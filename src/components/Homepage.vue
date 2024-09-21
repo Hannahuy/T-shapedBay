@@ -28,12 +28,12 @@
         </div>
       </div>
     </div>
-    <UEpage />
     <MonitoringSurveys v-if="selected === '监测调查'" />
     <Ecodynamics v-if="selected === '生态动力'" />
     <EcologicalGrid v-if="selected === '生态网格'" />
     <TrendForecasting v-if="selected === '趋势预测'" />
   </div>
+  <UEpage />
 </template>
 
 
@@ -98,6 +98,7 @@ onMounted(() => {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 2;
+  pointer-events: none !important;
 }
 
 .left {
