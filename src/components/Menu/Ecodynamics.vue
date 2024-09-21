@@ -20,7 +20,7 @@
             </div>
         </div>
         <!-- 右下角选择 -->
-        <div class="right-select" v-if="showselect">
+        <div class="right-select" v-show="showselect">
             <el-select v-model="selectvalue" placeholder="请选择层级" size="large" style="width: 24vh"
                 @change="selectchange">
                 <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
@@ -196,7 +196,9 @@ let layerFunction = [
         ).href,
     }
 ]
-const timePlay = ref(dayjs().minute(0).second(0).valueOf());
+
+const timePick = ref(dayjs("2023-08-21").toDate());
+const timePlay = ref(dayjs('2023-08-21 06:00:00').valueOf());
 const activePlay = ref("");
 // 暂停/播放
 let previousPlayState = "";
@@ -217,9 +219,9 @@ const togglePlay = () => {
         clearInterval(playInterval);
     }
 };
-const min = ref(dayjs().startOf("day").valueOf());
+const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
-const max = ref(dayjs().hour(23).minute(0).second(0).valueOf());
+const max = ref(dayjs(timePick.value).hour(23).minute(0).second(0).valueOf());
 
 const formattedTime = computed(() => {
     const time = dayjs(timePlay.value);
@@ -268,12 +270,21 @@ const marks = computed(() => {
 watch(timePlay, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
-
+        const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
+        callUIInteraction({
+            ModuleName: `生态动力`,
+            FunctionName: `标量场可视化`,
+            State: true,
+            Time: formattedTime,
+            Layer: selectvalue.value,
+            Type: "ZOOC"
+        });
     }
     if (currentTime.isSame(dayjs(max.value))) {
         activePlay.value = '';
     }
 });
+
 
 // 监听时间轴
 const gettimePlay = (e) => {
@@ -281,6 +292,15 @@ const gettimePlay = (e) => {
     if (activePlay.value === "play") {
         activePlay.value = "";
     }
+    const formattedTime = e.format('YYYY-MM-DD HH:mm:ss');
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: formattedTime,
+        Layer: selectvalue.value,
+        Type: "ZOOC"
+    });
 }
 const selectvalue = ref('水面表层0级');
 const options = ref([
@@ -313,7 +333,7 @@ const handleFunctionSelection = (selectedItem) => {
             ModuleName: `生态动力`,
             FunctionName: `标量场可视化`,
             State: true,
-            Time: '2023-08-21 06:20:00',
+            Time: timePlay.value,
             Layer: selectvalue.value,
             Type: "ZOOC"
         });
@@ -324,7 +344,7 @@ const selectchange = (e) => {
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
-        Time: '2023-08-21 06:20:00',
+        Time: timePlay.value,
         Layer: e,
         Type: "ZOOC"
     });
@@ -366,8 +386,8 @@ onMounted(() => {
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
-        Time: '2023-08-21 06:20:00',
-        Layer: 0,
+        Time: timePlay.value,
+        Layer: selectvalue.value,
         Type: "ZOOC"
     });
     addResponseEventListener("handle_responses", myHandleResponseFunction);
