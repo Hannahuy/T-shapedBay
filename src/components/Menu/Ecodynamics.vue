@@ -1,21 +1,68 @@
 <template>
     <div class="page">
         <div class="left-button">
-            <FunctionMenu :functionData="layerFunction" :Multiple="false" />
+            <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
         </div>
-        <div class="bottombox-button">
-            <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
-                @click="togglePlay"></el-button>
-        </div>
-        <div class="bottombox">
-            <div class="bottombox-slider">
-                <div :style="adjustedStyle">
-                    <span class="bottombox-slider-span">{{ formattedTime }}</span>
-                </div>
-                <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-                    style="position: relative; z-index: 1; width: 150vh" @change="gettimePlay">
-                </el-slider>
+        <div class="bottombox-left">
+            <div class="bottombox-button">
+                <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
+                    @click="togglePlay"></el-button>
             </div>
+            <div class="bottombox">
+                <div class="bottombox-slider">
+                    <div :style="adjustedStyle">
+                        <span class="bottombox-slider-span">{{ formattedTime }}</span>
+                    </div>
+                    <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max"
+                        :marks="marks" style="position: relative; z-index: 1; width: 1300px" @change="gettimePlay">
+                    </el-slider>
+                </div>
+            </div>
+        </div>
+        <!-- 右下角选择 -->
+        <div class="right-select" v-if="showselect">
+            <el-select v-model="selectvalue" placeholder="请选择层级" size="large" style="width: 24vh"
+                @change="selectchange">
+                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+            </el-select>
+        </div>
+
+        <!-- 右下角颜色条 -->
+        <div class="right-button">
+            <div class="leftbar">{{ barType }}</div>
+            <div class="rightbar">
+                <span>{{ barMin }}</span>
+                <span>{{ barMax }}</span>
+            </div>
+        </div>
+        <!-- 右上角查询表格 -->
+        <div class="smallWindow" v-if="showSmallWindow">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <td>数据值</td>
+                        <td>{{ Datavar }}</td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td>类型</td>
+                        <td>{{ Datatype }}</td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td>时间</td>
+                        <td>{{ Datatime }}</td>
+                    </tr>
+                </thead>
+                <thead>
+                    <tr>
+                        <td>层级</td>
+                        <td>{{ layer }}</td>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
 </template>
@@ -25,6 +72,7 @@ import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import FunctionMenu from '../Common/FunctionMenu.vue'
 import dayjs from 'dayjs'
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
+import { ElMessage } from 'element-plus';
 
 let layerFunction = [
     {
@@ -181,7 +229,7 @@ const formattedTime = computed(() => {
 const style = computed(() => {
     const length = max.value - min.value,
         progress = timePlay.value - min.value,
-        left = (progress / length) * 92;
+        left = (progress / length) * 91;
     return {
         paddingLeft: `${left}%`,
     };
@@ -234,6 +282,84 @@ const gettimePlay = (e) => {
         activePlay.value = "";
     }
 }
+const selectvalue = ref('水面表层0级');
+const options = ref([
+    {
+        value: '水面表层0级',
+        label: '水面表层0级',
+    },
+    {
+        value: '水面表层1级',
+        label: '水面表层1级',
+    },
+    {
+        value: '水面表层2级',
+        label: '水面表层2级',
+    },
+    {
+        value: '水面表层3级',
+        label: '水面表层3级',
+    },
+    {
+        value: '水面表层4级',
+        label: '水面表层4级',
+    },
+])
+const showselect = ref(true);
+const handleFunctionSelection = (selectedItem) => {
+    showselect.value = selectedItem.name !== "水位";
+    if (selectedItem.name !== "水位") {
+        callUIInteraction({
+            ModuleName: `生态动力`,
+            FunctionName: `标量场可视化`,
+            State: true,
+            Time: '2023-08-21 06:20:00',
+            Layer: selectvalue.value,
+            Type: "ZOOC"
+        });
+    }
+};
+const selectchange = (e) => {
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: '2023-08-21 06:20:00',
+        Layer: e,
+        Type: "ZOOC"
+    });
+}
+const showSmallWindow = ref(false);
+const barType = ref(null);
+const barMin = ref(0);
+const barMax = ref(0);
+const Datavar = ref(null);
+const Datatype = ref(null);
+const Datatime = ref(null);
+const layer = ref(null);
+
+const myHandleResponseFunction = (data) => {
+    const datajson = JSON.parse(data);
+    if (datajson.Function === '报错') {
+        ElMessage({
+            message: datajson.Type,
+            type: 'warning',
+        });
+        return
+    } else if (datajson.Function === '色带范围') {
+        barType.value = datajson.Data.Type;
+        barMin.value = datajson.Data.NorMin;
+        barMax.value = datajson.Data.NorMax;
+    } else if (datajson.Function === '点击查询') {
+        showSmallWindow.value = true;
+        Datavar.value = datajson.Data.var;
+        Datatype.value = datajson.Data.type;
+        Datatime.value = datajson.Data.time;
+        layer.value = datajson.Data.layer;
+    } else {
+
+    }
+}
 
 onMounted(() => {
     callUIInteraction({
@@ -244,6 +370,7 @@ onMounted(() => {
         Layer: 0,
         Type: "ZOOC"
     });
+    addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
 
@@ -256,30 +383,40 @@ onMounted(() => {
     position: absolute;
 }
 
-.bottombox {
-    width: 100%;
-    padding: 0 3vh 0 10vh;
+.bottombox-left {
+    width: 74%;
+    height: 5vh;
+    background-image: url('../../assets/img/timebackground.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     position: absolute;
     bottom: 2.5vh;
+    margin-left: 2.4vh;
+    z-index: 20;
+}
+
+.bottombox {
+    padding: 0 3vh 0 9vh;
+    position: absolute;
+    bottom: 2vh;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-evenly;
-    align-items: center;
+    z-index: 5;
 }
 
 .bottombox-button {
     position: absolute;
-    bottom: 2.2vh;
-    left: 1.5%;
+    bottom: 0.5vh;
+    left: 0.6%;
     display: flex;
     align-items: center;
-    z-index: 1;
+    z-index: 10;
 }
 
 .bottombox-play {
     background-image: url("../../assets/img/Timeout.png");
     background-repeat: no-repeat;
-    background-color: #42aeff;
+    background-color: transparent;
     background-position: 55% 50%;
     border-radius: 100%;
     border: 0;
@@ -290,7 +427,7 @@ onMounted(() => {
 .bottombox-play.active {
     background-image: url("../../assets/img/Play.png");
     background-repeat: no-repeat;
-    background-color: #42aeff;
+    background-color: transparent;
     background-position: center;
     background-size: 70% 70%;
     border-radius: 100%;
@@ -321,5 +458,83 @@ onMounted(() => {
 
 .bottombox-slider :deep(.el-slider__marks-text) {
     color: white !important;
+}
+
+.right-button {
+    width: 22%;
+    height: 4vh;
+    display: flex;
+    position: absolute;
+    bottom: 3vh;
+    right: 2.4vh;
+}
+
+.leftbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 1vh;
+    border-bottom-left-radius: 1vh;
+    width: 10%;
+    background-color: #FFFFFF;
+    font-size: 1.6vh;
+}
+
+.rightbar {
+    width: 90%;
+    border-top-right-radius: 1vh;
+    border-bottom-right-radius: 1vh;
+    background-image: url('../../assets/img/colorbar.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 1.6vh;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 0 2vh;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.smallWindow {
+    position: absolute;
+    right: 2.4vh;
+    top: 12vh;
+    width: 40vh;
+    height: 25vh;
+    z-index: 10;
+    background-image: url('../../assets/img/资源 71.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-table {
+    border-collapse: collapse;
+    width: 90%;
+    color: #b7cffc;
+    margin-top: 1vh;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 0.2vh solid #416491;
+    padding: 0.8vh;
+    text-align: center;
+    height: 3vh;
+    width: 50%;
+}
+
+.right-select {
+    position: absolute;
+    bottom: 9vh;
+    right: 2.4vh;
+}
+
+:deep(.el-select__wrapper) {
+    border-radius: 0;
 }
 </style>

@@ -7,7 +7,8 @@
         </div>
       </template>
       <template v-else>
-        <div @click="onClick(item, index)" style="cursor: pointer;" :class="checkedFunction.indexOf(index) > -1 ? 'active' : ''">
+        <div @click="onClick(item, index)" style="cursor: pointer;"
+          :class="checkedFunction.indexOf(index) > -1 ? 'active' : ''">
           <div class="icon">
             <img :src="checkedFunction.indexOf(index) > -1
               ? item.imageActive
@@ -43,7 +44,7 @@ const props = defineProps({
     },
   },
 });
-
+const emit = defineEmits(['functionSelected']);
 let onClick = (item, index) => {
   let _index = checkedFunction.value.indexOf(index);
   if (props.Multiple) {
@@ -86,6 +87,7 @@ let onClick = (item, index) => {
       checkedFunction.value = [index];
     }
   }
+  emit('functionSelected', item);
 };
 
 onMounted(() => {
