@@ -32,8 +32,8 @@ let matchViewportResolution;
 let lastTimeResized = new Date().getTime();
 let resizeTimeout;
 
-let onDataChannelConnected = () => { };
-let onDataChannelConnectedFail = () => { };
+let onDataChannelConnected=()=>{};
+let onDataChannelConnectedFail=()=>{};
 let responseEventListeners = new Map();
 
 let freezeFrameOverlay = null;
@@ -90,8 +90,8 @@ function scanGamepads() {
   let gamepads = navigator.getGamepads
     ? navigator.getGamepads()
     : navigator.webkitGetGamepads
-      ? navigator.webkitGetGamepads()
-      : [];
+    ? navigator.webkitGetGamepads()
+    : [];
   for (let i = 0; i < gamepads.length; i++) {
     if (gamepads[i] && gamepads[i].index in controllers) {
       controllers[gamepads[i].index].currentState = gamepads[i];
@@ -600,7 +600,7 @@ function createWebRtcOffer() {
 function sendInputData(data) {
   if (webRtcPlayerObj) {
     resetAfkWarningTimer();
-    webRtcPlayerObj.send(data);
+    webRtcPlayerObj.send(data); 
   }
 }
 
@@ -769,7 +769,7 @@ function setupWebRtcPlayer(htmlElement, config) {
     // Extract the toal size of the file (across all chunks)
     file.size = Math.ceil(
       new DataView(view.slice(1, 5).buffer).getInt32(0, true) /
-      16379 /* The maximum number of payload bits per message*/
+        16379 /* The maximum number of payload bits per message*/
     );
 
     // Get the file part of the payload
@@ -790,7 +790,8 @@ function setupWebRtcPlayer(htmlElement, config) {
         (file.size * 16 * 1024) / transferDuration
       );
       console.log(
-        `Average transfer bitrate: ${transferBitrate}kb/s over ${transferDuration / 1000
+        `Average transfer bitrate: ${transferBitrate}kb/s over ${
+          transferDuration / 1000
         } seconds`
       );
 
@@ -885,7 +886,7 @@ function setupWebRtcPlayer(htmlElement, config) {
       let ownership = view[1] === 0 ? false : true;
       console.log(
         "Received quality controller message, will control quality: " +
-        ownership
+          ownership
       );
       qualityController = ownership;
       // If we own the quality control, we can't relinquish it. We only lose
@@ -931,14 +932,14 @@ function setupWebRtcPlayer(htmlElement, config) {
         let allowConsoleCommands =
           settingsJSON.PixelStreaming.AllowPixelStreamingCommands;
         if (allowConsoleCommands === false) {
-          //   document.getElementById("encoder-min-qp-text").disabled = true;
-          //   document.getElementById("encoder-max-qp-text").disabled = true;
-          //   document.getElementById("webrtc-fps-text").disabled = true;
-          //   document.getElementById("webrtc-min-bitrate-text").disabled = true;
-          //   document.getElementById("webrtc-max-bitrate-text").disabled = true;
-          //   document.getElementById("show-fps-button").disabled = true;
-          //   document.getElementById("encoder-params-submit").disabled = true;
-          //   document.getElementById("webrtc-params-submit").disabled = true;
+        //   document.getElementById("encoder-min-qp-text").disabled = true;
+        //   document.getElementById("encoder-max-qp-text").disabled = true;
+        //   document.getElementById("webrtc-fps-text").disabled = true;
+        //   document.getElementById("webrtc-min-bitrate-text").disabled = true;
+        //   document.getElementById("webrtc-max-bitrate-text").disabled = true;
+        //   document.getElementById("show-fps-button").disabled = true;
+        //   document.getElementById("encoder-params-submit").disabled = true;
+        //   document.getElementById("webrtc-params-submit").disabled = true;
 
           if (!document.getElementById("warning-elem-webrtc")) {
             // let warningElem1 = document.createElement("p");
@@ -968,9 +969,9 @@ function setupWebRtcPlayer(htmlElement, config) {
         }
         let disableLatencyTest = settingsJSON.PixelStreaming.DisableLatencyTest;
         if (disableLatencyTest) {
-          //   document.getElementById("test-latency-button").disabled = true;
-          //   document.getElementById("test-latency-button").title =
-          //     "Disabled by -PixelStreamingDisableLatencyTester=true";
+        //   document.getElementById("test-latency-button").disabled = true;
+        //   document.getElementById("test-latency-button").title =
+        //     "Disabled by -PixelStreamingDisableLatencyTester=true";
           console.warn(
             "-PixelStreamingDisableLatencyTester=true, requesting latency report from the the browser to UE is disabled."
           );
@@ -998,7 +999,7 @@ function setupWebRtcPlayer(htmlElement, config) {
     } else if (view[0] == ToClientMessageType.FileContents) {
       processFileContents(view);
     } else {
-      console.error(`unrecognized data received, packet ID ${view[0] ? view[0] : ''}`);
+      console.error(`unrecognized data received, packet ID ${view[0]?view[0]:''}`);
     }
   };
 
@@ -1102,44 +1103,52 @@ function setupStats() {
     )}:${timeFormat.format(runTimeMinutes)}:${timeFormat.format(
       runTimeSeconds
     )}</div>`;
-    statsText += `<div>Video Resolution: ${aggregatedStats.hasOwnProperty("frameWidth") &&
-        aggregatedStats.frameWidth &&
-        aggregatedStats.hasOwnProperty("frameHeight") &&
-        aggregatedStats.frameHeight
+    statsText += `<div>Video Resolution: ${
+      aggregatedStats.hasOwnProperty("frameWidth") &&
+      aggregatedStats.frameWidth &&
+      aggregatedStats.hasOwnProperty("frameHeight") &&
+      aggregatedStats.frameHeight
         ? aggregatedStats.frameWidth + "x" + aggregatedStats.frameHeight
         : "Chrome only"
-      }</div>`;
+    }</div>`;
     statsText += `<div>Received (${receivedBytesMeasurement}): ${numberFormat.format(
       receivedBytes
     )}</div>`;
-    statsText += `<div>Frames Decoded: ${aggregatedStats.hasOwnProperty("framesDecoded")
+    statsText += `<div>Frames Decoded: ${
+      aggregatedStats.hasOwnProperty("framesDecoded")
         ? numberFormat.format(aggregatedStats.framesDecoded)
         : "Chrome only"
-      }</div>`;
-    statsText += `<div>Packets Lost: ${aggregatedStats.hasOwnProperty("packetsLost")
+    }</div>`;
+    statsText += `<div>Packets Lost: ${
+      aggregatedStats.hasOwnProperty("packetsLost")
         ? numberFormat.format(aggregatedStats.packetsLost)
         : "Chrome only"
-      }</div>`;
-    statsText += `<div>Framerate: ${aggregatedStats.hasOwnProperty("framerate")
+    }</div>`;
+    statsText += `<div>Framerate: ${
+      aggregatedStats.hasOwnProperty("framerate")
         ? numberFormat.format(aggregatedStats.framerate)
         : "Chrome only"
-      }</div>`;
-    statsText += `<div>Frames dropped: ${aggregatedStats.hasOwnProperty("framesDropped")
+    }</div>`;
+    statsText += `<div>Frames dropped: ${
+      aggregatedStats.hasOwnProperty("framesDropped")
         ? numberFormat.format(aggregatedStats.framesDropped)
         : "Chrome only"
-      }</div>`;
-    statsText += `<div>Net RTT (ms): ${aggregatedStats.hasOwnProperty("currentRoundTripTime")
+    }</div>`;
+    statsText += `<div>Net RTT (ms): ${
+      aggregatedStats.hasOwnProperty("currentRoundTripTime")
         ? numberFormat.format(aggregatedStats.currentRoundTripTime * 1000)
         : "Can't calculate"
-      }</div>`;
-    statsText += `<div>Browser receive to composite (ms): ${aggregatedStats.hasOwnProperty("receiveToCompositeMs")
+    }</div>`;
+    statsText += `<div>Browser receive to composite (ms): ${
+      aggregatedStats.hasOwnProperty("receiveToCompositeMs")
         ? numberFormat.format(aggregatedStats.receiveToCompositeMs)
         : "Chrome only"
-      }</div>`;
-    statsText += `<div style="color: ${color}">Bitrate (kbps): ${aggregatedStats.hasOwnProperty("bitrate")
+    }</div>`;
+    statsText += `<div style="color: ${color}">Bitrate (kbps): ${
+      aggregatedStats.hasOwnProperty("bitrate")
         ? numberFormat.format(aggregatedStats.bitrate)
         : "Chrome only"
-      }</div>`;
+    }</div>`;
     statsText += `<div style="color: ${color}">Video Quantization Parameter: ${VideoEncoderQP}</div>`;
 
     // let statsDiv = document.getElementById("stats");
@@ -1198,27 +1207,29 @@ function setupStats() {
     latencyStatsInnerHTML += `<div>Net latency RTT (ms): ${networkLatency.toFixed(
       2
     )}</div>`;
-    latencyStatsInnerHTML += `<div>UE Encode (ms): ${typeof encodeLatency === "string"
+    latencyStatsInnerHTML += `<div>UE Encode (ms): ${
+      typeof encodeLatency === "string"
         ? encodeLatency
         : encodeLatency.toFixed(2)
-      }</div>`;
-    latencyStatsInnerHTML += `<div>UE Send to capture (ms): ${typeof uePixelStreamLatency === "string"
+    }</div>`;
+    latencyStatsInnerHTML += `<div>UE Send to capture (ms): ${
+      typeof uePixelStreamLatency === "string"
         ? uePixelStreamLatency
         : uePixelStreamLatency.toFixed(2)
-      }</div>`;
+    }</div>`;
     latencyStatsInnerHTML += `<div>UE probe duration (ms): ${ueTestDuration.toFixed(
       2
     )}</div>`;
     latencyStatsInnerHTML +=
       timings.FrameDisplayDeltaTimeMs && timings.BrowserReceiptTimeMs
         ? `<div>Browser composite latency (ms): ${timings.FrameDisplayDeltaTimeMs.toFixed(
-          2
-        )}</div>`
+            2
+          )}</div>`
         : "";
     latencyStatsInnerHTML += browserSideLatency
       ? `<div>Total browser latency (ms): ${browserSideLatency.toFixed(
-        2
-      )}</div>`
+          2
+        )}</div>`
       : "";
     latencyStatsInnerHTML += endToEndLatency
       ? `<div>Total latency (ms): ${endToEndLatency.toFixed(2)}</div>`
@@ -1541,7 +1552,7 @@ function updateVideoStreamSize() {
     //   x: window.innerWidth,
     //   y: window.innerHeight,
     // };
-    if (!window.setScreen) {
+    if(!window.setScreen){
       let descriptor = {
         function: "setScreen",
         x: window.innerWidth,
@@ -2392,98 +2403,82 @@ function connect() {
     return;
   }
 
-  function real_connect() {
-    // 这里的223 端口，用自己的
-    fetch(`${serverUrl}/list_address`).then((response) => response.json()).then(res => {
-      const { type, url } = res;
-      if (type == 'can') {
-        ws = new WebSocket(url)
-        wsWatch(ws)
-      } else if (type == 'wait') {
-        setTimeout(() => {
-          real_connect()
-        }, 3000);
-      }
-    })
-  }
-  real_connect()
-
   //  ws = new WebSocket(serverUrl.replace('http://', 'ws://').replace('https://', 'wss://'));
-  function wsWatch() {
-    ws.onmessagebinary = function (event) {
-      if (!event || !event.data) { return; }
 
-      event.data.text().then(function (messageString) {
+  ws = new WebSocket(`ws://${serverUrl}/`);
+  ws.onmessagebinary = function(event) {
+    if(!event || !event.data) { return; }
+
+    event.data.text().then(function(messageString){
         // send the new stringified event back into `onmessage`
         ws.onmessage({ data: messageString });
-      }).catch(function (error) {
+    }).catch(function(error){
         console.error(`Failed to parse binary blob from websocket, reason: ${error}`);
-      });
+    });
+}
+  ws.onmessage = function (event) {
+    if (event.data && event.data instanceof Blob) {
+      ws.onmessagebinary(event);
+      return;
     }
-    ws.onmessage = function (event) {
-      if (event.data && event.data instanceof Blob) {
-        ws.onmessagebinary(event);
-        return;
-      }
-      let msg = JSON.parse(event.data);
-      if (msg.type === "config") {
-        console.log(
-          "%c[Inbound SS (config)]",
-          "background: lightblue; color: black",
-          msg
-        );
-        onConfig(msg);
-      } else if (msg.type === "playerCount") {
-        console.log(
-          "%c[Inbound SS (playerCount)]",
-          "background: lightblue; color: black",
-          msg
-        );
-      } else if (msg.type === "offer") {
-        console.log(
-          "%c[Inbound SS (offer)]",
-          "background: lightblue; color: black",
-          msg
-        );
-        onWebRtcOffer(msg);
-      } else if (msg.type === "answer") {
-        console.log(
-          "%c[Inbound SS (answer)]",
-          "background: lightblue; color: black",
-          msg
-        );
-        onWebRtcAnswer(msg);
-      } else if (msg.type === "iceCandidate") {
-        onWebRtcIce(msg.candidate);
-      } else if (msg.type === "warning" && msg.warning) {
-        console.warn(msg.warning);
-      } else {
-        console.error("Invalid SS message type", msg.type);
-      }
-    };
+    let msg = JSON.parse(event.data);
+    if (msg.type === "config") {
+      console.log(
+        "%c[Inbound SS (config)]",
+        "background: lightblue; color: black",
+        msg
+      );
+      onConfig(msg);
+    } else if (msg.type === "playerCount") {
+      console.log(
+        "%c[Inbound SS (playerCount)]",
+        "background: lightblue; color: black",
+        msg
+      );
+    } else if (msg.type === "offer") {
+      console.log(
+        "%c[Inbound SS (offer)]",
+        "background: lightblue; color: black",
+        msg
+      );
+      onWebRtcOffer(msg);
+    } else if (msg.type === "answer") {
+      console.log(
+        "%c[Inbound SS (answer)]",
+        "background: lightblue; color: black",
+        msg
+      );
+      onWebRtcAnswer(msg);
+    } else if (msg.type === "iceCandidate") {
+      onWebRtcIce(msg.candidate);
+    } else if (msg.type === "warning" && msg.warning) {
+      console.warn(msg.warning);
+    } else {
+      console.error("Invalid SS message type", msg.type);
+    }
+  };
 
-    ws.onerror = function (event) {
-      console.log(`WS error: ${JSON.stringify(event)}`);
-    };
+  ws.onerror = function (event) {
+    console.log(`WS error: ${JSON.stringify(event)}`);
+  };
 
-    ws.onclose = function (event) {
-      console.log(`WS closed: ${JSON.stringify(event.code)} - ${event.reason}`);
-      ws = undefined;
-      is_reconnection = true;
+  ws.onclose = function (event) {
+    console.log(`WS closed: ${JSON.stringify(event.code)} - ${event.reason}`);
+    ws = undefined;
+    is_reconnection = true;
 
-      // destroy `webRtcPlayerObj` if any
-      let playerDiv = document.getElementById("UEplayer");
-      if (webRtcPlayerObj) {
-        playerDiv.removeChild(webRtcPlayerObj.video);
-        webRtcPlayerObj.close();
-        webRtcPlayerObj = undefined;
-      }
+    // destroy `webRtcPlayerObj` if any
+    let playerDiv = document.getElementById("UEplayer");
+    if (webRtcPlayerObj) {
+      playerDiv.removeChild(webRtcPlayerObj.video);
+      webRtcPlayerObj.close();
+      webRtcPlayerObj = undefined;
+    }
 
-      showTextOverlay(`像素流送服务未正常启动，请联系管理员检查后重试`);
-      onDataChannelConnectedFail();
-      // let reclickToStart = setTimeout(start, 4000);
-    };
-  }
+    showTextOverlay(`像素流送服务未正常启动，请联系管理员检查后重试`);
+    onDataChannelConnectedFail();
+    // let reclickToStart = setTimeout(start, 4000);
+  };
 }
 
 // Config data received from WebRTC sender via the Cirrus web server
@@ -2539,7 +2534,7 @@ function parserOptions(options) {
 }
 
 let bFreeControl = true;
-export function app_load(option, onFinish, onError) {
+export function app_load(option, onFinish,onError) {
   console.log(" =========== load API ===========");
 
   connectToMatchmakerServer(option, (signalServerAddr) => {
@@ -2548,7 +2543,7 @@ export function app_load(option, onFinish, onError) {
       onDataChannelConnected = onFinish;
     }
     if (onError) {
-      onDataChannelConnectedFail = onError;
+        onDataChannelConnectedFail = onError;
     }
 
     parserOptions(option);
@@ -2585,39 +2580,39 @@ function connectToMatchmakerServer(options, onConnect) {
     xhr.open("get", matchmakerServerAddr, true);
     xhr.send(null);
   }
-  else if (matchmakerServerAddr.indexOf('newserver') != -1) {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState == 4) {
-        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
-          console.log("new server");
-          setTimeout(function () {
+  else if(matchmakerServerAddr.indexOf('newserver') != -1){
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+          if( xhr.readyState == 4){
+              if( xhr.status >= 200 && xhr.status < 300 || xhr.status == 304){
+                  console.log("new server");
+                  setTimeout(function(){
 
-            var xhr1 = new XMLHttpRequest();
-            xhr1.onreadystatechange = function () {
-              if (xhr1.readyState == 4) {
-                if (xhr1.status >= 200 && xhr1.status < 300 || xhr1.status == 304) {
-                  let jsonData = JSON.parse(xhr1.response);
-                  console.log(jsonData.signallingServer);
-                  if (jsonData.error) {
-                    console.log(jsonData.error);
-                  } else {
-                    console.log('ws to signal server: ', jsonData.signallingServer);
-                    onConnect(jsonData.signallingServer);
-                  }
+                      var xhr1 = new XMLHttpRequest();
+                      xhr1.onreadystatechange = function(){
+                          if( xhr1.readyState == 4){
+                              if( xhr1.status >= 200 && xhr1.status < 300 || xhr1.status == 304){
+                                  let jsonData = JSON.parse(xhr1.response);
+                                  console.log(jsonData.signallingServer);
+                                  if (jsonData.error) {
+                                      console.log(jsonData.error);
+                                  } else {
+                                      console.log('ws to signal server: ', jsonData.signallingServer);
+                                      onConnect(jsonData.signallingServer);
+                                  }
+                                }
+                          }
+                      };
+                      xhr1.open("get", "http://127.0.0.1:90/signallingserver", true);
+                      xhr1.send(null);
+
+                  },1000)
+
                 }
-              }
-            };
-            xhr1.open("get", "http://127.0.0.1:90/signallingserver", true);
-            xhr1.send(null);
-
-          }, 1000)
-
-        }
+          }
       }
-    }
-    xhr.open("get", matchmakerServerAddr, true);
-    xhr.send(null);
+      xhr.open("get", matchmakerServerAddr, true);
+      xhr.send(null);
   }
   else {
     matchmakerServerAddr = matchmakerServerAddr.replace("http://", "");

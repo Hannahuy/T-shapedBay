@@ -8,13 +8,13 @@
     <div class="right"></div>
     <div class="topMenu">
       <div class="topMenu-left">
-        <div class="topMenu-left-title" :class="{ 'topMenu-left-title-active': selected === '监测调查' }"
-          @click="selectMenu('监测调查')">
-          监测调查
+        <div class="topMenu-left-title" :class="{ 'topMenu-left-title-active': selected === '生态动力' }"
+          @click="selectMenu('生态动力')">
+          生态动力
         </div>
         <div class="topMenu-left-title" style="margin-left: 2.3vh;"
-          :class="{ 'topMenu-left-title-active': selected === '生态动力' }" @click="selectMenu('生态动力')">
-          生态动力
+          :class="{ 'topMenu-left-title-active': selected === '监测调查' }" @click="selectMenu('监测调查')">
+          监测调查
         </div>
       </div>
       <div class="topMenu-right">
@@ -29,8 +29,8 @@
       </div>
     </div>
     <UEpage />
-    <MonitoringSurveys v-if="selected === '监测调查'" />
     <Ecodynamics v-if="selected === '生态动力'" />
+    <MonitoringSurveys v-if="selected === '监测调查'" />
     <EcologicalGrid v-if="selected === '生态网格'" />
     <TrendForecasting v-if="selected === '趋势预测'" />
   </div>
@@ -45,7 +45,7 @@ import Ecodynamics from './Menu/Ecodynamics.vue';
 import MonitoringSurveys from './Menu/MonitoringSurveys.vue';
 import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
-let selected = ref('监测调查'); // 默认选中监测调查
+let selected = ref('生态动力'); // 默认选中监测调查
 const selectMenu = (menu) => {
   callUIInteraction({
     ModuleName: `${menu}`,
@@ -68,8 +68,8 @@ onMounted(() => {
     console.log("首次被加载")
   }
   callUIInteraction({
-    ModuleName: `监测调查`,
-    FunctionName: `监测调查`,
+    ModuleName: `生态动力`,
+    FunctionName: `生态动力`,
     State: true,
   });
 });
