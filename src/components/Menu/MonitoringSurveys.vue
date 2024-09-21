@@ -6,11 +6,19 @@
           浮游动物占比
           <span class="Englishspan">zooplankton</span>
         </div>
+        <div class="rightBox-top-content">
+        
+        </div>
       </div>
       <div class="rightBox-bottom">
         <div class="rightBox-bottom-title">
           物种数量信息
           <span class="Englishspan">information</span>
+        </div>
+        <div class="rightBox-bottom-content">
+          <div class="rightBox-bottom-content-radius">
+          
+          </div>
         </div>
       </div>
     </div>
@@ -65,5 +73,45 @@
   font-size: 1.2vh;
   color: #FFFFFF;
   font-weight: 100;
+}
+
+.rightBox-top-content{
+  margin-top: 2vh;
+  width: 100%;
+  height: 16vh;
+  background-image: url('../../assets/img/righttopbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.rightBox-bottom-content{
+  position: relative;
+  margin-top: 2vh;
+  width: 100%;
+  height: 16vh;
+  background-image: url('../../assets/img/rightbottombox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rightBox-bottom-content-radius {
+  position: absolute;
+  left: 12.02vh;
+  top: 1.7vh;
+  width: 12.5vh;
+  height: 12.5vh;
+  background-image: url('../../assets/img/radius.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: rotate 2s linear infinite; /* 持续旋转动画 */
 }
 </style>

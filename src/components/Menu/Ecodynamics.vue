@@ -74,6 +74,8 @@ import dayjs from 'dayjs'
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
 
+const selectedItemname = ref(null);
+
 let layerFunction = [
     {
         name: "水位",
@@ -266,7 +268,6 @@ const marks = computed(() => {
     }
     return marks;
 });
-
 watch(timePlay, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
@@ -277,30 +278,21 @@ watch(timePlay, (newVal) => {
             State: true,
             Time: formattedTime,
             Layer: selectvalue.value,
-            Type: "ZOOC"
+            Type: selectedItemname.value
         });
+        // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
+        
     }
     if (currentTime.isSame(dayjs(max.value))) {
         activePlay.value = '';
     }
 });
-
-
 // 监听时间轴
 const gettimePlay = (e) => {
     timePlay.value = dayjs(e).second(0).valueOf(); // 确保秒数为 0
     if (activePlay.value === "play") {
         activePlay.value = "";
     }
-    const formattedTime = e.format('YYYY-MM-DD HH:mm:ss');
-    callUIInteraction({
-        ModuleName: `生态动力`,
-        FunctionName: `标量场可视化`,
-        State: true,
-        Time: formattedTime,
-        Layer: selectvalue.value,
-        Type: "ZOOC"
-    });
 }
 const selectvalue = ref('水面表层0级');
 const options = ref([
@@ -327,27 +319,32 @@ const options = ref([
 ])
 const showselect = ref(true);
 const handleFunctionSelection = (selectedItem) => {
+    selectedItemname.value = selectedItem.name;
     showselect.value = selectedItem.name !== "水位";
     if (selectedItem.name !== "水位") {
+        const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
         callUIInteraction({
             ModuleName: `生态动力`,
             FunctionName: `标量场可视化`,
             State: true,
-            Time: timePlay.value,
+            Time: formattedTime,
             Layer: selectvalue.value,
-            Type: "ZOOC"
+            Type: selectedItem.name
         });
+        // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItem.name);
     }
 };
 const selectchange = (e) => {
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
-        Time: timePlay.value,
+        Time: formattedTime,
         Layer: e,
-        Type: "ZOOC"
+        Type: selectedItemname.value
     });
+    // console.log('生态动力',`标量场可视化`,true,formattedTime, e,selectedItemname.value);
 }
 const showSmallWindow = ref(false);
 const barType = ref(null);
@@ -382,14 +379,16 @@ const myHandleResponseFunction = (data) => {
 }
 
 onMounted(() => {
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
-        Time: timePlay.value,
+        Time: formattedTime,
         Layer: selectvalue.value,
-        Type: "ZOOC"
+        Type: selectedItemname.value
     });
+    // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
     addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
