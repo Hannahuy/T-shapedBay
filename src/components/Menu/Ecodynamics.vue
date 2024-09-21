@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <div class="left-button">
-            <FunctionMenu :functionData="layerFunction" :Multiple="true" />
+            <FunctionMenu :functionData="layerFunction" :Multiple="false" />
         </div>
         <div class="bottombox-button">
             <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
@@ -41,7 +41,7 @@ let layerFunction = [
     },
     {
         name: "流速",
-        check: true,
+        check: false,
         image: new URL(
             "../../assets/img/流速.png",
             import.meta.url
@@ -53,7 +53,7 @@ let layerFunction = [
     },
     {
         name: "浮游动物碳",
-        check: true,
+        check: false,
         image: new URL(
             "../../assets/img/浮游动物碳.png",
             import.meta.url
@@ -65,7 +65,7 @@ let layerFunction = [
     },
     {
         name: "浮游植物碳",
-        check: true,
+        check: false,
         image: new URL(
             "../../assets/img/浮游植物碳.png",
             import.meta.url
@@ -234,6 +234,17 @@ const gettimePlay = (e) => {
         activePlay.value = "";
     }
 }
+
+onMounted(() => {
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: '2023-08-21 06:20:00',
+        Layer: 0,
+        Type: "ZOOC"
+    });
+});
 </script>
 
 <style scoped>

@@ -7,7 +7,7 @@
         </div>
       </template>
       <template v-else>
-        <div @click="onClick(item, index)" :class="checkedFunction.indexOf(index) > -1 ? 'active' : ''">
+        <div @click="onClick(item, index)" style="cursor: pointer;" :class="checkedFunction.indexOf(index) > -1 ? 'active' : ''">
           <div class="icon">
             <img :src="checkedFunction.indexOf(index) > -1
               ? item.imageActive
@@ -26,7 +26,6 @@
 <script setup>
 import { onMounted, onUnmounted, ref, defineExpose, computed } from "vue";
 import { callUIInteraction } from "../../module/webrtcVideo/webrtcVideo.js";
-// import Cookies from 'js-cookie'; 
 
 let containerRef = ref(null);
 let checkedFunction = ref([]);
@@ -50,11 +49,11 @@ let onClick = (item, index) => {
   if (props.Multiple) {
     if (_index > -1) {
       // 取消选中
-      callUIInteraction({
-        ModuleName: `${item.name}`,
-        FunctionName: `${item.name}`,
-        State: false,
-      });
+      // callUIInteraction({
+      //   ModuleName: `${item.name}`,
+      //   FunctionName: `${item.name}`,
+      //   State: false,
+      // });
       checkedFunction.value.splice(_index, 1);
     } else {
       // 选中
@@ -67,21 +66,16 @@ let onClick = (item, index) => {
     }
   } else {
     if (_index > -1) {
-      // 取消选中
-      callUIInteraction({
-        ModuleName: `${item.name}`,
-        FunctionName: `${item.name}`,
-        State: false,
-      });
-      checkedFunction.value = [];
+      // 取消选中时，强制重新选中
+      return; // 不允许取消选中
     } else {
       if (checkedFunction.value.length > 0) {
         // 如果有其他选中项，打印信息
-        callUIInteraction({
-          ModuleName: `${props.functionData[checkedFunction.value[0]].name}`,
-          FunctionName: `${props.functionData[checkedFunction.value[0]].name}`,
-          State: false,
-        });
+        // callUIInteraction({
+        //   ModuleName: `${props.functionData[checkedFunction.value[0]].name}`,
+        //   FunctionName: `${props.functionData[checkedFunction.value[0]].name}`,
+        //   State: false,
+        // });
       }
       // 选中
       callUIInteraction({
@@ -94,7 +88,19 @@ let onClick = (item, index) => {
   }
 };
 
-onMounted(() => { });
+onMounted(() => {
+  let selectedIndex = props.functionData.findIndex(item => item.check);
+  if (selectedIndex === -1 && props.functionData.length > 0) {
+    // 如果没有选中项，默认选中第一个项
+    onClick(props.functionData[0], 0);
+  } else {
+    for (let i = 0; i < props.functionData.length; i++) {
+      if (props.functionData[i].check) {
+        onClick(props.functionData[i], i);
+      }
+    }
+  }
+});
 
 onUnmounted(() => { });
 
