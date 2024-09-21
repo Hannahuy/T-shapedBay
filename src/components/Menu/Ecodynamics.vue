@@ -196,6 +196,18 @@ let layerFunction = [
             "../../assets/img/无机氮-active.png",
             import.meta.url
         ).href,
+    },
+    {
+        name: "溶解氧",
+        check: false,
+        image: new URL(
+            "../../assets/img/无机氮.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/无机氮-active.png",
+            import.meta.url
+        ).href,
     }
 ]
 
