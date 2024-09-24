@@ -2475,7 +2475,7 @@ function connect() {
       webRtcPlayerObj = undefined;
     }
 
-    showTextOverlay(`像素流送服务未正常启动，请联系管理员检查后重试`);
+    showTextOverlay(`像素流送服务未正常启动`);
     onDataChannelConnectedFail();
     // let reclickToStart = setTimeout(start, 4000);
   };

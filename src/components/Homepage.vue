@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <div class="top">
-      <div class="top-title">丁字湾数字孪生系统</div>
+      <div class="top-title">丁字湾典型生态数字孪生系统</div>
     </div>
     <div class="left"></div>
     <div class="bottom"></div>
@@ -28,10 +28,18 @@
         </div>
       </div>
     </div>
-    <MonitoringSurveys v-if="selected === '监测调查'" />
-    <Ecodynamics v-if="selected === '生态动力'" />
-    <EcologicalGrid v-if="selected === '生态网格'" />
-    <TrendForecasting v-if="selected === '趋势预测'" />
+    <div v-if="selected === '监测调查'">
+      <MonitoringSurveys />
+    </div>
+    <div v-if="selected === '生态动力'">
+      <Ecodynamics />
+    </div>
+    <div v-if="selected === '生态网格'">
+      <EcologicalGrid />
+    </div>
+    <div v-if="selected === '趋势预测'">
+      <TrendForecasting />
+    </div>
   </div>
   <UEpage />
 </template>
@@ -94,10 +102,11 @@ onMounted(() => {
   top: 0;
   width: 100%;
   height: 16vh;
+  line-height: 5.5vh;
   background-image: url('../assets/top.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  z-index: 2;
+  z-index: 1;
   pointer-events: none !important;
 }
 
@@ -134,7 +143,7 @@ onMounted(() => {
 .top-title {
   font-family: HYLingXinJ;
   font-weight: bold;
-  font-size: 3.8vh;
+  font-size: 3.2vh;
   color: #FEFFFF;
   text-align: center;
   background: linear-gradient(0deg, #C7E4FF 24.072265625%, #FFFFFF 24.560546875%);

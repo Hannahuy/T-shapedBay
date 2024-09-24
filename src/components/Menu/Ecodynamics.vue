@@ -201,11 +201,11 @@ let layerFunction = [
         name: "溶解氧",
         check: false,
         image: new URL(
-            "../../assets/img/无机氮.png",
+            "../../assets/img/溶解氧.png",
             import.meta.url
         ).href,
         imageActive: new URL(
-            "../../assets/img/无机氮-active.png",
+            "../../assets/img/溶解氧-active.png",
             import.meta.url
         ).href,
     }
