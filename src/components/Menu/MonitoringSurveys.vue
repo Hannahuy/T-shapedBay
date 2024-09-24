@@ -502,13 +502,13 @@ const marks = computed(() => {
     };
   } else if (topMenu.value === '牡蛎') {
     return {
-      0: {
+      4: {
         style: {
           color: '#FFFFFF',
         },
         label: '2023.10'
       },
-      1: {
+      5: {
         style: {
           color: '#FFFFFF',
         },
@@ -532,41 +532,43 @@ const topMenuChange = (value) => {
     min.value = 0;
     max.value = 3;
   } else if (value === '牡蛎') {
-    timePlay.value = 0;
-    min.value = 0;
-    max.value = 1;
+    timePlay.value = 4;
+    min.value = 4;
+    max.value = 5;
   } else {
     showSilder.value = false;
   }
 };
 
 // 监听 timePlay 的变化
-watch(timePlay, (newVal) => {
-  if (newVal == 0 && topMenu.value === '鸟类') {
-    console.log(2023.06);
-  } else if (newVal == 1 && topMenu.value === '鸟类') {
-    console.log(2023.08);
-  } else if (newVal == 2 && topMenu.value === '鸟类') {
-    console.log(2023.11);
-  } else if (newVal == 3 && topMenu.value === '鸟类') {
-    console.log(2024.04);
-  } else if (newVal == 0 && topMenu.value === '牡蛎') {
-    console.log(2023.10);
-  } else if (newVal == 1 && topMenu.value === '牡蛎') {
-    console.log(2024.04);
-  } else if (newVal == 2019 && topMenu.value === '互花米草') {
-    console.log(2019);
-  } else if (newVal == 2020 && topMenu.value === '互花米草') {
-    console.log(2020);
-  } else if (newVal == 2021 && topMenu.value === '互花米草') {
-    console.log(2021);
-  } else if (newVal == 2022 && topMenu.value === '互花米草') {
-    console.log(2022);
-  } else if (newVal == 2023 && topMenu.value === '互花米草') {
-    console.log(2023);
-  }
+const logMapping = {
+  '鸟类': {
+    0: '2023.06',
+    1: '2023.08',
+    2: '2023.11',
+    3: '2024.04',
+  },
+  '牡蛎': {
+    4: '2023.10',
+    5: '2024.04',
+  },
+  '互花米草': {
+    2019: '2019',
+    2020: '2020',
+    2021: '2021',
+    2022: '2022',
+    2023: '2023',
+  },
+};
 
+watch(timePlay, (newVal) => {
+  const menu = topMenu.value;
+  const logValue = logMapping[menu]?.[newVal];
+  if (logValue !== undefined) {
+    console.log(logValue);
+  }
 });
+
 
 const birdShow = ref(true);
 const speciesList = ref([
