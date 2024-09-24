@@ -41,7 +41,7 @@
       <TrendForecasting />
     </div>
   </div>
-  <UEpage />
+  <!-- <UEpage /> -->
 </template>
 
 

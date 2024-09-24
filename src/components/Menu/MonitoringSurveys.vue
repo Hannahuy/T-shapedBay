@@ -24,15 +24,15 @@
       </div>
       <div class="leftBox-bottom-content">
         <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.4vh',
+          background: 'transparent', fontSize: '1.1vh',
           'text-align': 'center',
         }" height="17.5vh">
-          <el-table-column prop="project" label="项目" width="60" align="center" />
-          <el-table-column prop="PH" label="PH" width="70" align="center" />
-          <el-table-column prop="DO" label="DO" width="70" align="center" />
-          <el-table-column prop="COD" label="COD" width="70" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="70" align="center" />
-          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="100" align="center" />
+          <el-table-column prop="project" label="项目" width="50" align="center" />
+          <el-table-column prop="PH" label="PH" width="60" align="center" />
+          <el-table-column prop="DO" label="DO" width="50" align="center" />
+          <el-table-column prop="COD" label="COD" width="50" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
+          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="80" align="center" />
         </el-table>
       </div>
     </div>
@@ -44,16 +44,16 @@
       </div>
       <div class="rightBox-top-table">
         <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.4vh',
+          background: 'transparent', fontSize: '1.1vh',
           'text-align': 'center',
         }" height="16.25vh">
-          <el-table-column prop="Stations" label="站位" width="60" align="center" />
-          <el-table-column prop="Diversity" label="多样性指数" width="100" align="center" />
-          <el-table-column prop="Uniformity" label="均匀度" width="70" align="center" />
-          <el-table-column prop="Dominance" label="优势度" width="70" align="center" />
-          <el-table-column prop="Richness" label="丰富度" width="70" align="center" />
-          <el-table-column prop="threshold" label="指数阈值" width="80" align="center" />
-          <el-table-column prop="level" label="等级" width="100" align="center" />
+          <el-table-column prop="Stations" label="站位" width="50" align="center" />
+          <el-table-column prop="Diversity" label="多样性指数" width="80" align="center" />
+          <el-table-column prop="Uniformity" label="均匀度" width="60" align="center" />
+          <el-table-column prop="Dominance" label="优势度" width="60" align="center" />
+          <el-table-column prop="Richness" label="丰富度" width="60" align="center" />
+          <el-table-column prop="threshold" label="指数阈值" width="70" align="center" />
+          <el-table-column prop="level" label="等级" width="80" align="center" />
         </el-table>
       </div>
     </div>
@@ -63,16 +63,16 @@
       </div>
       <div class="rightBox-bottom-table">
         <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.4vh',
+          background: 'transparent', fontSize: '1.1vh',
           'text-align': 'center',
         }" height="16.25vh">
           <el-table-column prop="StationNumber" label="站号" width="60" align="center" />
-          <el-table-column prop="PH" label="PH" width="60" align="center" />
-          <el-table-column prop="DO" label="DO" width="60" align="center" />
-          <el-table-column prop="COD" label="COD" width="60" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="70" align="center" />
-          <el-table-column prop="phosphate" label="磷酸盐" width="70" align="center" />
-          <el-table-column prop="Nutritionalization" label="是否富营养化" width="120" align="center" />
+          <el-table-column prop="PH" label="PH" width="50" align="center" />
+          <el-table-column prop="DO" label="DO" width="50" align="center" />
+          <el-table-column prop="COD" label="COD" width="50" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
+          <el-table-column prop="phosphate" label="磷酸盐" width="60" align="center" />
+          <el-table-column prop="Nutritionalization" label="是否富营养化" width="90" align="center" />
         </el-table>
       </div>
     </div>
@@ -110,10 +110,11 @@
     </div>
   </div>
   <!-- 鸟类点击弹窗 -->
-  <div class="bird" v-show="birdShow">
+  <div class="bird" v-if="birdShow">
     <div class="rightBox-top-title-dialog">
-      XX站点
+      {{ birdstation }}
     </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="closebird">
     <div class="species">
       <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
           'odd-item': index % 2 === 0,
@@ -127,55 +128,78 @@
     </div>
     <div class="Carousel">
       <el-carousel height="16vh">
-        <el-carousel-item>
-          <img src="../../assets/img/text4.png" alt="" style="width: 100%;height: 100%;">
-        </el-carousel-item>
-        <el-carousel-item>
-          <img src="../../assets/img/text5.png" alt="" style="width: 100%;height: 100%;">
-        </el-carousel-item>
-        <el-carousel-item>
-          <img src="../../assets/img/text6.png" alt="" style="width: 100%;height: 100%;">
-        </el-carousel-item>
-        <el-carousel-item>
-          <img src="../../assets/img/text3.png" alt="" style="width: 100%;height: 100%;">
+        <el-carousel-item v-for="(image, index) in imageArray" :key="index" v-if="imageArray.length > 0">
+          <img :src="image" alt="" style="width: 100%; height: 100%;">
         </el-carousel-item>
       </el-carousel>
     </div>
     <div class="briefly">
-      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handletabClick">
+      <el-tabs v-model="activeName" class="demo-tabs">
         <el-tab-pane label="鸟种资料" name="first">
-          <table class="custom-table">
-            <thead>
-              <tr>
-                <td>中文目名</td>
-                <td></td>
-              </tr>
-            </thead>
-            <thead>
-              <tr>
-                <td>中文科名</td>
-                <td></td>
-              </tr>
-            </thead>
-            <thead>
-              <tr>
-                <td>中文属名</td>
-                <td></td>
-              </tr>
-            </thead>
-            <thead>
-              <tr>
-                <td>层级</td>
-                <td></td>
-              </tr>
-            </thead>
-          </table>
+          <div class="brieflydata">
+            <table class="custom-table">
+              <tbody>
+                <tr v-for="(item, index) in animalData" :key="index">
+                  <td>{{ item.title }}</td>
+                  <td>{{ item.txt }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </el-tab-pane>
         <el-tab-pane label="简介" name="second">
-          222
+          <div class="brieflydata">
+            <div v-for="(item, index) in animalDatalist" :key="index">
+              <div style="font-size: 1.6vh;font-weight: bold;">{{ item.title }}</div>
+              <div style="font-size: 1.2vh;">{{ item.txt }}</div>
+            </div>
+          </div>
         </el-tab-pane>
       </el-tabs>
     </div>
+  </div>
+  <!-- 牡蛎点击弹窗 -->
+  <div class="oysters" v-show="oystersShow">
+    <div class="rightBox-top-title-dialog">
+      牡蛎数据
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="closeoysters">
+    <div style="margin-top: 1vh;margin-bottom: 1vh;">
+      <table class="custom-table2">
+        <tbody>
+          <tr>
+            <td></td>
+            <td>牡蛎礁面积(m²)</td>
+            <td>造礁牡蛎密度(个/m³)</td>
+            <td>造礁牡蛎生物量(g/m³)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2023.10</td>
+            <td>20689</td>
+            <td>3097.6</td>
+            <td>30137.44</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2024.04</td>
+            <td>/</td>
+            <td>3260.8</td>
+            <td>25209.38</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      礁栖生物类群-2023
+    </div>
+    <div class="oystersecharts" ref="chartRef6"></div>
+    <div class="rightBox-top-title-dialog">
+      礁栖生物类群-2024
+    </div>
+    <div class="oystersecharts" ref="chartRef7"></div>
   </div>
 </template>
 
@@ -184,6 +208,7 @@ import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
+import axios from "axios";
 const tableData1 = ref([
   {
     project: '一类',
@@ -396,9 +421,9 @@ let initChart4 = (source) => {
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
-        padAngle: 5,
         itemStyle: {
-          borderRadius: 10
+          borderRadius: 10,
+          borderWidth: 2
         },
         label: {
           show: false,
@@ -447,6 +472,62 @@ let initChart5 = (source) => {
     ]
   });
 };
+let chartRef6 = ref(null);
+let initChart6 = (source) => {
+  let chart = echarts.init(chartRef6.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart6(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: source,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  });
+};
+let chartRef7 = ref(null);
+let initChart7 = (source) => {
+  let chart = echarts.init(chartRef7.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart7(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: source,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  });
+};
 let reloadChart = () => {
   charts.forEach((chart) => {
     chart();
@@ -460,69 +541,88 @@ const max = ref(2023);
 
 // 定义 slider 的刻度
 const marks = computed(() => {
+  const commonStyle = { style: { color: '#FFFFFF' } };
   if (topMenu.value === '互花米草') {
     const marks = {};
     const start = min.value;
     const end = max.value;
     for (let year = start; year <= end; year++) {
-      marks[year] = {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: year.toString()
-      };
+      marks[year] = { ...commonStyle, label: year.toString() };
     }
     return marks;
-  } else if (topMenu.value === '鸟类') {
-    return {
-      0: {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: '2023.06'
-      },
-      1: {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: '2023.08'
-      },
-      2: {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: '2023.11'
-      },
-      3: {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: '2024.04'
-      }
-    };
-  } else if (topMenu.value === '牡蛎') {
-    return {
-      4: {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: '2023.10'
-      },
-      5: {
-        style: {
-          color: '#FFFFFF',
-        },
-        label: '2024.04'
-      },
-    };
-  } else {
-    return null;
   }
+  const labels = {
+    '鸟类': [
+      '2023.06',
+      '2023.08',
+      '2023.11',
+      '2024.04'
+    ],
+  };
+  if (labels[topMenu.value]) {
+    return labels[topMenu.value].map((label, index) => ({
+      ...commonStyle,
+      label: label
+    })).reduce((acc, curr, index) => {
+      acc[index + (topMenu.value === '鸟类' ? 0 : 4)] = curr;
+      return acc;
+    }, {});
+  }
+  return null;
 });
+const clickStatus = {
+  '牡蛎': false,
+  '互花米草': true,
+  '鸟类': false,
+};
 
 const topMenuChange = (value) => {
+  // 取消之前的点击状态
+  for (const key in clickStatus) {
+    if (key !== value) {
+      if (clickStatus[key]) {
+        callUIInteraction({
+          ModuleName: `监测调查`,
+          FunctionName: `${key}`,
+          State: false,
+        });
+        clickStatus[key] = false;
+      }
+    }
+  }
+  if (!clickStatus[value]) {
+    if (value === '牡蛎' || value === '文昌鱼' || value === '水质沉积物') {
+      callUIInteraction({
+        ModuleName: `监测调查`,
+        FunctionName: `${value}`,
+        State: true,
+      });
+    }
+    clickStatus[value] = true;
+  }
   topMenu.value = value;
   showSilder.value = true;
+  birdShow.value = false;
+  oystersShow.value = false;
+  if (value === '牡蛎') {
+    oystersShow.value = true;
+    initChart6([
+      { value: 5, name: '刺胞动物' },
+      { value: 30, name: '节肢动物' },
+      { value: 25, name: '环节动物' },
+      { value: 35, name: '软体动物' },
+      { value: 5, name: '星虫动物' },
+    ]);
+    initChart7([
+      { value: 3, name: '刺胞动物' },
+      { value: 3, name: '纽形动物' },
+      { value: 3, name: '扁形动物' },
+      { value: 25, name: '节肢动物' },
+      { value: 22, name: '环节动物' },
+      { value: 41, name: '软体动物' },
+      { value: 3, name: '星虫动物' },
+    ]);
+  }
   if (value === '互花米草') {
     timePlay.value = 2019;
     min.value = 2019;
@@ -531,10 +631,6 @@ const topMenuChange = (value) => {
     timePlay.value = 0;
     min.value = 0;
     max.value = 3;
-  } else if (value === '牡蛎') {
-    timePlay.value = 4;
-    min.value = 4;
-    max.value = 5;
   } else {
     showSilder.value = false;
   }
@@ -547,10 +643,6 @@ const logMapping = {
     1: '2023.08',
     2: '2023.11',
     3: '2024.04',
-  },
-  '牡蛎': {
-    4: '2023.10',
-    5: '2024.04',
   },
   '互花米草': {
     2019: '2019',
@@ -565,12 +657,16 @@ watch(timePlay, (newVal) => {
   const menu = topMenu.value;
   const logValue = logMapping[menu]?.[newVal];
   if (logValue !== undefined) {
-    console.log(logValue);
+    callUIInteraction({
+      ModuleName: `监测调查`,
+      FunctionName: `${menu}`,
+      State: true,
+      Time: `${logValue}`,
+    });
   }
 });
 
-
-const birdShow = ref(true);
+const birdShow = ref(false);
 const speciesList = ref([
   { name: '斑嘴鸭', count: 'XX只' },
   { name: '琵嘴鸭', count: 'XX只' },
@@ -583,19 +679,60 @@ const speciesList = ref([
   // { name: '中杓鹬', count: 'XX只' },
 
 ]);
+const birdstation = ref(null)
 const activeIndex = ref(0);
+const animalData = ref([]);
+const animalDatalist = ref([]);
+const imageArray = ref([]);
+
+// 点击动物名显示信息
 const handleClick = (index, item) => {
   activeIndex.value = index;
-  console.log(`Clicked on: ${item.name}, Count: ${item.count}`);
+  axios.get(`http://192.168.0.227:8088/animal/getAnimal/${item.name}`).then((res) => {
+    animalData.value = res.data.data.info.鸟种资料;
+    animalDatalist.value = res.data.data.info.详细信息;
+    imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
+  });
 };
+
 const activeName = ref('first')
 
-const handletabClick = (tab, event) => {
-  console.log(tab, event)
+const closebird = () => {
+  birdShow.value = false;
+}
+const closeoysters = () => {
+  oystersShow.value = false;
+}
+const oystersShow = ref(false);
+
+const myHandleResponseFunction = (data) => {
+  console.log(data);
+  const datajson = JSON.parse(data);
+  if (datajson.Function === '报错') {
+    ElMessage({
+      message: datajson.Type,
+      type: 'warning',
+    });
+    return
+  } else if (datajson.Function === '色带范围') {
+    birdstation.value = datajson.Data.StationName;
+    axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.name[0]}`).then((res) => {
+      animalData.value = res.data.data.info.鸟种资料;
+      animalDatalist.value = res.data.data.info.详细信息;
+      imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
+    });
+  }
 }
 
 onMounted(() => {
+  callUIInteraction({
+    ModuleName: `监测调查`,
+    FunctionName: `互花米草`,
+    State: true,
+    Time: '2019',
+  });
   initChart1([
+    { value: 19.18, name: '节肢动物' },
     { value: 39.73, name: '软体动物' },
     { value: 31.51, name: '环节动物' },
     { value: 1.37, name: '原足动物' },
@@ -605,7 +742,6 @@ onMounted(() => {
     { value: 1.37, name: '脊索动物' },
     { value: 1.37, name: '刺胞动物' },
     { value: 1.37, name: '纽形动物' },
-    { value: 19.18, name: '节肢动物' },
   ]);
   initChart2([
     { value: 46.15, name: '多毛类' },
@@ -632,13 +768,8 @@ onMounted(() => {
     { value: 7, name: '毛颚动物' },
     { value: 33, name: '其他幼体' },
   ]);
-  callUIInteraction({
-    ModuleName: `监测调查`,
-    FunctionName: `互花米草`,
-    State: true,
-    Time: 2023.06,
-  });
   window.addEventListener("resize", reloadChart);
+  addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 onUnmounted(() => {
   window.removeEventListener("resize", reloadChart);
@@ -783,17 +914,20 @@ onUnmounted(() => {
   left: 34.4vh;
   top: 10vh;
   width: 30vh;
-  height: 80vh;
+  max-height: 80vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding: 1.5vh;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .species {
   margin: 1vh 0;
+  flex-shrink: 0;
 }
 
 .species-item {
@@ -827,6 +961,7 @@ onUnmounted(() => {
 .Carousel {
   width: 100%;
   height: 16vh;
+  flex-shrink: 0;
 }
 
 :deep(.el-carousel__button) {
@@ -839,10 +974,44 @@ onUnmounted(() => {
 
 .briefly {
   width: 100%;
-  height: 45.5vh;
+  flex-grow: 1;
+  overflow-y: auto;
   color: #CFEFFF;
   font-size: 1.4vh;
 }
+
+.brieflydata {
+  max-height: 39vh;
+  overflow-y: auto;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 1vh;
+  /* 滚动条的宽度 */
+  height: 1vh;
+  /* 滚动条的高度 */
+}
+
+::-webkit-scrollbar-track {
+  background: #0f5aa15d;
+  /* 滚动条轨道的背景 */
+  border-radius: 1vh;
+  /* 轨道的圆角 */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3386e462;
+  /* 滚动条的颜色 */
+  border-radius: 1vh;
+  /* 滚动条的圆角 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1289d8;
+  /* 鼠标悬停时的颜色 */
+}
+
 
 :deep(.el-tabs__item) {
   color: #CFEFFF;
@@ -863,14 +1032,27 @@ onUnmounted(() => {
   border: 0.2vh solid #416491;
   padding: 0.8vh;
   text-align: center;
-  font-size: 1.2vh;
-  /* width: 50%; */
+  font-size: 1vh;
+  width: 0%;
 }
 
+.custom-table2 {
+  border-collapse: collapse;
+  width: 100%;
+  color: #b7cffc;
+}
 
+.custom-table2 th,
+.custom-table2 td {
+  border: 0.2vh solid #416491;
+  padding: 0.8vh;
+  text-align: center;
+  font-size: 1vh;
+  width: 0%;
+}
 
 :deep(.el-table__body-wrapper) {
-  font-size: 1.2vh;
+  font-size: 1vh;
 }
 
 :deep(.el-table--fit) {
@@ -926,5 +1108,34 @@ onUnmounted(() => {
 
 :deep(.el-table .cell) {
   color: #b7cffc;
+}
+
+.close {
+  cursor: pointer;
+  width: 2vh;
+  position: absolute;
+  right: 1vh;
+  top: 2vh;
+}
+
+.oysters {
+  position: absolute;
+  left: 34.4vh;
+  top: 10vh;
+  width: 30vh;
+  max-height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.oystersecharts {
+  width: 26.75vh;
+  height: 20vh;
 }
 </style>
