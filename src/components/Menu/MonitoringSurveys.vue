@@ -1,182 +1,180 @@
 <template>
-  <div class="page">
-    <div class="leftBox">
-      <div class="rightBox-top">
-        <div class="rightBox-top-title">
-          潮间带生物类群组成
-        </div>
-        <div class="leftBox-top-table" ref="chartRef1"></div>
+  <div class="leftBox">
+    <div class="rightBox-top">
+      <div class="rightBox-top-title">
+        潮间带生物类群组成
       </div>
-      <div class="rightBox-middle">
-        <div class="rightBox-bottom-title">
-          大型底栖动物组成比例图
-        </div>
-        <div class="leftBox-bottom-table"></div>
+      <div class="leftBox-top-table" ref="chartRef1"></div>
+    </div>
+    <div class="rightBox-middle">
+      <div class="rightBox-bottom-title">
+        大型底栖动物组成比例图
       </div>
-      <div class="rightBox-middle2">
-        <div class="rightBox-bottom-title">
-          浮游植物组成比例图
-        </div>
-        <div class="leftBox-middle2-content"></div>
+      <div class="leftBox-bottom-table" ref="chartRef2"></div>
+    </div>
+    <div class="rightBox-middle2">
+      <div class="rightBox-bottom-title">
+        浮游植物组成比例图
       </div>
-      <div class="rightBox-bottom">
-        <div class="rightBox-bottom-title">
-          海水水质评价参数及标准
-        </div>
-        <div class="leftBox-bottom-content">
-          <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-            background: 'transparent', fontSize: '1.4vh',
-            'text-align': 'center',
-          }" height="17.5vh">
-            <el-table-column prop="project" label="项目" width="60" align="center" />
-            <el-table-column prop="PH" label="PH" width="70" align="center" />
-            <el-table-column prop="DO" label="DO" width="70" align="center" />
-            <el-table-column prop="COD" label="COD" width="70" align="center" />
-            <el-table-column prop="Inorganicnitrogen" label="无机氮" width="70" align="center" />
-            <el-table-column prop="Activephosphate" label="活性磷酸盐" width="100" align="center" />
-          </el-table>
-        </div>
+      <div class="leftBox-middle2-content" ref="chartRef3"></div>
+    </div>
+    <div class="rightBox-bottom">
+      <div class="rightBox-bottom-title">
+        海水水质评价参数及标准
+      </div>
+      <div class="leftBox-bottom-content">
+        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.4vh',
+          'text-align': 'center',
+        }" height="17.5vh">
+          <el-table-column prop="project" label="项目" width="60" align="center" />
+          <el-table-column prop="PH" label="PH" width="70" align="center" />
+          <el-table-column prop="DO" label="DO" width="70" align="center" />
+          <el-table-column prop="COD" label="COD" width="70" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="70" align="center" />
+          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="100" align="center" />
+        </el-table>
       </div>
     </div>
-    <div class="rightBox">
-      <div class="rightBox-top">
-        <div class="rightBox-top-title">
-          生物多样性评价结果
-        </div>
-        <div class="rightBox-top-table">
-          <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
-            background: 'transparent', fontSize: '1.4vh',
-            'text-align': 'center',
-          }" height="16.25vh">
-            <el-table-column prop="Stations" label="站位" width="60" align="center" />
-            <el-table-column prop="Diversity" label="多样性指数" width="100" align="center" />
-            <el-table-column prop="Uniformity" label="均匀度" width="70" align="center" />
-            <el-table-column prop="Dominance" label="优势度" width="70" align="center" />
-            <el-table-column prop="Richness" label="丰富度" width="70" align="center" />
-            <el-table-column prop="threshold" label="指数阈值" width="80" align="center" />
-            <el-table-column prop="level" label="等级" width="100" align="center" />
-          </el-table>
-        </div>
+  </div>
+  <div class="rightBox">
+    <div class="rightBox-top">
+      <div class="rightBox-top-title">
+        生物多样性评价结果
       </div>
-      <div class="rightBox-middle">
-        <div class="rightBox-bottom-title">
-          水质沉积物单指标评价结果
-        </div>
-        <div class="rightBox-bottom-table">
-          <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
-            background: 'transparent', fontSize: '1.4vh',
-            'text-align': 'center',
-          }" height="16.25vh">
-            <el-table-column prop="StationNumber" label="站号" width="60" align="center" />
-            <el-table-column prop="PH" label="PH" width="60" align="center" />
-            <el-table-column prop="DO" label="DO" width="60" align="center" />
-            <el-table-column prop="COD" label="COD" width="60" align="center" />
-            <el-table-column prop="Inorganicnitrogen" label="无机氮" width="70" align="center" />
-            <el-table-column prop="phosphate" label="磷酸盐" width="70" align="center" />
-            <el-table-column prop="Nutritionalization" label="是否富营养化" width="120" align="center" />
-          </el-table>
-        </div>
-      </div>
-      <div class="rightBox-middle2">
-        <div class="rightBox-bottom-title">
-          环境DNA多样性
-        </div>
-        <div class="rightBox-middle2-content"></div>
-      </div>
-      <div class="rightBox-bottom">
-        <div class="rightBox-bottom-title">
-          浮游动物组成比例
-        </div>
-        <div class="rightBox-bottom-content"></div>
+      <div class="rightBox-top-table">
+        <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.4vh',
+          'text-align': 'center',
+        }" height="16.25vh">
+          <el-table-column prop="Stations" label="站位" width="60" align="center" />
+          <el-table-column prop="Diversity" label="多样性指数" width="100" align="center" />
+          <el-table-column prop="Uniformity" label="均匀度" width="70" align="center" />
+          <el-table-column prop="Dominance" label="优势度" width="70" align="center" />
+          <el-table-column prop="Richness" label="丰富度" width="70" align="center" />
+          <el-table-column prop="threshold" label="指数阈值" width="80" align="center" />
+          <el-table-column prop="level" label="等级" width="100" align="center" />
+        </el-table>
       </div>
     </div>
-    <!-- 顶部选择 -->
-    <div class="topMenu">
-      <el-radio-group v-model="topMenu" size="large" @change="topMenuChange">
-        <el-radio-button label="互花米草" value="互花米草" />
-        <el-radio-button label="鸟类" value="鸟类" />
-        <el-radio-button label="牡蛎" value="牡蛎" />
-        <el-radio-button label="文昌鱼" value="文昌鱼" />
-        <el-radio-button label="水质沉积物" value="水质沉积物" />
-      </el-radio-group>
-    </div>
-    <!-- 时间轴 -->
-    <div class="bottombox-left">
-      <div class="bottombox">
-        <div class="bottombox-slider">
-          <el-slider :step="1" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-            style="position: relative; z-index: 1; width: 1000px" v-show="showSilder">
-          </el-slider>
-        </div>
+    <div class="rightBox-middle">
+      <div class="rightBox-bottom-title">
+        水质沉积物单指标评价结果
+      </div>
+      <div class="rightBox-bottom-table">
+        <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.4vh',
+          'text-align': 'center',
+        }" height="16.25vh">
+          <el-table-column prop="StationNumber" label="站号" width="60" align="center" />
+          <el-table-column prop="PH" label="PH" width="60" align="center" />
+          <el-table-column prop="DO" label="DO" width="60" align="center" />
+          <el-table-column prop="COD" label="COD" width="60" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="70" align="center" />
+          <el-table-column prop="phosphate" label="磷酸盐" width="70" align="center" />
+          <el-table-column prop="Nutritionalization" label="是否富营养化" width="120" align="center" />
+        </el-table>
       </div>
     </div>
-    <!-- 鸟类点击弹窗 -->
-    <div class="bird" v-show="birdShow">
-      <div class="rightBox-top-title-dialog">
-        XX站点
+    <div class="rightBox-middle2">
+      <div class="rightBox-bottom-title">
+        环境DNA多样性
       </div>
-      <div class="species">
-        <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
-            'odd-item': index % 2 === 0,
-            'even-item': index % 2 !== 0,
-            'active-item': activeIndex === index
-          }" @click="handleClick(index, item)">
-          <div>{{ index + 1 }}</div>
-          <div>{{ item.name }}</div>
-          <div>{{ item.count }}</div>
-        </div>
+      <div class="rightBox-middle2-content" ref="chartRef4"></div>
+    </div>
+    <div class="rightBox-bottom">
+      <div class="rightBox-bottom-title">
+        浮游动物组成比例
       </div>
-      <div class="Carousel">
-        <el-carousel height="16vh">
-          <el-carousel-item>
-            <img src="../../assets/img/text4.png" alt="" style="width: 100%;height: 100%;">
-          </el-carousel-item>
-          <el-carousel-item>
-            <img src="../../assets/img/text5.png" alt="" style="width: 100%;height: 100%;">
-          </el-carousel-item>
-          <el-carousel-item>
-            <img src="../../assets/img/text6.png" alt="" style="width: 100%;height: 100%;">
-          </el-carousel-item>
-          <el-carousel-item>
-            <img src="../../assets/img/text3.png" alt="" style="width: 100%;height: 100%;">
-          </el-carousel-item>
-        </el-carousel>
+      <div class="rightBox-bottom-content" ref="chartRef5"></div>
+    </div>
+  </div>
+  <!-- 顶部选择 -->
+  <div class="topMenu">
+    <el-radio-group v-model="topMenu" size="large" @change="topMenuChange">
+      <el-radio-button label="互花米草" value="互花米草" />
+      <el-radio-button label="鸟类" value="鸟类" />
+      <el-radio-button label="牡蛎" value="牡蛎" />
+      <el-radio-button label="文昌鱼" value="文昌鱼" />
+      <el-radio-button label="水质沉积物" value="水质沉积物" />
+    </el-radio-group>
+  </div>
+  <!-- 时间轴 -->
+  <div class="bottombox-left">
+    <div class="bottombox">
+      <div class="bottombox-slider">
+        <el-slider :step="1" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
+          style="position: relative; z-index: 1; width: 1000px" v-show="showSilder">
+        </el-slider>
       </div>
-      <div class="briefly">
-        <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handletabClick">
-          <el-tab-pane label="鸟种资料" name="first">
-            <table class="custom-table">
-              <thead>
-                <tr>
-                  <td>中文目名</td>
-                  <td></td>
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <td>中文科名</td>
-                  <td></td>
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <td>中文属名</td>
-                  <td></td>
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <td>层级</td>
-                  <td></td>
-                </tr>
-              </thead>
-            </table>
-          </el-tab-pane>
-          <el-tab-pane label="简介" name="second">
-            222
-          </el-tab-pane>
-        </el-tabs>
+    </div>
+  </div>
+  <!-- 鸟类点击弹窗 -->
+  <div class="bird" v-show="birdShow">
+    <div class="rightBox-top-title-dialog">
+      XX站点
+    </div>
+    <div class="species">
+      <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
+          'odd-item': index % 2 === 0,
+          'even-item': index % 2 !== 0,
+          'active-item': activeIndex === index
+        }" @click="handleClick(index, item)">
+        <div>{{ index + 1 }}</div>
+        <div>{{ item.name }}</div>
+        <div>{{ item.count }}</div>
       </div>
+    </div>
+    <div class="Carousel">
+      <el-carousel height="16vh">
+        <el-carousel-item>
+          <img src="../../assets/img/text4.png" alt="" style="width: 100%;height: 100%;">
+        </el-carousel-item>
+        <el-carousel-item>
+          <img src="../../assets/img/text5.png" alt="" style="width: 100%;height: 100%;">
+        </el-carousel-item>
+        <el-carousel-item>
+          <img src="../../assets/img/text6.png" alt="" style="width: 100%;height: 100%;">
+        </el-carousel-item>
+        <el-carousel-item>
+          <img src="../../assets/img/text3.png" alt="" style="width: 100%;height: 100%;">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="briefly">
+      <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handletabClick">
+        <el-tab-pane label="鸟种资料" name="first">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <td>中文目名</td>
+                <td></td>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <td>中文科名</td>
+                <td></td>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <td>中文属名</td>
+                <td></td>
+              </tr>
+            </thead>
+            <thead>
+              <tr>
+                <td>层级</td>
+                <td></td>
+              </tr>
+            </thead>
+          </table>
+        </el-tab-pane>
+        <el-tab-pane label="简介" name="second">
+          222
+        </el-tab-pane>
+      </el-tabs>
     </div>
   </div>
 </template>
@@ -305,120 +303,148 @@ let initChart1 = (source) => {
     initChart1(source);
   });
   chart.setOption({
-    dataset: {
-      sourceHeader: false,
-      source: source,
-    },
-    grid: {
-      top: '30',
-      bottom: "0",
-      left: '5',
-      right: "5",
-      containLabel: true,
-    },
     tooltip: {
-      trigger: "axis",
-      textStyle: {
-        fontSize: 12
-      },
-      formatter: (params) => {
-        let data = params[0].data;
-        if (!data[1]) {
-          return;
-        }
-        let tooltip = `时间：${data[0]}<br>气温：${data[1]} °C`;
-        return tooltip;
-      },
-    },
-    xAxis: {
-      type: "category",
-      axisLine: {
-        show: true,
-        lineStyle: {
-          width: 1,
-          color: "rgba(255,255,255,0.1)",
-        },
-      },
-      splitLine: {
-        show: true,
-        lineStyle: {
-          width: 1,
-          color: "rgba(255,255,255,0.1)",
-        },
-      },
-      axisTick: {
-        show: false,
-      },
-      boundaryGap: true,
-      axisLabel: {
-        textStyle: {
-          color: "#C5F1FF",
-          fontSize:12
-        },
-      },
-    },
-    yAxis: {
-      name: "气温 (°C)",
-      nameTextStyle: {
-        color: "#C5F1FF",
-        fontSize:12
-      },
-      axisLine: {
-        show: true,
-        lineStyle: {
-          width: 1,
-          color: "rgba(255,255,255,0.2)",
-        },
-      },
-      splitLine: {
-        show: true,
-        lineStyle: {
-          width: 1,
-          color: "rgba(255,255,255,0.2)",
-        },
-      },
-      axisLabel: {
-        interval: 3,
-        textStyle: {
-          color: "#C5F1FF",
-          fontSize:12
-        },
-      },
-      min: 0,
-      max: 40,
+      trigger: 'item'
     },
     series: [
       {
-        type: "line",
-        smooth: true,
-        symbolSize: 0,
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: source,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  });
+};
+let chartRef2 = ref(null);
+let initChart2 = (source) => {
+  let chart = echarts.init(chartRef2.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart2(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: source,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  });
+};
+let chartRef3 = ref(null);
+let initChart3 = (source) => {
+  let chart = echarts.init(chartRef3.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart3(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: source,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
+  });
+};
+let chartRef4 = ref(null);
+let initChart4 = (source) => {
+  let chart = echarts.init(chartRef4.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart4(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '70%'],
+        avoidLabelOverlap: false,
+        padAngle: 5,
         itemStyle: {
-          color: "#FF5733", // 修改为气温的颜色
+          borderRadius: 10
         },
-        encode: { x: 0, y: [1] },
-        areaStyle: {
-          normal: {
-            color: new echarts.graphic.LinearGradient(
-              0,
-              0,
-              0,
-              1,
-              [
-                {
-                  offset: 0,
-                  color: "#FF5733",
-                },
-                {
-                  offset: 0.9,
-                  color: "rgba(255,165,79,0.2)",
-                },
-              ],
-              false
-            ),
-          },
+        label: {
+          show: false,
+          position: 'center'
         },
-      },
-    ],
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: source
+      }
+    ]
+  });
+};
+let chartRef5 = ref(null);
+let initChart5 = (source) => {
+  let chart = echarts.init(chartRef5.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart5(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: '50%',
+        data: source,
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    ]
   });
 };
 let reloadChart = () => {
@@ -516,10 +542,33 @@ const topMenuChange = (value) => {
 
 // 监听 timePlay 的变化
 watch(timePlay, (newVal) => {
-  console.log(newVal);
+  if (newVal == 0 && topMenu.value === '鸟类') {
+    console.log(2023.06);
+  } else if (newVal == 1 && topMenu.value === '鸟类') {
+    console.log(2023.08);
+  } else if (newVal == 2 && topMenu.value === '鸟类') {
+    console.log(2023.11);
+  } else if (newVal == 3 && topMenu.value === '鸟类') {
+    console.log(2024.04);
+  } else if (newVal == 0 && topMenu.value === '牡蛎') {
+    console.log(2023.10);
+  } else if (newVal == 1 && topMenu.value === '牡蛎') {
+    console.log(2024.04);
+  } else if (newVal == 2019 && topMenu.value === '互花米草') {
+    console.log(2019);
+  } else if (newVal == 2020 && topMenu.value === '互花米草') {
+    console.log(2020);
+  } else if (newVal == 2021 && topMenu.value === '互花米草') {
+    console.log(2021);
+  } else if (newVal == 2022 && topMenu.value === '互花米草') {
+    console.log(2022);
+  } else if (newVal == 2023 && topMenu.value === '互花米草') {
+    console.log(2023);
+  }
+
 });
 
-const birdShow = ref(false);
+const birdShow = ref(true);
 const speciesList = ref([
   { name: '斑嘴鸭', count: 'XX只' },
   { name: '琵嘴鸭', count: 'XX只' },
@@ -545,31 +594,48 @@ const handletabClick = (tab, event) => {
 
 onMounted(() => {
   initChart1([
-    ["00:00", "19"],
-    ["01:00", "19"],
-    ["02:00", "20"],
-    ["03:00", "20"],
-    ["04:00", "20"],
-    ["05:00", "21"],
-    ["06:00", "21"],
-    ["07:00", "22"],
-    ["08:00", "22"],
-    ["09:00", "23"],
-    ["10:00", "24"],
-    ["11:00", "25"],
-    ["12:00", "28"],
-    ["13:00", "30"],
-    ["14:00", "32"],
-    ["15:00", "34"],
-    ["16:00", "36"],
-    ["17:00", "35"],
-    ["18:00", "33"],
-    ["19:00", "30"],
-    ["20:00", "28"],
-    ["21:00", "25"],
-    ["22:00", "22"],
-    ["23:00", "20"],
+    { value: 39.73, name: '软体动物' },
+    { value: 31.51, name: '环节动物' },
+    { value: 1.37, name: '原足动物' },
+    { value: 1.37, name: '星虫动物' },
+    { value: 1.37, name: '扁形动物' },
+    { value: 1.37, name: '腕足动物' },
+    { value: 1.37, name: '脊索动物' },
+    { value: 1.37, name: '刺胞动物' },
+    { value: 1.37, name: '纽形动物' },
+    { value: 19.18, name: '节肢动物' },
   ]);
+  initChart2([
+    { value: 46.15, name: '多毛类' },
+    { value: 30.77, name: '软体动物' },
+    { value: 15.38, name: '甲壳类' },
+    { value: 3.85, name: '头索动物' },
+    { value: 3.85, name: '纽形动物' },
+  ]);
+  initChart3([
+    { value: 12.5, name: '蓝藻门' },
+    { value: 87.5, name: '硅藻门' },
+  ]);
+  initChart4([
+    { value: '1', name: 'a1' },
+    { value: '1', name: 'a2' },
+    { value: '1', name: 'b1' },
+    { value: '1', name: 'b1' },
+    { value: '1', name: 'c1' },
+    { value: '1', name: 'c2' },
+  ]);
+  initChart5([
+    { value: 20, name: '肛肠动物' },
+    { value: 40, name: '节肢动物' },
+    { value: 7, name: '毛颚动物' },
+    { value: 33, name: '其他幼体' },
+  ]);
+  callUIInteraction({
+    ModuleName: `监测调查`,
+    FunctionName: `互花米草`,
+    State: true,
+    Time: 2023.06,
+  });
   window.addEventListener("resize", reloadChart);
 });
 onUnmounted(() => {
@@ -655,63 +721,13 @@ onUnmounted(() => {
   box-sizing: border-box;
 }
 
-.rightBox-top-table {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-}
-
-.rightBox-bottom-table {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-}
-
-.rightBox-middle2-content {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-  background-image: url('../../assets/img/text3.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.rightBox-bottom-content {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-  background-image: url('../../assets/img/text4.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.leftBox-top-table {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-  /* background-image: url('../../assets/img/text5.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%; */
-}
-
-.leftBox-bottom-table {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-  background-image: url('../../assets/img/text6.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
-.leftBox-middle2-content {
-  margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
-  background-image: url('../../assets/img/text7.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
+.rightBox-top-table,
+.rightBox-bottom-table,
+.rightBox-bottom-content,
+.rightBox-middle2-content,
+.leftBox-top-table,
+.leftBox-bottom-table,
+.leftBox-middle2-content,
 .leftBox-bottom-content {
   margin: 1vh 0;
   width: 100%;

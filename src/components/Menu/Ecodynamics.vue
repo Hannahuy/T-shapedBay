@@ -1,69 +1,66 @@
 <template>
-    <div class="page">
-        <div class="left-button">
-            <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
+    <div class="left-button">
+        <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
+    </div>
+    <div class="bottombox-left">
+        <div class="bottombox-button">
+            <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
+                @click="togglePlay"></el-button>
         </div>
-        <div class="bottombox-left">
-            <div class="bottombox-button">
-                <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
-                    @click="togglePlay"></el-button>
-            </div>
-            <div class="bottombox">
-                <div class="bottombox-slider">
-                    <div :style="adjustedStyle">
-                        <span class="bottombox-slider-span">{{ formattedTime }}</span>
-                    </div>
-                    <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max"
-                        :marks="marks" style="position: relative; z-index: 1; width: 1300px" @change="gettimePlay">
-                    </el-slider>
+        <div class="bottombox">
+            <div class="bottombox-slider">
+                <div :style="adjustedStyle">
+                    <span class="bottombox-slider-span">{{ formattedTime }}</span>
                 </div>
+                <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
+                    style="position: relative; z-index: 1; width: 1300px" @change="gettimePlay">
+                </el-slider>
             </div>
         </div>
-        <!-- 右下角选择 -->
-        <div class="right-select" v-show="showselect">
-            <el-select v-model="selectvalue" placeholder="请选择层级" size="large" style="width: 24vh"
-                @change="selectchange">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-            </el-select>
-        </div>
+    </div>
+    <!-- 右下角选择 -->
+    <div class="right-select" v-show="showselect">
+        <el-select v-model="selectvalue" placeholder="请选择层级" size="large" style="width: 24vh" @change="selectchange">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
+    </div>
 
-        <!-- 右下角颜色条 -->
-        <div class="right-button">
-            <div class="leftbar">{{ barType }}</div>
-            <div class="rightbar">
-                <span>{{ barMin }}</span>
-                <span>{{ barMax }}</span>
-            </div>
+    <!-- 右下角颜色条 -->
+    <div class="right-button">
+        <div class="leftbar">{{ barType }}</div>
+        <div class="rightbar">
+            <span>{{ barMin }}</span>
+            <span>{{ barMax }}</span>
         </div>
-        <!-- 右上角查询表格 -->
-        <div class="smallWindow" v-if="showSmallWindow">
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <td>数据值</td>
-                        <td>{{ Datavar }}</td>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td>类型</td>
-                        <td>{{ Datatype }}</td>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td>时间</td>
-                        <td>{{ Datatime }}</td>
-                    </tr>
-                </thead>
-                <thead>
-                    <tr>
-                        <td>层级</td>
-                        <td>{{ layer }}</td>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+    </div>
+    <!-- 右上角查询表格 -->
+    <div class="smallWindow" v-if="showSmallWindow">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <td>数据值</td>
+                    <td>{{ Datavar }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>类型</td>
+                    <td>{{ Datatype }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>时间</td>
+                    <td>{{ Datatime }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>层级</td>
+                    <td>{{ layer }}</td>
+                </tr>
+            </thead>
+        </table>
     </div>
 </template>
 
@@ -293,7 +290,7 @@ watch(timePlay, (newVal) => {
             Type: selectedItemname.value
         });
         // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
-        
+
     }
     if (currentTime.isSame(dayjs(max.value))) {
         activePlay.value = '';
