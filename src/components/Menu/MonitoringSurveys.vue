@@ -334,10 +334,15 @@ const initChart = (chartRef, source) => {
     initChart(chartRef, source);
   });
   chart.setOption({
-    tooltip: { trigger: 'item' },
+    tooltip: {
+      trigger: 'item',
+      valueFormatter: function (value) {
+        return value + ' %';
+      }
+    },
     series: [
       {
-        name: 'Composition',
+        // name: 'Composition',
         type: 'pie',
         data: source,
         radius: '55%',
@@ -459,7 +464,6 @@ const topMenuChange = (value) => {
           FunctionName: `${key}`,
           State: false,
         });
-        console.log(`监测调查`, key, false,);
         clickStatus[key] = false;
       }
     }
@@ -472,7 +476,6 @@ const topMenuChange = (value) => {
         Time: `2023.06`,
         State: true,
       });
-      console.log(`监测调查`, topMenu.value, `2023.06`, true,);
     } else if (value === '互花米草') {
       callUIInteraction({
         ModuleName: `监测调查`,
@@ -480,14 +483,12 @@ const topMenuChange = (value) => {
         Time: `2019`,
         State: true,
       });
-      console.log(`监测调查`, topMenu.value, `2019`, true,);
     } else {
       callUIInteraction({
         ModuleName: `监测调查`,
         FunctionName: topMenu.value,
         State: true,
       });
-      console.log(`监测调查`, topMenu.value, true,);
     }
     clickStatus[value] = true;
   }
@@ -523,29 +524,28 @@ const topMenuChange = (value) => {
   }
 };
 const logMapping = {
-    0: '2023.06',
-    1: '2023.08',
-    2: '2023.11',
-    3: '2024.04',
-    2019: '2019',
-    2020: '2020',
-    2021: '2021',
-    2022: '2022',
-    2023: '2023',
+  0: '2023.06',
+  1: '2023.08',
+  2: '2023.11',
+  3: '2024.04',
+  2019: '2019',
+  2020: '2020',
+  2021: '2021',
+  2022: '2022',
+  2023: '2023',
 };
 const gettimePlay = (e) => {
-    const timeValue = logMapping[e];
-    if (timeValue) {
-        callUIInteraction({
-            ModuleName: `监测调查`,
-            FunctionName: topMenu.value,
-            State: true,
-            Time: timeValue
-        });
-        console.log(`监测调查`, topMenu.value, true, timeValue);
-    } else {
-        console.error(`未找到对应的时间值: ${e}`);
-    }
+  const timeValue = logMapping[e];
+  if (timeValue) {
+    callUIInteraction({
+      ModuleName: `监测调查`,
+      FunctionName: topMenu.value,
+      State: true,
+      Time: timeValue
+    });
+  } else {
+    console.error(`未找到对应的时间值: ${e}`);
+  }
 }
 
 const birdShow = ref(false);
@@ -615,7 +615,6 @@ onMounted(() => {
     State: true,
     Time: '2019',
   });
-  console.log(`监测调查`, `互花米草`, true, '2019',);
   initChart(chartRef1, [
     { value: 19.18, name: '节肢动物' },
     { value: 39.73, name: '软体动物' },
@@ -1013,7 +1012,7 @@ onUnmounted(() => {
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  padding: 1.5vh;
+  padding: 1.5vh 1.5vh 0 1.5vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

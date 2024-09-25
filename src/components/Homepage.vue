@@ -29,15 +29,15 @@
       </div>
     </div>
     <div class="righticon">
-      <img src="../assets/img/晴天.png" class="imageicon" alt="" @click="weathernext">
+      <img :src="selectedWeather" class="imageicon" alt="" @click="weathernext">
       <img src="../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
       <img src="../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
     </div>
     <div class="weatherBox" v-if="showWeather">
-      <img src="../assets/img/晴天.png" class="imageicon" alt="">
-      <img src="../assets/img/阴天.png" class="imageicon" alt="">
-      <img src="../assets/img/雨天.png" class="imageicon" alt="">
-      <img src="../assets/img/雪天.png" class="imageicon" alt="">
+      <img src="../assets/img/晴天.png" class="imageicon" alt="" @click="selectWeather('晴天')">
+      <img src="../assets/img/阴天.png" class="imageicon" alt="" @click="selectWeather('阴天')">
+      <img src="../assets/img/雨天.png" class="imageicon" alt="" @click="selectWeather('雨天')">
+      <img src="../assets/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
     </div>
     <div v-if="selected === '监测调查'">
       <MonitoringSurveys />
@@ -66,7 +66,6 @@ import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
 
 let selected = ref('监测调查'); // 默认选中监测调查
-const showWeather = ref(false);
 const selectMenu = (menu) => {
   if (selected.value !== menu) {
     callUIInteraction({
@@ -82,9 +81,48 @@ const selectMenu = (menu) => {
   });
   selected.value = menu;
 };
+const showWeather = ref(false);
+const selectedWeather = ref('/src/assets/img/晴天.png');
 const weathernext = () => {
   showWeather.value = !showWeather.value;
 }
+const selectWeather = (weather) => {
+  showWeather.value = false;
+  switch (weather) {
+    case '晴天':
+      selectedWeather.value = '/src/assets/img/晴天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '晴天'
+      });
+      break;
+    case '阴天':
+      selectedWeather.value = '/src/assets/img/阴天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '阴天'
+      });
+      break;
+    case '雨天':
+      selectedWeather.value = '/src/assets/img/雨天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '雨天'
+      });
+      break;
+    case '雪天':
+      selectedWeather.value = '/src/assets/img/雪天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '雪天'
+      });
+      break;
+  }
+};
 const offing = () => {
   callUIInteraction({
     ModuleName: `其他`,
@@ -107,6 +145,11 @@ onMounted(() => {
     ModuleName: `监测调查`,
     FunctionName: `监测调查`,
     State: true,
+  });
+  callUIInteraction({
+    ModuleName: `其他`,
+    FunctionName: `天气`,
+    Weather: '晴天'
   });
 });
 </script>
