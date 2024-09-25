@@ -45,14 +45,12 @@
     <div v-if="selected === '生态动力'">
       <Ecodynamics />
     </div>
-    <div v-if="selected === '生态网格'">
-      <EcologicalGrid />
-    </div>
+    <EcologicalGrid v-if="selected === '生态网格'" />
     <div v-if="selected === '趋势预测'">
       <TrendForecasting />
     </div>
   </div>
-  <!-- <UEpage /> -->
+  <UEpage />
 </template>
 
 
@@ -177,7 +175,7 @@ onMounted(() => {
   background-image: url('../assets/top.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  z-index: 1;
+  z-index: 3;
   pointer-events: none !important;
 }
 
@@ -186,9 +184,10 @@ onMounted(() => {
   left: 0;
   width: 12vh;
   height: 100%;
-  background-image: url('../assets/left.png');
+  background-image: url('../assets/left2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  z-index: 2;
 }
 
 .bottom {
@@ -196,9 +195,10 @@ onMounted(() => {
   bottom: 0;
   width: 100%;
   height: 8.5vh;
-  background-image: url('../assets/bottom.png');
+  background-image: url('../assets/bottom2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  z-index: 2;
 }
 
 .right {
@@ -206,9 +206,10 @@ onMounted(() => {
   right: 0;
   width: 12vh;
   height: 100%;
-  background-image: url('../assets/right.png');
+  background-image: url('../assets/right2.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  z-index: 2;
 }
 
 .top-title {
@@ -303,7 +304,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  z-index: 2;
+  z-index: 3;
   right: 2.4vh;
   top: 3vh;
 }

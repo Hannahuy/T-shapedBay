@@ -35,6 +35,7 @@
     </div>
     <!-- 右上角查询表格 -->
     <div class="smallWindow" v-if="showSmallWindow">
+        <img src="../../assets/img/close.png" alt="" class="close" @click="close">
         <table class="custom-table">
             <thead>
                 <tr>
@@ -363,7 +364,9 @@ const Datavar = ref(null);
 const Datatype = ref(null);
 const Datatime = ref(null);
 const layer = ref(null);
-
+const close = () => {
+    showSmallWindow.value = false;
+};
 const myHandleResponseFunction = (data) => {
     const datajson = JSON.parse(data);
     if (datajson.Function === '报错') {
@@ -420,7 +423,7 @@ onMounted(() => {
     position: absolute;
     bottom: 2.5vh;
     margin-left: 2.4vh;
-    z-index: 20;
+    z-index: 10;
 }
 
 .bottombox {
@@ -495,6 +498,7 @@ onMounted(() => {
     position: absolute;
     bottom: 3vh;
     right: 2.4vh;
+    z-index: 3;
 }
 
 .leftbar {
@@ -538,6 +542,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 3;
 }
 
 .custom-table {
@@ -545,6 +550,7 @@ onMounted(() => {
     width: 90%;
     color: #b7cffc;
     margin-top: 1vh;
+    z-index: 3;
 }
 
 .custom-table th,
@@ -560,9 +566,17 @@ onMounted(() => {
     position: absolute;
     bottom: 9vh;
     right: 2.4vh;
+    z-index: 3;
 }
 
 :deep(.el-select__wrapper) {
     border-radius: 0;
+}
+.close {
+  cursor: pointer;
+  width: 2.5vh;
+  position: absolute;
+  right: 0.5vh;
+  top: 0.5vh;
 }
 </style>
