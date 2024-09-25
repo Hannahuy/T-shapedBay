@@ -76,7 +76,7 @@ const selectedItemname = ref(null);
 let layerFunction = [
     {
         name: "水位",
-        check: true,
+        check: false,
         image: new URL(
             "../../assets/img/水位.png",
             import.meta.url
@@ -100,7 +100,7 @@ let layerFunction = [
     },
     {
         name: "浮游动物碳",
-        check: false,
+        check: true,
         image: new URL(
             "../../assets/img/浮游动物碳.png",
             import.meta.url

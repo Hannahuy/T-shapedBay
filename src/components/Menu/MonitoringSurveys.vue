@@ -147,7 +147,7 @@
             </table>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="简介" name="second">
+        <el-tab-pane label="详细信息" name="second">
           <div class="brieflydata">
             <div v-for="(item, index) in animalDatalist" :key="index">
               <div style="font-size: 1.6vh;font-weight: bold;">{{ item.title }}</div>
@@ -319,92 +319,46 @@ const tableData3 = ref([
     Nutritionalization: '富营养化',
   },
 ])
-let charts = []
-let chartRef1 = ref(null);
-let initChart1 = (source) => {
-  let chart = echarts.init(chartRef1.value);
+const charts = [];
+const chartRef1 = ref(null);
+const chartRef2 = ref(null);
+const chartRef3 = ref(null);
+const chartRef4 = ref(null);
+const chartRef5 = ref(null);
+const chartRef6 = ref(null);
+const chartRef7 = ref(null);
+const initChart = (chartRef, source) => {
+  const chart = echarts.init(chartRef.value);
   charts.push(() => {
     chart.dispose();
-    initChart1(source);
+    initChart(chartRef, source);
   });
   chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
+    tooltip: { trigger: 'item' },
     series: [
       {
-        name: 'Access From',
+        name: 'Composition',
         type: 'pie',
-        radius: '50%',
         data: source,
+        radius: '55%',
         emphasis: {
           itemStyle: {
             shadowBlur: 10,
             shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
+            shadowColor: 'rgba(0, 0, 0, 0.5)',
+          },
+        },
+        label: { color: '#CFEFFF' },
+        itemStyle: {
+          color: (params) => {
+            const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+            return colors[params.dataIndex % colors.length];
+          },
+        },
+      },
+    ],
   });
 };
-let chartRef2 = ref(null);
-let initChart2 = (source) => {
-  let chart = echarts.init(chartRef2.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart2(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: source,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  });
-};
-let chartRef3 = ref(null);
-let initChart3 = (source) => {
-  let chart = echarts.init(chartRef3.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart3(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: source,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  });
-};
-let chartRef4 = ref(null);
 let initChart4 = (source) => {
   let chart = echarts.init(chartRef4.value);
   charts.push(() => {
@@ -419,7 +373,7 @@ let initChart4 = (source) => {
       {
         name: 'Access From',
         type: 'pie',
-        radius: ['40%', '70%'],
+        radius: ['40%', '80%'],
         avoidLabelOverlap: false,
         itemStyle: {
           borderRadius: 10,
@@ -427,7 +381,8 @@ let initChart4 = (source) => {
         },
         label: {
           show: false,
-          position: 'center'
+          position: 'center',
+          color: '#CFEFFF'
         },
         emphasis: {
           label: {
@@ -444,95 +399,10 @@ let initChart4 = (source) => {
     ]
   });
 };
-let chartRef5 = ref(null);
-let initChart5 = (source) => {
-  let chart = echarts.init(chartRef5.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart5(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: source,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  });
+const reloadChart = () => {
+  charts.forEach((chart) => chart());
 };
-let chartRef6 = ref(null);
-let initChart6 = (source) => {
-  let chart = echarts.init(chartRef6.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart6(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: source,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  });
-};
-let chartRef7 = ref(null);
-let initChart7 = (source) => {
-  let chart = echarts.init(chartRef7.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart7(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: source,
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }
-    ]
-  });
-};
-let reloadChart = () => {
-  charts.forEach((chart) => {
-    chart();
-  });
-};
+
 const showSilder = ref(true)
 const topMenu = ref('互花米草');
 const timePlay = ref(2019);
@@ -606,14 +476,14 @@ const topMenuChange = (value) => {
   oystersShow.value = false;
   if (value === '牡蛎') {
     oystersShow.value = true;
-    initChart6([
+    initChart(chartRef6, [
       { value: 5, name: '刺胞动物' },
       { value: 30, name: '节肢动物' },
       { value: 25, name: '环节动物' },
       { value: 35, name: '软体动物' },
       { value: 5, name: '星虫动物' },
     ]);
-    initChart7([
+    initChart(chartRef7, [
       { value: 3, name: '刺胞动物' },
       { value: 3, name: '纽形动物' },
       { value: 3, name: '扁形动物' },
@@ -668,16 +538,15 @@ watch(timePlay, (newVal) => {
 
 const birdShow = ref(false);
 const speciesList = ref([
-  { name: '斑嘴鸭', count: 'XX只' },
-  { name: '琵嘴鸭', count: 'XX只' },
-  { name: '白鹭', count: 'XX只' },
+  // { name: '斑嘴鸭', count: 'XX只' },
+  // { name: '琵嘴鸭', count: 'XX只' },
+  // { name: '白鹭', count: 'XX只' },
   // { name: '黑尾鸥', count: 'XX只' },
   // { name: '苍鹭', count: 'XX只' },
   // { name: '斑尾塍鹬', count: 'XX只' },
   // { name: '翘嘴鹬', count: 'XX只' },
   // { name: '中白鹭', count: 'XX只' },
   // { name: '中杓鹬', count: 'XX只' },
-
 ]);
 const birdstation = ref(null)
 const activeIndex = ref(0);
@@ -708,15 +577,18 @@ const oystersShow = ref(false);
 const myHandleResponseFunction = (data) => {
   console.log(data);
   const datajson = JSON.parse(data);
-  if (datajson.Function === '报错') {
+  birdShow.value = false;
+  if (datajson.Funcation === '报错') {
     ElMessage({
       message: datajson.Type,
       type: 'warning',
     });
     return
-  } else if (datajson.Function === '色带范围') {
-    birdstation.value = datajson.Data.StationName;
-    axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.name[0]}`).then((res) => {
+  } else if (datajson.Funcation === '站点点击查询') {
+    birdShow.value = true;
+    birdstation.value = datajson.Data.siteName;
+    speciesList.value = datajson.Data.animalsCount;
+    axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.Data.animalsCount[0].name}`).then((res) => {
       animalData.value = res.data.data.info.鸟种资料;
       animalDatalist.value = res.data.data.info.详细信息;
       imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
@@ -731,7 +603,7 @@ onMounted(() => {
     State: true,
     Time: '2019',
   });
-  initChart1([
+  initChart(chartRef1, [
     { value: 19.18, name: '节肢动物' },
     { value: 39.73, name: '软体动物' },
     { value: 31.51, name: '环节动物' },
@@ -743,14 +615,14 @@ onMounted(() => {
     { value: 1.37, name: '刺胞动物' },
     { value: 1.37, name: '纽形动物' },
   ]);
-  initChart2([
+  initChart(chartRef2, [
     { value: 46.15, name: '多毛类' },
     { value: 30.77, name: '软体动物' },
     { value: 15.38, name: '甲壳类' },
     { value: 3.85, name: '头索动物' },
     { value: 3.85, name: '纽形动物' },
   ]);
-  initChart3([
+  initChart(chartRef3, [
     { value: 12.5, name: '蓝藻门' },
     { value: 87.5, name: '硅藻门' },
   ]);
@@ -762,7 +634,7 @@ onMounted(() => {
     { value: '1', name: 'c1' },
     { value: '1', name: 'c2' },
   ]);
-  initChart5([
+  initChart(chartRef5, [
     { value: 20, name: '肛肠动物' },
     { value: 40, name: '节肢动物' },
     { value: 7, name: '毛颚动物' },

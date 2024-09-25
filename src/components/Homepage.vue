@@ -28,6 +28,11 @@
         </div>
       </div>
     </div>
+    <div class="righticon">
+      <img src="../assets/img/晴天.png" class="imageicon" alt="" @click="weathernext">
+      <img src="../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
+      <img src="../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
+    </div>
     <div v-if="selected === '监测调查'">
       <MonitoringSurveys />
     </div>
@@ -41,7 +46,7 @@
       <TrendForecasting />
     </div>
   </div>
-  <!-- <UEpage /> -->
+  <UEpage />
 </template>
 
 
@@ -69,6 +74,15 @@ const selectMenu = (menu) => {
   }
   selected.value = menu;
 };
+const weathernext = () => {
+
+}
+const offing = () => {
+  
+}
+const perspective = () => {
+  
+}
 onMounted(() => {
   if (window.performance.navigation.type == 1) {
     console.log("页面被刷新")
@@ -157,7 +171,7 @@ onMounted(() => {
 }
 
 .topMenu-left {
-  width: 50vh;
+  width: 30vh;
   display: flex;
   position: absolute;
   z-index: 3;
@@ -173,11 +187,11 @@ onMounted(() => {
 }
 
 .topMenu-right {
-  width: 50vh;
+  width: 30vh;
   display: flex;
   position: absolute;
   z-index: 3;
-  right: 6.6vh;
+  right: 26.6vh;
   top: 2.8vh;
   font-family: HYLingXinJ;
   font-weight: bold;
@@ -223,6 +237,20 @@ onMounted(() => {
   background-image: url('../assets/img/rightmenu-active.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  cursor: pointer;
+}
+.righticon{
+  width: 13vh;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 2;
+  right: 2.4vh;
+  top: 3vh;
+}
+.imageicon{
+  width: 3vh;
   cursor: pointer;
 }
 </style>
