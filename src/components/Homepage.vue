@@ -33,6 +33,12 @@
       <img src="../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
       <img src="../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
     </div>
+    <div class="weatherBox" v-if="showWeather">
+      <img src="../assets/img/晴天.png" class="imageicon" alt="">
+      <img src="../assets/img/阴天.png" class="imageicon" alt="">
+      <img src="../assets/img/雨天.png" class="imageicon" alt="">
+      <img src="../assets/img/雪天.png" class="imageicon" alt="">
+    </div>
     <div v-if="selected === '监测调查'">
       <MonitoringSurveys />
     </div>
@@ -46,7 +52,7 @@
       <TrendForecasting />
     </div>
   </div>
-  <UEpage />
+  <!-- <UEpage /> -->
 </template>
 
 
@@ -58,13 +64,10 @@ import Ecodynamics from './Menu/Ecodynamics.vue';
 import MonitoringSurveys from './Menu/MonitoringSurveys.vue';
 import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
+
 let selected = ref('监测调查'); // 默认选中监测调查
+const showWeather = ref(false);
 const selectMenu = (menu) => {
-  callUIInteraction({
-    ModuleName: `${menu}`,
-    FunctionName: `${menu}`,
-    State: true,
-  });
   if (selected.value !== menu) {
     callUIInteraction({
       ModuleName: `${selected.value}`,
@@ -72,16 +75,27 @@ const selectMenu = (menu) => {
       State: false,
     });
   }
+  callUIInteraction({
+    ModuleName: `${menu}`,
+    FunctionName: `${menu}`,
+    State: true,
+  });
   selected.value = menu;
 };
 const weathernext = () => {
-
+  showWeather.value = !showWeather.value;
 }
 const offing = () => {
-  
+  callUIInteraction({
+    ModuleName: `其他`,
+    FunctionName: `海面`,
+  });
 }
 const perspective = () => {
-  
+  callUIInteraction({
+    ModuleName: `其他`,
+    FunctionName: `视角`,
+  });
 }
 onMounted(() => {
   if (window.performance.navigation.type == 1) {
@@ -239,7 +253,8 @@ onMounted(() => {
   background-repeat: no-repeat;
   cursor: pointer;
 }
-.righticon{
+
+.righticon {
   width: 13vh;
   position: absolute;
   display: flex;
@@ -249,8 +264,24 @@ onMounted(() => {
   right: 2.4vh;
   top: 3vh;
 }
-.imageicon{
+
+.imageicon {
   width: 3vh;
   cursor: pointer;
+}
+
+.weatherBox {
+  position: absolute;
+  right: 2.4vh;
+  top: 6.2vh;
+  width: 20vh;
+  height: 5vh;
+  background-image: url('../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 20;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }
 </style>

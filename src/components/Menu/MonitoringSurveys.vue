@@ -104,7 +104,7 @@
     <div class="bottombox">
       <div class="bottombox-slider">
         <el-slider :step="1" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-          style="position: relative; z-index: 1; width: 1000px" v-show="showSilder">
+          @change="gettimePlay" style="position: relative; z-index: 1; width: 1000px" v-show="showSilder">
         </el-slider>
       </div>
     </div>
@@ -445,8 +445,11 @@ const clickStatus = {
   '互花米草': true,
   '鸟类': false,
 };
-
 const topMenuChange = (value) => {
+  topMenu.value = value;
+  showSilder.value = true;
+  birdShow.value = false;
+  oystersShow.value = false;
   // 取消之前的点击状态
   for (const key in clickStatus) {
     if (key !== value) {
@@ -456,24 +459,38 @@ const topMenuChange = (value) => {
           FunctionName: `${key}`,
           State: false,
         });
+        console.log(`监测调查`, key, false,);
         clickStatus[key] = false;
       }
     }
   }
   if (!clickStatus[value]) {
-    if (value === '牡蛎' || value === '文昌鱼' || value === '水质沉积物') {
+    if (value === '鸟类') {
       callUIInteraction({
         ModuleName: `监测调查`,
-        FunctionName: `${value}`,
+        FunctionName: topMenu.value,
+        Time: `2023.06`,
         State: true,
       });
+      console.log(`监测调查`, topMenu.value, `2023.06`, true,);
+    } else if (value === '互花米草') {
+      callUIInteraction({
+        ModuleName: `监测调查`,
+        FunctionName: topMenu.value,
+        Time: `2019`,
+        State: true,
+      });
+      console.log(`监测调查`, topMenu.value, `2019`, true,);
+    } else {
+      callUIInteraction({
+        ModuleName: `监测调查`,
+        FunctionName: topMenu.value,
+        State: true,
+      });
+      console.log(`监测调查`, topMenu.value, true,);
     }
     clickStatus[value] = true;
   }
-  topMenu.value = value;
-  showSilder.value = true;
-  birdShow.value = false;
-  oystersShow.value = false;
   if (value === '牡蛎') {
     oystersShow.value = true;
     initChart(chartRef6, [
@@ -505,36 +522,31 @@ const topMenuChange = (value) => {
     showSilder.value = false;
   }
 };
-
-// 监听 timePlay 的变化
 const logMapping = {
-  '鸟类': {
     0: '2023.06',
     1: '2023.08',
     2: '2023.11',
     3: '2024.04',
-  },
-  '互花米草': {
     2019: '2019',
     2020: '2020',
     2021: '2021',
     2022: '2022',
     2023: '2023',
-  },
 };
-
-watch(timePlay, (newVal) => {
-  const menu = topMenu.value;
-  const logValue = logMapping[menu]?.[newVal];
-  if (logValue !== undefined) {
-    callUIInteraction({
-      ModuleName: `监测调查`,
-      FunctionName: `${menu}`,
-      State: true,
-      Time: `${logValue}`,
-    });
-  }
-});
+const gettimePlay = (e) => {
+    const timeValue = logMapping[e];
+    if (timeValue) {
+        callUIInteraction({
+            ModuleName: `监测调查`,
+            FunctionName: topMenu.value,
+            State: true,
+            Time: timeValue
+        });
+        console.log(`监测调查`, topMenu.value, true, timeValue);
+    } else {
+        console.error(`未找到对应的时间值: ${e}`);
+    }
+}
 
 const birdShow = ref(false);
 const speciesList = ref([
@@ -603,6 +615,7 @@ onMounted(() => {
     State: true,
     Time: '2019',
   });
+  console.log(`监测调查`, `互花米草`, true, '2019',);
   initChart(chartRef1, [
     { value: 19.18, name: '节肢动物' },
     { value: 39.73, name: '软体动物' },
