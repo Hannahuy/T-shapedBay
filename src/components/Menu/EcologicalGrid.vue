@@ -234,8 +234,6 @@ let initChart1 = () => {
         ]
     });
 };
-
-
 let initChart2 = () => {
     let chart = echarts.init(chartRef2.value);
     charts.push(() => {
@@ -314,6 +312,114 @@ let initChart2 = () => {
         ]
     });
 };
+let initChart4 = () => {
+    const names = [
+        '环节动物',
+        '浮游植物',
+        '浮游动物',
+        '小型底栖动物',
+        '日本鳟',
+        '头足类',
+        '海胆',
+        '节肢动物',
+        '口虾姑'
+    ];
+    const years = ['2001', '2002', '2003', '2004', '2005', '2006'];
+    const shuffle = (array) => {
+        let currentIndex = array.length;
+        let randomIndex = 0;
+        while (currentIndex > 0) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+            [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex],
+                array[currentIndex]
+            ];
+        }
+        return array;
+    };
+    const generateRankingData = () => {
+        const map = new Map();
+        const defaultRanking = Array.from({ length: names.length }, (_, i) => i * 10);//y轴数据
+        for (const _ of years) {
+            const shuffleArray = shuffle(defaultRanking);
+            names.forEach((name, i) => {
+                map.set(name, (map.get(name) || []).concat(shuffleArray[i]));
+            });
+        }
+        return map;
+    };
+    const generateSeriesList = () => {
+        const seriesList = [];
+        const rankingMap = generateRankingData();
+        rankingMap.forEach((data, name) => {
+            const series = {
+                name,
+                symbolSize: 20,
+                type: 'line',
+                smooth: true,
+                emphasis: {
+                    focus: 'series'
+                },
+                endLabel: {
+                    show: true,
+                    formatter: '{a}',
+                    distance: 20
+                },
+                lineStyle: {
+                    width: 4
+                },
+                data
+            };
+            seriesList.push(series);
+        });
+        return seriesList;
+    };
+    let chart = echarts.init(chartRef4.value);
+    charts.push(() => {
+        chart.dispose();
+        initChart4();
+    });
+    chart.setOption({
+        tooltip: {
+            trigger: 'item'
+        },
+        grid: {
+            left: 15,
+            right: 100,
+            bottom: 0,
+            top: 30,
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            splitLine: {
+                show: true
+            },
+            axisLabel: {
+                margin: 15,
+                fontSize: 16,
+                color: '#CFEFFF'
+            },
+            boundaryGap: false,
+            data: years
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                margin: 15,
+                fontSize: 16,
+                formatter: '{value}',
+                color: '#CFEFFF'
+            },
+            // 移除 inverse，改为 0-90 范围
+            min: 0,
+            max: 90,
+            interval: 10
+        },
+        series: generateSeriesList()
+    });
+};
 let initChart5 = () => {
     let chart = echarts.init(chartRef5.value);
     charts.push(() => {
@@ -390,7 +496,6 @@ let initChart5 = () => {
         ]
     });
 }
-
 let initChart6 = () => {
     let chart = echarts.init(chartRef6.value);
     charts.push(() => {
@@ -476,6 +581,7 @@ const reloadChart = () => {
 onMounted(() => {
     initChart1();
     initChart2();
+    initChart4();
     initChart5();
     initChart6();
     window.addEventListener("resize", reloadChart);
