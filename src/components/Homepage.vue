@@ -141,9 +141,11 @@ onMounted(() => {
   }
   callUIInteraction({
     ModuleName: `监测调查`,
-    FunctionName: `监测调查`,
+    FunctionName: `互花米草`,
     State: true,
+    Time: '2019',
   });
+  console.log('监测调查');
   callUIInteraction({
     ModuleName: `其他`,
     FunctionName: `天气`,

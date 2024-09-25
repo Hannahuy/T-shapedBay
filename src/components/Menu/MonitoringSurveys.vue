@@ -609,12 +609,6 @@ const myHandleResponseFunction = (data) => {
 }
 
 onMounted(() => {
-  callUIInteraction({
-    ModuleName: `监测调查`,
-    FunctionName: `互花米草`,
-    State: true,
-    Time: '2019',
-  });
   initChart(chartRef1, [
     { value: 19.18, name: '节肢动物' },
     { value: 39.73, name: '软体动物' },
