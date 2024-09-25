@@ -139,18 +139,21 @@ onMounted(() => {
   } else {
     console.log("首次被加载")
   }
-  callUIInteraction({
-    ModuleName: `监测调查`,
-    FunctionName: `互花米草`,
-    State: true,
-    Time: '2019',
-  });
-  callUIInteraction({
-    ModuleName: `生态动力`,
-    FunctionName: `生态动力`,
-    State: false,
-  });
+  setTimeout(() => {
+    callUIInteraction({
+      ModuleName: `监测调查`,
+      FunctionName: `互花米草`,
+      State: true,
+      Time: '2019',
+    });
+    callUIInteraction({
+      ModuleName: `生态动力`,
+      FunctionName: `生态动力`,
+      State: false,
+    });
+    console.log(1111);
   console.log('监测调查');
+  }, 100);
   callUIInteraction({
     ModuleName: `其他`,
     FunctionName: `天气`,
