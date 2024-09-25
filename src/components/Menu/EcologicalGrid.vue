@@ -91,42 +91,64 @@ let initChart1 = () => {
                 edgeSymbolSize: [4, 10],
                 edgeLabel: {
                     fontSize: 20,
+                    color: '#FFFFFF'  // 修改边标签颜色
                 },
                 data: [
                     {
                         name: '日本鳟',
                         x: 300,
-                        y: 300
+                        y: 300,
+                        itemStyle: {
+                            color: '#FF6347'
+                        }
                     },
                     {
                         name: '头足类',
                         x: 500,
-                        y: 200
+                        y: 200,
+                        itemStyle: {
+                            color: '#4682B4'
+                        }
                     },
                     {
                         name: '许氏平鼬',
                         x: 700,
-                        y: 300
+                        y: 300,
+                        itemStyle: {
+                            color: '#32CD32'
+                        }
                     },
                     {
                         name: '其他底层鱼类',
                         x: 900,
-                        y: 300
+                        y: 300,
+                        itemStyle: {
+                            color: '#FFD700'
+                        }
                     },
                     {
                         name: '节肢动物',
                         x: 1100,
-                        y: 400
+                        y: 400,
+                        itemStyle: {
+                            color: '#FF69B4'
+                        }
                     },
                     {
                         name: '浮游植物',
                         x: 1300,
-                        y: 500
+                        y: 500,
+                        itemStyle: {
+                            color: '#7B68EE'
+                        }
                     },
                     {
                         name: '小型底栖动物',
                         x: 300,
-                        y: 500
+                        y: 500,
+                        itemStyle: {
+                            color: '#FF4500'
+                        }
                     }
                 ],
                 links: [
@@ -135,7 +157,7 @@ let initChart1 = () => {
                         target: '头足类',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FFD700'  // 修改边的颜色
+                            color: '#FFD700'
                         }
                     },
                     {
@@ -143,7 +165,7 @@ let initChart1 = () => {
                         target: '许氏平鼬',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FF8C00'  // 修改边的颜色
+                            color: '#FF8C00'
                         }
                     },
                     {
@@ -151,7 +173,7 @@ let initChart1 = () => {
                         target: '其他底层鱼类',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FFD700'  // 修改边的颜色
+                            color: '#FFD700'
                         }
                     },
                     {
@@ -159,7 +181,7 @@ let initChart1 = () => {
                         target: '节肢动物',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FF8C00'  // 修改边的颜色
+                            color: '#FF8C00'
                         }
                     },
                     {
@@ -167,7 +189,7 @@ let initChart1 = () => {
                         target: '浮游植物',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FFD700'  // 修改边的颜色
+                            color: '#FFD700'
                         }
                     },
                     {
@@ -175,7 +197,7 @@ let initChart1 = () => {
                         target: '小型底栖动物',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FF8C00'  // 修改边的颜色
+                            color: '#FF8C00'
                         }
                     },
                     {
@@ -183,7 +205,7 @@ let initChart1 = () => {
                         target: '浮游植物',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FF8C00'  // 修改边的颜色
+                            color: '#FF8C00'
                         },
                     },
                     {
@@ -191,7 +213,7 @@ let initChart1 = () => {
                         target: '其他底层鱼类',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FFD700'  // 修改边的颜色
+                            color: '#FFD700'
                         },
                     },
                     {
@@ -199,7 +221,7 @@ let initChart1 = () => {
                         target: '日本鳟',
                         lineStyle: {
                             curveness: 0.2,
-                            color: '#FFD700'  // 修改边的颜色
+                            color: '#FFD700'
                         },
                     },
                 ],
@@ -212,6 +234,7 @@ let initChart1 = () => {
         ]
     });
 };
+
 
 let initChart2 = () => {
     let chart = echarts.init(chartRef2.value);

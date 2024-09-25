@@ -145,6 +145,11 @@ onMounted(() => {
     State: true,
     Time: '2019',
   });
+  callUIInteraction({
+    ModuleName: `生态动力`,
+    FunctionName: `生态动力`,
+    State: false,
+  });
   console.log('监测调查');
   callUIInteraction({
     ModuleName: `其他`,
