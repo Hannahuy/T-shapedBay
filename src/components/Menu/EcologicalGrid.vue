@@ -17,6 +17,23 @@
                 <div class="toptitle">
                     功能组关键指数
                 </div>
+                <div class="container1">
+                    <div class="content1 ha">口虾姑</div>
+                    <div class="content1 hb">环节动物</div>
+                    <div class="content1 hc">浮游动物</div>
+                    <div class="content2 hd">其他贝类</div>
+                    <div class="content2 he">其他底层鱼类</div>
+                    <div class="content2 hf">小型底栖生物</div>
+                    <div class="content2 hg">扁平螺</div>
+                    <div class="content3 hi">脉红螺</div>
+                    <div class="content3 hj">海 胆</div>
+                    <div class="content3 hk">节肢动物</div>
+                    <div class="content3 hl">鍛虎鱼</div>
+                    <div class="content4 hm">鮞 鱼</div>
+                    <div class="content4 hn">许氏平鲉</div>
+                    <div class="content4 ho">日本鲟</div>
+                    <div class="content5 hp">海 星</div>
+                </div>
             </div>
         </div>
         <div class="middle">
@@ -24,16 +41,88 @@
                 <div class="toptitle">
                     建设参数
                 </div>
-                <div class="container" ref="chartRef3"></div>
+                <!-- <div class="container" ref="chartRef3"></div> -->
+                <div class="container4"></div>
             </div>
             <div class="middle-middle">
                 <div class="toptitle">
                     营养级传递效率
                 </div>
+                <div class="container3"></div>
             </div>
             <div class="middle-right">
                 <div class="toptitle">
                     参数数值
+                </div>
+                <div class="middle-right-content">
+                    <div class="middle-right-content-left">
+                        <div class="content-left-title">
+                            系统平均路径长度
+                        </div>
+                        <div class="content-left-content">
+                            <div
+                                style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                <span class="content-left-content-span">4151</span>
+                                <span class="content-left-content-span2">Finn's循环指数(%)</span>
+                            </div>
+                            <div
+                                style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                <span class="content-left-content-span">4151</span>
+                                <span class="content-left-content-span2">系统平均路径长度</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="middle-right-content-right">
+                        <div class="content-right-title">
+                            组织程度参数
+                        </div>
+                        <div style="display: flex;justify-content: space-evenly;">
+                            <div>
+                                <div
+                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                    <span class="content-left-content-span1">4151</span>
+                                    <span class="content-left-content-span2">聚合度</span>
+                                </div>
+                                <div
+                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                    <span class="content-left-content-span1">4151</span>
+                                    <span class="content-left-content-span2">相对冗余度</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                    <span class="content-left-content-span1">4151</span>
+                                    <span class="content-left-content-span2">相对聚合度</span>
+                                </div>
+                                <div
+                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                    <span class="content-left-content-span1">4151</span>
+                                    <span class="content-left-content-span2">总信息容量</span>
+                                </div>
+                            </div>
+                            <div>
+                                <div
+                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                    <span class="content-left-content-span1">4151</span>
+                                    <span class="content-left-content-span2">冗余度</span>
+                                </div>
+                                <div
+                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
+                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
+                                    <span class="content-left-content-span1">4151</span>
+                                    <span class="content-left-content-span2">Capacity</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -340,7 +429,7 @@ let initChart4 = () => {
     };
     const generateRankingData = () => {
         const map = new Map();
-        const defaultRanking = Array.from({ length: names.length }, (_, i) => i * 10);//y轴数据
+        const defaultRanking = Array.from({ length: names.length }, (_, i) => i * 10); // y轴数据
         for (const _ of years) {
             const shuffleArray = shuffle(defaultRanking);
             names.forEach((name, i) => {
@@ -355,7 +444,8 @@ let initChart4 = () => {
         rankingMap.forEach((data, name) => {
             const series = {
                 name,
-                symbolSize: 20,
+                symbol: 'circle', // 使用圆点
+                symbolSize: 8, // 设置圆点大小为5
                 type: 'line',
                 smooth: true,
                 emphasis: {
@@ -364,10 +454,10 @@ let initChart4 = () => {
                 endLabel: {
                     show: true,
                     formatter: '{a}',
-                    distance: 20
+                    distance: 20,
                 },
                 lineStyle: {
-                    width: 4
+                    width: 4,
                 },
                 data
             };
@@ -388,13 +478,16 @@ let initChart4 = () => {
             left: 15,
             right: 100,
             bottom: 0,
-            top: 30,
+            top: 15,
             containLabel: true
         },
         xAxis: {
             type: 'category',
             splitLine: {
-                show: true
+                show: true,
+                lineStyle: {
+                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
+                }
             },
             axisLabel: {
                 margin: 15,
@@ -402,7 +495,12 @@ let initChart4 = () => {
                 color: '#CFEFFF'
             },
             boundaryGap: false,
-            data: years
+            data: years,
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
+                }
+            }
         },
         yAxis: {
             type: 'value',
@@ -412,10 +510,19 @@ let initChart4 = () => {
                 formatter: '{value}',
                 color: '#CFEFFF'
             },
-            // 移除 inverse，改为 0-90 范围
             min: 0,
             max: 90,
-            interval: 10
+            interval: 10,
+            axisLine: {
+                lineStyle: {
+                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
+                }
+            }
         },
         series: generateSeriesList()
     });
@@ -716,11 +823,290 @@ onUnmounted(() => {
     box-sizing: border-box;
 }
 
+.container1 {
+    width: 100%;
+    height: calc(100% - 3.5vh);
+    padding: 1.5vh 1vh 1vh 1vh;
+    box-sizing: border-box;
+    position: relative;
+}
+
 .container5,
 .container6 {
     width: 100%;
     height: 26vh;
     padding: 1.5vh 0vh 1vh 0vh;
     box-sizing: border-box;
+}
+
+.content1 {
+    padding: 0.5vh 1vh;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffffffa2;
+    background-image: url('../../assets/img/EcologicalGrid/资源 24.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content2 {
+    padding: 0.5vh 1vh;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffffffb0;
+    background-image: url('../../assets/img/EcologicalGrid/资源 25.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content3 {
+    padding: 0.5vh 1vh;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffffffcb;
+    background-image: url('../../assets/img/EcologicalGrid/资源 26.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content4 {
+    padding: 0.5vh 1vh;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffffffea;
+    background-image: url('../../assets/img/EcologicalGrid/资源 27.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content5 {
+    padding: 0.5vh 1vh;
+    box-sizing: border-box;
+    text-align: center;
+    color: #ffffff;
+    background-image: url('../../assets/img/EcologicalGrid/资源 28.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+}
+
+.ha {
+    width: 8vh;
+    position: absolute;
+    top: 13vh;
+    right: 10vh;
+    font-size: 1.4vh;
+}
+
+.hb {
+    width: 9vh;
+    position: absolute;
+    top: 2vh;
+    right: 12vh;
+    font-size: 1.4vh;
+}
+
+.hc {
+    width: 9vh;
+    position: absolute;
+    top: 20vh;
+    left: 2vh;
+    font-size: 1.4vh;
+}
+
+.hd {
+    width: 8vh;
+    position: absolute;
+    top: 4vh;
+    right: 2vh;
+    font-size: 1.4vh;
+}
+
+.he {
+    width: 12vh;
+    position: absolute;
+    font-size: 1.3vh;
+    left: 2vh;
+    top: 2vh;
+}
+
+.hf {
+    width: 12vh;
+    position: absolute;
+    top: 17vh;
+    right: 1vh;
+    font-size: 1.4vh;
+}
+
+.hg {
+    width: 7vh;
+    position: absolute;
+    left: 20vh;
+    bottom: 2vh;
+    font-size: 1.4vh;
+}
+
+.hi {
+    width: 10vh;
+    position: absolute;
+    right: 10vh;
+    bottom: 1vh;
+    font-size: 1.8vh;
+}
+
+.hj {
+    width: 9vh;
+    position: absolute;
+    left: 4vh;
+    bottom: 11vh;
+    font-size: 1.8vh;
+}
+
+.hk {
+    width: 10vh;
+    position: absolute;
+    left: 10vh;
+    bottom: 16vh;
+    font-size: 1.8vh;
+}
+
+.hl {
+    width: 10vh;
+    position: absolute;
+    left: 28vh;
+    bottom: 6vh;
+    font-size: 1.8vh;
+}
+
+.hm {
+    width: 10vh;
+    position: absolute;
+    right: 6vh;
+    top: 8vh;
+    font-size: 1.8vh;
+}
+
+.hn {
+    width: 10vh;
+    position: absolute;
+    right: 26vh;
+    top: 3vh;
+    font-size: 1.8vh;
+}
+
+.ho {
+    width: 10vh;
+    position: absolute;
+    left: 11vh;
+    bottom: 6vh;
+    font-size: 1.8vh;
+}
+
+.hp {
+    width: 10vh;
+    position: absolute;
+    left: 24vh;
+    top: 10vh;
+    font-size: 2vh;
+}
+
+.middle-right-content {
+    width: 100%;
+    height: calc(100% - 3.5vh);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vh 1.5vh 1vh 1.5vh;
+    box-sizing: border-box;
+}
+
+.middle-right-content-left {
+    height: 100%;
+    width: 22vh;
+    background-image: url('../../assets/img/EcologicalGrid/资源 29.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.middle-right-content-right {
+    height: 100%;
+    width: 38.5vh;
+    background-image: url('../../assets/img/EcologicalGrid/资源 30.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.content-left-title {
+    height: 3.2vh;
+    text-align: center;
+    color: #FFFFFF;
+    letter-spacing: 0.2vh;
+    line-height: 3.2vh;
+}
+
+.content-right-title {
+    height: 3.2vh;
+    text-align: center;
+    color: #FFFFFF;
+    letter-spacing: 0.5vh;
+    line-height: 3.2vh;
+}
+
+.content-left-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.content-right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.image-raido {
+    width: 8vh;
+    height: 8vh;
+}
+
+.content-left-content-span {
+    position: absolute;
+    color: #00FFFD;
+    font-weight: bold;
+    top: 2.9vh;
+    left: 4.6vh;
+}
+
+.content-left-content-span1 {
+    position: absolute;
+    color: #00FFFD;
+    font-weight: bold;
+    top: 2.9vh;
+    left: 2vh;
+}
+
+.content-left-content-span2 {
+    color: #C7E4FF;
+    font-size: 1.6vh;
+}
+.container3 {
+    width: 100%;
+    height: calc(100% - 3.5vh);
+    padding: 1.5vh 1vh 1vh 1vh;
+    box-sizing: border-box;
+    background-image: url('../../assets/img/EcologicalGrid/贴图.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.container4{
+    width: 100%;
+    height: calc(100% - 3.5vh);
+    padding: 1.5vh 1vh 1vh 1vh;
+    box-sizing: border-box;
+    background-image: url('../../assets/img/EcologicalGrid/贴图2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 </style>
