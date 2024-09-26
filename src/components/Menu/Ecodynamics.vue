@@ -331,18 +331,16 @@ const showselect = ref(true);
 const handleFunctionSelection = (selectedItem) => {
     selectedItemname.value = selectedItem.name;
     showselect.value = selectedItem.name !== "水位";
-    if (selectedItem.name !== "水位") {
-        const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
-        callUIInteraction({
-            ModuleName: `生态动力`,
-            FunctionName: `标量场可视化`,
-            State: true,
-            Time: formattedTime,
-            Layer: selectvalue.value,
-            Type: selectedItem.name
-        });
-        // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItem.name);
-    }
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: formattedTime,
+        Layer: selectvalue.value,
+        Type: selectedItem.name
+    });
+    // console.log('生态动力', `标量场可视化`, true, formattedTime, selectvalue.value, selectedItem.name);
 };
 const selectchange = (e) => {
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
@@ -572,11 +570,12 @@ onMounted(() => {
 :deep(.el-select__wrapper) {
     border-radius: 0;
 }
+
 .close {
-  cursor: pointer;
-  width: 2.5vh;
-  position: absolute;
-  right: 0.5vh;
-  top: 0.5vh;
+    cursor: pointer;
+    width: 2.5vh;
+    position: absolute;
+    right: 0.5vh;
+    top: 0.5vh;
 }
 </style>
