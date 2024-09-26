@@ -41,8 +41,7 @@
                 <div class="toptitle">
                     建设参数
                 </div>
-                <!-- <div class="container" ref="chartRef3"></div> -->
-                <div class="container4"></div>
+                <div class="container" ref="chartRef3"></div>
             </div>
             <div class="middle-middle">
                 <div class="toptitle">
@@ -171,7 +170,7 @@ let initChart1 = () => {
             {
                 type: 'graph',
                 layout: 'none',
-                symbolSize: 50,
+                symbolSize: 20,
                 roam: true,
                 label: {
                     show: true,
@@ -188,7 +187,14 @@ let initChart1 = () => {
                         x: 300,
                         y: 300,
                         itemStyle: {
-                            color: '#FF6347'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-8, 25]
                         }
                     },
                     {
@@ -196,7 +202,14 @@ let initChart1 = () => {
                         x: 500,
                         y: 200,
                         itemStyle: {
-                            color: '#4682B4'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-8, 25]
                         }
                     },
                     {
@@ -204,7 +217,14 @@ let initChart1 = () => {
                         x: 700,
                         y: 300,
                         itemStyle: {
-                            color: '#32CD32'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-15, 25]
                         }
                     },
                     {
@@ -212,7 +232,14 @@ let initChart1 = () => {
                         x: 900,
                         y: 300,
                         itemStyle: {
-                            color: '#FFD700'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-25, 25]
                         }
                     },
                     {
@@ -220,7 +247,14 @@ let initChart1 = () => {
                         x: 1100,
                         y: 400,
                         itemStyle: {
-                            color: '#FF69B4'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-15, 25]
                         }
                     },
                     {
@@ -228,7 +262,14 @@ let initChart1 = () => {
                         x: 1300,
                         y: 500,
                         itemStyle: {
-                            color: '#7B68EE'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-15, 25]
                         }
                     },
                     {
@@ -236,7 +277,14 @@ let initChart1 = () => {
                         x: 300,
                         y: 500,
                         itemStyle: {
-                            color: '#FF4500'
+                            color: '#FFFFFF',  // 圆心颜色
+                            borderColor: '#4085a6',  // 圆边颜色
+                            borderWidth: 4  // 圆边宽度
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [-25, 25]
                         }
                     }
                 ],
@@ -376,7 +424,7 @@ let initChart2 = () => {
                 show: false
             },
             axisLabel: {
-                rotate: 45,
+                rotate: 0,
                 textStyle: {
                     color: '#CFEFFF' // 设置半径轴标签文字颜色
                 }
@@ -388,7 +436,7 @@ let initChart2 = () => {
                 type: 'scatter',
                 coordinateSystem: 'polar',
                 symbolSize: function (val) {
-                    return val[2] * 5;
+                    return val[2] * 3; // 将乘数改为3以减小圆点大小
                 },
                 data: data,
                 itemStyle: {
@@ -399,6 +447,151 @@ let initChart2 = () => {
                 }
             }
         ]
+    });
+};
+let initChart3 = () => {
+    let chart = echarts.init(chartRef3.value);
+    charts.push(() => {
+        chart.dispose();
+        initChart3();
+    });
+    chart.setOption({
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['建设前', '建设中', '建设后'],
+            align: 'left',
+            right: 10,
+            textStyle: {
+                color: "#CFEFFF"
+            },
+            itemWidth: 10,
+            itemHeight: 10,
+            itemGap: 35
+        },
+        grid: {
+            left: '2%',
+            right: '2%',
+            bottom: '2%',
+            top: '15%',
+            containLabel: true
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['中小客',
+                '大客',
+                '小货',
+                '中货',
+                '大货',
+                '大客',
+                '小货',
+                '中货',
+                '大货',
+                '小货',
+                '中货',
+                '大货',
+            ],
+            axisLine: {
+                show: true,
+                lineStyle: {
+                    color: "#063374",
+                    width: 1,
+                    type: "solid"
+                }
+            },
+            axisTick: {
+                show: false,
+            },
+            axisLabel: {
+                show: true,
+                textStyle: {
+                    color: "#CFEFFF",
+                },
+                interval: 0
+            },
+        }],
+        yAxis: [{
+            type: 'value',
+            axisLabel: {
+                // formatter: '{value} %',
+                textStyle: {
+                    color: "#CFEFFF",
+                }
+            },
+            axisTick: {
+                show: false,
+            },
+            axisLine: {
+                show: false,
+                lineStyle: {
+                    color: "#00c7ff",
+                    width: 1,
+                    type: "solid"
+                },
+            },
+            splitLine: {
+                show: false,
+            }
+        }],
+        series: [{
+            name: '建设前',
+            type: 'bar',
+            data: [20, 50, 80, 58, 83, 68, 57, 80, 42, 66, 78, 89],
+            barWidth: 5, //柱子宽度
+            barGap: 1, //柱子之间间距
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#16cef9'
+                    }, {
+                        offset: 1,
+                        color: '#0a2f45'
+                    }]),
+                    opacity: 1,
+                }
+            }
+        }, {
+            name: '建设中',
+            type: 'bar',
+            data: [50, 70, 60, 61, 75, 87, 60, 62, 86, 46, 52, 68],
+            barWidth: 5,
+            barGap: 1,
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#dcfafc'
+                    }, {
+                        offset: 1,
+                        color: '#3c5569'
+                    }]),
+                    opacity: 1,
+                }
+            }
+        }, {
+            name: '建设后',
+            type: 'bar',
+            data: [70, 48, 73, 68, 53, 47, 50, 72, 96, 86, 92, 95],
+            barWidth: 5,
+            barGap: 1,
+            itemStyle: {
+                normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: '#f8ad3a'
+                    }, {
+                        offset: 1,
+                        color: '#192b34'
+                    }]),
+                    opacity: 1,
+                }
+            }
+        }]
     });
 };
 let initChart4 = () => {
@@ -455,6 +648,7 @@ let initChart4 = () => {
                     show: true,
                     formatter: '{a}',
                     distance: 20,
+                    color: '#CFEFFF'
                 },
                 lineStyle: {
                     width: 4,
@@ -575,7 +769,7 @@ let initChart5 = () => {
             text: ['1.0 ', '0.0 '],
             dimension: 0,
             inRange: {
-                color: ['#65B581', '#FFCE34', '#FD665F']
+                color: ['#f4ac3d', '#C0B777', '#16cffb']
             }
         },
         tooltip: {
@@ -596,6 +790,7 @@ let initChart5 = () => {
         series: [
             {
                 type: 'bar',
+                showBackground: true,
                 encode: {
                     y: 'product'
                 }
@@ -651,7 +846,7 @@ let initChart6 = () => {
             text: ['1.0 ', '0.0 '],
             dimension: 0,
             inRange: {
-                color: ['#65B581', '#FFCE34', '#FD665F']
+                color: ['#f4ac3d', '#C0B777', '#16cffb']
             },
             textStyle: {
                 color: '#CFEFFF' // 设置文字颜色
@@ -675,6 +870,7 @@ let initChart6 = () => {
         series: [
             {
                 type: 'bar',
+                showBackground: true,
                 encode: {
                     y: 'product'
                 }
@@ -688,6 +884,7 @@ const reloadChart = () => {
 onMounted(() => {
     initChart1();
     initChart2();
+    initChart3();
     initChart4();
     initChart5();
     initChart6();
@@ -1091,21 +1288,13 @@ onUnmounted(() => {
     color: #C7E4FF;
     font-size: 1.6vh;
 }
+
 .container3 {
     width: 100%;
     height: calc(100% - 3.5vh);
     padding: 1.5vh 1vh 1vh 1vh;
     box-sizing: border-box;
     background-image: url('../../assets/img/EcologicalGrid/贴图.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-.container4{
-    width: 100%;
-    height: calc(100% - 3.5vh);
-    padding: 1.5vh 1vh 1vh 1vh;
-    box-sizing: border-box;
-    background-image: url('../../assets/img/EcologicalGrid/贴图2.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
