@@ -18,9 +18,9 @@
         </div>
       </div>
       <div class="topMenu-right">
-        <div class="topMenu-right-title" :class="{ 'topMenu-right-title-active': selected === '生态网格' }"
-          @click="selectMenu('生态网格')">
-          生态网格
+        <div class="topMenu-right-title" :class="{ 'topMenu-right-title-active': selected === '生态网络' }"
+          @click="selectMenu('生态网络')">
+          生态网络
         </div>
         <div class="topMenu-right-title" style="margin-left: 2.3vh;"
           :class="{ 'topMenu-right-title-active': selected === '趋势预测' }" @click="selectMenu('趋势预测')">
@@ -28,31 +28,22 @@
         </div>
       </div>
     </div>
-    <div class="righticon">
-      <img :src="selectedWeather" class="imageicon" alt="" @click="weathernext">
-      <img src="../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
-      <img src="../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
-    </div>
-    <div class="weatherBox" v-if="showWeather">
-      <img src="../assets/img/晴天.png" class="imageicon" alt="" @click="selectWeather('晴天')">
-      <img src="../assets/img/阴天.png" class="imageicon" alt="" @click="selectWeather('阴天')">
-      <img src="../assets/img/雨天.png" class="imageicon" alt="" @click="selectWeather('雨天')">
-      <img src="../assets/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
-    </div>
     <div v-if="selected === '监测调查'">
       <MonitoringSurveys />
     </div>
     <div v-if="selected === '生态动力'">
       <Ecodynamics />
     </div>
-    <EcologicalGrid v-if="selected === '生态网格'" />
+    <EcologicalGrid v-if="selected === '生态网络'" />
     <div v-if="selected === '趋势预测'">
       <TrendForecasting />
+    </div>
+    <div v-show="!selected">
+      <Home />
     </div>
   </div>
   <UEpage />
 </template>
-
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
@@ -62,76 +53,35 @@ import Ecodynamics from './Menu/Ecodynamics.vue';
 import MonitoringSurveys from './Menu/MonitoringSurveys.vue';
 import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
+import Home from './Menu/Home.vue'
 
-let selected = ref('监测调查'); // 默认选中监测调查
+let selected = ref('');
+let lastActiveButton = ref('')
 const selectMenu = (menu) => {
-  if (selected.value !== menu) {
+  if (selected.value === menu) {
+    lastActiveButton.value = selected.value;
+    selected.value = '';
     callUIInteraction({
-      ModuleName: `${selected.value}`,
-      FunctionName: `${selected.value}`,
+      ModuleName: `${lastActiveButton.value}`,
+      FunctionName: `${lastActiveButton.value}`,
       State: false,
     });
+  } else {
+    lastActiveButton.value = selected.value;
+    selected.value = menu;
+    if (lastActiveButton.value) {
+      callUIInteraction({
+        ModuleName: `${lastActiveButton.value}`,
+        FunctionName: `${lastActiveButton.value}`,
+        State: false,
+      });
+    }
+    callUIInteraction({
+      ModuleName: `${menu}`,
+      FunctionName: `${menu}`,
+      State: true,
+    });
   }
-  callUIInteraction({
-    ModuleName: `${menu}`,
-    FunctionName: `${menu}`,
-    State: true,
-  });
-  selected.value = menu;
-};
-const showWeather = ref(false);
-const selectedWeather = ref('/src/assets/img/晴天.png');
-const weathernext = () => {
-  showWeather.value = !showWeather.value;
-}
-const selectWeather = (weather) => {
-  showWeather.value = false;
-  switch (weather) {
-    case '晴天':
-      selectedWeather.value = '/src/assets/img/晴天.png';
-      callUIInteraction({
-        ModuleName: `其他`,
-        FunctionName: `天气`,
-        Weather: '晴天'
-      });
-      break;
-    case '阴天':
-      selectedWeather.value = '/src/assets/img/阴天.png';
-      callUIInteraction({
-        ModuleName: `其他`,
-        FunctionName: `天气`,
-        Weather: '阴天'
-      });
-      break;
-    case '雨天':
-      selectedWeather.value = '/src/assets/img/雨天.png';
-      callUIInteraction({
-        ModuleName: `其他`,
-        FunctionName: `天气`,
-        Weather: '雨天'
-      });
-      break;
-    case '雪天':
-      selectedWeather.value = '/src/assets/img/雪天.png';
-      callUIInteraction({
-        ModuleName: `其他`,
-        FunctionName: `天气`,
-        Weather: '雪天'
-      });
-      break;
-  }
-};
-const offing = () => {
-  callUIInteraction({
-    ModuleName: `其他`,
-    FunctionName: `海面`,
-  });
-}
-const perspective = () => {
-  callUIInteraction({
-    ModuleName: `其他`,
-    FunctionName: `视角`,
-  });
 }
 onMounted(() => {
   if (window.performance.navigation.type == 1) {
@@ -139,21 +89,6 @@ onMounted(() => {
   } else {
     console.log("首次被加载")
   }
-  // setTimeout(() => {
-  //   callUIInteraction({
-  //     ModuleName: `监测调查`,
-  //     FunctionName: `互花米草`,
-  //     State: true,
-  //     Time: '2019',
-  //   });
-  //   callUIInteraction({
-  //     ModuleName: `生态动力`,
-  //     FunctionName: `生态动力`,
-  //     State: false,
-  //   });
-  //   console.log(1111);
-  // console.log('监测调查');
-  // }, 100);
   callUIInteraction({
     ModuleName: `其他`,
     FunctionName: `天气`,
@@ -225,7 +160,7 @@ onMounted(() => {
 .top-title {
   font-family: HYLingXinJ;
   font-weight: bold;
-  font-size: 3.2vh;
+  font-size: 3vh;
   color: #FEFFFF;
   text-align: center;
   background: linear-gradient(0deg, #C7E4FF 24.072265625%, #FFFFFF 24.560546875%);
@@ -306,36 +241,5 @@ onMounted(() => {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   cursor: pointer;
-}
-
-.righticon {
-  width: 13vh;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  z-index: 3;
-  right: 2.4vh;
-  top: 3vh;
-}
-
-.imageicon {
-  width: 3vh;
-  cursor: pointer;
-}
-
-.weatherBox {
-  position: absolute;
-  right: 2.4vh;
-  top: 6.2vh;
-  width: 20vh;
-  height: 5vh;
-  background-image: url('../assets/img/rightbox.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  z-index: 20;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
 }
 </style>

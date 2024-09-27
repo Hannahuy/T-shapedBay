@@ -1,120 +1,58 @@
 <template>
-  <div class="leftBox">
-    <div class="rightBox-top">
-      <div class="rightBox-top-title">
-        潮间带生物类群组成
-      </div>
-      <div class="leftBox-top-table" ref="chartRef1"></div>
-    </div>
-    <div class="rightBox-middle">
-      <div class="rightBox-bottom-title">
-        大型底栖动物组成比例图
-      </div>
-      <div class="leftBox-bottom-table" ref="chartRef2"></div>
-    </div>
-    <div class="rightBox-middle2">
-      <div class="rightBox-bottom-title">
-        浮游植物组成比例图
-      </div>
-      <div class="leftBox-middle2-content" ref="chartRef3"></div>
-    </div>
-    <div class="rightBox-bottom">
-      <div class="rightBox-bottom-title">
-        海水水质评价参数及标准
-      </div>
-      <div class="leftBox-bottom-content">
-        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.1vh',
-          'text-align': 'center',
-        }" height="17.5vh">
-          <el-table-column prop="project" label="项目" width="50" align="center" />
-          <el-table-column prop="PH" label="PH" width="60" align="center" />
-          <el-table-column prop="DO" label="DO" width="50" align="center" />
-          <el-table-column prop="COD" label="COD" width="50" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
-          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="80" align="center" />
-        </el-table>
-      </div>
-    </div>
+  <!-- 右侧工具栏 -->
+  <div class="righticon">
+    <img :src="selectedWeather" class="imageicon" alt="" @click="weathernext">
+    <img src="../../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
+    <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
   </div>
-  <div class="rightBox">
-    <div class="rightBox-top">
-      <div class="rightBox-top-title">
-        生物多样性评价结果
-      </div>
-      <div class="rightBox-top-table">
-        <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.1vh',
-          'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="Stations" label="站位" width="50" align="center" />
-          <el-table-column prop="Diversity" label="多样性指数" width="80" align="center" />
-          <el-table-column prop="Uniformity" label="均匀度" width="60" align="center" />
-          <el-table-column prop="Dominance" label="优势度" width="60" align="center" />
-          <el-table-column prop="Richness" label="丰富度" width="60" align="center" />
-          <el-table-column prop="threshold" label="指数阈值" width="70" align="center" />
-          <el-table-column prop="level" label="等级" width="80" align="center" />
-        </el-table>
-      </div>
-    </div>
-    <div class="rightBox-middle">
-      <div class="rightBox-bottom-title">
-        水质沉积物单指标评价结果
-      </div>
-      <div class="rightBox-bottom-table">
-        <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.1vh',
-          'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="StationNumber" label="站号" width="60" align="center" />
-          <el-table-column prop="PH" label="PH" width="50" align="center" />
-          <el-table-column prop="DO" label="DO" width="50" align="center" />
-          <el-table-column prop="COD" label="COD" width="50" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
-          <el-table-column prop="phosphate" label="磷酸盐" width="60" align="center" />
-          <el-table-column prop="Nutritionalization" label="是否富营养化" width="90" align="center" />
-        </el-table>
-      </div>
-    </div>
-    <div class="rightBox-middle2">
-      <div class="rightBox-bottom-title">
-        环境DNA多样性
-      </div>
-      <div class="rightBox-middle2-content" ref="chartRef4"></div>
-    </div>
-    <div class="rightBox-bottom">
-      <div class="rightBox-bottom-title">
-        浮游动物组成比例
-      </div>
-      <div class="rightBox-bottom-content" ref="chartRef5"></div>
-    </div>
-  </div>
-  <!-- 顶部选择 -->
-  <div class="topMenu">
-    <el-radio-group v-model="topMenu" size="large" @change="topMenuChange">
-      <el-radio-button label="互花米草" value="互花米草" />
-      <el-radio-button label="鸟类" value="鸟类" />
-      <el-radio-button label="牡蛎" value="牡蛎" />
-      <el-radio-button label="文昌鱼" value="文昌鱼" />
-      <el-radio-button label="水质沉积物" value="水质沉积物" />
-    </el-radio-group>
+  <div class="weatherBox" v-if="showWeather">
+    <img src="../../assets/img/晴天.png" class="imageicon" alt="" @click="selectWeather('晴天')">
+    <img src="../../assets/img/阴天.png" class="imageicon" alt="" @click="selectWeather('阴天')">
+    <img src="../../assets/img/雨天.png" class="imageicon" alt="" @click="selectWeather('雨天')">
+    <img src="../../assets/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
   </div>
   <!-- 时间轴 -->
   <div class="bottombox-left">
+    <div class="bottombox-button">
+      <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
+        @click="togglePlay"></el-button>
+    </div>
     <div class="bottombox">
       <div class="bottombox-slider">
-        <el-slider :step="1" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-          @change="gettimePlay" style="position: relative; z-index: 1; width: 1000px" v-show="showSilder">
+        <div :style="adjustedStyle">
+          <span class="bottombox-slider-span">{{ formattedTime }}</span>
+        </div>
+        <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
+          style="position: relative; z-index: 1; width: 1725px" @change="gettimePlay">
         </el-slider>
       </div>
     </div>
   </div>
   <!-- 鸟类点击弹窗 -->
-  <div class="bird" v-if="birdShow">
+  <div class="bird" v-show="birdShow">
     <div class="rightBox-top-title-dialog">
       {{ birdstation }}
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="closebird">
+    <div class="rightBox-bottom-content">
+      <div class="rightBox-bottom-content-radius"></div>
+      <div style="display: flex;justify-content: space-between;padding: 0 1vh;margin-top: 3vh;text-align: center;">
+        <div class="content-radius-left">
+          <div style="font-size: 1vh;color:#CFEFFF;margin-bottom: 0.5vh;">
+            <span style="font-size: 1.6vh;color:#00E7FF;">{{ speciesList.length }}</span>种
+          </div>
+          <div style="width: 5.5vh;height:0.2vh;background-color: #26569d;"></div>
+          <div style="font-size: 1.2vh;color:#00E7FF;margin-top: 0.5vh;">鸟类种类</div>
+        </div>
+        <div class="content-radius-right">
+          <div style="font-size: 1vh;color:#CFEFFF;margin-bottom: 0.5vh;">
+            <span style="font-size: 1.6vh;color:#00E7FF;">{{ countspeciesList }}</span>只
+          </div>
+          <div style="width: 5.5vh;height:0.2vh;background-color: #26569d;"></div>
+          <div style="font-size: 1.2vh;color:#00E7FF;margin-top: 0.5vh;">鸟类数量</div>
+        </div>
+      </div>
+    </div>
     <div class="species">
       <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
           'odd-item': index % 2 === 0,
@@ -133,29 +71,30 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <div class="briefly">
-      <el-tabs v-model="activeName" class="demo-tabs">
-        <el-tab-pane label="鸟种资料" name="first">
-          <div class="brieflydata">
-            <table class="custom-table">
-              <tbody>
-                <tr v-for="(item, index) in animalData" :key="index">
-                  <td>{{ item.title }}</td>
-                  <td>{{ item.txt }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </el-tab-pane>
-        <el-tab-pane label="详细信息" name="second">
-          <div class="brieflydata">
-            <div v-for="(item, index) in animalDatalist" :key="index">
-              <div style="font-size: 1.6vh;font-weight: bold;">{{ item.title }}</div>
-              <div style="font-size: 1.2vh;">{{ item.txt }}</div>
-            </div>
-          </div>
-        </el-tab-pane>
-      </el-tabs>
+    <div class="rightBox-top-title-dialog" style="margin-top: 1vh;">
+      鸟种资料
+    </div>
+    <div class="brieflydata1">
+      <table class="custom-table">
+        <tbody>
+          <tr v-for="(item, index) in animalData" :key="index">
+            <td>{{ item.title }}</td>
+            <td>{{ item.txt }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="briefly" v-show="birdShow">
+    <img src="../../assets/img/close.png" alt="" class="close2" @click="closebird">
+    <div class="rightBox-top-title-dialog">
+      详细信息
+    </div>
+    <div class="brieflydata">
+      <div v-for="(item, index) in animalDatalist" :key="index">
+        <div style="font-size: 1.6vh;font-weight: bold;">{{ item.title }}</div>
+        <div style="font-size: 1.2vh;">{{ item.txt }}</div>
+      </div>
     </div>
   </div>
   <!-- 牡蛎点击弹窗 -->
@@ -208,123 +147,9 @@ import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
+import dayjs from 'dayjs'
 import axios from "axios";
-const tableData1 = ref([
-  {
-    project: '一类',
-    PH: '7.8~8.5',
-    DO: '>6',
-    COD: '≤2',
-    Inorganicnitrogen: '≤0.20',
-    Activephosphate: '≤0.015'
-  },
-  {
-    project: '二类',
-    PH: '7.8~8.5',
-    DO: '>5',
-    COD: '≤3',
-    Inorganicnitrogen: '≤0.30',
-    Activephosphate: '≤0.030'
-  },
-  {
-    project: '三类',
-    PH: '6.8~8.8',
-    DO: '>4',
-    COD: '≤4',
-    Inorganicnitrogen: '≤0.40',
-    Activephosphate: '≤0.030'
-  },
-  {
-    project: '四类',
-    PH: '6.8~8.8',
-    DO: '>3',
-    COD: '≤25',
-    Inorganicnitrogen: '≤0.50',
-    Activephosphate: '≤0.045'
-  }
-])
-const tableData2 = ref([
-  {
-    Stations: '1',
-    Diversity: '1.00',
-    Uniformity: '1.00',
-    Dominance: '1.00',
-    Richness: '1.00',
-    threshold: '1.00',
-    level: '多样性一般',
-  },
-  {
-    Stations: '2',
-    Diversity: '1.50',
-    Uniformity: '0.95',
-    Dominance: '0.75',
-    Richness: '1.00',
-    threshold: '1.42',
-    level: '多样性一般',
-  },
-  {
-    Stations: '3',
-    Diversity: '1.25',
-    Uniformity: '0.79',
-    Dominance: '0.83',
-    Richness: '0.77',
-    threshold: '0.99',
-    level: '多样性一般',
-  },
-  {
-    Stations: '4',
-    Diversity: '1.00',
-    Uniformity: '1.00',
-    Dominance: '1.00',
-    Richness: '1.00',
-    threshold: '1.00',
-    level: '多样性一般',
-  },
-])
-const tableData3 = ref([
-  {
-    StationNumber: '1',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '一类',
-    phosphate: '一类',
-    Nutritionalization: '否',
-  },
-  {
-    StationNumber: '2',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '一类',
-    phosphate: '一类',
-    Nutritionalization: '否',
-  },
-  {
-    StationNumber: '3',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '二类',
-    phosphate: '二类',
-    Nutritionalization: '否',
-  },
-  {
-    StationNumber: '4',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '四类',
-    phosphate: '一类',
-    Nutritionalization: '富营养化',
-  },
-])
 const charts = [];
-const chartRef1 = ref(null);
-const chartRef2 = ref(null);
-const chartRef3 = ref(null);
-const chartRef4 = ref(null);
-const chartRef5 = ref(null);
 const chartRef6 = ref(null);
 const chartRef7 = ref(null);
 const initChart = (chartRef, source) => {
@@ -364,202 +189,161 @@ const initChart = (chartRef, source) => {
     ],
   });
 };
-let initChart4 = (source) => {
-  let chart = echarts.init(chartRef4.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart4(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '80%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center',
-          color: '#CFEFFF'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold'
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: source
-      }
-    ]
-  });
-};
 const reloadChart = () => {
   charts.forEach((chart) => chart());
 };
 
-const showSilder = ref(true)
-const topMenu = ref('互花米草');
-const timePlay = ref(2019);
-const min = ref(2019);
-const max = ref(2023);
+const showWeather = ref(false);
+const selectedWeather = ref('/src/assets/img/晴天.png');
+const weathernext = () => {
+  showWeather.value = !showWeather.value;
+}
+const selectWeather = (weather) => {
+  showWeather.value = false;
+  switch (weather) {
+    case '晴天':
+      selectedWeather.value = '/src/assets/img/晴天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '晴天'
+      });
+      break;
+    case '阴天':
+      selectedWeather.value = '/src/assets/img/阴天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '阴天'
+      });
+      break;
+    case '雨天':
+      selectedWeather.value = '/src/assets/img/雨天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '雨天'
+      });
+      break;
+    case '雪天':
+      selectedWeather.value = '/src/assets/img/雪天.png';
+      callUIInteraction({
+        ModuleName: `其他`,
+        FunctionName: `天气`,
+        Weather: '雪天'
+      });
+      break;
+  }
+};
+const offing = () => {
+  callUIInteraction({
+    ModuleName: `其他`,
+    FunctionName: `海面`,
+  });
+}
+const perspective = () => {
+  callUIInteraction({
+    ModuleName: `其他`,
+    FunctionName: `视角`,
+  });
+}
+
+const timePick = ref(dayjs("2023-08-21").toDate());
+const timePlay = ref(null);
+const activePlay = ref("");
+// 暂停/播放
+let previousPlayState = "";
+let intervalTime = null;
+let playInterval = null;
+const togglePlay = () => {
+  intervalTime = 16.6665;
+  previousPlayState = activePlay.value;
+  activePlay.value = activePlay.value === "play" ? "" : "play";
+  if (activePlay.value === "play") {
+    playInterval = setInterval(() => {
+      timePlay.value = dayjs(timePlay.value).add(1, "minute").valueOf();
+      if (activePlay.value !== "play") {
+        clearInterval(playInterval);
+      }
+    }, intervalTime);
+  } else {
+    clearInterval(playInterval);
+  }
+};
+const min = ref(dayjs(timePick.value).startOf("day").valueOf());
+// 将 max 设置为当天的23点
+const max = ref(dayjs(timePick.value).hour(23).minute(0).second(0).valueOf());
+
+const formattedTime = computed(() => {
+  const time = dayjs(timePlay.value);
+  return time.format("YYYY/MM/DD HH:mm");
+});
+
+const style = computed(() => {
+  const length = max.value - min.value,
+    progress = timePlay.value - min.value,
+    left = (progress / length) * 93;
+  return {
+    paddingLeft: `${left}%`,
+  };
+});
+
+const adjustedStyle = computed(() => {
+  const baseStyle = style.value;
+  const divWidth = 125; // 计算宽度为125px
+  const totalWidth = 1725;
+  const leftPadding = parseFloat(baseStyle.paddingLeft);
+
+  if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
+    return {
+      paddingLeft: `${((totalWidth - divWidth) / totalWidth) * 100}%`,
+    };
+  }
+  return baseStyle;
+});
 
 // 定义 slider 的刻度
 const marks = computed(() => {
-  const commonStyle = { style: { color: '#FFFFFF' } };
-  if (topMenu.value === '互花米草') {
-    const marks = {};
-    const start = min.value;
-    const end = max.value;
-    for (let year = start; year <= end; year++) {
-      marks[year] = { ...commonStyle, label: year.toString() };
-    }
-    return marks;
+  const marks = {};
+  const start = dayjs(min.value);
+  for (let i = 0; i <= 23; i++) {
+    const markTime = start.add(i, 'hour');
+    marks[markTime.valueOf()] = {
+      style: {
+        color: '#ffffff'
+      },
+      label: markTime.format('HH:mm')
+    };
   }
-  const labels = {
-    '鸟类': [
-      '2023.06',
-      '2023.08',
-      '2023.11',
-      '2024.04'
-    ],
-  };
-  if (labels[topMenu.value]) {
-    return labels[topMenu.value].map((label, index) => ({
-      ...commonStyle,
-      label: label
-    })).reduce((acc, curr, index) => {
-      acc[index + (topMenu.value === '鸟类' ? 0 : 4)] = curr;
-      return acc;
-    }, {});
-  }
-  return null;
+  return marks;
 });
-const clickStatus = {
-  '牡蛎': false,
-  '互花米草': true,
-  '鸟类': false,
-};
-const topMenuChange = (value) => {
-  topMenu.value = value;
-  showSilder.value = true;
-  birdShow.value = false;
-  oystersShow.value = false;
-  // 取消之前的点击状态
-  for (const key in clickStatus) {
-    if (key !== value) {
-      if (clickStatus[key]) {
-        callUIInteraction({
-          ModuleName: `监测调查`,
-          FunctionName: `${key}`,
-          State: false,
-        });
-        clickStatus[key] = false;
-      }
-    }
-  }
-  if (!clickStatus[value]) {
-    if (value === '鸟类') {
-      callUIInteraction({
-        ModuleName: `监测调查`,
-        FunctionName: topMenu.value,
-        Time: `2023.06`,
-        State: true,
-      });
-    } else if (value === '互花米草') {
-      callUIInteraction({
-        ModuleName: `监测调查`,
-        FunctionName: topMenu.value,
-        Time: `2019`,
-        State: true,
-      });
-    } else {
-      callUIInteraction({
-        ModuleName: `监测调查`,
-        FunctionName: topMenu.value,
-        State: true,
-      });
-    }
-    clickStatus[value] = true;
-  }
-  if (value === '牡蛎') {
-    oystersShow.value = true;
-    initChart(chartRef6, [
-      { value: 5, name: '刺胞动物' },
-      { value: 30, name: '节肢动物' },
-      { value: 25, name: '环节动物' },
-      { value: 35, name: '软体动物' },
-      { value: 5, name: '星虫动物' },
-    ]);
-    initChart(chartRef7, [
-      { value: 3, name: '刺胞动物' },
-      { value: 3, name: '纽形动物' },
-      { value: 3, name: '扁形动物' },
-      { value: 25, name: '节肢动物' },
-      { value: 22, name: '环节动物' },
-      { value: 41, name: '软体动物' },
-      { value: 3, name: '星虫动物' },
-    ]);
-  }
-  if (value === '互花米草') {
-    timePlay.value = 2019;
-    min.value = 2019;
-    max.value = 2023;
-  } else if (value === '鸟类') {
-    timePlay.value = 0;
-    min.value = 0;
-    max.value = 3;
-  } else {
-    showSilder.value = false;
-  }
-};
-const logMapping = {
-  0: '2023.06',
-  1: '2023.08',
-  2: '2023.11',
-  3: '2024.04',
-  2019: '2019',
-  2020: '2020',
-  2021: '2021',
-  2022: '2022',
-  2023: '2023',
-};
-const gettimePlay = (e) => {
-  const timeValue = logMapping[e];
-  if (timeValue) {
+watch(timePlay, (newVal) => {
+  const currentTime = dayjs(newVal);
+  if (currentTime.minute() === 0 && currentTime.second() === 0) {
+    const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
-      ModuleName: `监测调查`,
-      FunctionName: topMenu.value,
+      ModuleName: `生态动力`,
+      FunctionName: `标量场可视化`,
       State: true,
-      Time: timeValue
+      Time: formattedTime,
     });
-  } else {
-    console.error(`未找到对应的时间值: ${e}`);
+    // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
+    sessionStorage.setItem('timePlay', formattedTime);
+  }
+  if (currentTime.isSame(dayjs(max.value))) {
+    activePlay.value = '';
+  }
+});
+// 监听时间轴
+const gettimePlay = (e) => {
+  timePlay.value = dayjs(e).second(0).valueOf(); // 确保秒数为 0
+  if (activePlay.value === "play") {
+    activePlay.value = "";
   }
 }
-
+// 鸟弹窗
 const birdShow = ref(false);
-const speciesList = ref([
-  // { name: '斑嘴鸭', count: 'XX只' },
-  // { name: '琵嘴鸭', count: 'XX只' },
-  // { name: '白鹭', count: 'XX只' },
-  // { name: '黑尾鸥', count: 'XX只' },
-  // { name: '苍鹭', count: 'XX只' },
-  // { name: '斑尾塍鹬', count: 'XX只' },
-  // { name: '翘嘴鹬', count: 'XX只' },
-  // { name: '中白鹭', count: 'XX只' },
-  // { name: '中杓鹬', count: 'XX只' },
-]);
+const speciesList = ref([]);
 const birdstation = ref(null)
 const activeIndex = ref(0);
 const animalData = ref([]);
@@ -575,8 +359,7 @@ const handleClick = (index, item) => {
     imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
   });
 };
-
-const activeName = ref('first')
+const countspeciesList = ref(0);
 
 const closebird = () => {
   birdShow.value = false;
@@ -590,16 +373,19 @@ const myHandleResponseFunction = (data) => {
   console.log(data);
   const datajson = JSON.parse(data);
   birdShow.value = false;
+
   if (datajson.Funcation === '报错') {
     ElMessage({
       message: datajson.Type,
       type: 'warning',
     });
-    return
+    return;
   } else if (datajson.Funcation === '站点点击查询') {
     birdShow.value = true;
     birdstation.value = datajson.Data.siteName;
     speciesList.value = datajson.Data.animalsCount;
+    countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
+
     axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.Data.animalsCount[0].name}`).then((res) => {
       animalData.value = res.data.data.info.鸟种资料;
       animalDatalist.value = res.data.data.info.详细信息;
@@ -609,48 +395,33 @@ const myHandleResponseFunction = (data) => {
 }
 
 onMounted(() => {
+  const storedTime = sessionStorage.getItem('timePlay');
+  if (storedTime) {
+    timePlay.value = dayjs(storedTime).valueOf(); // 从 sessionStorage 获取值
+  } else {
+    timePlay.value = dayjs('2023-08-21 06:00:00').valueOf(); // 默认值
+  }
   callUIInteraction({
     ModuleName: `监测调查`,
     FunctionName: `互花米草`,
     State: true,
     Time: '2019',
   });
-  initChart(chartRef1, [
-    { value: 19.18, name: '节肢动物' },
-    { value: 39.73, name: '软体动物' },
-    { value: 31.51, name: '环节动物' },
-    { value: 1.37, name: '原足动物' },
-    { value: 1.37, name: '星虫动物' },
-    { value: 1.37, name: '扁形动物' },
-    { value: 1.37, name: '腕足动物' },
-    { value: 1.37, name: '脊索动物' },
-    { value: 1.37, name: '刺胞动物' },
-    { value: 1.37, name: '纽形动物' },
+  initChart(chartRef6, [
+    { value: 5, name: '刺胞动物' },
+    { value: 30, name: '节肢动物' },
+    { value: 25, name: '环节动物' },
+    { value: 35, name: '软体动物' },
+    { value: 5, name: '星虫动物' },
   ]);
-  initChart(chartRef2, [
-    { value: 46.15, name: '多毛类' },
-    { value: 30.77, name: '软体动物' },
-    { value: 15.38, name: '甲壳类' },
-    { value: 3.85, name: '头索动物' },
-    { value: 3.85, name: '纽形动物' },
-  ]);
-  initChart(chartRef3, [
-    { value: 12.5, name: '蓝藻门' },
-    { value: 87.5, name: '硅藻门' },
-  ]);
-  initChart4([
-    { value: '1', name: 'a1' },
-    { value: '1', name: 'a2' },
-    { value: '1', name: 'b1' },
-    { value: '1', name: 'b1' },
-    { value: '1', name: 'c1' },
-    { value: '1', name: 'c2' },
-  ]);
-  initChart(chartRef5, [
-    { value: 20, name: '肛肠动物' },
-    { value: 40, name: '节肢动物' },
-    { value: 7, name: '毛颚动物' },
-    { value: 33, name: '其他幼体' },
+  initChart(chartRef7, [
+    { value: 3, name: '刺胞动物' },
+    { value: 3, name: '纽形动物' },
+    { value: 3, name: '扁形动物' },
+    { value: 25, name: '节肢动物' },
+    { value: 22, name: '环节动物' },
+    { value: 41, name: '软体动物' },
+    { value: 3, name: '星虫动物' },
   ]);
   window.addEventListener("resize", reloadChart);
   addResponseEventListener("handle_responses", myHandleResponseFunction);
@@ -752,23 +523,66 @@ onUnmounted(() => {
 }
 
 .bottombox-left {
-  width: 62%;
+  width: 97.5%;
   height: 5vh;
+  background-image: url('../../assets/img/timebackground.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   position: absolute;
   bottom: 2.5vh;
-  z-index: 20;
-  left: 50%;
-  transform: translateX(-50%);
+  margin-left: 2.4vh;
+  z-index: 10;
 }
 
-
 .bottombox {
-  padding: 0 3vh 0 9vh;
+  padding: 0 3vh 0 11vh;
   position: absolute;
   bottom: 2vh;
   box-sizing: border-box;
   display: flex;
   z-index: 5;
+}
+
+.bottombox-button {
+  position: absolute;
+  bottom: 0.5vh;
+  left: 0.9%;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.bottombox-play {
+  background-image: url("../../assets/img/Timeout.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: 55% 50%;
+  border-radius: 100%;
+  border: 0;
+  width: 4vh;
+  height: 4vh;
+}
+
+.bottombox-play.active {
+  background-image: url("../../assets/img/Play.png");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-position: center;
+  background-size: 70% 70%;
+  border-radius: 100%;
+  border: 0;
+  width: 4vh;
+  height: 4vh;
+}
+
+.bottombox-slider-span {
+  width: 12.5vh;
+  background-color: #42aeff;
+  border-radius: 1.25rem;
+  color: white;
+  display: block;
+  text-align: center;
+  font-size: 1.4vh;
 }
 
 .bottombox-slider :deep(.el-slider__button) {
@@ -785,20 +599,12 @@ onUnmounted(() => {
   color: white !important;
 }
 
-.topMenu {
-  position: absolute;
-  z-index: 12;
-  top: 9vh;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .bird {
   position: absolute;
-  left: 34.4vh;
+  left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  max-height: 80vh;
+  height: 80vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
@@ -811,7 +617,9 @@ onUnmounted(() => {
 
 .species {
   margin: 1vh 0;
-  flex-shrink: 0;
+  overflow-y: auto;
+  width: 100%;
+  max-height: 16vh;
 }
 
 .species-item {
@@ -857,23 +665,37 @@ onUnmounted(() => {
 }
 
 .briefly {
-  width: 100%;
-  flex-grow: 1;
-  overflow-y: auto;
+  width: 30vh;
+  height: 80vh;
+  position: absolute;
+  right: 7.4vh;
+  top: 10vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
   color: #CFEFFF;
   font-size: 1.4vh;
 }
 
+.brieflydata1 {
+  margin-top: 1vh;
+  overflow-y: auto;
+  min-height: 22vh;
+}
+
 .brieflydata {
-  max-height: 39vh;
+  height: 71.5vh;
   overflow-y: auto;
 }
 
 /* 自定义滚动条样式 */
 ::-webkit-scrollbar {
-  width: 1vh;
+  width: 0.5vh;
   /* 滚动条的宽度 */
-  height: 1vh;
+  height: 0.5vh;
   /* 滚动条的高度 */
 }
 
@@ -935,65 +757,6 @@ onUnmounted(() => {
   width: 0%;
 }
 
-:deep(.el-table__body-wrapper) {
-  font-size: 1vh;
-}
-
-:deep(.el-table--fit) {
-  padding: 0;
-}
-
-:deep(.el-table, .el-table__expanded-cell) {
-  background-color: transparent;
-  border: none;
-}
-
-:deep(.el-table th) {
-  background-color: transparent;
-  border: none;
-}
-
-:deep(.el-table tr) {
-  background-color: transparent;
-  border: none;
-}
-
-:deep(.el-table--enable-row-transition .el-table__body td, .el-table .cell) {
-  background-color: transparent;
-  border: none;
-}
-
-:deep(.el-table__header-wrapper th) {
-  background-color: transparent;
-  border: none;
-}
-
-:deep(.el-table__body-wrapper td) {
-  border: none;
-}
-
-:deep(.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell) {
-  background-color: transparent;
-}
-
-/* 去掉中间数据的分割线 */
-:deep(.el-table__row > td) {
-  border: none;
-}
-
-/* 去掉上面的线 */
-:deep(.el-table th.is-leaf) {
-  border: none;
-}
-
-:deep(.el-table__inner-wrapper:before) {
-  display: none;
-}
-
-:deep(.el-table .cell) {
-  color: #b7cffc;
-}
-
 .close {
   cursor: pointer;
   width: 2vh;
@@ -1002,9 +765,17 @@ onUnmounted(() => {
   top: 2vh;
 }
 
+.close2 {
+  cursor: pointer;
+  width: 2vh;
+  position: absolute;
+  right: 1vh;
+  top: 1vh;
+}
+
 .oysters {
   position: absolute;
-  left: 34.4vh;
+  left: 2.4vh;
   top: 10vh;
   width: 30vh;
   max-height: 80vh;
@@ -1021,5 +792,79 @@ onUnmounted(() => {
 .oystersecharts {
   width: 26.75vh;
   height: 20vh;
+}
+
+:deep(.el-tabs__item) {
+  width: 13.5vh;
+  padding: 0 !important;
+}
+
+.rightBox-bottom-content {
+  position: relative;
+  margin-top: 1vh;
+  width: 100%;
+  height: 11vh;
+  background-image: url('../../assets/img/rightbottombox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rightBox-bottom-content-radius {
+  position: absolute;
+  left: 8.8vh;
+  top: 1vh;
+  width: 9vh;
+  height: 9vh;
+  background-image: url('../../assets/img/radius.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  animation: rotate 2s linear infinite;
+  /* 持续旋转动画 */
+}
+
+.righticon {
+  height: 15vh;
+  width: 4vh;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 3;
+  right: 2.4vh;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.imageicon {
+  width: 3vh;
+  cursor: pointer;
+}
+
+.weatherBox {
+  position: absolute;
+  right: 2.4vh;
+  top: 32%;
+  transform: translateY(-32%);
+  width: 4vh;
+  height: 18vh;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 </style>

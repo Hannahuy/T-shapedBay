@@ -2,6 +2,7 @@
     <div class="left-button">
         <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
     </div>
+    <!-- 时间轴 -->
     <div class="bottombox-left">
         <div class="bottombox-button">
             <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
@@ -13,18 +14,21 @@
                     <span class="bottombox-slider-span">{{ formattedTime }}</span>
                 </div>
                 <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-                    style="position: relative; z-index: 1; width: 1300px" @change="gettimePlay">
+                    style="position: relative; z-index: 1; width: 1725px" @change="gettimePlay">
                 </el-slider>
             </div>
         </div>
     </div>
     <!-- 右下角选择 -->
     <div class="right-select" v-show="showselect">
-        <el-select v-model="selectvalue" placeholder="请选择层级" size="large" style="width: 24vh" @change="selectchange">
-            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
+        <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
+            <el-checkbox label="水面表层0级" value="水面表层0级" />
+            <el-checkbox label="水面表层1级" value="水面表层1级" />
+            <el-checkbox label="水面表层2级" value="水面表层2级" />
+            <el-checkbox label="水面表层3级" value="水面表层3级" />
+            <el-checkbox label="水面表层4级" value="水面表层4级" />
+        </el-checkbox-group>
     </div>
-
     <!-- 右下角颜色条 -->
     <div class="right-button">
         <div class="leftbar">{{ barType }}</div>
@@ -210,7 +214,7 @@ let layerFunction = [
 ]
 
 const timePick = ref(dayjs("2023-08-21").toDate());
-const timePlay = ref(dayjs('2023-08-21 06:00:00').valueOf());
+const timePlay = ref(null);
 const activePlay = ref("");
 // 暂停/播放
 let previousPlayState = "";
@@ -243,7 +247,7 @@ const formattedTime = computed(() => {
 const style = computed(() => {
     const length = max.value - min.value,
         progress = timePlay.value - min.value,
-        left = (progress / length) * 91;
+        left = (progress / length) * 93;
     return {
         paddingLeft: `${left}%`,
     };
@@ -252,7 +256,7 @@ const style = computed(() => {
 const adjustedStyle = computed(() => {
     const baseStyle = style.value;
     const divWidth = 125; // 计算宽度为125px
-    const totalWidth = 1600;
+    const totalWidth = 1725;
     const leftPadding = parseFloat(baseStyle.paddingLeft);
 
     if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
@@ -291,7 +295,7 @@ watch(timePlay, (newVal) => {
             Type: selectedItemname.value
         });
         // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
-
+        sessionStorage.setItem('timePlay', formattedTime);
     }
     if (currentTime.isSame(dayjs(max.value))) {
         activePlay.value = '';
@@ -304,29 +308,14 @@ const gettimePlay = (e) => {
         activePlay.value = "";
     }
 }
-const selectvalue = ref('水面表层0级');
-const options = ref([
-    {
-        value: '水面表层0级',
-        label: '水面表层0级',
-    },
-    {
-        value: '水面表层1级',
-        label: '水面表层1级',
-    },
-    {
-        value: '水面表层2级',
-        label: '水面表层2级',
-    },
-    {
-        value: '水面表层3级',
-        label: '水面表层3级',
-    },
-    {
-        value: '水面表层4级',
-        label: '水面表层4级',
-    },
-])
+const selectvalue = ref([
+    "水面表层0级",
+    "水面表层1级",
+    "水面表层2级",
+    "水面表层3级",
+    "水面表层4级"
+]);
+
 const showselect = ref(true);
 const handleFunctionSelection = (selectedItem) => {
     selectedItemname.value = selectedItem.name;
@@ -342,17 +331,17 @@ const handleFunctionSelection = (selectedItem) => {
     });
     // console.log('生态动力', `标量场可视化`, true, formattedTime, selectvalue.value, selectedItem.name);
 };
-const selectchange = (e) => {
+const selectchange = (selectedValues) => {
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
         Time: formattedTime,
-        Layer: e,
+        Layer: selectedValues, // 传递选中的值
         Type: selectedItemname.value
     });
-    // console.log('生态动力',`标量场可视化`,true,formattedTime, e,selectedItemname.value);
+    // console.log('生态动力', `标量场可视化`, true, formattedTime, selectedValues, selectedItemname.value);
 }
 const showSmallWindow = ref(false);
 const barType = ref(null);
@@ -389,6 +378,12 @@ const myHandleResponseFunction = (data) => {
 }
 
 onMounted(() => {
+    const storedTime = sessionStorage.getItem('timePlay');
+    if (storedTime) {
+        timePlay.value = dayjs(storedTime).valueOf(); // 从 sessionStorage 获取值
+    } else {
+        timePlay.value = dayjs('2023-08-21 06:00:00').valueOf(); // 默认值
+    }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
@@ -413,7 +408,7 @@ onMounted(() => {
 }
 
 .bottombox-left {
-    width: 74%;
+    width: 97.5%;
     height: 5vh;
     background-image: url('../../assets/img/timebackground.png');
     background-repeat: no-repeat;
@@ -425,7 +420,7 @@ onMounted(() => {
 }
 
 .bottombox {
-    padding: 0 3vh 0 9vh;
+    padding: 0 3vh 0 11vh;
     position: absolute;
     bottom: 2vh;
     box-sizing: border-box;
@@ -436,7 +431,7 @@ onMounted(() => {
 .bottombox-button {
     position: absolute;
     bottom: 0.5vh;
-    left: 0.6%;
+    left: 0.9%;
     display: flex;
     align-items: center;
     z-index: 10;
@@ -490,11 +485,11 @@ onMounted(() => {
 }
 
 .right-button {
-    width: 22%;
-    height: 4vh;
+    width: 15%;
+    height: 2vh;
     display: flex;
     position: absolute;
-    bottom: 3vh;
+    bottom: 11vh;
     right: 2.4vh;
     z-index: 3;
 }
@@ -503,17 +498,17 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 1vh;
-    border-bottom-left-radius: 1vh;
-    width: 10%;
+    border-top-left-radius: 0.5vh;
+    border-bottom-left-radius: 0.5vh;
+    width: 18%;
     background-color: #FFFFFF;
     font-size: 1.6vh;
 }
 
 .rightbar {
-    width: 90%;
-    border-top-right-radius: 1vh;
-    border-bottom-right-radius: 1vh;
+    width: 82%;
+    border-top-right-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
     background-image: url('../../assets/img/colorbar.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
@@ -522,7 +517,7 @@ onMounted(() => {
     font-weight: bold;
     display: flex;
     align-items: center;
-    padding: 0 2vh;
+    padding: 0 1vh;
     box-sizing: border-box;
     justify-content: space-between;
 }
@@ -562,9 +557,30 @@ onMounted(() => {
 
 .right-select {
     position: absolute;
-    bottom: 9vh;
+    bottom: 14.5vh;
     right: 2.4vh;
     z-index: 3;
+    background-image: url('../../assets/img/rightbox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 15vh;
+    height: 18vh;
+    padding: 1vh 0vh 1vh 2.5vh;
+    box-sizing: border-box;
+}
+
+:deep(.el-checkbox) {
+    color: #b7cffc;
+}
+
+:deep(.el-checkbox__input.is-checked+.el-checkbox__label) {
+    color: #b7cffc;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    /* 竖直排列 */
 }
 
 :deep(.el-select__wrapper) {
