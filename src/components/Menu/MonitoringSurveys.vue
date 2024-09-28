@@ -92,8 +92,9 @@
     </div>
     <div class="brieflydata">
       <div v-for="(item, index) in animalDatalist" :key="index">
-        <div style="font-size: 1.6vh;font-weight: bold;">{{ item.title }}</div>
-        <div style="font-size: 1.2vh;">{{ item.txt }}</div>
+        <div style="font-size: 1.6vh;font-weight: bold;color:#00E7FF;text-align: center;margin-bottom: 1vh;">{{
+      item.title }}</div>
+        <div style="font-size: 1.2vh;text-indent: 2em;margin-bottom: 1vh;">{{ item.txt }}</div>
       </div>
     </div>
   </div>
@@ -147,7 +148,7 @@
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="SpartinaalternifloraShow = false">
     <div>
-      <el-radio-group v-model="radio" style="display: flex;flex-direction: column;">
+      <el-radio-group v-model="radio" style="display: flex;flex-direction: column;" @change="radioChange">
         <el-radio :value="2019">2019</el-radio>
         <el-radio :value="2020">2020</el-radio>
         <el-radio :value="2021">2021</el-radio>
@@ -162,26 +163,38 @@
       <table class="custom-table2">
         <tbody>
           <tr>
-            <td></td>
-            <td>牡蛎礁面积(m²)</td>
-            <td>造礁牡蛎密度(个/m³)</td>
-            <td>造礁牡蛎生物量(g/m³)</td>
+            <td>年份</td>
+            <td>面积(km²)</td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td>2023.10</td>
-            <td>20689</td>
-            <td>3097.6</td>
-            <td>30137.44</td>
+            <td>2019</td>
+            <td>5.23</td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td>2024.04</td>
-            <td>/</td>
-            <td>3260.8</td>
-            <td>25209.38</td>
+            <td>2020</td>
+            <td>6.70</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2021</td>
+            <td>7.74</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2022</td>
+            <td>2.97</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2023</td>
+            <td>4.77</td>
           </tr>
         </tbody>
       </table>
@@ -198,7 +211,7 @@
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="showSediment = false">
     <div>
-      <el-radio-group v-model="radio2" style="display: flex;flex-direction: column;">
+      <el-radio-group v-model="radio2" style="display: flex;flex-direction: column;" @change="radioChange2">
         <el-radio value="2023.06">2023.06</el-radio>
         <el-radio value="2023.08">2023.08</el-radio>
         <el-radio value="2023.11">2023.11</el-radio>
@@ -206,34 +219,52 @@
       </el-radio-group>
     </div>
     <div class="rightBox-top-title-dialog">
-      沉积物数据
+      水质数据
     </div>
     <div style="margin-top: 1vh;margin-bottom: 1vh;">
       <table class="custom-table2">
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
+          <tr v-for="(value, key) in waterQuality" :key="key">
+            <td>{{ key }}</td>
+            <td>{{ value }}</td>
           </tr>
         </tbody>
+      </table>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      沉积物数据
+    </div>
+    <div style="margin-top: 1vh;margin-bottom: 1vh;">
+      <table class="custom-table2">
+        <thead>
+          <tr>
+            <th rowspan="4">Eh(mV)</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th rowspan="4">名称或代号</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
         <tbody>
           <tr>
-            <td></td>
+            <td rowspan="4">粒级含量</td>
+            <td>砾石(%)</td>
             <td></td>
           </tr>
-        </tbody>
-        <tbody>
           <tr>
-            <td></td>
-            <td></td>
+            <td>砂(%)</td>
             <td></td>
           </tr>
-        </tbody>
-        <tbody>
           <tr>
+            <td>粉砂(%)</td>
             <td></td>
-            <td></td>
-            <td></td>
+          </tr>
+          <tr>
+            <td>粘土(%)</td>
+            <td>{{ sediment.粒级含量[3] }}</td>
           </tr>
         </tbody>
       </table>
@@ -359,7 +390,7 @@ const initChart2 = (source) => {
         if (!data[1]) {
           return;
         }
-        let tooltip = `时间：${data[0]}<br>降水：${data[1]} mm`;
+        let tooltip = `时间：${data[0]}<br>面积：${data[1]} km²`;
         return tooltip;
       },
     },
@@ -390,7 +421,7 @@ const initChart2 = (source) => {
       },
     },
     yAxis: {
-      name: "降水 (mm)",
+      name: "k㎡",
       nameTextStyle: {
         color: "#C5F1FF",
       },
@@ -414,7 +445,7 @@ const initChart2 = (source) => {
         },
       },
       min: 0,
-      max: 20,
+      max: 10,
     },
     series: [
       {
@@ -624,6 +655,25 @@ const countspeciesList = ref(0);
 const oystersShow = ref(false);
 const SpartinaalternifloraShow = ref(false);
 
+const radioChange = (e) => {
+  callUIInteraction({
+    ModuleName: `监测调查`,
+    FunctionName: `互花米草`,
+    State: true,
+    Time: e
+  });
+}
+
+const radioChange2 = (e) => {
+  callUIInteraction({
+    ModuleName: `监测调查`,
+    FunctionName: `水质沉积物`,
+    State: true,
+    Time: e
+  });
+}
+const waterQuality = ref({});
+const sediment = ref({});
 const myHandleResponseFunction = (data) => {
   console.log(data);
   const datajson = JSON.parse(data);
@@ -655,22 +705,20 @@ const myHandleResponseFunction = (data) => {
     ]);
   } else if (datajson.Function === '互花米草点击查询') {
     SpartinaalternifloraShow.value = true;
+    // axios.get().then((res) => {
+    //   console.log(res);
     initChart2([
-      ["0:00", "0"],
-      ["2:00", "0"],
-      ["4:00", "1"],
-      ["6:00", "0"],
-      ["8:00", "0"],
-      ["10:00", "0"],
-      ["12:00", "5"],
-      ["14:00", "10"],
-      ["16:00", "15"],
-      ["18:00", "8"],
-      ["20:00", "0"],
-      ["22:00", "0"],
+      ["2019", "5.23"],
+      ["2020", "6.70"],
+      ["2021", "7.74"],
+      ["2022", "2.97"],
+      ["2023", "4.77"],
     ]);
+    // })
   } else if (datajson.Function === '水质沉积物点击查询') {
     showSediment.value = true;
+    waterQuality.value = datajson.Data.waterQuality;
+    sediment.value = datajson.Data.sediment;
   } else if (datajson.Function === '潮间带点击查询') {
     showIntertidalzone.value = true;
     IntertidalzoneName.value = datajson.Data.name;
@@ -700,20 +748,6 @@ onMounted(() => {
     ModuleName: `监测调查`,
     State: true,
   });
-  initChart2([
-    ["0:00", "0"],
-    ["2:00", "0"],
-    ["4:00", "1"],
-    ["6:00", "0"],
-    ["8:00", "0"],
-    ["10:00", "0"],
-    ["12:00", "5"],
-    ["14:00", "10"],
-    ["16:00", "15"],
-    ["18:00", "8"],
-    ["20:00", "0"],
-    ["22:00", "0"],
-  ]);
   window.addEventListener("resize", reloadChart);
   addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
@@ -1168,7 +1202,7 @@ onUnmounted(() => {
   left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  height: 80vh;
+  height: 71vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
