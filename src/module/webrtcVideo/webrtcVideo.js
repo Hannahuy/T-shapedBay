@@ -1549,9 +1549,7 @@ function updateVideoStreamSize() {
       };
       let callUIInteractionf51 = {
         ModuleName: `监测调查`,
-        FunctionName: `互花米草`,
         State: true,
-        Time: '2019',
       };
       let callUIInteractionf52 = {
         ModuleName: `生态动力`,

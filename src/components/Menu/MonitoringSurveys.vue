@@ -134,11 +134,11 @@
     <div class="rightBox-top-title-dialog">
       礁栖生物类群-2023
     </div>
-    <div class="oystersecharts" ref="chartRef6"></div>
+    <div class="oystersecharts" ref="chartRef1"></div>
     <div class="rightBox-top-title-dialog">
       礁栖生物类群-2024
     </div>
-    <div class="oystersecharts" ref="chartRef7"></div>
+    <div class="oystersecharts" ref="chartRef2"></div>
   </div>
   <!-- 互花米草弹窗 -->
   <div class="Spartinaalterniflora" v-show="SpartinaalternifloraShow">
@@ -189,91 +189,51 @@
     <div class="rightBox-top-title-dialog">
       面积变化折线图
     </div>
-    <div class="oystersecharts" ref="chartRef7"></div>
+    <div class="oystersecharts" ref="chartRef5"></div>
   </div>
-  <!-- 水质弹窗 -->
-  <div class="water" v-if="showWater">
-    <div class="rightBox-top-title-dialog">
-      {{}}
-    </div>
-    <img src="../../assets/img/close.png" alt="" class="close" @click="showWater = false">
-    <div>
-      <el-radio-group v-model="radio2" style="display: flex;flex-direction: column;">
-        <el-radio :value="2019">2019</el-radio>
-        <el-radio :value="2020">2020</el-radio>
-        <el-radio :value="2021">2021</el-radio>
-        <el-radio :value="2022">2022</el-radio>
-        <el-radio :value="2023">2023</el-radio>
-      </el-radio-group>
-    </div>
-    <div style="margin-top: 1vh;margin-bottom: 1vh;">
-      <table class="custom-table2">
-        <tbody>
-          <tr>
-            <td></td>
-            <td>牡蛎礁面积(m²)</td>
-            <td>造礁牡蛎密度(个/m³)</td>
-            <td>造礁牡蛎生物量(g/m³)</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>2023.10</td>
-            <td>20689</td>
-            <td>3097.6</td>
-            <td>30137.44</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>2024.04</td>
-            <td>/</td>
-            <td>3260.8</td>
-            <td>25209.38</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <!-- 沉积物弹窗 -->
+  <!-- 水质沉积物弹窗 -->
   <div class="sediment" v-if="showSediment">
     <div class="rightBox-top-title-dialog">
-      沉积物数据
+      时间选择
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="showSediment = false">
     <div>
-      <el-radio-group v-model="radio3" style="display: flex;flex-direction: column;">
-        <el-radio :value="2019">2019</el-radio>
-        <el-radio :value="2020">2020</el-radio>
-        <el-radio :value="2021">2021</el-radio>
-        <el-radio :value="2022">2022</el-radio>
-        <el-radio :value="2023">2023</el-radio>
+      <el-radio-group v-model="radio2" style="display: flex;flex-direction: column;">
+        <el-radio value="2023.06">2023.06</el-radio>
+        <el-radio value="2023.08">2023.08</el-radio>
+        <el-radio value="2023.11">2023.11</el-radio>
+        <el-radio value="2024.04">2024.04</el-radio>
       </el-radio-group>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      沉积物数据
     </div>
     <div style="margin-top: 1vh;margin-bottom: 1vh;">
       <table class="custom-table2">
         <tbody>
           <tr>
             <td></td>
-            <td>沉积物面积(m²)</td>
-            <td>沉积物密度(kg/m³)</td>
-            <td>沉积物生物量(kg/m³)</td>
+            <td></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td>2023.10</td>
-            <td>15000</td>
-            <td>1200</td>
-            <td>18000</td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td>2024.04</td>
-            <td>/</td>
-            <td>1300</td>
-            <td>19000</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
           </tr>
         </tbody>
       </table>
@@ -282,34 +242,32 @@
   <!-- 潮间带 -->
   <div class="Intertidalzone" v-show="showIntertidalzone">
     <div class="rightBox-top-title-dialog">
-      {{}}
+      {{ IntertidalzoneName }}
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="showIntertidalzone = false">
-    <div>2020-2021</div>
+    <div style="margin-top: 1vh;margin-bottom: 1vh;text-align: center;color:#CFEFFF;font-size: 1.6vh;">
+      日期：2024.04.26 ~ 2024.04.29</div>
+    <div class="rightBox-top-title-dialog">
+      生物种类多样性
+    </div>
     <div style="margin-top: 1vh;margin-bottom: 1vh;">
       <table class="custom-table2">
         <tbody>
           <tr>
-            <td></td>
             <td>沉积物密度(kg/m³)</td>
+            <td>{{ Intertidalzonedata }}</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
             <td>沉积物生物量(kg/m³)</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>2023.10</td>
-            <td>1200</td>
-            <td>18000</td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>2024.04</td>
-            <td>1300</td>
-            <td>19000</td>
+            <td>{{ Intertidalzonedata2 }}</td>
           </tr>
         </tbody>
       </table>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      生物种类多样性
     </div>
     <div class="oystersecharts" ref="chartRef6"></div>
   </div>
@@ -323,14 +281,19 @@ import { ElMessage } from 'element-plus';
 import dayjs from 'dayjs'
 import axios from "axios";
 const radio = ref(2019)
-const radio2 = ref(2019)
-const radio3 = ref(2019)
-const showWater = ref(false);
-const showSediment =ref(false);
+const radio2 = ref('2023.06')
+const Intertidalzonedata2 = ref(null);
+const Intertidalzonedata = ref(null);
+const IntertidalzoneName = ref(null);
+const showSediment = ref(false);
 const showIntertidalzone = ref(false);
 const charts = [];
+const chartRef1 = ref(null);
+const chartRef2 = ref(null);
+const chartRef3 = ref(null);
+const chartRef4 = ref(null);
+const chartRef5 = ref(null);
 const chartRef6 = ref(null);
-const chartRef7 = ref(null);
 const initChart = (chartRef, source) => {
   const chart = echarts.init(chartRef.value);
   charts.push(() => {
@@ -369,7 +332,7 @@ const initChart = (chartRef, source) => {
   });
 };
 const initChart2 = (source) => {
-  let chart = echarts.init(chartRef7.value);
+  let chart = echarts.init(chartRef5.value);
   charts.push(() => {
     chart.dispose();
     initChart2(source);
@@ -664,15 +627,13 @@ const SpartinaalternifloraShow = ref(false);
 const myHandleResponseFunction = (data) => {
   console.log(data);
   const datajson = JSON.parse(data);
-  birdShow.value = false;
-
-  if (datajson.Funcation === '报错') {
+  if (datajson.Function === '报错') {
     ElMessage({
       message: datajson.Type,
       type: 'warning',
     });
     return;
-  } else if (datajson.Funcation === '站点点击查询') {
+  } else if (datajson.Function === '鸟类点击查询') {
     birdShow.value = true;
     birdstation.value = datajson.Data.siteName;
     speciesList.value = datajson.Data.animalsCount;
@@ -683,10 +644,16 @@ const myHandleResponseFunction = (data) => {
       animalDatalist.value = res.data.data.info.详细信息;
       imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
     });
-  } else if (datajson.Funcation === '牡蛎点击查询') {
+  } else if (datajson.Function === '牡蛎礁点击查询') {
     oystersShow.value = true;
-    initChart();
-  } else if (datajson.Funcation === '互花米草点击查询') {
+    initChart(chartRef1, [
+      { value: 5, name: '刺胞动物' },
+      { value: 30, name: '节肢动物' },
+      { value: 25, name: '环节动物' },
+      { value: 35, name: '软体动物' },
+      { value: 5, name: '星虫动物' },
+    ]);
+  } else if (datajson.Function === '互花米草点击查询') {
     SpartinaalternifloraShow.value = true;
     initChart2([
       ["0:00", "0"],
@@ -702,6 +669,23 @@ const myHandleResponseFunction = (data) => {
       ["20:00", "0"],
       ["22:00", "0"],
     ]);
+  } else if (datajson.Function === '水质沉积物点击查询') {
+    showSediment.value = true;
+  } else if (datajson.Function === '潮间带点击查询') {
+    showIntertidalzone.value = true;
+    IntertidalzoneName.value = datajson.Data.name;
+    Intertidalzonedata.value = datajson.Data.density;
+    Intertidalzonedata2.value = datajson.Data.biomass;
+    const statisticsData = datajson.Data.statistics;
+    const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
+    const chartData = Object.keys(statisticsData).map(key => {
+      const percentage = ((statisticsData[key] / total) * 100).toFixed(1);
+      return {
+        name: key,
+        value: parseFloat(percentage)
+      };
+    });
+    initChart(chartRef6, chartData);
   }
 }
 
@@ -714,9 +698,7 @@ onMounted(() => {
   }
   callUIInteraction({
     ModuleName: `监测调查`,
-    FunctionName: `互花米草`,
     State: true,
-    Time: '2019',
   });
   initChart2([
     ["0:00", "0"],
@@ -731,13 +713,6 @@ onMounted(() => {
     ["18:00", "8"],
     ["20:00", "0"],
     ["22:00", "0"],
-  ]);
-  initChart(chartRef6, [
-    { value: 5, name: '刺胞动物' },
-    { value: 30, name: '节肢动物' },
-    { value: 25, name: '环节动物' },
-    { value: 35, name: '软体动物' },
-    { value: 5, name: '星虫动物' },
   ]);
   window.addEventListener("resize", reloadChart);
   addResponseEventListener("handle_responses", myHandleResponseFunction);
@@ -935,6 +910,7 @@ onUnmounted(() => {
   margin: 1vh 0;
   overflow-y: auto;
   width: 100%;
+  min-height: 2.5vh;
   max-height: 16vh;
 }
 
@@ -1003,7 +979,8 @@ onUnmounted(() => {
 }
 
 .brieflydata {
-  height: 71.5vh;
+  margin-top: 1vh;
+  height: 72vh;
   overflow-y: auto;
 }
 
@@ -1054,7 +1031,7 @@ onUnmounted(() => {
   border: 0.2vh solid #416491;
   padding: 0.8vh;
   text-align: center;
-  font-size: 1vh;
+  font-size: 1.1vh;
   width: 0%;
 }
 
@@ -1120,7 +1097,8 @@ onUnmounted(() => {
   position: relative;
   margin-top: 1vh;
   width: 100%;
-  height: 11vh;
+  max-height: 11vh !important;
+  min-height: 11vh !important;
   background-image: url('../../assets/img/rightbottombox.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -1210,7 +1188,6 @@ onUnmounted(() => {
   color: #b7cffc;
 }
 
-.water,
 .sediment {
   position: absolute;
   left: 2.4vh;
@@ -1226,12 +1203,13 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
 }
-.Intertidalzone{
+
+.Intertidalzone {
   position: absolute;
   left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  height: 80vh;
+  height: 45.5vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
