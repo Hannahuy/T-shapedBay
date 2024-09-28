@@ -33,7 +33,7 @@
     <div class="rightBox-top-title-dialog">
       {{ birdstation }}
     </div>
-    <img src="../../assets/img/close.png" alt="" class="close" @click="closebird">
+    <img src="../../assets/img/close.png" alt="" class="close" @click="birdShow = false">
     <div class="rightBox-bottom-content">
       <div class="rightBox-bottom-content-radius"></div>
       <div style="display: flex;justify-content: space-between;padding: 0 1vh;margin-top: 3vh;text-align: center;">
@@ -55,10 +55,10 @@
     </div>
     <div class="species">
       <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
-          'odd-item': index % 2 === 0,
-          'even-item': index % 2 !== 0,
-          'active-item': activeIndex === index
-        }" @click="handleClick(index, item)">
+      'odd-item': index % 2 === 0,
+      'even-item': index % 2 !== 0,
+      'active-item': activeIndex === index
+    }" @click="handleClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.count }}</div>
@@ -86,7 +86,7 @@
     </div>
   </div>
   <div class="briefly" v-show="birdShow">
-    <img src="../../assets/img/close.png" alt="" class="close2" @click="closebird">
+    <img src="../../assets/img/close.png" alt="" class="close2" @click="birdShow = false">
     <div class="rightBox-top-title-dialog">
       详细信息
     </div>
@@ -102,7 +102,7 @@
     <div class="rightBox-top-title-dialog">
       牡蛎数据
     </div>
-    <img src="../../assets/img/close.png" alt="" class="close" @click="closeoysters">
+    <img src="../../assets/img/close.png" alt="" class="close" @click="oystersShow = false">
     <div style="margin-top: 1vh;margin-bottom: 1vh;">
       <table class="custom-table2">
         <tbody>
@@ -140,6 +140,179 @@
     </div>
     <div class="oystersecharts" ref="chartRef7"></div>
   </div>
+  <!-- 互花米草弹窗 -->
+  <div class="Spartinaalterniflora" v-show="SpartinaalternifloraShow">
+    <div class="rightBox-top-title-dialog">
+      时间选择
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="SpartinaalternifloraShow = false">
+    <div>
+      <el-radio-group v-model="radio" style="display: flex;flex-direction: column;">
+        <el-radio :value="2019">2019</el-radio>
+        <el-radio :value="2020">2020</el-radio>
+        <el-radio :value="2021">2021</el-radio>
+        <el-radio :value="2022">2022</el-radio>
+        <el-radio :value="2023">2023</el-radio>
+      </el-radio-group>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      面积变化表格
+    </div>
+    <div style="margin-top: 1vh;margin-bottom: 1vh;">
+      <table class="custom-table2">
+        <tbody>
+          <tr>
+            <td></td>
+            <td>牡蛎礁面积(m²)</td>
+            <td>造礁牡蛎密度(个/m³)</td>
+            <td>造礁牡蛎生物量(g/m³)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2023.10</td>
+            <td>20689</td>
+            <td>3097.6</td>
+            <td>30137.44</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2024.04</td>
+            <td>/</td>
+            <td>3260.8</td>
+            <td>25209.38</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      面积变化折线图
+    </div>
+    <div class="oystersecharts" ref="chartRef7"></div>
+  </div>
+  <!-- 水质弹窗 -->
+  <div class="water" v-if="showWater">
+    <div class="rightBox-top-title-dialog">
+      {{}}
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="showWater = false">
+    <div>
+      <el-radio-group v-model="radio2" style="display: flex;flex-direction: column;">
+        <el-radio :value="2019">2019</el-radio>
+        <el-radio :value="2020">2020</el-radio>
+        <el-radio :value="2021">2021</el-radio>
+        <el-radio :value="2022">2022</el-radio>
+        <el-radio :value="2023">2023</el-radio>
+      </el-radio-group>
+    </div>
+    <div style="margin-top: 1vh;margin-bottom: 1vh;">
+      <table class="custom-table2">
+        <tbody>
+          <tr>
+            <td></td>
+            <td>牡蛎礁面积(m²)</td>
+            <td>造礁牡蛎密度(个/m³)</td>
+            <td>造礁牡蛎生物量(g/m³)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2023.10</td>
+            <td>20689</td>
+            <td>3097.6</td>
+            <td>30137.44</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2024.04</td>
+            <td>/</td>
+            <td>3260.8</td>
+            <td>25209.38</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- 沉积物弹窗 -->
+  <div class="sediment" v-if="showSediment">
+    <div class="rightBox-top-title-dialog">
+      沉积物数据
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="showSediment = false">
+    <div>
+      <el-radio-group v-model="radio3" style="display: flex;flex-direction: column;">
+        <el-radio :value="2019">2019</el-radio>
+        <el-radio :value="2020">2020</el-radio>
+        <el-radio :value="2021">2021</el-radio>
+        <el-radio :value="2022">2022</el-radio>
+        <el-radio :value="2023">2023</el-radio>
+      </el-radio-group>
+    </div>
+    <div style="margin-top: 1vh;margin-bottom: 1vh;">
+      <table class="custom-table2">
+        <tbody>
+          <tr>
+            <td></td>
+            <td>沉积物面积(m²)</td>
+            <td>沉积物密度(kg/m³)</td>
+            <td>沉积物生物量(kg/m³)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2023.10</td>
+            <td>15000</td>
+            <td>1200</td>
+            <td>18000</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2024.04</td>
+            <td>/</td>
+            <td>1300</td>
+            <td>19000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- 潮间带 -->
+  <div class="Intertidalzone" v-show="showIntertidalzone">
+    <div class="rightBox-top-title-dialog">
+      {{}}
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="showIntertidalzone = false">
+    <div>2020-2021</div>
+    <div style="margin-top: 1vh;margin-bottom: 1vh;">
+      <table class="custom-table2">
+        <tbody>
+          <tr>
+            <td></td>
+            <td>沉积物密度(kg/m³)</td>
+            <td>沉积物生物量(kg/m³)</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2023.10</td>
+            <td>1200</td>
+            <td>18000</td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>2024.04</td>
+            <td>1300</td>
+            <td>19000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="oystersecharts" ref="chartRef6"></div>
+  </div>
 </template>
 
 <script setup>
@@ -149,6 +322,12 @@ import { callUIInteraction, addResponseEventListener } from "../../module/webrtc
 import { ElMessage } from 'element-plus';
 import dayjs from 'dayjs'
 import axios from "axios";
+const radio = ref(2019)
+const radio2 = ref(2019)
+const radio3 = ref(2019)
+const showWater = ref(false);
+const showSediment =ref(false);
+const showIntertidalzone = ref(false);
 const charts = [];
 const chartRef6 = ref(null);
 const chartRef7 = ref(null);
@@ -183,6 +362,125 @@ const initChart = (chartRef, source) => {
           color: (params) => {
             const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
             return colors[params.dataIndex % colors.length];
+          },
+        },
+      },
+    ],
+  });
+};
+const initChart2 = (source) => {
+  let chart = echarts.init(chartRef7.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart2(source);
+  });
+  chart.setOption({
+    dataset: {
+      sourceHeader: false,
+      source: source,
+    },
+    grid: {
+      top: '15%',
+      bottom: "0",
+      left: "10",
+      right: "5",
+      containLabel: true,
+    },
+    tooltip: {
+      trigger: "axis",
+      textStyle: {
+
+      },
+      formatter: (params) => {
+        let data = params[0].data;
+        if (!data[1]) {
+          return;
+        }
+        let tooltip = `时间：${data[0]}<br>降水：${data[1]} mm`;
+        return tooltip;
+      },
+    },
+    xAxis: {
+      type: "category",
+      axisLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.1)",
+        },
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.1)",
+        },
+      },
+      axisTick: {
+        show: false,
+      },
+      boundaryGap: true,
+      axisLabel: {
+        textStyle: {
+          color: "#C5F1FF",
+        },
+      },
+    },
+    yAxis: {
+      name: "降水 (mm)",
+      nameTextStyle: {
+        color: "#C5F1FF",
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.2)",
+        },
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.2)",
+        },
+      },
+      axisLabel: {
+        textStyle: {
+          color: "#C5F1FF",
+        },
+      },
+      min: 0,
+      max: 20,
+    },
+    series: [
+      {
+        type: "line",
+        smooth: true,
+        symbolSize: 0,
+        itemStyle: {
+          color: "#00B0FF", // 修改为降水的颜色
+        },
+        encode: { x: 0, y: [1] },
+        areaStyle: {
+          normal: {
+            color: new echarts.graphic.LinearGradient(
+              0,
+              0,
+              0,
+              1,
+              [
+                {
+                  offset: 0,
+                  color: "#00B0FF",
+                },
+                {
+                  offset: 0.9,
+                  color: "rgba(26,201,255,0)",
+                },
+              ],
+              false
+            ),
           },
         },
       },
@@ -248,7 +546,7 @@ const perspective = () => {
   });
 }
 
-const timePick = ref(dayjs("2023-08-21").toDate());
+const timePick = ref(dayjs("2024-08-01").toDate());
 const timePlay = ref(null);
 const activePlay = ref("");
 // 暂停/播放
@@ -360,14 +658,8 @@ const handleClick = (index, item) => {
   });
 };
 const countspeciesList = ref(0);
-
-const closebird = () => {
-  birdShow.value = false;
-}
-const closeoysters = () => {
-  oystersShow.value = false;
-}
 const oystersShow = ref(false);
+const SpartinaalternifloraShow = ref(false);
 
 const myHandleResponseFunction = (data) => {
   console.log(data);
@@ -391,6 +683,25 @@ const myHandleResponseFunction = (data) => {
       animalDatalist.value = res.data.data.info.详细信息;
       imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
     });
+  } else if (datajson.Funcation === '牡蛎点击查询') {
+    oystersShow.value = true;
+    initChart();
+  } else if (datajson.Funcation === '互花米草点击查询') {
+    SpartinaalternifloraShow.value = true;
+    initChart2([
+      ["0:00", "0"],
+      ["2:00", "0"],
+      ["4:00", "1"],
+      ["6:00", "0"],
+      ["8:00", "0"],
+      ["10:00", "0"],
+      ["12:00", "5"],
+      ["14:00", "10"],
+      ["16:00", "15"],
+      ["18:00", "8"],
+      ["20:00", "0"],
+      ["22:00", "0"],
+    ]);
   }
 }
 
@@ -407,21 +718,26 @@ onMounted(() => {
     State: true,
     Time: '2019',
   });
+  initChart2([
+    ["0:00", "0"],
+    ["2:00", "0"],
+    ["4:00", "1"],
+    ["6:00", "0"],
+    ["8:00", "0"],
+    ["10:00", "0"],
+    ["12:00", "5"],
+    ["14:00", "10"],
+    ["16:00", "15"],
+    ["18:00", "8"],
+    ["20:00", "0"],
+    ["22:00", "0"],
+  ]);
   initChart(chartRef6, [
     { value: 5, name: '刺胞动物' },
     { value: 30, name: '节肢动物' },
     { value: 25, name: '环节动物' },
     { value: 35, name: '软体动物' },
     { value: 5, name: '星虫动物' },
-  ]);
-  initChart(chartRef7, [
-    { value: 3, name: '刺胞动物' },
-    { value: 3, name: '纽形动物' },
-    { value: 3, name: '扁形动物' },
-    { value: 25, name: '节肢动物' },
-    { value: 22, name: '环节动物' },
-    { value: 41, name: '软体动物' },
-    { value: 3, name: '星虫动物' },
   ]);
   window.addEventListener("resize", reloadChart);
   addResponseEventListener("handle_responses", myHandleResponseFunction);
@@ -792,6 +1108,7 @@ onUnmounted(() => {
 .oystersecharts {
   width: 26.75vh;
   height: 20vh;
+  margin-top: 1vh;
 }
 
 :deep(.el-tabs__item) {
@@ -866,5 +1183,62 @@ onUnmounted(() => {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+}
+
+.Spartinaalterniflora {
+  position: absolute;
+  left: 2.4vh;
+  top: 10vh;
+  width: 30vh;
+  height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+:deep(.el-radio) {
+  margin-right: 0;
+  color: #b7cffc;
+}
+
+:deep(.el-radio__input.is-checked+.el-radio__label) {
+  color: #b7cffc;
+}
+
+.water,
+.sediment {
+  position: absolute;
+  left: 2.4vh;
+  top: 10vh;
+  width: 30vh;
+  height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+.Intertidalzone{
+  position: absolute;
+  left: 2.4vh;
+  top: 10vh;
+  width: 30vh;
+  height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 </style>

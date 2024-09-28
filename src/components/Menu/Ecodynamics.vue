@@ -213,7 +213,7 @@ let layerFunction = [
     }
 ]
 
-const timePick = ref(dayjs("2023-08-21").toDate());
+const timePick = ref(dayjs("2024-08-01").toDate());
 const timePlay = ref(null);
 const activePlay = ref("");
 // 暂停/播放
@@ -286,15 +286,16 @@ watch(timePlay, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
+        const currentSelectValues = Array.from(selectvalue.value);
         callUIInteraction({
             ModuleName: `生态动力`,
             FunctionName: `标量场可视化`,
             State: true,
             Time: formattedTime,
-            Layer: selectvalue.value,
+            Layer: currentSelectValues,
             Type: selectedItemname.value
         });
-        // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
+        console.log('生态动力',`标量场可视化`,true,formattedTime, currentSelectValues,selectedItemname.value);
         sessionStorage.setItem('timePlay', formattedTime);
     }
     if (currentTime.isSame(dayjs(max.value))) {
@@ -320,16 +321,24 @@ const showselect = ref(true);
 const handleFunctionSelection = (selectedItem) => {
     selectedItemname.value = selectedItem.name;
     showselect.value = selectedItem.name !== "水位";
+    const currentSelectValues = Array.from(selectvalue.value);
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
         Time: formattedTime,
-        Layer: selectvalue.value,
+        Layer: currentSelectValues,
         Type: selectedItem.name
     });
-    // console.log('生态动力', `标量场可视化`, true, formattedTime, selectvalue.value, selectedItem.name);
+    console.log({
+        ModuleName: `生态动力`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: formattedTime,
+        Layer: currentSelectValues,
+        Type: selectedItem.name
+    });
 };
 const selectchange = (selectedValues) => {
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
@@ -341,7 +350,14 @@ const selectchange = (selectedValues) => {
         Layer: selectedValues, // 传递选中的值
         Type: selectedItemname.value
     });
-    // console.log('生态动力', `标量场可视化`, true, formattedTime, selectedValues, selectedItemname.value);
+    console.log({
+        ModuleName: `生态动力`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: formattedTime,
+        Layer: selectedValues, // 传递选中的值
+        Type: selectedItemname.value
+    });
 }
 const showSmallWindow = ref(false);
 const barType = ref(null);
@@ -382,18 +398,19 @@ onMounted(() => {
     if (storedTime) {
         timePlay.value = dayjs(storedTime).valueOf(); // 从 sessionStorage 获取值
     } else {
-        timePlay.value = dayjs('2023-08-21 06:00:00').valueOf(); // 默认值
+        timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
     }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
     callUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `标量场可视化`,
         State: true,
         Time: formattedTime,
-        Layer: selectvalue.value,
+        Layer: currentSelectValues,
         Type: selectedItemname.value
     });
-    // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
+    console.log('生态动力',`标量场可视化`,true,formattedTime, currentSelectValues,selectedItemname.value);
     addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
