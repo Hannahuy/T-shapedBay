@@ -226,7 +226,7 @@ const timePick = ref(dayjs("2024-08-01").toDate());
 const timePlay = ref(null);
 const activePlay = ref("");
 // 暂停/播放
-let previousPlayState = "";
+let previousPlayState = null;
 let intervalTime = null;
 let playInterval = null;
 const togglePlay = () => {
