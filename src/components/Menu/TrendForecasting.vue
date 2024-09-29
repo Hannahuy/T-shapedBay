@@ -1,7 +1,7 @@
 <template>
-    <div class="leftbox">
-        <div class="leftbox-middle">
-            <div class="leftbox-middle-content">
+    <div class="rightbox">
+        <div class="rightbox-middle">
+            <div class="rightbox-middle-content">
                 <div class="rightBox-top-title-dialog">
                     情景选择
                 </div>
@@ -15,7 +15,7 @@
                 <div class="rightBox-top-title-dialog">
                     参数名称
                 </div>
-                <div class="leftbox-table">
+                <div class="rightbox-table">
                     <table class="custom-table">
                         <thead>
                             <tr>
@@ -37,6 +37,9 @@
             </div>
         </div>
     </div>
+    <div class="left-button">
+        <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
+    </div>
     <!-- 时间轴 -->
     <div class="bottombox-left">
         <div class="bottombox-button">
@@ -54,25 +57,95 @@
             </div>
         </div>
     </div>
+    <!-- 右下角选择 -->
+    <div class="right-select" v-show="showselect">
+        <!-- <div class="top-leftbox-middle-content-div-2">
+            <div class="top-leftbox-middle-content-div-2-content">
+                <div class="color-bar-one">
+                    <a-slider v-model:value="Zaxis" vertical :reverse="true" @change="getZaxis" :min="0" :max="20"
+                        :step="1" tooltipPlacement="top" />
+                </div>
+                <span class="top-leftbox-middle-content-div-2-span">层级</span>
+            </div>
+            <div class="top-leftbox-middle-content-div-2-content">
+                <div class="color-bar-two">
+                    <a-slider v-model:value="threshold" vertical :reverse="true" @change="getthreshold" :min="0"
+                        :max="1" :step="0.01" tooltipPlacement="top" />
+                </div>
+                <span class="top-leftbox-middle-content-div-2-span">特征范围</span>
+            </div>
+        </div> -->
+        <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
+            <el-checkbox label="水面表层0级" value="水面表层0级" />
+            <el-checkbox label="水面表层1级" value="水面表层1级" />
+            <el-checkbox label="水面表层2级" value="水面表层2级" />
+            <el-checkbox label="水面表层3级" value="水面表层3级" />
+            <el-checkbox label="水面表层4级" value="水面表层4级" />
+        </el-checkbox-group>
+    </div>
+    <!-- 右下角颜色条 -->
+    <div class="right-button">
+        <div class="leftbar">{{ barType }}</div>
+        <div class="rightbar">
+            <span>{{ barMin }}</span>
+            <span>{{ barMax }}</span>
+        </div>
+    </div>
+    <!-- 右上角查询表格 -->
+    <div class="smallWindow" v-if="showSmallWindow">
+        <img src="../../assets/img/close.png" alt="" class="close" @click="close">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <td>数据值</td>
+                    <td>{{ Datavar }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>类型</td>
+                    <td>{{ Datatype }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>时间</td>
+                    <td>{{ Datatime }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>层级</td>
+                    <td>{{ layer }}</td>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import FunctionMenu from '../Common/FunctionMenu.vue'
+import dayjs from 'dayjs'
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
-import dayjs from 'dayjs'
+
 const radio = ref('浒苔情景');
 const tablehead = ref('浒苔面积（㎡）');
 const tablehead2 = ref('浒苔生物量（kg/㎡）');
-const tabledata = ref('');
-const tabledata2 = ref('');
+const tabledata = ref(218300);
+const tabledata2 = ref(2);
 const changeRadio = (e) => {
     if (e == '浒苔情景') {
         tablehead.value = '浒苔面积（㎡）'
         tablehead2.value = '浒苔生物量（kg/㎡）'
+        tabledata.value = 218300;
+        tabledata2.value = 2;
     } else {
         tablehead.value = '无机氮（mg/m³）'
         tablehead2.value = '无机磷（mg/m³）'
+        tabledata.value = 200;
+        tabledata2.value = 100;
     }
 }
 const drive = () => {
@@ -83,6 +156,143 @@ const drive = () => {
 
     }
 }
+
+const selectedItemname = ref(null);
+
+let layerFunction = [
+    {
+        name: "水位",
+        check: false,
+        image: new URL(
+            "../../assets/img/水位.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/水位-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "流速",
+        check: false,
+        image: new URL(
+            "../../assets/img/流速.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/流速-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "浮游动物碳",
+        check: true,
+        image: new URL(
+            "../../assets/img/浮游动物碳.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/浮游动物碳-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "浮游植物碳",
+        check: false,
+        image: new URL(
+            "../../assets/img/浮游植物碳.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/浮游植物碳-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "浮游植物磷",
+        check: false,
+        image: new URL(
+            "../../assets/img/浮游植物磷.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/浮游植物磷-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "浮游植物氮",
+        check: false,
+        image: new URL(
+            "../../assets/img/浮游植物氮.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/浮游植物氮-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "叶绿素",
+        check: false,
+        image: new URL(
+            "../../assets/img/叶绿素.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/叶绿素-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "初级生产力",
+        check: false,
+        image: new URL(
+            "../../assets/img/初级生产力.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/初级生产力-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "无机磷",
+        check: false,
+        image: new URL(
+            "../../assets/img/无机磷.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/无机磷-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "无机氮",
+        check: false,
+        image: new URL(
+            "../../assets/img/无机氮.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/无机氮-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "溶解氧",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    }
+]
 
 const timePick = ref(dayjs("2024-08-01").toDate());
 const timePlay = ref(null);
@@ -157,10 +367,15 @@ watch(timePlay, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
+        const currentSelectValues = Array.from(selectvalue.value);  // 恢复
         callUIInteraction({
             ModuleName: `趋势预测`,
-            FunctionMenu: '时间轴',
+            // FunctionMenu: '要素切换',
             Time: formattedTime,
+            Type: selectedItemname.value,
+            FunctionName: `标量场可视化`,
+            State: true,
+            Layer: currentSelectValues,
         });
         // console.log('趋势预测', formattedTime, selectedItemname.value, '333333333333333333333');
         sessionStorage.setItem('timePlay', formattedTime);
@@ -176,6 +391,105 @@ const gettimePlay = (e) => {
         activePlay.value = "";
     }
 }
+
+const showselect = ref(true);
+const handleFunctionSelection = (selectedItem) => {
+    selectedItemname.value = selectedItem.name;
+    showselect.value = selectedItem.name !== "水位" && selectedItem.name !== "流速";
+    if (timePlay.value == null) {
+        timePlay.value = sessionStorage.getItem('timePlay');
+    }
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        // FunctionMenu: '要素切换',
+        Time: formattedTime,
+        Type: selectedItem.name,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Layer: currentSelectValues,
+    });
+    // console.log({
+    //     ModuleName: `趋势预测`,
+    //     FunctionMenu: '要素切换',
+    //     Time: formattedTime,
+    //     Type: selectedItem.name
+    // }, '222222222222222222222222222');
+};
+const showSmallWindow = ref(false);
+const barType = ref(null);
+const barMin = ref(0);
+const barMax = ref(0);
+const Datavar = ref(null);
+const Datatype = ref(null);
+const Datatime = ref(null);
+const layer = ref(null);
+const close = () => {
+    showSmallWindow.value = false;
+};
+const myHandleResponseFunction = (data) => {
+    const datajson = JSON.parse(data);
+    if (datajson.Function === '报错') {
+        ElMessage({
+            message: datajson.Type,
+            type: 'warning',
+        });
+        return
+    } else if (datajson.Function === '色带范围') {
+        barType.value = datajson.Data.Type;
+        barMin.value = datajson.Data.NorMin;
+        barMax.value = datajson.Data.NorMax;
+    } else if (datajson.Function === '点击查询') {
+        showSmallWindow.value = true;
+        Datavar.value = datajson.Data.var;
+        Datatype.value = datajson.Data.type;
+        Datatime.value = datajson.Data.time;
+        layer.value = datajson.Data.layer;
+    } else {
+
+    }
+}
+// const Zaxis = ref(0);
+// const threshold = ref(0);
+// // 多层
+// const getZaxis = (e) => {
+//     callUIInteraction({
+//         ModuleName: `趋势预测`,
+//         FunctionMenu: "多层剖切",
+//         Value:e
+//     });
+// };
+// // 特征
+// const getthreshold = (e) => {
+//     callUIInteraction({
+//         ModuleName: `趋势预测`,
+//         FunctionMenu: "特征阈值",
+//         Value:e
+//     });
+// };
+// 多选
+const selectvalue = ref([
+    "水面表层0级",
+    "水面表层1级",
+    "水面表层2级",
+    "水面表层3级",
+    "水面表层4级"
+]);
+
+const selectchange = (selectedValues) => {
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: formattedTime,
+        Layer: selectedValues, // 传递选中的值
+        Type: selectedItemname.value
+    });
+    console.log('趋势预测', `标量场可视化`, true, formattedTime, selectedValues, selectedItemname.value);
+}
+
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
     if (storedTime) {
@@ -184,105 +498,29 @@ onMounted(() => {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
     }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
     callUIInteraction({
         ModuleName: `趋势预测`,
-        FunctionMenu: '时间轴',
+        // FunctionMenu: '要素切换',
         Time: formattedTime,
+        Type: selectedItemname.value,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Layer: currentSelectValues,
+
     });
     // console.log(`趋势预测`, formattedTime, selectedItemname.value, '444444444444444444');
+    addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
 
 <style scoped>
-.leftbox {
+.left-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
     position: absolute;
-    top: 10vh;
-    left: 2.4vh;
-    z-index: 3;
-}
-
-.leftbox-middle {
-    width: 40vh;
-    height: 33.8vh;
-    background-image: url("../../assets/img/框-bg.png");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin-top: 2vh;
-    padding: 2vh;
-    box-sizing: border-box;
-    color: #b7cffc;
-}
-
-:deep(.el-radio.el-radio--large) {
-    height: auto;
-}
-
-:deep(.el-radio.el-radio--large .el-radio__label) {
-    color: #b7cffc;
-}
-
-:deep(.el-radio__input.is-checked .el-radio__inner) {
-    background-color: #0a6adf;
-    background: #0a6adf;
-}
-
-:deep(.el-radio__inner) {
-    border: none;
-}
-
-.rightBox-top-title-dialog {
-    width: 100%;
-    height: 3vh;
-    background-image: url('../../assets/img/rightboxtitle.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    color: #FFFFFF;
-    font-size: 1.6vh;
-    font-weight: bold;
-    line-height: 3vh;
-    padding-left: 3vh;
-    box-sizing: border-box;
-}
-
-.leftbox-table {
-    margin-top: 1vh;
-}
-
-.custom-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.custom-table th,
-.custom-table td {
-    border: 0.1vh solid #416491;
-    padding: 0.8vh;
-    text-align: center;
-    height: 4vh;
-    width: 50%;
-}
-
-.buttonstyles {
-    margin-top: 2vh;
-    margin-left: 37vh;
-    border-radius: 0;
-    background-color: #0a6adf;
-    border: 0;
-    position: absolute;
-    right: 2vh;
-    bottom: 2.4vh;
-}
-
-:deep(.el-radio__label) {
-    color: #b7cffc;
-}
-
-:deep(.el-radio__input.is-checked+.el-radio__label) {
-    color: #b7cffc;
-}
-
-:deep(.el-input__wrapper) {
-    border-radius: 0;
 }
 
 .bottombox-left {
@@ -360,5 +598,258 @@ onMounted(() => {
 
 .bottombox-slider :deep(.el-slider__marks-text) {
     color: white !important;
+}
+
+.right-button {
+    width: 15%;
+    height: 2vh;
+    display: flex;
+    position: absolute;
+    bottom: 11vh;
+    right: 2.4vh;
+    z-index: 3;
+}
+
+.leftbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 0.5vh;
+    border-bottom-left-radius: 0.5vh;
+    width: 18%;
+    background-color: #FFFFFF;
+    font-size: 1.6vh;
+}
+
+.rightbar {
+    width: 82%;
+    border-top-right-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    background-image: url('../../assets/img/colorbar.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: white;
+    font-size: 1.6vh;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    padding: 0 1vh;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+
+.smallWindow {
+    position: absolute;
+    right: 2.4vh;
+    top: 12vh;
+    width: 40vh;
+    height: 25vh;
+    z-index: 10;
+    background-image: url('../../assets/img/资源 71.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3;
+}
+
+.custom-table {
+    border-collapse: collapse;
+    width: 90%;
+    color: #b7cffc;
+    margin-top: 1vh;
+    z-index: 3;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 0.2vh solid #416491;
+    padding: 0.8vh;
+    text-align: center;
+    height: 3vh;
+    width: 50%;
+}
+
+.right-select {
+    position: absolute;
+    bottom: 14.5vh;
+    right: 2.4vh;
+    z-index: 3;
+    background-image: url('../../assets/img/rightbox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 15vh;
+    height: 18vh;
+    padding: 1vh 0vh 1vh 2.5vh;
+    box-sizing: border-box;
+}
+
+/* .right-select {
+    position: absolute;
+    bottom: 15.5vh;
+    right: 2.4vh;
+    z-index: 3;
+    background-image: url('../../assets/img/rightbox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 16vh;
+    height: 25vh;
+    padding: 1vh;
+    box-sizing: border-box;
+} */
+
+:deep(.el-checkbox) {
+    color: #b7cffc;
+}
+
+:deep(.el-checkbox__input.is-checked+.el-checkbox__label) {
+    color: #b7cffc;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    /* 竖直排列 */
+}
+
+:deep(.el-select__wrapper) {
+    border-radius: 0;
+}
+
+.close {
+    cursor: pointer;
+    width: 2.5vh;
+    position: absolute;
+    right: 0.5vh;
+    top: 0.5vh;
+}
+
+.top-leftbox-middle-content-div-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 22vh;
+    color: #b7cffc;
+}
+
+.top-leftbox-middle-content-2-span {
+    width: 100%;
+    height: 5vh;
+    line-height: 6vh;
+    padding-left: 1vh;
+    font-size: 2vh;
+    display: block;
+    font-family: YouSheBiaoTiHei;
+    box-sizing: border-box;
+}
+
+.top-leftbox-middle-content-div-2-content {
+    width: 9vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1.5vh;
+}
+
+.color-bar-one {
+    height: 15vh;
+    margin-bottom: 2.5vh;
+}
+
+.color-bar-two {
+    height: 15vh;
+    margin-bottom: 2.5vh;
+}
+
+.rightbox {
+    position: absolute;
+    top: 10vh;
+    right: 2.4vh;
+    z-index: 3;
+}
+
+.rightbox-middle {
+    width: 40vh;
+    height: 33.8vh;
+    background-image: url("../../assets/img/框-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-top: 2vh;
+    padding: 2vh;
+    box-sizing: border-box;
+    color: #b7cffc;
+}
+
+:deep(.el-radio.el-radio--large) {
+    height: auto;
+}
+
+:deep(.el-radio.el-radio--large .el-radio__label) {
+    color: #b7cffc;
+}
+
+:deep(.el-radio__input.is-checked .el-radio__inner) {
+    background-color: #0a6adf;
+    background: #0a6adf;
+}
+
+:deep(.el-radio__inner) {
+    border: none;
+}
+
+.rightBox-top-title-dialog {
+    width: 100%;
+    height: 3vh;
+    background-image: url('../../assets/img/rightboxtitle.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #FFFFFF;
+    font-size: 1.6vh;
+    font-weight: bold;
+    line-height: 3vh;
+    padding-left: 3vh;
+    box-sizing: border-box;
+}
+
+.rightbox-table {
+    margin-top: 1vh;
+}
+
+.custom-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.custom-table th,
+.custom-table td {
+    border: 0.1vh solid #416491;
+    padding: 0.8vh;
+    text-align: center;
+    height: 4vh;
+    width: 50%;
+}
+
+.buttonstyles {
+    margin-top: 2vh;
+    margin-left: 37vh;
+    border-radius: 0;
+    background-color: #0a6adf;
+    border: 0;
+    position: absolute;
+    right: 2vh;
+    bottom: 2.4vh;
+}
+
+:deep(.el-radio__label) {
+    color: #b7cffc;
+}
+
+:deep(.el-radio__input.is-checked+.el-radio__label) {
+    color: #b7cffc;
+}
+
+:deep(.el-input__wrapper) {
+    border-radius: 0;
 }
 </style>
