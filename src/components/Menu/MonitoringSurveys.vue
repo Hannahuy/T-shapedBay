@@ -1,9 +1,18 @@
 <template>
   <!-- 右侧工具栏 -->
   <div class="righticon">
-    <img :src="selectedWeather" class="imageicon" alt="" @click="weathernext">
-    <img src="../../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
-    <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
+    <el-tooltip class="box-item" effect="dark" content="天气" placement="left">
+      <img :src="selectedWeather" class="imageicon" alt="" @click="weathernext">
+    </el-tooltip>
+    <el-tooltip class="box-item" effect="dark" content="海面" placement="left">
+      <img src="../../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
+    </el-tooltip>
+    <el-tooltip class="box-item" effect="dark" content="视角恢复" placement="left">
+      <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
+    </el-tooltip>
+    <el-tooltip class="box-item" effect="dark" content="等深线" placement="left">
+      <img src="../../assets/img/等深线.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
+    </el-tooltip>
   </div>
   <div class="weatherBox" v-if="showWeather">
     <img src="/img/晴天.png" class="imageicon" alt="" @click="selectWeather('晴天')">
@@ -55,10 +64,10 @@
     </div>
     <div class="species">
       <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
-      'odd-item': index % 2 === 0,
-      'even-item': index % 2 !== 0,
-      'active-item': activeIndex === index
-    }" @click="handleClick(index, item)">
+        'odd-item': index % 2 === 0,
+        'even-item': index % 2 !== 0,
+        'active-item': activeIndex === index
+      }" @click="handleClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.count }}</div>
@@ -93,7 +102,7 @@
     <div class="brieflydata">
       <div v-for="(item, index) in animalDatalist" :key="index">
         <div style="font-size: 1.6vh;font-weight: bold;color:#00E7FF;text-align: center;margin-bottom: 1vh;">{{
-      item.title }}</div>
+        item.title }}</div>
         <div style="font-size: 1.2vh;text-indent: 2em;margin-bottom: 1vh;">{{ item.txt }}</div>
       </div>
     </div>
@@ -636,12 +645,11 @@ watch(timePlay, (newVal) => {
   if (currentTime.minute() === 0 && currentTime.second() === 0) {
     const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
-      ModuleName: `生态动力`,
-      FunctionName: `标量场可视化`,
-      State: true,
+      ModuleName: `监测调查`,
+      FunctionName: `时间轴`,
       Time: formattedTime,
     });
-    // console.log('生态动力',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
+    // console.log('监测调查',`标量场可视化`,true,formattedTime, selectvalue.value,selectedItemname.value);
     sessionStorage.setItem('timePlay', formattedTime);
   }
   if (currentTime.isSame(dayjs(max.value))) {
@@ -1217,7 +1225,7 @@ onUnmounted(() => {
 }
 
 .righticon {
-  height: 15vh;
+  height: 20vh;
   width: 4vh;
   position: absolute;
   display: flex;
@@ -1238,8 +1246,8 @@ onUnmounted(() => {
 .weatherBox {
   position: absolute;
   right: 2.4vh;
-  top: 32%;
-  transform: translateY(-32%);
+  top: 28%;
+  transform: translateY(-28%);
   width: 4vh;
   height: 18vh;
   background-image: url('../../assets/img/rightbox.png');

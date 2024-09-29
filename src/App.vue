@@ -20,4 +20,15 @@ div {
 .el-input__inner{
   text-align: left;
 }
+.ant-slider:hover .ant-slider-rail {
+  background-color: #91caff !important;
+}
+
+.ant-slider-vertical .ant-slider-rail {
+  background-color: #91caff !important;
+}
+
+.ant-slider .ant-slider-rail {
+  background-color: #91caff !important;
+}
 </style>

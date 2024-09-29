@@ -21,13 +21,22 @@
     </div>
     <!-- 右下角选择 -->
     <div class="right-select" v-show="showselect">
-        <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
-            <el-checkbox label="水面表层0级" value="水面表层0级" />
-            <el-checkbox label="水面表层1级" value="水面表层1级" />
-            <el-checkbox label="水面表层2级" value="水面表层2级" />
-            <el-checkbox label="水面表层3级" value="水面表层3级" />
-            <el-checkbox label="水面表层4级" value="水面表层4级" />
-        </el-checkbox-group>
+        <div class="top-leftbox-middle-content-div-2">
+            <div class="top-leftbox-middle-content-div-2-content">
+                <div class="color-bar-one">
+                    <a-slider v-model:value="Zaxis" vertical :reverse="true" @change="getZaxis" :min="0" :max="20"
+                        :step="1" tooltipPlacement="top" />
+                </div>
+                <span class="top-leftbox-middle-content-div-2-span">层级</span>
+            </div>
+            <div class="top-leftbox-middle-content-div-2-content">
+                <div class="color-bar-two">
+                    <a-slider v-model:value="threshold" vertical :reverse="true" @change="getthreshold" :min="0"
+                        :max="1" :step="0.01" tooltipPlacement="top" />
+                </div>
+                <span class="top-leftbox-middle-content-div-2-span">特征范围</span>
+            </div>
+        </div>
     </div>
     <!-- 右下角颜色条 -->
     <div class="right-button">
@@ -286,16 +295,13 @@ watch(timePlay, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
-        const currentSelectValues = Array.from(selectvalue.value);
         callUIInteraction({
             ModuleName: `生态动力`,
-            FunctionName: `标量场可视化`,
-            State: true,
+            FunctionMenu: '要素切换',
             Time: formattedTime,
-            Layer: currentSelectValues,
             Type: selectedItemname.value
         });
-        console.log('生态动力',`标量场可视化`,true,formattedTime, currentSelectValues,selectedItemname.value);
+        // console.log('生态动力', formattedTime, selectedItemname.value, '333333333333333333333');
         sessionStorage.setItem('timePlay', formattedTime);
     }
     if (currentTime.isSame(dayjs(max.value))) {
@@ -309,56 +315,28 @@ const gettimePlay = (e) => {
         activePlay.value = "";
     }
 }
-const selectvalue = ref([
-    "水面表层0级",
-    "水面表层1级",
-    "水面表层2级",
-    "水面表层3级",
-    "水面表层4级"
-]);
 
 const showselect = ref(true);
 const handleFunctionSelection = (selectedItem) => {
     selectedItemname.value = selectedItem.name;
-    showselect.value = selectedItem.name !== "水位";
-    const currentSelectValues = Array.from(selectvalue.value);
+    showselect.value = selectedItem.name !== "水位" && selectedItem.name !== "流速";
+    if (timePlay.value == null) {
+        timePlay.value = sessionStorage.getItem('timePlay');
+    }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
-        FunctionName: `标量场可视化`,
-        State: true,
+        FunctionMenu: '要素切换',
         Time: formattedTime,
-        Layer: currentSelectValues,
         Type: selectedItem.name
     });
-    console.log({
-        ModuleName: `生态动力`,
-        FunctionName: `标量场可视化`,
-        State: true,
-        Time: formattedTime,
-        Layer: currentSelectValues,
-        Type: selectedItem.name
-    });
+    // console.log({
+    //     ModuleName: `生态动力`,
+    //     FunctionMenu: '要素切换',
+    //     Time: formattedTime,
+    //     Type: selectedItem.name
+    // }, '222222222222222222222222222');
 };
-const selectchange = (selectedValues) => {
-    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
-    callUIInteraction({
-        ModuleName: `生态动力`,
-        FunctionName: `标量场可视化`,
-        State: true,
-        Time: formattedTime,
-        Layer: selectedValues, // 传递选中的值
-        Type: selectedItemname.value
-    });
-    console.log({
-        ModuleName: `生态动力`,
-        FunctionName: `标量场可视化`,
-        State: true,
-        Time: formattedTime,
-        Layer: selectedValues, // 传递选中的值
-        Type: selectedItemname.value
-    });
-}
 const showSmallWindow = ref(false);
 const barType = ref(null);
 const barMin = ref(0);
@@ -392,6 +370,24 @@ const myHandleResponseFunction = (data) => {
 
     }
 }
+const Zaxis = ref(0);
+const threshold = ref(0);
+// 多层
+const getZaxis = (e) => {
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionMenu: "多层剖切",
+        Value:e
+    });
+};
+// 特征
+const getthreshold = (e) => {
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionMenu: "特征阈值",
+        Value:e
+    });
+};
 
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
@@ -401,16 +397,14 @@ onMounted(() => {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
     }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
-    const currentSelectValues = Array.from(selectvalue.value);
     callUIInteraction({
         ModuleName: `生态动力`,
-        FunctionName: `标量场可视化`,
-        State: true,
+        FunctionMenu: '要素切换',
         Time: formattedTime,
-        Layer: currentSelectValues,
         Type: selectedItemname.value
+
     });
-    console.log('生态动力',`标量场可视化`,true,formattedTime, currentSelectValues,selectedItemname.value);
+    // console.log(`生态动力`, formattedTime, selectedItemname.value, '444444444444444444');
     addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
@@ -574,15 +568,15 @@ onMounted(() => {
 
 .right-select {
     position: absolute;
-    bottom: 14.5vh;
+    bottom: 15.5vh;
     right: 2.4vh;
     z-index: 3;
     background-image: url('../../assets/img/rightbox.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    width: 15vh;
-    height: 18vh;
-    padding: 1vh 0vh 1vh 2.5vh;
+    width: 16vh;
+    height: 25vh;
+    padding: 1vh;
     box-sizing: border-box;
 }
 
@@ -610,5 +604,42 @@ onMounted(() => {
     position: absolute;
     right: 0.5vh;
     top: 0.5vh;
+}
+
+.top-leftbox-middle-content-div-2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 215px;
+    color: #b7cffc;
+}
+
+.top-leftbox-middle-content-2-span {
+    width: 100%;
+    height: 50px;
+    line-height: 60px;
+    padding-left: 10px;
+    font-size: 20px;
+    display: block;
+    font-family: YouSheBiaoTiHei;
+    box-sizing: border-box;
+}
+
+.top-leftbox-middle-content-div-2-content {
+    width: 85px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.color-bar-one {
+    height: 15vh;
+    margin-bottom: 2.5vh;
+}
+
+.color-bar-two {
+    height: 15vh;
+    margin-bottom: 2.5vh;
 }
 </style>
