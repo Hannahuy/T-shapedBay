@@ -730,6 +730,15 @@ const myHandleResponseFunction = (data) => {
       { value: 35, name: '软体动物' },
       { value: 5, name: '星虫动物' },
     ]);
+    initChart(chartRef2, [
+      { value: 3, name: '扁形动物' },
+      { value: 3, name: '刺胞动物' },
+      { value: 22, name: '环节动物' },
+      { value: 25, name: '节肢动物' },
+      { value: 3, name: '纽形动物' },
+      { value: 41, name: '软体动物' },
+      { value: 3, name: '星虫动物' },
+    ]);
   } else if (datajson.Function === '互花米草点击查询') {
     SpartinaalternifloraShow.value = true;
     initChart2([
@@ -990,8 +999,8 @@ onUnmounted(() => {
   margin: 1vh 0;
   overflow-y: auto;
   width: 100%;
-  min-height: 2.5vh;
-  max-height: 16vh;
+  min-height: 4vh;
+  max-height: 10vh;
 }
 
 .species-item {
