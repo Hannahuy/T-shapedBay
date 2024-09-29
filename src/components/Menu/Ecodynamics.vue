@@ -610,27 +610,27 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    height: 215px;
+    height: 22vh;
     color: #b7cffc;
 }
 
 .top-leftbox-middle-content-2-span {
     width: 100%;
-    height: 50px;
-    line-height: 60px;
-    padding-left: 10px;
-    font-size: 20px;
+    height: 5vh;
+    line-height: 6vh;
+    padding-left: 1vh;
+    font-size: 2vh;
     display: block;
     font-family: YouSheBiaoTiHei;
     box-sizing: border-box;
 }
 
 .top-leftbox-middle-content-div-2-content {
-    width: 85px;
+    width: 9vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 15px;
+    margin-top: 1.5vh;
 }
 
 .color-bar-one {
