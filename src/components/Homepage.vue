@@ -1,7 +1,14 @@
 <template>
   <div class="page">
     <div class="top">
-      <div class="top-title">丁字湾典型生态数字孪生系统</div>
+      <div class="top-title">
+        <div class="top-title-left">
+          <div style="width: 10.5vh;">晴天</div>
+          <div>18℃ ~ 27℃</div>
+        </div>
+        <div class="top-title-middle">丁字湾典型生态数字孪生系统</div>
+        <div class="top-title-right">{{ dayTime }}</div>
+      </div>
     </div>
     <div class="left"></div>
     <div class="bottom"></div>
@@ -55,6 +62,18 @@ import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
 import Home from './Menu/Home.vue'
 
+const dayTime = ref('');
+const updateTime = () => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // 月份从0开始
+  const day = String(now.getDate()).padStart(2, '0');
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+  dayTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; // 格式化时间
+};
+
 let selected = ref('');
 let lastActiveButton = ref('')
 const selectMenu = (menu) => {
@@ -83,6 +102,8 @@ const selectMenu = (menu) => {
     });
   }
 }
+const interval = ref(null);
+
 onMounted(() => {
   if (window.performance.navigation.type == 1) {
     console.log("页面被刷新")
@@ -94,6 +115,11 @@ onMounted(() => {
     FunctionName: `天气`,
     Weather: '晴天'
   });
+  interval.value = setInterval(updateTime, 1000);
+  updateTime(); // 初始化时间
+});
+onUnmounted(() => {
+  clearInterval(interval)
 });
 </script>
 
@@ -158,15 +184,54 @@ onMounted(() => {
 }
 
 .top-title {
+  height: 8.5vh;
   font-family: HYLingXinJ;
   font-weight: bold;
   font-size: 3vh;
+  color: #FEFFFF;
+  background: linear-gradient(0deg, #C7E4FF 24.072265625%, #FFFFFF 24.560546875%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.3vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2vh;
+  box-sizing: border-box;
+}
+
+.top-title-left {
+  width: 23vh;
+  font-family: HYLingXinJ;
+  font-weight: bold;
+  font-size: 1.6vh;
   color: #FEFFFF;
   text-align: center;
   background: linear-gradient(0deg, #C7E4FF 24.072265625%, #FFFFFF 24.560546875%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 0.5vh;
+  display: flex;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  letter-spacing: 0vh;
+}
+
+.top-title-middle {
+  margin-bottom: 3vh;
+}
+
+.top-title-right {
+  width: 23vh;
+  font-family: HYLingXinJ;
+  font-weight: bold;
+  font-size: 1.6vh;
+  color: #FEFFFF;
+  text-align: center;
+  background: linear-gradient(0deg, #C7E4FF 24.072265625%, #FFFFFF 24.560546875%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0vh;
+  margin-top: 0.5vh;
 }
 
 .topMenu {
