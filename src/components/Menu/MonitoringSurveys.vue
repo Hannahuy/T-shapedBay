@@ -6,10 +6,10 @@
     <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
   </div>
   <div class="weatherBox" v-if="showWeather">
-    <img src="../../assets/img/晴天.png" class="imageicon" alt="" @click="selectWeather('晴天')">
-    <img src="../../assets/img/阴天.png" class="imageicon" alt="" @click="selectWeather('阴天')">
-    <img src="../../assets/img/雨天.png" class="imageicon" alt="" @click="selectWeather('雨天')">
-    <img src="../../assets/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
+    <img src="/img/晴天.png" class="imageicon" alt="" @click="selectWeather('晴天')">
+    <img src="/img/阴天.png" class="imageicon" alt="" @click="selectWeather('阴天')">
+    <img src="/img/雨天.png" class="imageicon" alt="" @click="selectWeather('雨天')">
+    <img src="/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
   </div>
   <!-- 时间轴 -->
   <div class="bottombox-left">
@@ -218,8 +218,9 @@
         <el-radio value="2024.04">2024.04</el-radio>
       </el-radio-group>
     </div>
-    <div class="rightBox-top-title-dialog">
+    <div class="rightBox-top-title-dialog1">
       水质数据
+      <span>{{ tablename }}</span>
     </div>
     <div style="margin-top: 1vh;margin-bottom: 1vh;">
       <table class="custom-table2">
@@ -231,42 +232,63 @@
         </tbody>
       </table>
     </div>
-    <div class="rightBox-top-title-dialog">
+    <div class="rightBox-top-title-dialog1">
       沉积物数据
+      <span>{{ tablename }}</span>
     </div>
     <div style="margin-top: 1vh;margin-bottom: 1vh;">
-      <table class="custom-table2">
+      <table class="custom-table2" v-if="sediment.粒级含量">
         <thead>
           <tr>
             <th rowspan="4">Eh(mV)</th>
-            <th colspan="2"></th>
+            <th colspan="2">{{ sediment['Eh(mV)'] }}</th>
           </tr>
         </thead>
         <thead>
           <tr>
             <th rowspan="4">名称或代号</th>
-            <th colspan="2"></th>
+            <th colspan="2">{{ sediment.名称或代号 }}</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td rowspan="4">粒级含量</td>
-            <td>砾石(%)</td>
-            <td></td>
+            <td>砾石(%) >2mm</td>
+            <td>{{ sediment.粒级含量['砾石(%)'] }}</td>
           </tr>
           <tr>
-            <td>砂(%)</td>
-            <td></td>
+            <td>砂(%) 0.063~2mm</td>
+            <td>{{ sediment.粒级含量['砂(%)'] }}</td>
           </tr>
           <tr>
-            <td>粉砂(%)</td>
-            <td></td>
+            <td>粉砂(%) 0.004~0.063mm</td>
+            <td>{{ sediment.粒级含量['粉砂(%)'] }}</td>
           </tr>
           <tr>
-            <td>粘土(%)</td>
-            <td>{{ sediment.粒级含量[3] }}</td>
+            <td>粘土(%) <0.004mm </td>
+            <td>{{ sediment.粒级含量['粘土(%)'] }}</td>
           </tr>
         </tbody>
+      </table>
+      <table class="custom-table2" v-else>
+        <thead>
+          <tr>
+            <th rowspan="4">Eh(mV)</th>
+            <th colspan="2">{{ sediment['Eh(mV)'] }}</th>
+          </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th rowspan="4">有机碳(%)</th>
+            <th colspan="2">{{ sediment['有机碳(%)'] }}</th>
+          </tr>
+        </thead>
+        <thead>
+          <tr>
+            <th rowspan="4">硫化物(×10⁻⁶)</th>
+            <th colspan="2">{{ sediment['硫化物(×10⁻⁶)'] }}</th>
+          </tr>
+        </thead>
       </table>
     </div>
   </div>
@@ -486,7 +508,7 @@ const reloadChart = () => {
 };
 
 const showWeather = ref(false);
-const selectedWeather = ref('/src/assets/img/晴天.png');
+const selectedWeather = ref('img/晴天.png');
 const weathernext = () => {
   showWeather.value = !showWeather.value;
 }
@@ -494,7 +516,7 @@ const selectWeather = (weather) => {
   showWeather.value = false;
   switch (weather) {
     case '晴天':
-      selectedWeather.value = '/src/assets/img/晴天.png';
+      selectedWeather.value = 'img/晴天.png';
       callUIInteraction({
         ModuleName: `其他`,
         FunctionName: `天气`,
@@ -502,7 +524,7 @@ const selectWeather = (weather) => {
       });
       break;
     case '阴天':
-      selectedWeather.value = '/src/assets/img/阴天.png';
+      selectedWeather.value = 'img/阴天.png';
       callUIInteraction({
         ModuleName: `其他`,
         FunctionName: `天气`,
@@ -510,7 +532,7 @@ const selectWeather = (weather) => {
       });
       break;
     case '雨天':
-      selectedWeather.value = '/src/assets/img/雨天.png';
+      selectedWeather.value = 'img/雨天.png';
       callUIInteraction({
         ModuleName: `其他`,
         FunctionName: `天气`,
@@ -518,7 +540,7 @@ const selectWeather = (weather) => {
       });
       break;
     case '雪天':
-      selectedWeather.value = '/src/assets/img/雪天.png';
+      selectedWeather.value = 'img/雪天.png';
       callUIInteraction({
         ModuleName: `其他`,
         FunctionName: `天气`,
@@ -674,9 +696,15 @@ const radioChange2 = (e) => {
 }
 const waterQuality = ref({});
 const sediment = ref({});
+const tablename = ref(null);
 const myHandleResponseFunction = (data) => {
   console.log(data);
   const datajson = JSON.parse(data);
+  birdShow.value = false;
+  oystersShow.value = false;
+  SpartinaalternifloraShow.value = false;
+  showSediment.value = false;
+  showIntertidalzone.value = false;
   if (datajson.Function === '报错') {
     ElMessage({
       message: datajson.Type,
@@ -688,7 +716,6 @@ const myHandleResponseFunction = (data) => {
     birdstation.value = datajson.Data.siteName;
     speciesList.value = datajson.Data.animalsCount;
     countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
-
     axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.Data.animalsCount[0].name}`).then((res) => {
       animalData.value = res.data.data.info.鸟种资料;
       animalDatalist.value = res.data.data.info.详细信息;
@@ -705,8 +732,6 @@ const myHandleResponseFunction = (data) => {
     ]);
   } else if (datajson.Function === '互花米草点击查询') {
     SpartinaalternifloraShow.value = true;
-    // axios.get().then((res) => {
-    //   console.log(res);
     initChart2([
       ["2019", "5.23"],
       ["2020", "6.70"],
@@ -714,9 +739,9 @@ const myHandleResponseFunction = (data) => {
       ["2022", "2.97"],
       ["2023", "4.77"],
     ]);
-    // })
   } else if (datajson.Function === '水质沉积物点击查询') {
     showSediment.value = true;
+    tablename.value = datajson.Data.name;
     waterQuality.value = datajson.Data.waterQuality;
     sediment.value = datajson.Data.sediment;
   } else if (datajson.Function === '潮间带点击查询') {
@@ -832,6 +857,27 @@ onUnmounted(() => {
   line-height: 3vh;
   padding-left: 3vh;
   box-sizing: border-box;
+}
+
+.rightBox-top-title-dialog1 {
+  width: 100%;
+  height: 3vh;
+  background-image: url('../../assets/img/rightboxtitle.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: #FFFFFF;
+  font-size: 1.6vh;
+  font-weight: bold;
+  line-height: 3vh;
+  padding-left: 3vh;
+  padding-right: 3vh;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.rightBox-top-title-dialog1 span {
+  font-size: 1.2vh;
 }
 
 .rightBox-top-table,
@@ -1227,7 +1273,7 @@ onUnmounted(() => {
   left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  height: 80vh;
+  max-height: 81.5vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
