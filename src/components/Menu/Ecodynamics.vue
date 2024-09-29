@@ -21,7 +21,7 @@
     </div>
     <!-- 右下角选择 -->
     <div class="right-select" v-show="showselect">
-        <div class="top-leftbox-middle-content-div-2">
+        <!-- <div class="top-leftbox-middle-content-div-2">
             <div class="top-leftbox-middle-content-div-2-content">
                 <div class="color-bar-one">
                     <a-slider v-model:value="Zaxis" vertical :reverse="true" @change="getZaxis" :min="0" :max="20"
@@ -36,7 +36,14 @@
                 </div>
                 <span class="top-leftbox-middle-content-div-2-span">特征范围</span>
             </div>
-        </div>
+        </div> -->
+        <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
+            <el-checkbox label="水面表层0级" value="水面表层0级" />
+            <el-checkbox label="水面表层1级" value="水面表层1级" />
+            <el-checkbox label="水面表层2级" value="水面表层2级" />
+            <el-checkbox label="水面表层3级" value="水面表层3级" />
+            <el-checkbox label="水面表层4级" value="水面表层4级" />
+        </el-checkbox-group>
     </div>
     <!-- 右下角颜色条 -->
     <div class="right-button">
@@ -295,11 +302,15 @@ watch(timePlay, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
+        const currentSelectValues = Array.from(selectvalue.value);  // 恢复
         callUIInteraction({
             ModuleName: `生态动力`,
-            FunctionMenu: '要素切换',
+            // FunctionMenu: '要素切换',
             Time: formattedTime,
-            Type: selectedItemname.value
+            Type: selectedItemname.value,
+            FunctionName: `标量场可视化`,
+            State: true,
+            Layer: currentSelectValues,
         });
         // console.log('生态动力', formattedTime, selectedItemname.value, '333333333333333333333');
         sessionStorage.setItem('timePlay', formattedTime);
@@ -324,11 +335,15 @@ const handleFunctionSelection = (selectedItem) => {
         timePlay.value = sessionStorage.getItem('timePlay');
     }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
     callUIInteraction({
         ModuleName: `生态动力`,
-        FunctionMenu: '要素切换',
+        // FunctionMenu: '要素切换',
         Time: formattedTime,
-        Type: selectedItem.name
+        Type: selectedItem.name,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Layer: currentSelectValues,
     });
     // console.log({
     //     ModuleName: `生态动力`,
@@ -370,24 +385,45 @@ const myHandleResponseFunction = (data) => {
 
     }
 }
-const Zaxis = ref(0);
-const threshold = ref(0);
-// 多层
-const getZaxis = (e) => {
+// const Zaxis = ref(0);
+// const threshold = ref(0);
+// // 多层
+// const getZaxis = (e) => {
+//     callUIInteraction({
+//         ModuleName: `生态动力`,
+//         FunctionMenu: "多层剖切",
+//         Value:e
+//     });
+// };
+// // 特征
+// const getthreshold = (e) => {
+//     callUIInteraction({
+//         ModuleName: `生态动力`,
+//         FunctionMenu: "特征阈值",
+//         Value:e
+//     });
+// };
+// 多选
+const selectvalue = ref([
+    "水面表层0级",
+    "水面表层1级",
+    "水面表层2级",
+    "水面表层3级",
+    "水面表层4级"
+]);
+
+const selectchange = (selectedValues) => {
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `生态动力`,
-        FunctionMenu: "多层剖切",
-        Value:e
+        FunctionName: `标量场可视化`,
+        State: true,
+        Time: formattedTime,
+        Layer: selectedValues, // 传递选中的值
+        Type: selectedItemname.value
     });
-};
-// 特征
-const getthreshold = (e) => {
-    callUIInteraction({
-        ModuleName: `生态动力`,
-        FunctionMenu: "特征阈值",
-        Value:e
-    });
-};
+    console.log('生态动力', `标量场可视化`, true, formattedTime, selectedValues, selectedItemname.value);
+}
 
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
@@ -397,11 +433,15 @@ onMounted(() => {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
     }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
     callUIInteraction({
         ModuleName: `生态动力`,
-        FunctionMenu: '要素切换',
+        // FunctionMenu: '要素切换',
         Time: formattedTime,
-        Type: selectedItemname.value
+        Type: selectedItemname.value,
+        FunctionName: `标量场可视化`,
+        State: true,
+        Layer: currentSelectValues,
 
     });
     // console.log(`生态动力`, formattedTime, selectedItemname.value, '444444444444444444');
@@ -568,6 +608,20 @@ onMounted(() => {
 
 .right-select {
     position: absolute;
+    bottom: 14.5vh;
+    right: 2.4vh;
+    z-index: 3;
+    background-image: url('../../assets/img/rightbox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 15vh;
+    height: 18vh;
+    padding: 1vh 0vh 1vh 2.5vh;
+    box-sizing: border-box;
+}
+
+/* .right-select {
+    position: absolute;
     bottom: 15.5vh;
     right: 2.4vh;
     z-index: 3;
@@ -578,7 +632,7 @@ onMounted(() => {
     height: 25vh;
     padding: 1vh;
     box-sizing: border-box;
-}
+} */
 
 :deep(.el-checkbox) {
     color: #b7cffc;

@@ -24,15 +24,15 @@
       </div>
       <div class="leftBox-bottom-content">
         <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.1vh',
+          background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
         }" height="17.5vh">
-          <el-table-column prop="project" label="项目" width="50" align="center" />
-          <el-table-column prop="PH" label="PH" width="60" align="center" />
-          <el-table-column prop="DO" label="DO" width="50" align="center" />
-          <el-table-column prop="COD" label="COD" width="50" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
-          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="80" align="center" />
+          <el-table-column prop="project" label="项目" width="40" align="center" />
+          <el-table-column prop="PH" label="PH" width="50" align="center" />
+          <el-table-column prop="DO" label="DO" width="40" align="center" />
+          <el-table-column prop="COD" label="COD" width="40" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
+          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="70" align="center" />
         </el-table>
       </div>
     </div>
@@ -44,16 +44,16 @@
       </div>
       <div class="rightBox-top-table">
         <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.1vh',
+          background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
         }" height="16.25vh">
-          <el-table-column prop="Stations" label="站位" width="50" align="center" />
-          <el-table-column prop="Diversity" label="多样性指数" width="80" align="center" />
-          <el-table-column prop="Uniformity" label="均匀度" width="60" align="center" />
-          <el-table-column prop="Dominance" label="优势度" width="60" align="center" />
-          <el-table-column prop="Richness" label="丰富度" width="60" align="center" />
-          <el-table-column prop="threshold" label="指数阈值" width="70" align="center" />
-          <el-table-column prop="level" label="等级" width="80" align="center" />
+          <el-table-column prop="Stations" label="站位" width="40" align="center" />
+          <el-table-column prop="Diversity" label="多样性指数" width="70" align="center" />
+          <el-table-column prop="Uniformity" label="均匀度" width="50" align="center" />
+          <el-table-column prop="Dominance" label="优势度" width="50" align="center" />
+          <el-table-column prop="Richness" label="丰富度" width="50" align="center" />
+          <el-table-column prop="threshold" label="指数阈值" width="60" align="center" />
+          <el-table-column prop="level" label="等级" width="70" align="center" />
         </el-table>
       </div>
     </div>
@@ -63,16 +63,16 @@
       </div>
       <div class="rightBox-bottom-table">
         <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.1vh',
+          background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
         }" height="16.25vh">
-          <el-table-column prop="StationNumber" label="站号" width="60" align="center" />
-          <el-table-column prop="PH" label="PH" width="50" align="center" />
-          <el-table-column prop="DO" label="DO" width="50" align="center" />
-          <el-table-column prop="COD" label="COD" width="50" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
-          <el-table-column prop="phosphate" label="磷酸盐" width="60" align="center" />
-          <el-table-column prop="Nutritionalization" label="是否富营养化" width="90" align="center" />
+          <el-table-column prop="StationNumber" label="站号" width="50" align="center" />
+          <el-table-column prop="PH" label="PH" width="40" align="center" />
+          <el-table-column prop="DO" label="DO" width="40" align="center" />
+          <el-table-column prop="COD" label="COD" width="40" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
+          <el-table-column prop="phosphate" label="磷酸盐" width="50" align="center" />
+          <el-table-column prop="Nutritionalization" label="是否富营养化" width="80" align="center" />
         </el-table>
       </div>
     </div>
@@ -427,7 +427,7 @@ onUnmounted(() => {
 }
 
 :deep(.el-table__body-wrapper) {
-  font-size: 1vh;
+  font-size: 1.1vh;
 }
 
 :deep(.el-table--fit) {
@@ -483,5 +483,6 @@ onUnmounted(() => {
 
 :deep(.el-table .cell) {
   color: #b7cffc;
+  padding: 0 0.5vh
 }
 </style>
