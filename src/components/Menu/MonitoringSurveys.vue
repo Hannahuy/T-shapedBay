@@ -1,6 +1,8 @@
 <template>
   <!-- 指北针 -->
-  <North />
+  <div class="North" id="compass">
+    <img src="/img/指北针.png" style="width: 10vh; height: 10vh;" alt="指北针" id="compassImage">
+  </div>
   <!-- 右侧工具栏 -->
   <div class="righticon">
     <el-tooltip class="box-item" effect="dark" content="天气" placement="left">
@@ -715,79 +717,109 @@ const radioChange2 = (e) => {
 const waterQuality = ref({});
 const sediment = ref({});
 const tablename = ref(null);
+const toggleVisibility = (visibleEntities) => {
+  birdShow.value = visibleEntities.includes('bird');
+  oystersShow.value = visibleEntities.includes('oyster');
+  SpartinaalternifloraShow.value = visibleEntities.includes('Spartinaalterniflora');
+  showSediment.value = visibleEntities.includes('sediment');
+  showIntertidalzone.value = visibleEntities.includes('intertidalzone');
+};
+
+const initChartsByData = (charts, data) => {
+  charts.forEach(([chartRef, chartData]) => initChart(chartRef, chartData));
+};
+
 const myHandleResponseFunction = (data) => {
-  console.log(data);
+  // console.log(data);
   const datajson = JSON.parse(data);
-  birdShow.value = false;
-  oystersShow.value = false;
-  SpartinaalternifloraShow.value = false;
-  showSediment.value = false;
-  showIntertidalzone.value = false;
+
   if (datajson.Function === '报错') {
     ElMessage({
       message: datajson.Type,
       type: 'warning',
     });
     return;
-  } else if (datajson.Function === '鸟类点击查询') {
-    birdShow.value = true;
-    birdstation.value = datajson.Data.siteName;
-    speciesList.value = datajson.Data.animalsCount;
-    countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
-    axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.Data.animalsCount[0].name}`).then((res) => {
-      animalData.value = res.data.data.info.鸟种资料;
-      animalDatalist.value = res.data.data.info.详细信息;
-      imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
-    });
-  } else if (datajson.Function === '牡蛎礁点击查询') {
-    oystersShow.value = true;
-    initChart(chartRef1, [
-      { value: 5, name: '刺胞动物' },
-      { value: 30, name: '节肢动物' },
-      { value: 25, name: '环节动物' },
-      { value: 35, name: '软体动物' },
-      { value: 5, name: '星虫动物' },
-    ]);
-    initChart(chartRef2, [
-      { value: 3, name: '扁形动物' },
-      { value: 3, name: '刺胞动物' },
-      { value: 22, name: '环节动物' },
-      { value: 25, name: '节肢动物' },
-      { value: 3, name: '纽形动物' },
-      { value: 41, name: '软体动物' },
-      { value: 3, name: '星虫动物' },
-    ]);
-  } else if (datajson.Function === '互花米草点击查询') {
-    SpartinaalternifloraShow.value = true;
-    initChart2([
-      ["2019", "5.23"],
-      ["2020", "6.70"],
-      ["2021", "7.74"],
-      ["2022", "2.97"],
-      ["2023", "4.77"],
-    ]);
-  } else if (datajson.Function === '水质沉积物点击查询') {
-    showSediment.value = true;
-    tablename.value = datajson.Data.name;
-    waterQuality.value = datajson.Data.waterQuality;
-    sediment.value = datajson.Data.sediment;
-  } else if (datajson.Function === '潮间带点击查询') {
-    showIntertidalzone.value = true;
-    IntertidalzoneName.value = datajson.Data.name;
-    Intertidalzonedata.value = datajson.Data.density;
-    Intertidalzonedata2.value = datajson.Data.biomass;
-    const statisticsData = datajson.Data.statistics;
-    const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
-    const chartData = Object.keys(statisticsData).map(key => {
-      const percentage = ((statisticsData[key] / total) * 100).toFixed(1);
-      return {
-        name: key,
-        value: parseFloat(percentage)
-      };
-    });
-    initChart(chartRef6, chartData);
   }
-}
+
+  switch (datajson.Function) {
+    case '鸟类点击查询':
+      toggleVisibility(['bird']);
+      birdstation.value = datajson.Data.siteName;
+      speciesList.value = datajson.Data.animalsCount;
+      countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
+
+      axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.Data.animalsCount[0].name}`)
+        .then((res) => {
+          animalData.value = res.data.data.info.鸟种资料;
+          animalDatalist.value = res.data.data.info.详细信息;
+          imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
+        });
+      break;
+
+    case '牡蛎礁点击查询':
+      toggleVisibility(['oyster']);
+      initChartsByData([
+        [chartRef1, [
+          { value: 5, name: '刺胞动物' },
+          { value: 30, name: '节肢动物' },
+          { value: 25, name: '环节动物' },
+          { value: 35, name: '软体动物' },
+          { value: 5, name: '星虫动物' },
+        ]],
+        [chartRef2, [
+          { value: 3, name: '扁形动物' },
+          { value: 3, name: '刺胞动物' },
+          { value: 22, name: '环节动物' },
+          { value: 25, name: '节肢动物' },
+          { value: 3, name: '纽形动物' },
+          { value: 41, name: '软体动物' },
+          { value: 3, name: '星虫动物' },
+        ]],
+      ]);
+      break;
+
+    case '互花米草点击查询':
+      toggleVisibility(['Spartinaalterniflora']);
+      initChart2([
+        ["2019", "5.23"],
+        ["2020", "6.70"],
+        ["2021", "7.74"],
+        ["2022", "2.97"],
+        ["2023", "4.77"],
+      ]);
+      break;
+
+    case '水质沉积物点击查询':
+      toggleVisibility(['sediment']);
+      tablename.value = datajson.Data.name;
+      waterQuality.value = datajson.Data.waterQuality;
+      sediment.value = datajson.Data.sediment;
+      break;
+
+    case '潮间带点击查询':
+      toggleVisibility(['intertidalzone']);
+      IntertidalzoneName.value = datajson.Data.name;
+      Intertidalzonedata.value = datajson.Data.density;
+      Intertidalzonedata2.value = datajson.Data.biomass;
+
+      const statisticsData = datajson.Data.statistics;
+      const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
+      const chartData = Object.keys(statisticsData).map(key => ({
+        name: key,
+        value: parseFloat(((statisticsData[key] / total) * 100).toFixed(1)),
+      }));
+      initChart(chartRef6, chartData);
+      break;
+
+    case '指北针':
+      const angle = datajson.angle;
+      const compassImage = document.getElementById('compassImage');
+      compassImage.style.transform = `rotate(${angle}deg)`;
+    default:
+      console.warn('Unknown function type:', datajson.Function);
+  }
+};
+
 
 onMounted(() => {
   const storedTime = sessionStorage.getItem('timePlay');
@@ -1325,5 +1357,12 @@ onUnmounted(() => {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+.North {
+  position: absolute;
+  z-index: 3;
+  right: 2.4vh;
+  bottom: 10vh;
 }
 </style>

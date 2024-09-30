@@ -165,25 +165,38 @@ let initChart1 = () => {
 
     // 初始数据
     const data = [
-        { name: '日本鳟', x: 300, y: 300 },
-        { name: '头足类', x: 500, y: 200 },
-        { name: '许氏平鼬', x: 700, y: 300 },
-        { name: '其他底层鱼类', x: 900, y: 300 },
-        { name: '节肢动物', x: 1100, y: 400 },
-        { name: '浮游植物', x: 1300, y: 500 },
-        { name: '小型底栖动物', x: 300, y: 500 }
+        { name: '日本鳟', x: 100, y: 400 },
+        { name: '头足类', x: 250, y: 450 },
+        { name: '许氏平鼬', x: 375, y: 550 },
+        { name: '小型底栖动物', x: 450, y: 225 },
+        { name: '其他底层鱼类', x: 650, y: 500 },
+        { name: '节肢动物', x: 650, y: 350 },
+        { name: '浮游植物', x: 700, y: 200 },
+        { name: '浮游动物', x: 1300, y: 250 },
+        { name: '海魁', x: 250, y: 250 },
+        { name: '口虾姑', x: 375, y: 350 },
+        { name: '脉红螺', x: 475, y: 375 },
+        { name: '扁平螺', x: 850, y: 300 },
+        { name: '锻虎鱼', x: 900, y: 550 },
+        { name: '鮞鱼', x: 1100, y: 450 },
+        { name: '其他大型底栖动物', x: 1250, y: 400 },
+        { name: '环节动物', x: 950, y: 400 },
+        { name: '碎屑', x: 1000, y: 250 },
+        { name: '海星', x: 1150, y: 300 },
+        { name: '其他贝类', x: 1075, y: 350 },
     ];
 
     const links = [
-        { source: '日本鳟', target: '头足类', lineStyle: { curveness: 0.2, color: '#FFD700' } },
-        { source: '头足类', target: '许氏平鼬', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '许氏平鼬', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#FFD700' } },
-        { source: '其他底层鱼类', target: '节肢动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '节肢动物', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#FFD700' } },
-        { source: '日本鳟', target: '小型底栖动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '小型底栖动物', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '日本鳟', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#FFD700' } },
-        { source: '节肢动物', target: '日本鳟', lineStyle: { curveness: 0.2, color: '#FFD700' } }
+        // { source: '日本鳟', target: '头足类', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
+        // { source: '头足类', target: '许氏平鼬', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
+        // { source: '许氏平鼬', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#FFD700' } },
+        // { source: '其他底层鱼类', target: '节肢动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
+        // { source: '节肢动物', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#FFD700' } },
+        // { source: '日本鳟', target: '小型底栖动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
+        // { source: '小型底栖动物', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
+        // { source: '日本鳟', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#FFD700' } },
+        // { source: '节肢动物', target: '日本鳟', lineStyle: { curveness: 0.2, color: '#FFD700' } },
+        // { source: '浮游动物', target: '日本鳟', lineStyle: { curveness: 0.2, color: '#FFD700' } },
     ];
     chart.setOption({
         tooltip: {
@@ -216,7 +229,7 @@ let initChart1 = () => {
                     label: {
                         show: true,
                         color: '#CFEFFF',
-                        position: [-10, 25]
+                        position: [-8, 30]
                     }
                 })),
                 links: links,
