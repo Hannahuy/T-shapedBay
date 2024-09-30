@@ -743,6 +743,7 @@ const myHandleResponseFunction = (data) => {
   switch (datajson.Function) {
     case '鸟类点击查询':
       toggleVisibility(['bird']);
+      activeIndex.value = 0;
       birdstation.value = datajson.Data.siteName;
       speciesList.value = datajson.Data.animalsCount;
       countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
