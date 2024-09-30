@@ -586,12 +586,12 @@ let previousPlayState = null;
 let intervalTime = null;
 let playInterval = null;
 const togglePlay = () => {
-  intervalTime = 16.6665;
+  intervalTime = 400;
   previousPlayState = activePlay.value;
   activePlay.value = activePlay.value === "play" ? "" : "play";
   if (activePlay.value === "play") {
     playInterval = setInterval(() => {
-      timePlay.value = dayjs(timePlay.value).add(1, "minute").valueOf();
+      timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
       if (activePlay.value !== "play") {
         clearInterval(playInterval);
       }

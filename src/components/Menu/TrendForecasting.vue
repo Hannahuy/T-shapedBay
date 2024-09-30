@@ -161,30 +161,6 @@ const selectedItemname = ref(null);
 
 let layerFunction = [
     {
-        name: "水位",
-        check: false,
-        image: new URL(
-            "../../assets/img/水位.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/水位-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "流速",
-        check: false,
-        image: new URL(
-            "../../assets/img/流速.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/流速-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
         name: "浮游动物碳",
         check: true,
         image: new URL(
@@ -209,7 +185,31 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "浮游植物磷",
+        name: "叶绿素a",
+        check: false,
+        image: new URL(
+            "../../assets/img/浮游动物碳.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/浮游动物碳-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "硝酸盐",
+        check: false,
+        image: new URL(
+            "../../assets/img/浮游植物碳.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/浮游植物碳-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "铵盐",
         check: false,
         image: new URL(
             "../../assets/img/浮游植物磷.png",
@@ -221,7 +221,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "浮游植物氮",
+        name: "磷酸盐",
         check: false,
         image: new URL(
             "../../assets/img/浮游植物氮.png",
@@ -233,7 +233,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "叶绿素",
+        name: "硅酸盐",
         check: false,
         image: new URL(
             "../../assets/img/叶绿素.png",
@@ -241,42 +241,6 @@ let layerFunction = [
         ).href,
         imageActive: new URL(
             "../../assets/img/叶绿素-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "初级生产力",
-        check: false,
-        image: new URL(
-            "../../assets/img/初级生产力.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/初级生产力-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "无机磷",
-        check: false,
-        image: new URL(
-            "../../assets/img/无机磷.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/无机磷-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "无机氮",
-        check: false,
-        image: new URL(
-            "../../assets/img/无机氮.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/无机氮-active.png",
             import.meta.url
         ).href,
     },
@@ -302,19 +266,19 @@ let previousPlayState = null;
 let intervalTime = null;
 let playInterval = null;
 const togglePlay = () => {
-    intervalTime = 16.6665;
-    previousPlayState = activePlay.value;
-    activePlay.value = activePlay.value === "play" ? "" : "play";
-    if (activePlay.value === "play") {
-        playInterval = setInterval(() => {
-            timePlay.value = dayjs(timePlay.value).add(1, "minute").valueOf();
-            if (activePlay.value !== "play") {
-                clearInterval(playInterval);
-            }
-        }, intervalTime);
-    } else {
+  intervalTime = 400;
+  previousPlayState = activePlay.value;
+  activePlay.value = activePlay.value === "play" ? "" : "play";
+  if (activePlay.value === "play") {
+    playInterval = setInterval(() => {
+      timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
+      if (activePlay.value !== "play") {
         clearInterval(playInterval);
-    }
+      }
+    }, intervalTime);
+  } else {
+    clearInterval(playInterval);
+  }
 };
 const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
@@ -771,7 +735,7 @@ onMounted(() => {
 
 .rightbox-middle {
     width: 40vh;
-    height: 33.8vh;
+    height: 32.5vh;
     background-image: url("../../assets/img/框-bg.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;

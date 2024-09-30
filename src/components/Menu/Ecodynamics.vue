@@ -237,19 +237,19 @@ let previousPlayState = null;
 let intervalTime = null;
 let playInterval = null;
 const togglePlay = () => {
-    intervalTime = 16.6665;
-    previousPlayState = activePlay.value;
-    activePlay.value = activePlay.value === "play" ? "" : "play";
-    if (activePlay.value === "play") {
-        playInterval = setInterval(() => {
-            timePlay.value = dayjs(timePlay.value).add(1, "minute").valueOf();
-            if (activePlay.value !== "play") {
-                clearInterval(playInterval);
-            }
-        }, intervalTime);
-    } else {
+  intervalTime = 400;
+  previousPlayState = activePlay.value;
+  activePlay.value = activePlay.value === "play" ? "" : "play";
+  if (activePlay.value === "play") {
+    playInterval = setInterval(() => {
+      timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
+      if (activePlay.value !== "play") {
         clearInterval(playInterval);
-    }
+      }
+    }, intervalTime);
+  } else {
+    clearInterval(playInterval);
+  }
 };
 const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
