@@ -342,7 +342,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
-import North from '../Menu/North.vue'
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
 import dayjs from 'dayjs'
