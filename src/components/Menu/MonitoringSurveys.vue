@@ -11,7 +11,7 @@
       <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
     </el-tooltip>
     <el-tooltip class="box-item" effect="dark" content="等深线" placement="left">
-      <img src="../../assets/img/等深线.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
+      <img src="../../assets/img/等深线.png" class="imageicon" style="width: 2.3vh;" alt="" @click="contour">
     </el-tooltip>
   </div>
   <div class="weatherBox" v-if="showWeather">
@@ -568,6 +568,13 @@ const perspective = () => {
   callUIInteraction({
     ModuleName: `其他`,
     FunctionName: `视角`,
+  });
+}
+
+const contour = () => {
+  callUIInteraction({
+    ModuleName: `其他`,
+    FunctionName: `等深线`,
   });
 }
 
