@@ -1,8 +1,6 @@
 <template>
   <!-- 指北针 -->
-  <div class="North" id="compass">
-    <img src="/img/指北针.png" style="width: 10vh; height: 10vh;" alt="指北针" id="compassImage">
-  </div>
+  <North />
   <!-- 右侧工具栏 -->
   <div class="righticon">
     <el-tooltip class="box-item" effect="dark" content="天气" placement="left">
@@ -342,6 +340,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
+import North from '../Menu/North.vue'
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
 import dayjs from 'dayjs'
@@ -787,13 +786,6 @@ const myHandleResponseFunction = (data) => {
       };
     });
     initChart(chartRef6, chartData);
-  } else if (datajson.Function === '指北针') {
-    const angle = datajson.angle; // 获取角度值
-    const compassImage = document.getElementById('compassImage');
-
-    // 设置旋转角度
-    compassImage.style.transform = `rotate(${angle}deg)`;
-    // compassImage.style.transition = 'transform 0.2s'; // 添加过渡效果
   }
 }
 
@@ -1333,12 +1325,5 @@ onUnmounted(() => {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-}
-
-.North {
-  position: absolute;
-  z-index: 3;
-  right: 2.4vh;
-  bottom: 10vh;
 }
 </style>
