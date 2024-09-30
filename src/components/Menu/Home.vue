@@ -213,6 +213,7 @@ const chartRef3 = ref(null);
 const chartRef4 = ref(null);
 const chartRef5 = ref(null);
 const initChart = (chartRef, source) => {
+  console.log(chartRef.value)
   const chart = echarts.init(chartRef.value);
   charts.push(() => {
     chart.dispose();
@@ -289,7 +290,7 @@ let initChart4 = (source) => {
   });
 };
 const reloadChart = () => {
-  charts.forEach((chart) => chart());
+  charts.splice(-5).forEach((chart) => chart());
 };
 
 const myHandleResponseFunction = (data) => {
@@ -422,7 +423,7 @@ onUnmounted(() => {
 .leftBox-middle2-content,
 .leftBox-bottom-content {
   margin: 1vh 0;
-  width: 100%;
+  width: 27vh;
   height: 16.25vh;
 }
 
