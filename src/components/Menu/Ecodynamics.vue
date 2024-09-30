@@ -96,30 +96,6 @@ const selectedItemname = ref(null);
 
 let layerFunction = [
     {
-        name: "水位",
-        check: false,
-        image: new URL(
-            "../../assets/img/水位.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/水位-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "流速",
-        check: false,
-        image: new URL(
-            "../../assets/img/流速.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/流速-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
         name: "浮游动物碳",
         check: true,
         image: new URL(
@@ -226,7 +202,19 @@ let layerFunction = [
             "../../assets/img/溶解氧-active.png",
             import.meta.url
         ).href,
-    }
+    },
+    {
+        name: "流速",
+        check: false,
+        image: new URL(
+            "../../assets/img/流速.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/流速-active.png",
+            import.meta.url
+        ).href,
+    },
 ]
 
 const timePick = ref(dayjs("2024-08-01").toDate());
@@ -330,7 +318,7 @@ const gettimePlay = (e) => {
 const showselect = ref(true);
 const handleFunctionSelection = (selectedItem) => {
     selectedItemname.value = selectedItem.name;
-    showselect.value = selectedItem.name !== "水位" && selectedItem.name !== "流速";
+    showselect.value = selectedItem.name !== "流速";
     if (timePlay.value == null) {
         timePlay.value = sessionStorage.getItem('timePlay');
     }
