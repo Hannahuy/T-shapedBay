@@ -141,11 +141,21 @@ const changeRadio = (e) => {
         tablehead2.value = '浒苔生物量（kg/㎡）'
         tabledata.value = 218300;
         tabledata2.value = 2;
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: ` 浒苔情景 `,
+            State: true,
+        });
     } else {
         tablehead.value = '无机氮（mg/m³）'
         tablehead2.value = '无机磷（mg/m³）'
         tabledata.value = 200;
         tabledata2.value = 100;
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: ` 陆源污染情景 `,
+            State: true,
+        });
     }
 }
 const drive = () => {
@@ -266,19 +276,19 @@ let previousPlayState = null;
 let intervalTime = null;
 let playInterval = null;
 const togglePlay = () => {
-  intervalTime = 400;
-  previousPlayState = activePlay.value;
-  activePlay.value = activePlay.value === "play" ? "" : "play";
-  if (activePlay.value === "play") {
-    playInterval = setInterval(() => {
-      timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
-      if (activePlay.value !== "play") {
+    intervalTime = 400;
+    previousPlayState = activePlay.value;
+    activePlay.value = activePlay.value === "play" ? "" : "play";
+    if (activePlay.value === "play") {
+        playInterval = setInterval(() => {
+            timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
+            if (activePlay.value !== "play") {
+                clearInterval(playInterval);
+            }
+        }, intervalTime);
+    } else {
         clearInterval(playInterval);
-      }
-    }, intervalTime);
-  } else {
-    clearInterval(playInterval);
-  }
+    }
 };
 const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
@@ -474,6 +484,11 @@ onMounted(() => {
 
     });
     // console.log(`趋势预测`, formattedTime, selectedItemname.value, '444444444444444444');
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: ` 浒苔情景 `,
+        State: true,
+    });
     addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
