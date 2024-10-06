@@ -135,35 +135,51 @@ const tablehead = ref('浒苔面积（㎡）');
 const tablehead2 = ref('浒苔生物量（kg/㎡）');
 const tabledata = ref(218300);
 const tabledata2 = ref(2);
+const radioselection = ref(null);
 const changeRadio = (e) => {
+    radioselection.value = e;
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
     if (e == '浒苔情景') {
         tablehead.value = '浒苔面积（㎡）'
         tablehead2.value = '浒苔生物量（kg/㎡）'
         tabledata.value = 218300;
         tabledata2.value = 2;
-        callUIInteraction({
-            ModuleName: `趋势预测`,
-            FunctionName: ` 浒苔情景 `,
-            State: true,
-        });
     } else {
         tablehead.value = '无机氮（mg/m³）'
         tablehead2.value = '无机磷（mg/m³）'
         tabledata.value = 200;
         tabledata2.value = 100;
-        callUIInteraction({
-            ModuleName: `趋势预测`,
-            FunctionName: ` 陆源污染情景 `,
-            State: true,
-        });
     }
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: e,
+        State: true,
+        Time: formattedTime,
+        Type: selectedItemname.value,
+        Layer: currentSelectValues,
+    });
+    // console.log({
+    //     ModuleName: `趋势预测`,
+    //     FunctionName: e,
+    //     State: true,
+    //     Time: formattedTime,
+    //     Type: selectedItemname.value,
+    //     Layer: currentSelectValues,
+    // });
 }
 const drive = () => {
     if (tabledata.value == '' || tabledata2.value == '') {
         ElMessage.warning('请输入数据');
         return
     } else {
-
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: radioselection.value,
+            State: true,
+            Area: tabledata.value,
+            Quantity: tabledata2.value
+        });
     }
 }
 
@@ -351,7 +367,15 @@ watch(timePlay, (newVal) => {
             State: true,
             Layer: currentSelectValues,
         });
-        // console.log('趋势预测', formattedTime, selectedItemname.value, '333333333333333333333');
+        // console.log({
+        //     ModuleName: `趋势预测`,
+        //     // FunctionMenu: '要素切换',
+        //     Time: formattedTime,
+        //     Type: selectedItemname.value,
+        //     FunctionName: `标量场可视化`,
+        //     State: true,
+        //     Layer: currentSelectValues,
+        // });
         sessionStorage.setItem('timePlay', formattedTime);
     }
     if (currentTime.isSame(dayjs(max.value))) {
