@@ -135,7 +135,7 @@ const tablehead = ref('浒苔面积（㎡）');
 const tablehead2 = ref('浒苔生物量（kg/㎡）');
 const tabledata = ref(218300);
 const tabledata2 = ref(2);
-const radioselection = ref(null);
+const radioselection = ref('浒苔情景');
 const changeRadio = (e) => {
     radioselection.value = e;
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
@@ -153,7 +153,7 @@ const changeRadio = (e) => {
     }
     callUIInteraction({
         ModuleName: `趋势预测`,
-        FunctionName: e,
+        FunctionName: radioselection.value,
         State: true,
         Time: formattedTime,
         Type: selectedItemname.value,
@@ -363,7 +363,7 @@ watch(timePlay, (newVal) => {
             // FunctionMenu: '要素切换',
             Time: formattedTime,
             Type: selectedItemname.value,
-            FunctionName: `标量场可视化`,
+            FunctionName: radioselection.value,
             State: true,
             Layer: currentSelectValues,
         });
@@ -404,16 +404,19 @@ const handleFunctionSelection = (selectedItem) => {
         // FunctionMenu: '要素切换',
         Time: formattedTime,
         Type: selectedItem.name,
-        FunctionName: `标量场可视化`,
+        FunctionName: radioselection.value,
         State: true,
         Layer: currentSelectValues,
     });
     // console.log({
     //     ModuleName: `趋势预测`,
-    //     FunctionMenu: '要素切换',
+    //     // FunctionMenu: '要素切换',
     //     Time: formattedTime,
-    //     Type: selectedItem.name
-    // }, '222222222222222222222222222');
+    //     Type: selectedItem.name,
+    //     FunctionName: radioselection.value,
+    //     State: true,
+    //     Layer: currentSelectValues,
+    // });
 };
 const showSmallWindow = ref(false);
 const barType = ref(null);
@@ -479,13 +482,20 @@ const selectchange = (selectedValues) => {
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `趋势预测`,
-        FunctionName: `标量场可视化`,
+        FunctionName: radioselection.value,
         State: true,
         Time: formattedTime,
         Layer: selectedValues, // 传递选中的值
         Type: selectedItemname.value
     });
-    console.log('趋势预测', `标量场可视化`, true, formattedTime, selectedValues, selectedItemname.value);
+    // console.log({
+    //     ModuleName: `趋势预测`,
+    //     FunctionName: radioselection.value,
+    //     State: true,
+    //     Time: formattedTime,
+    //     Layer: selectedValues, // 传递选中的值
+    //     Type: selectedItemname.value
+    // });
 }
 
 onMounted(() => {
@@ -502,7 +512,7 @@ onMounted(() => {
         // FunctionMenu: '要素切换',
         Time: formattedTime,
         Type: selectedItemname.value,
-        FunctionName: `标量场可视化`,
+        FunctionName: radioselection.value,
         State: true,
         Layer: currentSelectValues,
 
