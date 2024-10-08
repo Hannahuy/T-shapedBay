@@ -123,8 +123,8 @@
           <tr>
             <td></td>
             <td>牡蛎礁面积(m²)</td>
-            <td>造礁牡蛎密度(个/m³)</td>
-            <td>造礁牡蛎生物量(g/m³)</td>
+            <td>造礁牡蛎密度(个/m²)</td>
+            <td>造礁牡蛎生物量(g/m²)</td>
           </tr>
         </tbody>
         <tbody>
@@ -320,13 +320,13 @@
       <table class="custom-table2">
         <tbody>
           <tr>
-            <td>平均密度(个/m²)</td>
+            <td>平均密度</td>
             <td>{{ Intertidalzonedata }}</td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td>生物量(g/m²)</td>
+            <td>生物量</td>
             <td>{{ Intertidalzonedata2 }}</td>
           </tr>
         </tbody>
