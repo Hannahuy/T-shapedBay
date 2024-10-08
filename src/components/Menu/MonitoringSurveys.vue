@@ -320,13 +320,13 @@
       <table class="custom-table2">
         <tbody>
           <tr>
-            <td>沉积物密度(kg/m³)</td>
+            <td>平均密度(个/m³)</td>
             <td>{{ Intertidalzonedata }}</td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td>沉积物生物量(kg/m³)</td>
+            <td>生物量(g/m²)</td>
             <td>{{ Intertidalzonedata2 }}</td>
           </tr>
         </tbody>
