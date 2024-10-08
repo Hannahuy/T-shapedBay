@@ -213,7 +213,6 @@ const chartRef3 = ref(null);
 const chartRef4 = ref(null);
 const chartRef5 = ref(null);
 const initChart = (chartRef, source) => {
-  console.log(chartRef.value)
   const chart = echarts.init(chartRef.value);
   charts.push(() => {
     chart.dispose();

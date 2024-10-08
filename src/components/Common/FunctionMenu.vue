@@ -11,9 +11,9 @@
           :class="checkedFunction.indexOf(index) > -1 ? 'active' : ''">
           <div class="icon">
             <img :src="checkedFunction.indexOf(index) > -1
-              ? item.imageActive
-              : item.image
-              " />
+      ? item.imageActive
+      : item.image
+      " />
           </div>
           <div class="name" :style="{ letterSpacing: item.name.length == 2 ? '0.2rem' : '0' }">
             {{ item.name }}
@@ -38,6 +38,12 @@ const props = defineProps({
     },
   },
   Multiple: {
+    type: Boolean,
+    default: () => {
+      return false;
+    },
+  },
+  defaultSelect: {
     type: Boolean,
     default: () => {
       return false;
@@ -92,15 +98,23 @@ let onClick = (item, index) => {
 
 onMounted(() => {
   let selectedIndex = props.functionData.findIndex(item => item.check);
-  if (selectedIndex === -1 && props.functionData.length > 0) {
-    // 如果没有选中项，默认选中第一个项
-    onClick(props.functionData[0], 0);
-  } else {
-    for (let i = 0; i < props.functionData.length; i++) {
-      if (props.functionData[i].check) {
-        onClick(props.functionData[i], i);
+  if (props.defaultSelect) {
+    if (selectedIndex === -1 && props.functionData.length > 0) {
+      // 如果没有选中项，默认选中第一个项
+      onClick(props.functionData[0], 0);
+    } else {
+      for (let i = 0; i < props.functionData.length; i++) {
+        if (props.functionData[i].check) {
+          onClick(props.functionData[i], i);
+        }
       }
     }
+  } else {
+    for (let i = 0; i < props.functionData.length; i++) {
+        if (props.functionData[i].check) {
+          onClick(props.functionData[i], i);
+        }
+      }
   }
 });
 

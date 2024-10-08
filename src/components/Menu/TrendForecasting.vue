@@ -37,8 +37,9 @@
             </div>
         </div>
     </div>
-    <div class="left-button">
-        <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
+    <div class="left-button" v-if="showselect">
+        <FunctionMenu :functionData="layerFunction" :defaultSelect="false" :Multiple="false"
+            @functionSelected="handleFunctionSelection" />
     </div>
     <!-- 时间轴 -->
     <div class="bottombox-left">
@@ -58,7 +59,7 @@
         </div>
     </div>
     <!-- 右下角选择 -->
-    <div class="right-select" v-show="showselect">
+    <div class="right-select" v-if="showselect">
         <!-- <div class="top-leftbox-middle-content-div-2">
             <div class="top-leftbox-middle-content-div-2-content">
                 <div class="color-bar-one">
@@ -84,42 +85,12 @@
         </el-checkbox-group>
     </div>
     <!-- 右下角颜色条 -->
-    <div class="right-button">
+    <div class="right-button" v-if="showselect">
         <div class="leftbar">{{ barType }}</div>
         <div class="rightbar">
             <span>{{ barMin }}</span>
             <span>{{ barMax }}</span>
         </div>
-    </div>
-    <!-- 右上角查询表格 -->
-    <div class="smallWindow" v-if="showSmallWindow">
-        <img src="../../assets/img/close.png" alt="" class="close" @click="close">
-        <table class="custom-table">
-            <thead>
-                <tr>
-                    <td>数据值</td>
-                    <td>{{ Datavar }}</td>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <td>类型</td>
-                    <td>{{ Datatype }}</td>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <td>时间</td>
-                    <td>{{ Datatime }}</td>
-                </tr>
-            </thead>
-            <thead>
-                <tr>
-                    <td>层级</td>
-                    <td>{{ layer }}</td>
-                </tr>
-            </thead>
-        </table>
     </div>
 </template>
 
@@ -173,13 +144,7 @@ const drive = () => {
         ElMessage.warning('请输入数据');
         return
     } else {
-        callUIInteraction({
-            ModuleName: `趋势预测`,
-            FunctionName: radioselection.value,
-            State: true,
-            Area: tabledata.value,
-            Quantity: tabledata2.value
-        });
+        showselect.value = true;
     }
 }
 
@@ -188,7 +153,7 @@ const selectedItemname = ref(null);
 let layerFunction = [
     {
         name: "浮游动物碳",
-        check: true,
+        check: false,
         image: new URL(
             "../../assets/img/浮游动物碳.png",
             import.meta.url
@@ -358,25 +323,27 @@ watch(timePlay, (newVal) => {
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
         const currentSelectValues = Array.from(selectvalue.value);  // 恢复
-        callUIInteraction({
-            ModuleName: `趋势预测`,
-            // FunctionMenu: '要素切换',
-            Time: formattedTime,
-            Type: selectedItemname.value,
-            FunctionName: radioselection.value,
-            State: true,
-            Layer: currentSelectValues,
-        });
-        // console.log({
-        //     ModuleName: `趋势预测`,
-        //     // FunctionMenu: '要素切换',
-        //     Time: formattedTime,
-        //     Type: selectedItemname.value,
-        //     FunctionName: `标量场可视化`,
-        //     State: true,
-        //     Layer: currentSelectValues,
-        // });
-        sessionStorage.setItem('timePlay', formattedTime);
+        if (selectedItemname.value !== null) {
+            callUIInteraction({
+                ModuleName: `趋势预测`,
+                // FunctionMenu: '要素切换',
+                Time: formattedTime,
+                Type: selectedItemname.value,
+                FunctionName: radioselection.value,
+                State: true,
+                Layer: currentSelectValues,
+            });
+            // console.log({
+            //     ModuleName: `趋势预测`,
+            //     // FunctionMenu: '要素切换',
+            //     Time: formattedTime,
+            //     Type: selectedItemname.value,
+            //     FunctionName: `标量场可视化`,
+            //     State: true,
+            //     Layer: currentSelectValues,
+            // });
+            sessionStorage.setItem('timePlay', formattedTime);
+        }
     }
     if (currentTime.isSame(dayjs(max.value))) {
         activePlay.value = '';
@@ -390,10 +357,9 @@ const gettimePlay = (e) => {
     }
 }
 
-const showselect = ref(true);
+const showselect = ref(false);
 const handleFunctionSelection = (selectedItem) => {
     selectedItemname.value = selectedItem.name;
-    showselect.value = selectedItem.name !== "水位" && selectedItem.name !== "流速";
     if (timePlay.value == null) {
         timePlay.value = sessionStorage.getItem('timePlay');
     }
@@ -418,7 +384,6 @@ const handleFunctionSelection = (selectedItem) => {
     //     Layer: currentSelectValues,
     // });
 };
-const showSmallWindow = ref(false);
 const barType = ref(null);
 const barMin = ref(0);
 const barMax = ref(0);
@@ -426,9 +391,6 @@ const Datavar = ref(null);
 const Datatype = ref(null);
 const Datatime = ref(null);
 const layer = ref(null);
-const close = () => {
-    showSmallWindow.value = false;
-};
 const myHandleResponseFunction = (data) => {
     const datajson = JSON.parse(data);
     if (datajson.Function === '报错') {
@@ -442,7 +404,6 @@ const myHandleResponseFunction = (data) => {
         barMin.value = datajson.Data.NorMin;
         barMax.value = datajson.Data.NorMax;
     } else if (datajson.Function === '点击查询') {
-        showSmallWindow.value = true;
         Datavar.value = datajson.Data.var;
         Datatype.value = datajson.Data.type;
         Datatime.value = datajson.Data.time;
@@ -505,24 +466,6 @@ onMounted(() => {
     } else {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
     }
-    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
-    const currentSelectValues = Array.from(selectvalue.value);
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        // FunctionMenu: '要素切换',
-        Time: formattedTime,
-        Type: selectedItemname.value,
-        FunctionName: radioselection.value,
-        State: true,
-        Layer: currentSelectValues,
-
-    });
-    // console.log(`趋势预测`, formattedTime, selectedItemname.value, '444444444444444444');
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: ` 浒苔情景 `,
-        State: true,
-    });
     addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 </script>
