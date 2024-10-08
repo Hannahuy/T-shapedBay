@@ -320,7 +320,7 @@
       <table class="custom-table2">
         <tbody>
           <tr>
-            <td>平均密度(个/m³)</td>
+            <td>平均密度(个/m²)</td>
             <td>{{ Intertidalzonedata }}</td>
           </tr>
         </tbody>
