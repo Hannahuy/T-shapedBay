@@ -686,10 +686,10 @@ const imageArray = ref([]);
 // 点击动物名显示信息
 const handleClick = (index, item) => {
   activeIndex.value = index;
-  axios.get(`http://192.168.0.227:8088/animal/getAnimal/${item.name}`).then((res) => {
+  axios.get( window.VITE_APP_BASE_API + `/animal/getAnimal/${item.name}`).then((res) => {
     animalData.value = res.data.data.info.鸟种资料;
     animalDatalist.value = res.data.data.info.详细信息;
-    imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
+    imageArray.value = res.data.data.images.imageArray.map(image =>  window.VITE_APP_BASE_API + `${image.path}`);
   });
 };
 const countspeciesList = ref(0);
@@ -748,11 +748,11 @@ const myHandleResponseFunction = (data) => {
       speciesList.value = datajson.Data.animalsCount;
       countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
 
-      axios.get(`http://192.168.0.227:8088/animal/getAnimal/${datajson.Data.animalsCount[0].name}`)
+      axios.get( window.VITE_APP_BASE_API + `/animal/getAnimal/${datajson.Data.animalsCount[0].name}`)
         .then((res) => {
           animalData.value = res.data.data.info.鸟种资料;
           animalDatalist.value = res.data.data.info.详细信息;
-          imageArray.value = res.data.data.images.imageArray.map(image => `http://192.168.0.227:8088${image.path}`);
+          imageArray.value = res.data.data.images.imageArray.map(image => window.VITE_APP_BASE_API + `${image.path}`);
         });
       break;
 

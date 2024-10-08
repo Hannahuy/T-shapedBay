@@ -8,6 +8,8 @@ import Antd from 'ant-design-vue';
 import 'ant-design-vue/dist/reset.css';
 
 const app = createApp(App);
+const VITE_APP_BASE_API = 'http://192.168.0.227:8088';
+window.VITE_APP_BASE_API = VITE_APP_BASE_API;
 app.use(routes);
 app.use(ElementPlus, {
   locale: zhCn,
