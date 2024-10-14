@@ -1556,10 +1556,14 @@ function updateVideoStreamSize() {
         FunctionName: `生态动力`,
         State: false,
       };
+      let callUIInteractionf53 = {
+        Function: `开启分辨率`,
+      };
       // console.log(descriptor)
       emitUIInteraction(descriptor);
       emitUIInteraction(callUIInteractionf51);
       emitUIInteraction(callUIInteractionf52);
+      emitUIInteraction(callUIInteractionf53);
     }
     window.setScreen = true;
     lastTimeResized = new Date().getTime();

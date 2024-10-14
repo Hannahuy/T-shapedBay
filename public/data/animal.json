@@ -1,0 +1,1464 @@
+{
+    "data": [
+        {
+            "name": "花鲈",
+            "x": 600,
+            "y": 200,
+            "value": "生物量0.125054 营养级4.00"
+        },
+        {
+            "name": "尖海龙",
+            "x": 450,
+            "y": 275,
+            "value": "生物量0.144334 营养级3.05"
+        },
+        {
+            "name": "半滑舌鳎",
+            "x": 1200,
+            "y": 200,
+            "value": "生物量0.1081102 营养级3.88"
+        },
+        {
+            "name": "鲬",
+            "x": 900,
+            "y": 200,
+            "value": "生物量0.3704824 营养级3.96"
+        },
+        {
+            "name": "细纹狮子鱼",
+            "x": 550,
+            "y": 275,
+            "value": "生物量0.03354932 营养级3.03"
+        },
+        {
+            "name": "方氏云鳚",
+            "x": 675,
+            "y": 300,
+            "value": "生物量0.01199064 营养级3.05"
+        },
+        {
+            "name": "长蛇鲻",
+            "x": 250,
+            "y": 200,
+            "value": "生物量0.02633549 营养级3.98"
+        },
+        {
+            "name": "鰕虎鱼类",
+            "x": 350,
+            "y": 275,
+            "value": "生物量0.21 营养级3.13"
+        },
+        {
+            "name": "其它中上层鱼类",
+            "x": 200,
+            "y": 300,
+            "value": "生物量1.559 营养级3.02"
+        },
+        {
+            "name": "其它底层鱼类",
+            "x": 725,
+            "y": 250,
+            "value": "生物量0.035 营养级3.41"
+        },
+        {
+            "name": "头足类",
+            "x": 1050,
+            "y": 250,
+            "value": "生物量0.06 营养级3.38"
+        },
+        {
+            "name": "三疣梭子蟹",
+            "x": 950,
+            "y": 275,
+            "value": "生物量0.2034629 营养级3.11"
+        },
+        {
+            "name": "日本蟳",
+            "x": 1100,
+            "y": 275,
+            "value": "生物量0.6566055 营养级3.07"
+        },
+        {
+            "name": "口虾蛄",
+            "x": 850,
+            "y": 295,
+            "value": "生物量0.03104212 营养级3.08"
+        },
+        {
+            "name": "其它蟹类",
+            "x": 925,
+            "y": 350,
+            "value": "生物量0.08435385 营养级2.75"
+        },
+        {
+            "name": "其它虾类",
+            "x": 600,
+            "y": 350,
+            "value": "生物量1.414561 营养级2.33"
+        },
+        {
+            "name": "脉红螺",
+            "x": 1175,
+            "y": 275,
+            "value": "生物量0.6016757 营养级2.96"
+        },
+        {
+            "name": "牡蛎",
+            "x": 475,
+            "y": 400,
+            "value": "生物量3.81 营养级2.03"
+        },
+        {
+            "name": "中国蛤蜊",
+            "x": 175,
+            "y": 400,
+            "value": "生物量16 营养级2.03"
+        },
+        {
+            "name": "扁玉螺",
+            "x": 1250,
+            "y": 285,
+            "value": "生物量0.08261339 营养级3.01"
+        },
+        {
+            "name": "经氏壳蛞蝓",
+            "x": 1075,
+            "y": 350,
+            "value": "生物量0.66 营养级2.98"
+        },
+        {
+            "name": "纵肋织纹螺",
+            "x": 1300,
+            "y": 400,
+            "value": "生物量0.02822174 营养级2.00"
+        },
+        {
+            "name": "其它软体动物",
+            "x": 1000,
+            "y": 400,
+            "value": "生物量19.21 营养级2.01"
+        },
+        {
+            "name": "其它甲壳动物",
+            "x": 700,
+            "y": 400,
+            "value": "生物量0.02 营养级2.10"
+        },
+        {
+            "name": "环节动物",
+            "x": 850,
+            "y": 400,
+            "value": "生物量0.34 营养级2.00"
+        },
+        {
+            "name": "棘皮动物",
+            "x": 1175,
+            "y": 400,
+            "value": "生物量3.96 营养级2.01"
+        },
+        {
+            "name": "海仙人掌",
+            "x": 400,
+            "y": 350,
+            "value": "生物量0.04 营养级2.89"
+        },
+        {
+            "name": "浮游动物",
+            "x": 325,
+            "y": 400,
+            "value": "生物量1.45 营养级2.05"
+        },
+        {
+            "name": "浮游植物",
+            "x": 500,
+            "y": 500,
+            "value": "生物量13.5 营养级1.00"
+        },
+        {
+            "name": "碎屑",
+            "x": 950,
+            "y": 500,
+            "value": "生物量42 营养级1.00"
+        }
+    ],
+    "links": [
+        {
+            "source": "花鲈",
+            "target": "尖海龙",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.03508515"
+        },
+        {
+            "source": "花鲈",
+            "target": "其它中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.6268407"
+        },
+        {
+            "source": "花鲈",
+            "target": "头足类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.001610696"
+        },
+        {
+            "source": "花鲈",
+            "target": "日本蟳",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01400605"
+        },
+        {
+            "source": "花鲈",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.004201815"
+        },
+        {
+            "source": "花鲈",
+            "target": "其它虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01057457"
+        },
+        {
+            "source": "花鲈",
+            "target": "经氏壳蛞蝓",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.00294127"
+        },
+        {
+            "source": "花鲈",
+            "target": "其它甲壳动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.001120484"
+        },
+        {
+            "source": "花鲈",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.003921693"
+        },
+        {
+            "source": "尖海龙",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.7678571"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "鰕虎鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.03962453"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "其它中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01165427"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "头足类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.002913569"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "三疣梭子蟹",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0932342"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "日本蟳",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.2843643"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "口虾蛄",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01748141"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01107156"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "其他虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01847203"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "扁玉螺",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.001165428"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "经氏壳蛞蝓",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01223699"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.08857248"
+        },
+        {
+            "source": "半滑舌鳎",
+            "target": "棘皮动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.001748141"
+        },
+        {
+            "source": "鲬",
+            "target": "半滑舌鳎",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.09035324"
+        },
+        {
+            "source": "鲬",
+            "target": "长蛇鲻",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01348556"
+        },
+        {
+            "source": "鲬",
+            "target": "鰕虎鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1591296"
+        },
+        {
+            "source": "鲬",
+            "target": "其它中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1362041"
+        },
+        {
+            "source": "鲬",
+            "target": "其他底层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.004045668"
+        },
+        {
+            "source": "鲬",
+            "target": "头足类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1051874"
+        },
+        {
+            "source": "鲬",
+            "target": "三疣梭子蟹",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.08091335"
+        },
+        {
+            "source": "鲬",
+            "target": "日本蟳",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.3236534"
+        },
+        {
+            "source": "鲬",
+            "target": "口虾蛄",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.04180523"
+        },
+        {
+            "source": "鲬",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.05259368"
+        },
+        {
+            "source": "鲬",
+            "target": "其他虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.3411846"
+        },
+        {
+            "source": "细纹狮子鱼",
+            "target": "其他虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.007222496"
+        },
+        {
+            "source": "细纹狮子鱼",
+            "target": "其他软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.001690886"
+        },
+        {
+            "source": "细纹狮子鱼",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.09058315"
+        },
+        {
+            "source": "细纹狮子鱼",
+            "target": "棘皮动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0005072656"
+        },
+        {
+            "source": "细纹狮子鱼",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.02077374"
+        },
+        {
+            "source": "方氏云鳚",
+            "target": "其他中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.001420771"
+        },
+        {
+            "source": "方氏云鳚",
+            "target": "其他虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.005098061"
+        },
+        {
+            "source": "方氏云鳚",
+            "target": "其他软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.06301537"
+        },
+        {
+            "source": "方氏云鳚",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.006510474"
+        },
+        {
+            "source": "方氏云鳚",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.007521729"
+        },
+        {
+            "source": "长蛇鲻",
+            "target": "尖海龙",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01748729"
+        },
+        {
+            "source": "长蛇鲻",
+            "target": "鰕虎鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1105814"
+        },
+        {
+            "source": "长蛇鲻",
+            "target": "其它中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.00006857762"
+        },
+        {
+            "source": "长蛇鲻",
+            "target": "其它底层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.003428881"
+        },
+        {
+            "source": "长蛇鲻",
+            "target": "头足类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.00548621"
+        },
+        {
+            "source": "长蛇鲻",
+            "target": "其他虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.03446026"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "鰕虎鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.049392"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "其它底层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0046305"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "其它虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.3225915"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.3195045"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.179046"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "棘皮动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.015435"
+        },
+        {
+            "source": "鰕虎鱼类",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.6529005"
+        },
+        {
+            "source": "其它中上层鱼类",
+            "target": "其它甲壳动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1199806"
+        },
+        {
+            "source": "其它中上层鱼类",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "14.42767"
+        },
+        {
+            "source": "其它中上层鱼类",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.4499274"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "鰕虎鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0143227"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "其它中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0073549"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "三疣梭子蟹",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.00522585"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "日本蟳",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01219365"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "口虾蛄",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0030968"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.00561295"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "其它虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.08612975"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.054194"
+        },
+        {
+            "source": "其它底层鱼类",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.005419401"
+        },
+        {
+            "source": "头足类",
+            "target": "其它中上层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01476"
+        },
+        {
+            "source": "头足类",
+            "target": "其它底层鱼类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01476"
+        },
+        {
+            "source": "头足类",
+            "target": "三疣梭子蟹",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.009839999"
+        },
+        {
+            "source": "头足类",
+            "target": "日本蟳",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.03936"
+        },
+        {
+            "source": "头足类",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.013776"
+        },
+        {
+            "source": "头足类",
+            "target": "其它虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.266664"
+        },
+        {
+            "source": "头足类",
+            "target": "中国蛤蜊",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.05904"
+        },
+        {
+            "source": "头足类",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0738"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "方氏云鳚",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.008301287"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.02822438"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "其他虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.3154489"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "牡蛎",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.03320515"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "经氏壳蛞蝓",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.03320515"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "1.112373"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.04316669"
+        },
+        {
+            "source": "三疣梭子蟹",
+            "target": "棘皮动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.08633339"
+        },
+        {
+            "source": "日本蟳",
+            "target": "细纹狮子鱼",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.02764309"
+        },
+        {
+            "source": "日本蟳",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.05528618"
+        },
+        {
+            "source": "日本蟳",
+            "target": "其它虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.5528619"
+        },
+        {
+            "source": "日本蟳",
+            "target": "牡蛎",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1105724"
+        },
+        {
+            "source": "日本蟳",
+            "target": "扁玉螺",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.05528618"
+        },
+        {
+            "source": "日本蟳",
+            "target": "经氏壳蛞蝓",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.02764309"
+        },
+        {
+            "source": "日本蟳",
+            "target": "纵肋织纹螺",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.005528619"
+        },
+        {
+            "source": "日本蟳",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "4.511353"
+        },
+        {
+            "source": "日本蟳",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1824444"
+        },
+        {
+            "source": "口虾蛄",
+            "target": "其它蟹类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.01371937"
+        },
+        {
+            "source": "口虾蛄",
+            "target": "其它虾类",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.06244681"
+        },
+        {
+            "source": "口虾蛄",
+            "target": "经氏壳蛞蝓",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.002365409"
+        },
+        {
+            "source": "口虾蛄",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.3188572"
+        },
+        {
+            "source": "口虾蛄",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.07569309"
+        },
+        {
+            "source": "其它蟹类",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.5567354"
+        },
+        {
+            "source": "其它蟹类",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.2024492"
+        },
+        {
+            "source": "其它蟹类",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.2530615"
+        },
+        {
+            "source": "其它虾类",
+            "target": "经氏壳蛞蝓",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.2036967"
+        },
+        {
+            "source": "其它虾类",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "2.851754"
+        },
+        {
+            "source": "其它虾类",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.1018484"
+        },
+        {
+            "source": "其它虾类",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "1.527726"
+        },
+        {
+            "source": "其它虾类",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "5.499813"
+        },
+        {
+            "source": "脉红螺",
+            "target": "牡蛎",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.04650953"
+        },
+        {
+            "source": "脉红螺",
+            "target": "中国蛤蜊",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "2.046419"
+        },
+        {
+            "source": "脉红螺",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "2.325477"
+        },
+        {
+            "source": "脉红螺",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.2325477"
+        },
+        {
+            "source": "牡蛎",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "1.381982"
+        },
+        {
+            "source": "牡蛎",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "19.34775"
+        },
+        {
+            "source": "牡蛎",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "34.54956"
+        },
+        {
+            "source": "中国蛤蜊",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "4.8"
+        },
+        {
+            "source": "中国蛤蜊",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "67.2"
+        },
+        {
+            "source": "中国蛤蜊",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "120"
+        },
+        {
+            "source": "扁玉螺",
+            "target": "中国蛤蜊",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.002193386"
+        },
+        {
+            "source": "扁玉螺",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.4364837"
+        },
+        {
+            "source": "经氏壳蛞蝓",
+            "target": "中国蛤蜊",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.209088"
+        },
+        {
+            "source": "经氏壳蛞蝓",
+            "target": "其它软体动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "8.88624"
+        },
+        {
+            "source": "经氏壳蛞蝓",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.52272"
+        },
+        {
+            "source": "经氏壳蛞蝓",
+            "target": "棘皮动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.52272"
+        },
+        {
+            "source": "经氏壳蛞蝓",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.313632"
+        },
+        {
+            "source": "纵肋织纹螺",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.2551245"
+        },
+        {
+            "source": "其它软体动物",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "2.59335"
+        },
+        {
+            "source": "其它软体动物",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "191.9079"
+        },
+        {
+            "source": "其它软体动物",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "324.1687"
+        },
+        {
+            "source": "其它甲壳动物",
+            "target": "环节动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.023919"
+        },
+        {
+            "source": "其它甲壳动物",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.023919"
+        },
+        {
+            "source": "其它甲壳动物",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.047838"
+        },
+        {
+            "source": "其它甲壳动物",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.382704"
+        },
+        {
+            "source": "环节动物",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.765"
+        },
+        {
+            "source": "环节动物",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "6.885"
+        },
+        {
+            "source": "棘皮动物",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.181368"
+        },
+        {
+            "source": "棘皮动物",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "2.539152"
+        },
+        {
+            "source": "棘皮动物",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "15.41628"
+        },
+        {
+            "source": "海仙人掌",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.221"
+        },
+        {
+            "source": "海仙人掌",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0156"
+        },
+        {
+            "source": "海仙人掌",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "0.0234"
+        },
+        {
+            "source": "浮游动物",
+            "target": "浮游动物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "6.766667"
+        },
+        {
+            "source": "浮游动物",
+            "target": "浮游植物",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "81.20001"
+        },
+        {
+            "source": "浮游动物",
+            "target": "碎屑",
+            "lineStyle": {
+                "curveness": 0.2,
+                "color": "#c0c0c0"
+            },
+            "value": "47.36667"
+        }
+    ]
+}

@@ -148,6 +148,8 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
+import animal from '/public/data/animal.json'
+import appraise from '/public/data/评价指数.json'
 
 const charts = [];
 const chartRef1 = ref(null);
@@ -162,72 +164,6 @@ let initChart1 = () => {
         chart.dispose();
         initChart1();
     });
-
-    // 初始数据
-    const data = [
-        { name: '日本鳟', x: 100, y: 400 },
-        { name: '头足类', x: 250, y: 450 },
-        { name: '许氏平鼬', x: 375, y: 550 },
-        { name: '小型底栖动物', x: 450, y: 225 },
-        { name: '其他底层鱼类', x: 650, y: 500 },
-        { name: '节肢动物', x: 650, y: 350 },
-        { name: '浮游植物', x: 700, y: 200 },
-        { name: '浮游动物', x: 1300, y: 250 },
-        { name: '海魁', x: 250, y: 250 },
-        { name: '口虾姑', x: 375, y: 350 },
-        { name: '脉红螺', x: 475, y: 375 },
-        { name: '扁平螺', x: 850, y: 300 },
-        { name: '锻虎鱼', x: 900, y: 550 },
-        { name: '鮞鱼', x: 1100, y: 450 },
-        { name: '其他大型底栖动物', x: 1250, y: 400 },
-        { name: '环节动物', x: 950, y: 400 },
-        { name: '碎屑', x: 1000, y: 250 },
-        { name: '海星', x: 1150, y: 300 },
-        { name: '其他贝类', x: 1075, y: 350 },
-    ];
-
-    const links = [
-        { source: '日本鳟', target: '头足类', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '日本鳟', target: '小型底栖动物', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '日本鳟', target: '海魁', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '日本鳟', target: '节肢动物', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '日本鳟', target: '口虾姑', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '日本鳟', target: '扁平螺', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '头足类', target: '许氏平鼬', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '头足类', target: '口虾姑', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '许氏平鼬', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '许氏平鼬', target: '环节动物', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '许氏平鼬', target: '脉红螺', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '小型底栖动物', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '其他底层鱼类', target: '环节动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '其他底层鱼类', target: '其他贝类', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '其他底层鱼类', target: '脉红螺', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '其他底层鱼类', target: '海星', lineStyle: { curveness: 0.2, color: 'yellow' } },
-        { source: '节肢动物', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '节肢动物', target: '小型底栖动物', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '节肢动物', target: '脉红螺', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '浮游动物', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '浮游动物', target: '碎屑', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '海魁', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '海魁', target: '脉红螺', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '脉红螺', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '脉红螺', target: '口虾姑', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '扁平螺', target: '浮游植物', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '扁平螺', target: '碎屑', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '锻虎鱼', target: '鮞鱼', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '锻虎鱼', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: 'yellow' } },
-        { source: '锻虎鱼', target: '脉红螺', lineStyle: { curveness: 0.2, color: 'yellow' } },
-        { source: '锻虎鱼', target: '鮞鱼', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '鮞鱼', target: '环节动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '鮞鱼', target: '节肢动物', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '其他大型底栖动物', target: '锻虎鱼', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '其他大型底栖动物', target: '其他贝类', lineStyle: { curveness: 0.2, color: '#1c6088' } },
-        { source: '环节动物', target: '鮞鱼', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '环节动物', target: '鮞鱼', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '环节动物', target: '小型底栖动物', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-        { source: '海星', target: '浮游动物', lineStyle: { curveness: 0.2, color: '#FF8C00' } },
-        { source: '其他贝类', target: '其他底层鱼类', lineStyle: { curveness: 0.2, color: '#5f9280' } },
-    ];
     chart.setOption({
         tooltip: {
             trigger: 'item',
@@ -249,20 +185,54 @@ let initChart1 = () => {
                     fontSize: 20,
                     color: '#FFFFFF'
                 },
-                data: data.map(item => ({
-                    ...item,
-                    itemStyle: {
-                        color: '#FFFFFF',
-                        borderColor: '#4085a6',
-                        borderWidth: 4
-                    },
-                    label: {
-                        show: true,
-                        color: '#CFEFFF',
-                        position: [-8, 30]
+                data: animal.data.map(item => {
+                    const colorMap = {
+                        'red': ["浮游植物", "浮游动物", "海仙人掌"],
+                        'orange': ["其它甲壳动物", "环节动物", "其它软体动物", "棘皮动物", "纵肋织纹螺", "扁玉螺", "经氏壳蛞蝓"],
+                        '#f2cc01': ["中国蛤蜊", "牡蛎", "脉红螺"],
+                        '#D6ee01': ["其它虾类", "其它蟹类", "日本蟳", "头足类", "三疣梭子蟹", "其它底层鱼类", "口虾蛄"],
+                        '#01efef': ["碎屑", "方氏云鳚", "细纹狮子鱼", "尖海龙", "花鲈", "鲬", "长蛇鲻", "半滑舌鳎"],
+                        '#75ff8d': ["鰕虎鱼类", "其它中上层鱼类"]
+                    };
+                    const sizeMap = {
+                        "碎屑": 30,
+                        "浮游植物": 24,
+                        "其它软体动物": 27,
+                        "中国蛤蜊": 27,
+                        "浮游动物": 21,
+                        "牡蛎": 18,
+                        "棘皮动物": 18,
+                        "其它虾类": 15,
+                        "其它中上层鱼类": 15
+                    };
+
+                    let color = '#FFFFFF'; // 默认颜色
+                    let size = 9; // 默认大小
+
+                    for (const [key, values] of Object.entries(colorMap)) {
+                        if (values.includes(item.name)) {
+                            color = key;
+                            size = sizeMap[item.name] || 9; // 根据项目名称设置大小，默认值为9
+                            break;
+                        }
                     }
-                })),
-                links: links,
+                    const labelPositionY = (item.name.length <= 2) ? 4 : -16;
+                    return {
+                        ...item,
+                        itemStyle: {
+                            color: color,
+                            borderColor: '#4085a6',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [labelPositionY, size] // 使用动态的 size 值
+                        },
+                        symbolSize: size
+                    };
+                }),
+                links: animal.links,
                 lineStyle: {
                     opacity: 0.9,
                     width: 2,
@@ -276,7 +246,7 @@ let initChart1 = () => {
         if (params.dataType === 'edge') {
             const highlightedLink = params.data;
             // 更新线条样式
-            const updatedLinks = links.map(link => {
+            const updatedLinks = animal.links.map(link => {
                 return {
                     ...link,
                     lineStyle: {
@@ -296,7 +266,7 @@ let initChart1 = () => {
     chart.on('mouseout', function () {
         chart.setOption({
             series: [{
-                links: links
+                links: animal.links
             }]
         });
     });
@@ -308,78 +278,150 @@ let initChart2 = () => {
         chart.dispose();
         initChart2();
     });
-    const hours = [
-        '生态系统规模', '系统成熟度', '组织程度', '能量传递效率',
-        '生态系统规模1', '系统成熟度1', '组织程度1', '能量传递效率1',
-        '生态系统规模2', '系统成熟度2', '组织程度2', '能量传递效率2'
-    ];
-    const data = [
-        [0, 0, 5], [1, 1, 3], [2, 2, 4], [3, 3, 6],
-        [4, 4, 2], [5, 5, 7], [6, 6, 5], [7, 7, 4],
-        [8, 8, 6], [9, 9, 3], [10, 10, 5], [11, 11, 2]
-    ];
-    chart.setOption({
-        polar: {},
-        tooltip: {
-            formatter: function (params) {
-                return (
-                    params.value[2] +
-                    ' commits  '
-                );
-            },
-        },
-        angleAxis: {
-            type: 'category',
-            data: hours,
-            boundaryGap: false,
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: '#3B63D1', // 设置颜色为蓝色
-                    type: 'dashed', // 设置为虚线
-                    width: 2
-                }
-            },
-            axisLine: {
-                show: false
-            },
-            axisLabel: {
-                textStyle: {
-                    color: '#CFEFFF' // 设置角度轴标签文字颜色
-                }
+
+    let dataMax = 3; // 判断索引，0差1重2良3优
+    const Dataarr = [];
+
+    const source = {
+        data: appraise.评价指标.map(item => item.current_value),
+        indicator: appraise.评价指标.map(item => ({
+            name: item.name,
+            max: dataMax,
+            '优Ⅰ': item['优Ⅰ'],
+            '良Ⅱ': item['良Ⅱ'],
+            '中Ⅲ': item['中Ⅲ'],
+            '差Ⅳ': item['差Ⅳ']
+        }))
+    };
+
+    // 遍历每个数据项
+    source.data.forEach((value, index) => {
+        const indicator = source.indicator[index];
+        if (indicator.name == '总初级生产量/总呼吸量' || indicator.name == '总初级生产量/总生物量') {
+            if (value >= indicator['差Ⅳ']) {
+                Dataarr.push(3);
+            } else if (value < indicator['差Ⅳ'] && value >= indicator['中Ⅲ']) {
+                Dataarr.push(3);
+            } else if (value < indicator['中Ⅲ'] && value >= indicator['良Ⅱ']) {
+                Dataarr.push(2);
+            } else if (value < indicator['良Ⅱ'] && value > indicator['优Ⅰ']) {
+                Dataarr.push(1);
+            } else {
+                Dataarr.push(0);
             }
-        },
-        radiusAxis: {
-            type: 'category',
-            axisLine: {
-                show: false
-            },
-            axisLabel: {
-                rotate: 0,
-                textStyle: {
-                    color: '#CFEFFF' // 设置半径轴标签文字颜色
-                }
+        } else {
+            if (value >= indicator['优Ⅰ']) {
+                Dataarr.push(0); // 优Ⅰ
+            } else if (value >= indicator['良Ⅱ'] && value < indicator['优Ⅰ']) {
+                Dataarr.push(1); // 良Ⅱ
+            } else if (value >= indicator['中Ⅲ'] && value < indicator['良Ⅱ']) {
+                Dataarr.push(2); // 中Ⅲ
+            } else if (value >= indicator['差Ⅳ'] && value < indicator['中Ⅲ']) {
+                Dataarr.push(3); // 差Ⅳ
+            } else {
+                Dataarr.push(3); // 差Ⅳ
             }
-        },
-        series: [
-            {
-                name: 'Punch Card',
-                type: 'scatter',
-                coordinateSystem: 'polar',
-                symbolSize: function (val) {
-                    return val[2] * 3; // 将乘数改为3以减小圆点大小
-                },
-                data: data,
+        }
+    });
+
+
+    const buildSeries = function (data) {
+        const helper = data.map((item, index) => {
+            const arr = new Array(data.length);
+            arr.splice(index, 1, item);
+            return arr;
+        });
+
+        return [data, ...helper].map((item, index) => {
+            return {
+                type: 'radar',
                 itemStyle: {
-                    color: 'orange' // 设置颜色为橙色
+                    color: 'orange'
                 },
-                animationDelay: function (idx) {
-                    return idx * 5;
+                lineStyle: {
+                    color: index === 0 ? 'orange' : 'transparent'
+                },
+                areaStyle: {
+                    color: index === 0 ? 'orange' : 'transparent',
+                    opacity: 0.3
+                },
+                tooltip: {
+                    show: index === 0 ? false : true,
+                    formatter: function () {
+                        const indicatorIndex = index - 1; // 获取指标的索引
+                        const indicator = appraise.评价指标[indicatorIndex]; // 获取原始指标数据
+                        const currentValue = source.data[indicatorIndex]; // 获取当前值
+                        let level = '差Ⅳ';
+                        if (currentValue >= indicator['优Ⅰ']) {
+                            level = '优Ⅰ';
+                        } else if (currentValue >= indicator['良Ⅱ'] && currentValue < indicator['优Ⅰ']) {
+                            level = '良Ⅱ';
+                        } else if (currentValue >= indicator['中Ⅲ'] && currentValue < indicator['良Ⅱ']) {
+                            level = '中Ⅲ';
+                        } else if (currentValue >= indicator['差Ⅳ'] && currentValue < indicator['中Ⅲ']) {
+                            level = '差Ⅳ';
+                        } else {
+                            level = '差Ⅳ';
+                        }
+                        if (indicator.name == '总初级生产量/总呼吸量' || indicator.name == '总初级生产量/总生物量') {
+                            if (currentValue >= indicator['差Ⅳ']) {
+                                level = '差Ⅳ';
+                            } else if (currentValue < indicator['差Ⅳ'] && currentValue >= indicator['中Ⅲ']) {
+                                level = '差Ⅳ';
+                            } else if (currentValue < indicator['中Ⅲ'] && currentValue >= indicator['良Ⅱ']) {
+                                level = '中Ⅲ';
+                            } else if (currentValue < indicator['良Ⅱ'] && currentValue > indicator['优Ⅰ']) {
+                                level = '良Ⅱ';
+                            } else {
+                                level = '优Ⅰ';
+                            }
+                        }
+                        console.log(indicator.name, currentValue, level);
+                        return `${indicator.name}：${level}  ${currentValue}`;
+                    }
+                },
+                z: index === 0 ? 1 : 2,
+                data: [item]
+            };
+        });
+    };
+
+    chart.setOption({
+        tooltip: {
+            trigger: 'item'
+        },
+        radar: {
+            indicator: source.indicator,
+            shape: 'circle',
+            splitNumber: 5,
+            name: {
+                textStyle: {
+                    color: '#CFEFFF' // 设置指示器名称颜色
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#3B63D1', // 设置分割线颜色
+                    width: 2,
+                    type: 'dashed' // 设置为虚线
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#3B63D1' // 设置轴线颜色
+                }
+            },
+            splitArea: {
+                areaStyle: {
+                    color: 'rgba(255, 255, 255, 0.1)' // 设置分割区域颜色
                 }
             }
-        ]
+        },
+        series: buildSeries(Dataarr)
     });
 };
+
+
 let initChart3 = () => {
     let chart = echarts.init(chartRef3.value);
     charts.push(() => {
@@ -413,25 +455,25 @@ let initChart3 = () => {
         },
         xAxis: [{
             type: 'category',
-            data: ['中小客',
-                '大客',
-                '小货',
-                '中货',
-                '大货',
-                '大客',
-                '小货',
-                '中货',
-                '大货',
-                '小货',
-                '中货',
-                '大货',
+            data: ['总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
+                '总生产力',
             ],
             axisLine: {
                 show: true,
                 lineStyle: {
                     color: "#063374",
                     width: 1,
-                    type: "solid"
+                    type: "solid",
                 }
             },
             axisTick: {
@@ -441,6 +483,7 @@ let initChart3 = () => {
                 show: true,
                 textStyle: {
                     color: "#CFEFFF",
+                    fontSize: 10
                 },
                 interval: 0
             },

@@ -73,6 +73,19 @@ const updateTime = () => {
   const seconds = String(now.getSeconds()).padStart(2, '0');
   dayTime.value = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`; // 格式化时间
 };
+const windowSize = ref({ width: window.innerWidth, height: window.innerHeight });
+const logWindowSize = () => {
+  windowSize.value = { width: window.innerWidth, height: window.innerHeight };
+  callUIInteraction({
+    Function:'更改分辨率',
+    w: windowSize.value.width,
+    h: windowSize.value.height,
+  });
+  console.log({
+    w: windowSize.value.width,
+    h: windowSize.value.height,
+  });
+};
 
 let selected = ref('');
 let lastActiveButton = ref('')
@@ -112,6 +125,7 @@ onMounted(() => {
   } else {
     console.log("首次被加载")
   }
+  logWindowSize();
   callUIInteraction({
     ModuleName: `其他`,
     FunctionName: `天气`,
@@ -119,9 +133,11 @@ onMounted(() => {
   });
   interval.value = setInterval(updateTime, 1000);
   updateTime(); // 初始化时间
+  window.addEventListener('resize', logWindowSize);
 });
 onUnmounted(() => {
   clearInterval(interval)
+  window.removeEventListener('resize', logWindowSize);
 });
 </script>
 
