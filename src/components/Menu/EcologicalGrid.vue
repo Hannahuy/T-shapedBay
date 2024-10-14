@@ -216,7 +216,8 @@ let initChart1 = () => {
                             break;
                         }
                     }
-                    const labelPositionY = (item.name.length <= 2) ? 4 : -16;
+                    // 根据 item.name 的长度计算 position 的第一个值
+                    const positionOffset = -4 * Math.min(item.name.length, 6); // 限制最大长度为6
                     return {
                         ...item,
                         itemStyle: {
@@ -227,7 +228,10 @@ let initChart1 = () => {
                         label: {
                             show: true,
                             color: '#CFEFFF',
-                            position: [labelPositionY, size] // 使用动态的 size 值
+                            position: [positionOffset, size],
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            padding: [4, 4],
+                            borderRadius: 4
                         },
                         symbolSize: size
                     };
