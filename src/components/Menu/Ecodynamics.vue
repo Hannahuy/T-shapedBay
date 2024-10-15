@@ -203,18 +203,18 @@ let layerFunction = [
             import.meta.url
         ).href,
     },
-    // {
-    //     name: "流速",
-    //     check: false,
-    //     image: new URL(
-    //         "../../assets/img/流速.png",
-    //         import.meta.url
-    //     ).href,
-    //     imageActive: new URL(
-    //         "../../assets/img/流速-active.png",
-    //         import.meta.url
-    //     ).href,
-    // },
+    {
+        name: "流速",
+        check: false,
+        image: new URL(
+            "../../assets/img/流速.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/流速-active.png",
+            import.meta.url
+        ).href,
+    },
 ]
 
 const timePick = ref(dayjs("2024-08-01").toDate());
