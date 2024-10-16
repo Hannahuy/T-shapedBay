@@ -3,6 +3,9 @@
         <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
     </div>
     <!-- 时间轴 -->
+    <div class="bottomCalendar">
+        <el-date-picker v-model="timePick" type="date" :editable="false" />
+    </div>
     <div class="bottombox-left">
         <div class="bottombox-button">
             <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
@@ -38,11 +41,11 @@
             </div>
         </div> -->
         <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
-            <el-checkbox label="水面表层0级" value="水面表层0级" />
-            <el-checkbox label="水面表层1级" value="水面表层1级" />
-            <el-checkbox label="水面表层2级" value="水面表层2级" />
-            <el-checkbox label="水面表层3级" value="水面表层3级" />
-            <el-checkbox label="水面表层4级" value="水面表层4级" />
+            <el-checkbox label="水面表层" value="水面表层0级" />
+            <el-checkbox label="水面中上层" value="水面表层1级" />
+            <el-checkbox label="水面中层" value="水面表层2级" />
+            <el-checkbox label="水面中下层" value="水面表层3级" />
+            <el-checkbox label="水面底层" value="水面表层4级" />
         </el-checkbox-group>
     </div>
     <!-- 右下角颜色条 -->
@@ -120,7 +123,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "浮游植物磷",
+        name: "叶绿素a",
         check: false,
         image: new URL(
             "../../assets/img/浮游植物磷.png",
@@ -132,7 +135,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "浮游植物氮",
+        name: "硝酸盐",
         check: false,
         image: new URL(
             "../../assets/img/浮游植物氮.png",
@@ -144,7 +147,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "叶绿素",
+        name: "铵盐",
         check: false,
         image: new URL(
             "../../assets/img/叶绿素.png",
@@ -156,7 +159,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "初级生产力",
+        name: "磷酸盐",
         check: false,
         image: new URL(
             "../../assets/img/初级生产力.png",
@@ -168,7 +171,7 @@ let layerFunction = [
         ).href,
     },
     {
-        name: "无机磷",
+        name: "硅酸盐",
         check: false,
         image: new URL(
             "../../assets/img/无机磷.png",
@@ -176,18 +179,6 @@ let layerFunction = [
         ).href,
         imageActive: new URL(
             "../../assets/img/无机磷-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "无机氮",
-        check: false,
-        image: new URL(
-            "../../assets/img/无机氮.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/无机氮-active.png",
             import.meta.url
         ).href,
     },
@@ -225,23 +216,33 @@ let previousPlayState = null;
 let intervalTime = null;
 let playInterval = null;
 const togglePlay = () => {
-  intervalTime = 400;
-  previousPlayState = activePlay.value;
-  activePlay.value = activePlay.value === "play" ? "" : "play";
-  if (activePlay.value === "play") {
-    playInterval = setInterval(() => {
-      timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
-      if (activePlay.value !== "play") {
+    intervalTime = 400;
+    previousPlayState = activePlay.value;
+    activePlay.value = activePlay.value === "play" ? "" : "play";
+    if (activePlay.value === "play") {
+        playInterval = setInterval(() => {
+            timePlay.value = dayjs(timePlay.value).add(1, "hour").valueOf();
+            if (activePlay.value !== "play") {
+                clearInterval(playInterval);
+            }
+        }, intervalTime);
+    } else {
         clearInterval(playInterval);
-      }
-    }, intervalTime);
-  } else {
-    clearInterval(playInterval);
-  }
+    }
 };
 const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
 const max = ref(dayjs(timePick.value).hour(23).minute(0).second(0).valueOf());
+watch(timePick, (newVal) => {
+    const selectedDate = dayjs(newVal);
+    min.value = selectedDate.startOf("day").valueOf();
+    // 更新 max 为当天23点
+    max.value = selectedDate.hour(23).minute(0).second(0).valueOf();
+    // 仅在 timePlay 为 null 时设置为当天的 00:00:00
+    if (!timePlay.value) {
+        timePlay.value = selectedDate.startOf("day").valueOf();
+    }
+});
 
 const formattedTime = computed(() => {
     const time = dayjs(timePlay.value);
@@ -416,9 +417,11 @@ const selectchange = (selectedValues) => {
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
     if (storedTime) {
-        timePlay.value = dayjs(storedTime).valueOf(); // 从 sessionStorage 获取值
+        timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
+        timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
     } else {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
+        timePick.value = dayjs('2024-08-01').toDate(); // 默认值
     }
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     const currentSelectValues = Array.from(selectvalue.value);
@@ -444,6 +447,53 @@ onMounted(() => {
     justify-content: space-evenly;
     align-items: center;
     position: absolute;
+}
+
+.bottomCalendar {
+    position: absolute;
+    bottom: 12vh;
+    left: 3vh;
+    width: 13.5vh;
+    height: 2.5rem;
+    color: rgb(0, 113, 204);
+    border-radius: 1.25rem;
+    line-height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.8vh;
+    z-index: 3;
+}
+
+.bottomCalendar :deep(.el-input__wrapper) {
+    position: absolute;
+    z-index: 1000;
+    width: 13.5vh;
+    height: 2.5rem;
+    color: rgb(0, 113, 204);
+    border-radius: 1.25rem;
+    background: #fff;
+    line-height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.8vh;
+}
+
+.bottomCalendar :deep(.el-input__prefix-inner) {
+    display: none !important;
+}
+
+.bottomCalendar :deep(.el-input__inner) {
+    margin-right: 1.5vh;
+    color: rgb(0, 113, 204);
+    cursor: pointer;
+    text-align: center;
+    margin: 0;
+}
+
+.bottomCalendar :deep(.el-input__suffix-inner) {
+    display: none !important;
 }
 
 .bottombox-left {

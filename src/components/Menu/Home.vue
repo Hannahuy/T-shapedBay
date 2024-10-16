@@ -2,47 +2,9 @@
   <div class="leftBox">
     <div class="rightBox-top">
       <div class="rightBox-top-title">
-        潮间带生物类群组成
-      </div>
-      <div class="leftBox-top-table" ref="chartRef1"></div>
-    </div>
-    <div class="rightBox-middle">
-      <div class="rightBox-bottom-title">
-        大型底栖动物组成比例图
-      </div>
-      <div class="leftBox-bottom-table" ref="chartRef2"></div>
-    </div>
-    <div class="rightBox-middle2">
-      <div class="rightBox-bottom-title">
-        浮游植物组成比例图
-      </div>
-      <div class="leftBox-middle2-content" ref="chartRef3"></div>
-    </div>
-    <div class="rightBox-bottom">
-      <div class="rightBox-bottom-title">
-        海水水质评价参数及标准
-      </div>
-      <div class="leftBox-bottom-content">
-        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.2vh',
-          'text-align': 'center',
-        }" height="17.5vh">
-          <el-table-column prop="project" label="项目" width="40" align="center" />
-          <el-table-column prop="PH" label="PH" width="50" align="center" />
-          <el-table-column prop="DO" label="DO" width="40" align="center" />
-          <el-table-column prop="COD" label="COD" width="40" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
-          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="70" align="center" />
-        </el-table>
-      </div>
-    </div>
-  </div>
-  <div class="rightBox">
-    <div class="rightBox-top">
-      <div class="rightBox-top-title">
         生物多样性评价结果
       </div>
-      <div class="rightBox-top-table">
+      <div class="leftBox-top-table">
         <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
           background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
@@ -61,7 +23,7 @@
       <div class="rightBox-bottom-title">
         水质沉积物单指标评价结果
       </div>
-      <div class="rightBox-bottom-table">
+      <div class="leftBox-bottom-table">
         <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
           background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
@@ -78,15 +40,83 @@
     </div>
     <div class="rightBox-middle2">
       <div class="rightBox-bottom-title">
-        环境DNA多样性
+        海水水质评价参数及标准
       </div>
-      <div class="rightBox-middle2-content" ref="chartRef4"></div>
+      <div class="leftBox-middle2-content">
+        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.2vh',
+          'text-align': 'center',
+        }" height="16.25vh">
+          <el-table-column prop="project" label="项目" width="40" align="center" />
+          <el-table-column prop="PH" label="PH" width="50" align="center" />
+          <el-table-column prop="DO" label="DO" width="40" align="center" />
+          <el-table-column prop="COD" label="COD" width="40" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
+          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="70" align="center" />
+        </el-table>
+      </div>
     </div>
     <div class="rightBox-bottom">
       <div class="rightBox-bottom-title">
-        浮游动物组成比例
+        总体评价
       </div>
-      <div class="rightBox-bottom-content" ref="chartRef5"></div>
+      <div class="leftBox-bottom-content">
+        <el-table :data="tableData4" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.6vh',
+          'text-align': 'center',
+        }" height="8.5vh">
+          <el-table-column prop="habitat" label="海湾生境" align="center" />
+          <el-table-column prop="creature" label="海湾生物" align="center" />
+          <el-table-column prop="threatFactors" label="威胁因素" align="center" />
+        </el-table>
+        <div class="bottom-table">
+          <el-table :data="tableData4" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.6vh',
+          'text-align': 'center',
+        }" height="8.5vh">
+          <el-table-column label="综合指数" align="center">
+            <template #default="{ row }">
+              <span :style="{ color: getStatusColor(row.status) }">{{ row.Composite }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="稳定状态" align="center">
+            <template #default="{ row }">
+              <span :style="{ color: getStatusColor(row.status) }">{{ row.status }}</span>
+            </template>
+          </el-table-column>
+        </el-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rightBox">
+    <div class="rightBox-top">
+      <div class="rightBox-top-title">
+        xxxxx
+      </div>
+      <div class="rightBox-top-table">
+
+      </div>
+    </div>
+    <div class="rightBox-middle">
+      <div class="rightBox-bottom-title">
+        xxxxx
+      </div>
+      <div class="rightBox-bottom-table">
+
+      </div>
+    </div>
+    <div class="rightBox-middle2">
+      <div class="rightBox-bottom-title">
+        xxxxx
+      </div>
+      <div class="rightBox-middle2-content"></div>
+    </div>
+    <div class="rightBox-bottom">
+      <div class="rightBox-bottom-title">
+        xxxxx
+      </div>
+      <div class="rightBox-bottom-content"></div>
     </div>
   </div>
 </template>
@@ -206,90 +236,26 @@ const tableData3 = ref([
     Nutritionalization: '富营养化',
   },
 ])
-const charts = [];
-const chartRef1 = ref(null);
-const chartRef2 = ref(null);
-const chartRef3 = ref(null);
-const chartRef4 = ref(null);
-const chartRef5 = ref(null);
-const initChart = (chartRef, source) => {
-  const chart = echarts.init(chartRef.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart(chartRef, source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item',
-      valueFormatter: function (value) {
-        return value + ' %';
-      }
-    },
-    series: [
-      {
-        type: 'pie',
-        data: source,
-        radius: '55%',
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)',
-          },
-        },
-        label: { color: '#CFEFFF' },
-        itemStyle: {
-          color: (params) => {
-            const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
-            return colors[params.dataIndex % colors.length];
-          },
-        },
-      },
-    ],
-  });
-};
-let initChart4 = (source) => {
-  let chart = echarts.init(chartRef4.value);
-  charts.push(() => {
-    chart.dispose();
-    initChart4(source);
-  });
-  chart.setOption({
-    tooltip: {
-      trigger: 'item'
-    },
-    series: [
-      {
-        name: 'Access From',
-        type: 'pie',
-        radius: ['40%', '80%'],
-        avoidLabelOverlap: false,
-        itemStyle: {
-          borderRadius: 10,
-          borderWidth: 2
-        },
-        label: {
-          show: false,
-          position: 'center',
-          color: '#CFEFFF'
-        },
-        emphasis: {
-          label: {
-            show: true,
-            fontSize: 40,
-            fontWeight: 'bold'
-          }
-        },
-        labelLine: {
-          show: false
-        },
-        data: source
-      }
-    ]
-  });
-};
-const reloadChart = () => {
-  charts.splice(-5).forEach((chart) => chart());
+const tableData4 = ref([
+  {
+    habitat: '38.125',
+    creature: '28.75',
+    threatFactors: '20',
+    Composite: '86.875',
+    status: '稳定',
+  }
+])
+const getStatusColor = (status) => {
+  switch (status) {
+    case '稳定':
+      return '#2EA043';
+    case '受损':
+      return '#D18616';
+    case '严重受损':
+      return '#F85149';
+    default:
+      return '#b7cffc'; // 默认颜色
+  }
 };
 
 const myHandleResponseFunction = (data) => {
@@ -304,48 +270,10 @@ const myHandleResponseFunction = (data) => {
 }
 
 onMounted(() => {
-  initChart(chartRef1, [
-    { value: 19.18, name: '节肢动物' },
-    { value: 39.73, name: '软体动物' },
-    { value: 31.51, name: '环节动物' },
-    { value: 1.37, name: '原足动物' },
-    { value: 1.37, name: '星虫动物' },
-    { value: 1.37, name: '扁形动物' },
-    { value: 1.37, name: '腕足动物' },
-    { value: 1.37, name: '脊索动物' },
-    { value: 1.37, name: '刺胞动物' },
-    { value: 1.37, name: '纽形动物' },
-  ]);
-  initChart(chartRef2, [
-    { value: 46.15, name: '多毛类' },
-    { value: 30.77, name: '软体动物' },
-    { value: 15.38, name: '甲壳类' },
-    { value: 3.85, name: '头索动物' },
-    { value: 3.85, name: '纽形动物' },
-  ]);
-  initChart(chartRef3, [
-    { value: 12.5, name: '蓝藻门' },
-    { value: 87.5, name: '硅藻门' },
-  ]);
-  initChart4([
-    { value: '1', name: 'a1' },
-    { value: '1', name: 'a2' },
-    { value: '1', name: 'b1' },
-    { value: '1', name: 'b1' },
-    { value: '1', name: 'c1' },
-    { value: '1', name: 'c2' },
-  ]);
-  initChart(chartRef5, [
-    { value: 20, name: '肛肠动物' },
-    { value: 40, name: '节肢动物' },
-    { value: 7, name: '毛颚动物' },
-    { value: 33, name: '其他幼体' },
-  ]);
-  window.addEventListener("resize", reloadChart);
   addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
 onUnmounted(() => {
-  window.removeEventListener("resize", reloadChart);
+
 });
 </script>
 
@@ -484,5 +412,11 @@ onUnmounted(() => {
 :deep(.el-table .cell) {
   color: #b7cffc;
   padding: 0 0.5vh
+}
+.leftBox-bottom-content :deep(.el-table__body-wrapper){
+  font-size: 1.4vh;
+}
+.bottom-table :deep(.el-table__body-wrapper){
+  font-size: 1.8vh;
 }
 </style>

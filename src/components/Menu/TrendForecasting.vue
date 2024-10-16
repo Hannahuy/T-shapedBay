@@ -42,6 +42,9 @@
             @functionSelected="handleFunctionSelection" />
     </div>
     <!-- 时间轴 -->
+    <div class="bottomCalendar">
+        <el-date-picker v-model="timePick" type="date" :editable="false" />
+    </div>
     <div class="bottombox-left">
         <div class="bottombox-button">
             <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
@@ -77,11 +80,11 @@
             </div>
         </div> -->
         <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
-            <el-checkbox label="水面表层0级" value="水面表层0级" />
-            <el-checkbox label="水面表层1级" value="水面表层1级" />
-            <el-checkbox label="水面表层2级" value="水面表层2级" />
-            <el-checkbox label="水面表层3级" value="水面表层3级" />
-            <el-checkbox label="水面表层4级" value="水面表层4级" />
+            <el-checkbox label="水面表层" value="水面表层0级" />
+            <el-checkbox label="水面中上层" value="水面表层1级" />
+            <el-checkbox label="水面中层" value="水面表层2级" />
+            <el-checkbox label="水面中下层" value="水面表层3级" />
+            <el-checkbox label="水面底层" value="水面表层4级" />
         </el-checkbox-group>
     </div>
     <!-- 右下角颜色条 -->
@@ -139,115 +142,228 @@ const changeRadio = (e) => {
     //     Layer: currentSelectValues,
     // });
 }
+const layerFunction = ref([]);
 const drive = () => {
     if (tabledata.value == '' || tabledata2.value == '') {
         ElMessage.warning('请输入数据');
-        return
+        return;
     } else {
         showselect.value = true;
+        // 根据选中的情景设置 layerFunction
+        if (radioselection.value === '浒苔情景') {
+            layerFunction.value = [
+                {
+                    name: "浮游动物碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游动物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游动物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "浮游植物碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "叶绿素a",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游动物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游动物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "硝酸盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "铵盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物磷.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物磷-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "磷酸盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物氮.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物氮-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "硅酸盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/叶绿素.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/叶绿素-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "溶解氧",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/溶解氧.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/溶解氧-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "碎屑碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/溶解氧.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/溶解氧-active.png",
+                        import.meta.url
+                    ).href,
+                }
+            ];
+        } else if (radioselection.value === '陆源污染情景') {
+            layerFunction.value = [
+                {
+                    name: "浮游动物碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游动物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游动物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "浮游植物碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "叶绿素a",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游动物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游动物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "硝酸盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "铵盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物磷.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物磷-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "磷酸盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物氮.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物氮-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "硅酸盐",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/叶绿素.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/叶绿素-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "溶解氧",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/溶解氧.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/溶解氧-active.png",
+                        import.meta.url
+                    ).href,
+                }
+            ];
+        }
     }
 }
-
 const selectedItemname = ref(null);
-
-let layerFunction = [
-    {
-        name: "浮游动物碳",
-        check: false,
-        image: new URL(
-            "../../assets/img/浮游动物碳.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/浮游动物碳-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "浮游植物碳",
-        check: false,
-        image: new URL(
-            "../../assets/img/浮游植物碳.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/浮游植物碳-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "叶绿素a",
-        check: false,
-        image: new URL(
-            "../../assets/img/浮游动物碳.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/浮游动物碳-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "硝酸盐",
-        check: false,
-        image: new URL(
-            "../../assets/img/浮游植物碳.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/浮游植物碳-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "铵盐",
-        check: false,
-        image: new URL(
-            "../../assets/img/浮游植物磷.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/浮游植物磷-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "磷酸盐",
-        check: false,
-        image: new URL(
-            "../../assets/img/浮游植物氮.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/浮游植物氮-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "硅酸盐",
-        check: false,
-        image: new URL(
-            "../../assets/img/叶绿素.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/叶绿素-active.png",
-            import.meta.url
-        ).href,
-    },
-    {
-        name: "溶解氧",
-        check: false,
-        image: new URL(
-            "../../assets/img/溶解氧.png",
-            import.meta.url
-        ).href,
-        imageActive: new URL(
-            "../../assets/img/溶解氧-active.png",
-            import.meta.url
-        ).href,
-    }
-]
 
 const timePick = ref(dayjs("2024-08-01").toDate());
 const timePlay = ref(null);
@@ -274,6 +390,16 @@ const togglePlay = () => {
 const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
 const max = ref(dayjs(timePick.value).hour(23).minute(0).second(0).valueOf());
+watch(timePick, (newVal) => {
+    const selectedDate = dayjs(newVal);
+    min.value = selectedDate.startOf("day").valueOf();
+    // 更新 max 为当天23点
+    max.value = selectedDate.hour(23).minute(0).second(0).valueOf();
+    // 仅在 timePlay 为 null 时设置为当天的 00:00:00
+    if (!timePlay.value) {
+        timePlay.value = selectedDate.startOf("day").valueOf();
+    }
+});
 
 const formattedTime = computed(() => {
     const time = dayjs(timePlay.value);
@@ -342,8 +468,8 @@ watch(timePlay, (newVal) => {
             //     State: true,
             //     Layer: currentSelectValues,
             // });
-            sessionStorage.setItem('timePlay', formattedTime);
         }
+        sessionStorage.setItem('timePlay', formattedTime);
     }
     if (currentTime.isSame(dayjs(max.value))) {
         activePlay.value = '';
@@ -462,12 +588,15 @@ const selectchange = (selectedValues) => {
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
     if (storedTime) {
-        timePlay.value = dayjs(storedTime).valueOf(); // 从 sessionStorage 获取值
+        timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
+        timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
     } else {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
+        timePick.value = dayjs('2024-08-01').toDate(); // 默认值
     }
     addResponseEventListener("handle_responses", myHandleResponseFunction);
 });
+
 </script>
 
 <style scoped>
@@ -477,6 +606,53 @@ onMounted(() => {
     justify-content: space-evenly;
     align-items: center;
     position: absolute;
+}
+
+.bottomCalendar {
+    position: absolute;
+    bottom: 12vh;
+    left: 3vh;
+    width: 13.5vh;
+    height: 2.5rem;
+    color: rgb(0, 113, 204);
+    border-radius: 1.25rem;
+    line-height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.8vh;
+    z-index: 3;
+}
+
+.bottomCalendar :deep(.el-input__wrapper) {
+    position: absolute;
+    z-index: 1000;
+    width: 13.5vh;
+    height: 2.5rem;
+    color: rgb(0, 113, 204);
+    border-radius: 1.25rem;
+    background: #fff;
+    line-height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.8vh;
+}
+
+.bottomCalendar :deep(.el-input__prefix-inner) {
+    display: none !important;
+}
+
+.bottomCalendar :deep(.el-input__inner) {
+    margin-right: 1.5vh;
+    color: rgb(0, 113, 204);
+    cursor: pointer;
+    text-align: center;
+    margin: 0;
+}
+
+.bottomCalendar :deep(.el-input__suffix-inner) {
+    display: none !important;
 }
 
 .bottombox-left {

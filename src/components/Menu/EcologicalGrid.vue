@@ -3,19 +3,19 @@
         <div class="top">
             <div class="top-left">
                 <div class="toptitle">
-                    能量流动数据
+                    食物网结构
                 </div>
                 <div class="container" ref="chartRef1"></div>
             </div>
             <div class="top-middle">
                 <div class="toptitle">
-                    总体特征参数
+                    食物网特征参数
                 </div>
                 <div class="container" ref="chartRef2"></div>
             </div>
             <div class="top-right">
                 <div class="toptitle">
-                    功能组关键指数
+                    食物网关键物种
                 </div>
                 <div class="container1">
                     <div class="content1 ha">口虾姑</div>
@@ -39,19 +39,19 @@
         <div class="middle">
             <div class="middle-left">
                 <div class="toptitle">
-                    建设参数
+                    食物网监控状况等级
                 </div>
                 <div class="container" ref="chartRef3"></div>
             </div>
             <div class="middle-middle">
                 <div class="toptitle">
-                    营养级传递效率
+                    食物网不同营养级间能量传递情况
                 </div>
                 <div class="container3"></div>
             </div>
             <div class="middle-right">
                 <div class="toptitle">
-                    参数数值
+                    生物量金字塔(t/km²)
                 </div>
                 <div class="middle-right-content">
                     <div class="middle-right-content-left">
@@ -128,7 +128,7 @@
         <div class="bottom">
             <div class="bottom-left">
                 <div class="toptitle">
-                    营养级能量传递效率
+                    食物网中个生物所在营养级
                 </div>
                 <div class="container" ref="chartRef4"></div>
             </div>
@@ -239,7 +239,7 @@ let initChart1 = () => {
                 links: animal.links,
                 lineStyle: {
                     opacity: 0.9,
-                    width: 2,
+                    width: 1,
                     curveness: 0
                 }
             }
@@ -283,7 +283,7 @@ let initChart2 = () => {
         initChart2();
     });
 
-    let dataMax = 3; // 判断索引，0差1重2良3优
+    let dataMax = 4; // 判断索引，0差1重2良3优
     const Dataarr = [];
 
     const source = {
@@ -303,27 +303,27 @@ let initChart2 = () => {
         const indicator = source.indicator[index];
         if (indicator.name == '总初级生产量/总呼吸量' || indicator.name == '总初级生产量/总生物量') {
             if (value >= indicator['差Ⅳ']) {
-                Dataarr.push(3);
+                Dataarr.push(1);
             } else if (value < indicator['差Ⅳ'] && value >= indicator['中Ⅲ']) {
-                Dataarr.push(3);
+                Dataarr.push(1);
             } else if (value < indicator['中Ⅲ'] && value >= indicator['良Ⅱ']) {
                 Dataarr.push(2);
             } else if (value < indicator['良Ⅱ'] && value > indicator['优Ⅰ']) {
-                Dataarr.push(1);
+                Dataarr.push(3);
             } else {
-                Dataarr.push(0);
+                Dataarr.push(4);
             }
         } else {
             if (value >= indicator['优Ⅰ']) {
-                Dataarr.push(0); // 优Ⅰ
+                Dataarr.push(4); // 优Ⅰ
             } else if (value >= indicator['良Ⅱ'] && value < indicator['优Ⅰ']) {
-                Dataarr.push(1); // 良Ⅱ
+                Dataarr.push(3); // 良Ⅱ
             } else if (value >= indicator['中Ⅲ'] && value < indicator['良Ⅱ']) {
                 Dataarr.push(2); // 中Ⅲ
             } else if (value >= indicator['差Ⅳ'] && value < indicator['中Ⅲ']) {
-                Dataarr.push(3); // 差Ⅳ
+                Dataarr.push(1); // 差Ⅳ
             } else {
-                Dataarr.push(3); // 差Ⅳ
+                Dataarr.push(1); // 差Ⅳ
             }
         }
     });
@@ -380,8 +380,7 @@ let initChart2 = () => {
                                 level = '优Ⅰ';
                             }
                         }
-                        console.log(indicator.name, currentValue, level);
-                        return `${indicator.name}：${level}  ${currentValue}`;
+                        return `${indicator.name}：${currentValue}  ${level}`;
                     }
                 },
                 z: index === 0 ? 1 : 2,
@@ -395,12 +394,37 @@ let initChart2 = () => {
             trigger: 'item'
         },
         radar: {
-            indicator: source.indicator,
+            indicator: source.indicator.map(indicator => ({
+                name: indicator.name,
+                max: indicator.max,
+                axisLabel: {
+                    show: indicator.name === '连接指数' // 仅显示“连接指数”的轴标签
+                }
+            })),
             shape: 'circle',
-            splitNumber: 5,
+            splitNumber: 4,
             name: {
                 textStyle: {
                     color: '#CFEFFF' // 设置指示器名称颜色
+                }
+            },
+            axisLabel: {
+                show: true,
+                showMinLabel: false,
+                color: '#FFFFFF',
+                formatter: function (value) {
+                    switch (value) {
+                        case 1:
+                            return '差';
+                        case 2:
+                            return '中';
+                        case 3:
+                            return '良';
+                        case 4:
+                            return '优';
+                        default:
+                            return '';
+                    }
                 }
             },
             splitLine: {
@@ -421,10 +445,10 @@ let initChart2 = () => {
                 }
             }
         },
+
         series: buildSeries(Dataarr)
     });
 };
-
 
 let initChart3 = () => {
     let chart = echarts.init(chartRef3.value);

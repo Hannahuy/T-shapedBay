@@ -1,6 +1,6 @@
 <template>
   <!-- 指北针 -->
-  <div class="North" id="compass">
+  <div class="North" id="compass" v-show="showNorth">
     <img src="/img/指北针.png" style="width: 10vh; height: 10vh;" alt="指北针" id="compassImage">
   </div>
   <!-- 右侧工具栏 -->
@@ -25,6 +25,9 @@
     <img src="/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
   </div>
   <!-- 时间轴 -->
+  <div class="bottomCalendar">
+    <el-date-picker v-model="timePick" type="date" :editable="false" />
+  </div>
   <div class="bottombox-left">
     <div class="bottombox-button">
       <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
@@ -68,10 +71,10 @@
     </div>
     <div class="species">
       <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
-        'odd-item': index % 2 === 0,
-        'even-item': index % 2 !== 0,
-        'active-item': activeIndex === index
-      }" @click="handleClick(index, item)">
+    'odd-item': index % 2 === 0,
+    'even-item': index % 2 !== 0,
+    'active-item': activeIndex === index
+  }" @click="handleClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.count }}</div>
@@ -106,7 +109,7 @@
     <div class="brieflydata">
       <div v-for="(item, index) in animalDatalist" :key="index">
         <div style="font-size: 1.6vh;font-weight: bold;color:#00E7FF;text-align: center;margin-bottom: 1vh;">{{
-        item.title }}</div>
+    item.title }}</div>
         <div style="font-size: 1.2vh;text-indent: 2em;margin-bottom: 1vh;">{{ item.txt }}</div>
       </div>
     </div>
@@ -153,6 +156,28 @@
       礁栖生物类群-2024
     </div>
     <div class="oystersecharts" ref="chartRef2"></div>
+  </div>
+  <!-- 牡蛎礁右侧弹窗 -->
+  <div class="oystersright" v-show="oystersShow">
+    <div class="rightBox-top-title-dialog">
+      牡蛎示例图
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="oystersShow = false">
+    <div class="Carousel">
+      <el-carousel height="16vh">
+        <el-carousel-item v-for="(image, index) in imageoysters" :key="index" v-if="imageoysters.length > 0">
+          <img :src="image" alt="" style="width: 100%; height: 100%;">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <!-- <div class="rightBox-top-title-dialog">
+      牡蛎介绍
+    </div>
+    <div>
+      长牡蛎(Crassostrea gigas)，俗称太平洋牡蛎、大连湾牡蛎，隶属于软体动物门(Mollusca)，双壳纲(Bivalvia)，牡蛎目(Ostreida)，牡蛎科(Ostridae)，巨蛎属(Crassostrea)。长牡蛎自然分布在我国长江以北沿海的潮间带与潮下带，是我国辽宁、河北、山东、江苏等省的主要养殖贝类。该物种在韩国和日本沿海也有自然分布，后经多次引种，目前也是法国、美国、澳大利亚和南非等国的主产牡蛎。
+长牡蛎为一种广温广盐性的海洋双壳贝类，适温范围为-3～32 ℃，最适生长温度为5～28 ℃，适盐范围为15～35，最适生长盐度为20～31。长牡蛎生活史中存在营浮游生活的幼虫期，至幼虫变态期以其左壳固定在外物上生活，终生不再移动。牡蛎是滤食性贝类，幼虫期可以摄食直径在10μm以内的有机颗粒和单胞藻；成体的食物包括浮游植物、有机碎屑、小型浮游动物等。具有群聚的特点，偏好以牡蛎壳等贝壳为附着基质，因此常形成由不同年龄的个体群聚而成的牡蛎礁。
+长牡蛎的性成熟年龄为1龄，一般为雌雄异体，亦有雌雄同体和性别转换现象。通常一龄时雄贝比例较高，二龄时则雌雄近等。长牡蛎属多次性产卵型贝类，丁字湾海域长牡蛎产卵期为5月上旬至7月下旬。温度、盐度和潮汐的变化均会诱导其产卵、排精。长牡蛎怀卵量较大，1龄牡蛎的平均怀卵量在800万粒～856.8万粒，2龄牡蛎的平均怀卵量在2333.80万粒～2900万粒之间。由于丁字湾牡蛎礁区附着基质丰富、长牡蛎幼虫补充量大，因此牡蛎礁能够正常发育，且造礁牡蛎密度较大。
+    </div> -->
   </div>
   <!-- 互花米草弹窗 -->
   <div class="Spartinaalterniflora" v-show="SpartinaalternifloraShow">
@@ -218,7 +243,7 @@
     <div class="oystersecharts" ref="chartRef5"></div>
   </div>
   <!-- 水质沉积物弹窗 -->
-  <div class="sediment" v-if="showSediment">
+  <div class="sediment" v-show="showSediment">
     <div class="rightBox-top-title-dialog">
       时间选择
     </div>
@@ -305,6 +330,36 @@
       </table>
     </div>
   </div>
+  <!-- 水质沉积物右侧弹窗 -->
+  <div class="rightBox" v-show="showSediment">
+    <div class="rightBox-top">
+      <div class="rightBox-top-title">
+        大型底栖动物组成比例图
+      </div>
+      <img src="../../assets/img/close.png" alt="" class="close" @click="showSediment = false">
+      <div class="leftBox-bottom-table" ref="chartRef8"></div>
+    </div>
+    <div class="rightBox-middle">
+      <div class="rightBox-bottom-title">
+        浮游植物组成比例图
+      </div>
+      <div class="rightBox-bottom-table">
+        <div class="leftBox-middle2-content" ref="chartRef7"></div>
+      </div>
+    </div>
+    <div class="rightBox-middle2">
+      <div class="rightBox-bottom-title">
+        浮游动物组成比例
+      </div>
+      <div class="rightBox-bottom-content-chart" ref="chartRef3"></div>
+    </div>
+    <div class="rightBox-bottom">
+      <div class="rightBox-bottom-title">
+        环境DNA多样性
+      </div>
+      <div class="rightBox-middle2-content" ref="chartRef4"></div>
+    </div>
+  </div>
   <!-- 潮间带 -->
   <div class="Intertidalzone" v-show="showIntertidalzone">
     <div class="rightBox-top-title-dialog">
@@ -336,6 +391,16 @@
       生物种类多样性
     </div>
     <div class="oystersecharts" ref="chartRef6"></div>
+    <div class="rightBox-top-title-dialog">
+      优势物种
+    </div>
+    <div class="Carousel" style="margin-top: 1vh;">
+      <el-carousel height="16vh">
+        <el-carousel-item v-for="(image, index) in imageSediment" :key="index" v-if="imageSediment.length > 0">
+          <img :src="image" alt="" style="width: 100%; height: 100%;">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
   </div>
 </template>
 
@@ -353,6 +418,7 @@ const Intertidalzonedata = ref(null);
 const IntertidalzoneName = ref(null);
 const showSediment = ref(false);
 const showIntertidalzone = ref(false);
+const showNorth = ref(false)
 const charts = [];
 const chartRef1 = ref(null);
 const chartRef2 = ref(null);
@@ -360,6 +426,8 @@ const chartRef3 = ref(null);
 const chartRef4 = ref(null);
 const chartRef5 = ref(null);
 const chartRef6 = ref(null);
+const chartRef7 = ref(null);
+const chartRef8 = ref(null);
 const initChart = (chartRef, source) => {
   const chart = echarts.init(chartRef.value);
   charts.push(() => {
@@ -516,6 +584,46 @@ const initChart2 = (source) => {
     ],
   });
 };
+let initChart4 = (source) => {
+  let chart = echarts.init(chartRef4.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart4(source);
+  });
+  chart.setOption({
+    tooltip: {
+      trigger: 'item'
+    },
+    series: [
+      {
+        name: 'Access From',
+        type: 'pie',
+        radius: ['40%', '80%'],
+        avoidLabelOverlap: false,
+        itemStyle: {
+          borderRadius: 10,
+          borderWidth: 2
+        },
+        label: {
+          show: false,
+          position: 'center',
+          color: '#CFEFFF'
+        },
+        emphasis: {
+          label: {
+            show: true,
+            fontSize: 40,
+            fontWeight: 'bold'
+          }
+        },
+        labelLine: {
+          show: false
+        },
+        data: source
+      }
+    ]
+  });
+};
 const reloadChart = () => {
   charts.forEach((chart) => chart());
 };
@@ -607,7 +715,16 @@ const togglePlay = () => {
 const min = ref(dayjs(timePick.value).startOf("day").valueOf());
 // 将 max 设置为当天的23点
 const max = ref(dayjs(timePick.value).hour(23).minute(0).second(0).valueOf());
-
+watch(timePick, (newVal) => {
+  const selectedDate = dayjs(newVal);
+  min.value = selectedDate.startOf("day").valueOf();
+  // 更新 max 为当天23点
+  max.value = selectedDate.hour(23).minute(0).second(0).valueOf();
+  // 仅在 timePlay 为 null 时设置为当天的 00:00:00
+  if (!timePlay.value) {
+    timePlay.value = selectedDate.startOf("day").valueOf();
+  }
+});
 const formattedTime = computed(() => {
   const time = dayjs(timePlay.value);
   return time.format("YYYY/MM/DD HH:mm");
@@ -682,18 +799,24 @@ const activeIndex = ref(0);
 const animalData = ref([]);
 const animalDatalist = ref([]);
 const imageArray = ref([]);
-
+const imageSediment = ref([]);
+const imageoysters = ref([
+  '/img/牡蛎礁1.jpg',
+  '/img/牡蛎礁2.jpg',
+  '/img/牡蛎礁3.jpg'
+]);
+console.log(imageoysters.value);
 // 点击动物名显示信息
 const handleClick = (index, item) => {
   activeIndex.value = index;
-  axios.get( window.VITE_APP_BASE_API + `/animal/getAnimal/${item.name}`).then((res) => {
+  axios.get(window.VITE_APP_BASE_API + `/animal/getAnimal/${item.name}`).then((res) => {
     animalData.value = res.data.data.info.鸟种资料;
     animalDatalist.value = res.data.data.info.详细信息;
-    imageArray.value = res.data.data.images.imageArray.map(image =>  window.VITE_APP_BASE_API + `${image.path}`);
+    imageArray.value = res.data.data.images.imageArray.map(image => window.VITE_APP_BASE_API + `${image.path}`);
   });
 };
 const countspeciesList = ref(0);
-const oystersShow = ref(false);
+const oystersShow = ref(true);
 const SpartinaalternifloraShow = ref(false);
 
 const radioChange = (e) => {
@@ -712,7 +835,27 @@ const radioChange2 = (e) => {
     State: true,
     Time: e
   });
-}
+
+  const data = {
+    time: e
+  };
+
+  axios.post(window.VITE_APP_BASE_API + `/animal/getBioRecord`, data).then((res) => {
+    const results = res.data.data; // 获取结果数组
+    // 遍历结果数组
+    results.forEach(item => {
+      const type = item.type; // 获取类型
+      const records = item.records.data; // 获取记录数据
+      if (type === '浮游植物') {
+        initChart(chartRef7, records);
+      } else if (type === '底栖生物') {
+        initChart(chartRef8, records);
+      } else if (type === '浮游动物') {
+        initChart(chartRef3, records);
+      }
+    });
+  });
+};
 const waterQuality = ref({});
 const sediment = ref({});
 const tablename = ref(null);
@@ -748,7 +891,7 @@ const myHandleResponseFunction = (data) => {
       speciesList.value = datajson.Data.animalsCount;
       countspeciesList.value = speciesList.value.reduce((total, animal) => total + animal.count, 0);
 
-      axios.get( window.VITE_APP_BASE_API + `/animal/getAnimal/${datajson.Data.animalsCount[0].name}`)
+      axios.get(window.VITE_APP_BASE_API + `/animal/getAnimal/${datajson.Data.animalsCount[0].name}`)
         .then((res) => {
           animalData.value = res.data.data.info.鸟种资料;
           animalDatalist.value = res.data.data.info.详细信息;
@@ -791,6 +934,24 @@ const myHandleResponseFunction = (data) => {
 
     case '水质沉积物点击查询':
       toggleVisibility(['sediment']);
+      const data = {
+        time: 2023.06
+      };
+      axios.post(window.VITE_APP_BASE_API + `/animal/getBioRecord`, data).then((res) => {
+        const results = res.data.data; // 获取结果数组
+        // 遍历结果数组
+        results.forEach(item => {
+          const type = item.type; // 获取类型
+          const records = item.records.data; // 获取记录数据
+          if (type === '浮游植物') {
+            initChart(chartRef7, records);
+          } else if (type === '底栖生物') {
+            initChart(chartRef8, records);
+          } else if (type === '浮游动物') {
+            initChart(chartRef3, records);
+          }
+        });
+      });
       tablename.value = datajson.Data.name;
       waterQuality.value = datajson.Data.waterQuality;
       sediment.value = datajson.Data.sediment;
@@ -824,9 +985,11 @@ const myHandleResponseFunction = (data) => {
 onMounted(() => {
   const storedTime = sessionStorage.getItem('timePlay');
   if (storedTime) {
-    timePlay.value = dayjs(storedTime).valueOf(); // 从 sessionStorage 获取值
+    timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
+    timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
   } else {
-    timePlay.value = dayjs('2023-08-21 06:00:00').valueOf(); // 默认值
+    timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
+    timePick.value = dayjs('2024-08-01').toDate(); // 默认值
   }
   callUIInteraction({
     ModuleName: `监测调查`,
@@ -841,52 +1004,18 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.leftBox {
-  position: absolute;
-  left: 2.4vh;
-  top: 10vh;
-  width: 30vh;
-  height: 88vh;
-  background-image: url('../../assets/img/rightbox.png');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  z-index: 10;
-  padding: 1.5vh;
-  box-sizing: border-box;
-}
-
 .rightBox {
   position: absolute;
-  right: 2.4vh;
+  right: 7.4vh;
   top: 10vh;
   width: 30vh;
-  height: 88vh;
+  height: 80vh;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   z-index: 10;
   padding: 1.5vh;
   box-sizing: border-box;
-}
-
-.rightBox-top {
-  width: 100%;
-  height: 21.25vh;
-}
-
-.rightBox-middle {
-  width: 100%;
-  height: 21.25vh;
-}
-
-.rightBox-middle2 {
-  width: 100%;
-  height: 21.25vh;
-}
-
-.rightBox-bottom {
-  width: 100%;
-  height: 21.25vh;
 }
 
 .rightBox-top-title,
@@ -939,17 +1068,78 @@ onUnmounted(() => {
   font-size: 1.2vh;
 }
 
-.rightBox-top-table,
+.rightBox-top,
+.rightBox-middle,
+.rightBox-middle2,
+.rightBox-bottom {
+  width: 100%;
+  height: 18.4vh;
+}
+
 .rightBox-bottom-table,
 .rightBox-bottom-content,
-.rightBox-middle2-content,
-.leftBox-top-table,
-.leftBox-bottom-table,
+.rightBox-bottom-content-chart,
 .leftBox-middle2-content,
-.leftBox-bottom-content {
+.leftBox-bottom-table {
   margin: 1vh 0;
-  width: 100%;
-  height: 16.25vh;
+  width: 27vh;
+  height: 14vh;
+}
+
+.rightBox-middle2-content {
+  margin: 1vh 0;
+  width: 27vh;
+  height: 18.25vh;
+  background-image: url('../../../public/img/DNA.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.bottomCalendar {
+  position: absolute;
+  bottom: 12vh;
+  left: 3vh;
+  width: 13.5vh;
+  height: 2.5rem;
+  color: rgb(0, 113, 204);
+  border-radius: 1.25rem;
+  line-height: 2.5rem;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.8vh;
+  z-index: 3;
+}
+
+.bottomCalendar :deep(.el-input__wrapper) {
+  position: absolute;
+  z-index: 1000;
+  width: 13.5vh;
+  height: 2.5rem;
+  color: rgb(0, 113, 204);
+  border-radius: 1.25rem;
+  background: #fff;
+  line-height: 2.5rem;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.8vh;
+}
+
+.bottomCalendar :deep(.el-input__prefix-inner) {
+  display: none !important;
+}
+
+.bottomCalendar :deep(.el-input__inner) {
+  margin-right: 1.5vh;
+  color: rgb(0, 113, 204);
+  cursor: pointer;
+  text-align: center;
+  margin: 0;
+}
+
+.bottomCalendar :deep(.el-input__suffix-inner) {
+  display: none !important;
 }
 
 .bottombox-left {
@@ -1085,6 +1275,8 @@ onUnmounted(() => {
   width: 100%;
   height: 16vh;
   flex-shrink: 0;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
 :deep(.el-carousel__button) {
@@ -1208,6 +1400,22 @@ onUnmounted(() => {
 .oysters {
   position: absolute;
   left: 2.4vh;
+  top: 10vh;
+  width: 30vh;
+  max-height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh 1.5vh 0 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.oystersright{
+  position: absolute;
+  right: 7.4vh;
   top: 10vh;
   width: 30vh;
   max-height: 80vh;
@@ -1348,7 +1556,7 @@ onUnmounted(() => {
   left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  height: 45.5vh;
+  height: 64.5vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
