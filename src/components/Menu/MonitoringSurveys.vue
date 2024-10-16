@@ -816,7 +816,7 @@ const handleClick = (index, item) => {
   });
 };
 const countspeciesList = ref(0);
-const oystersShow = ref(true);
+const oystersShow = ref(false);
 const SpartinaalternifloraShow = ref(false);
 
 const radioChange = (e) => {
