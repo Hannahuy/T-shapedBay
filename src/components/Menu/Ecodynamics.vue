@@ -17,7 +17,7 @@
                     <span class="bottombox-slider-span">{{ formattedTime }}</span>
                 </div>
                 <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-                    style="position: relative; z-index: 1; width: 1725px" @change="gettimePlay">
+                    style="position: relative; z-index: 1; width: 1560px" @change="gettimePlay">
                 </el-slider>
             </div>
         </div>
@@ -252,7 +252,7 @@ const formattedTime = computed(() => {
 const style = computed(() => {
     const length = max.value - min.value,
         progress = timePlay.value - min.value,
-        left = (progress / length) * 93;
+        left = (progress / length) * 95;
     return {
         paddingLeft: `${left}%`,
     };
@@ -261,7 +261,7 @@ const style = computed(() => {
 const adjustedStyle = computed(() => {
     const baseStyle = style.value;
     const divWidth = 125; // 计算宽度为125px
-    const totalWidth = 1725;
+    const totalWidth = 1560;
     const leftPadding = parseFloat(baseStyle.paddingLeft);
 
     if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
@@ -451,8 +451,8 @@ onMounted(() => {
 
 .bottomCalendar {
     position: absolute;
-    bottom: 12vh;
-    left: 3vh;
+    bottom: 3.5vh;
+    right: 3vh;
     width: 13.5vh;
     height: 2.5rem;
     color: rgb(0, 113, 204);
@@ -497,7 +497,7 @@ onMounted(() => {
 }
 
 .bottombox-left {
-    width: 97.5%;
+    width: 89%;
     height: 5vh;
     background-image: url('../../assets/img/timebackground.png');
     background-repeat: no-repeat;
@@ -520,7 +520,7 @@ onMounted(() => {
 .bottombox-button {
     position: absolute;
     bottom: 0.5vh;
-    left: 0.9%;
+    left: 0.8%;
     display: flex;
     align-items: center;
     z-index: 10;

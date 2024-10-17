@@ -9,13 +9,24 @@
       <img :src="selectedWeather" class="imageicon" alt="" @click="weathernext">
     </el-tooltip>
     <el-tooltip class="box-item" effect="dark" content="海面" placement="left">
-      <img src="../../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt="" @click="offing">
+      <img src="../../assets/img/海面.png" class="imageicon" style="width: 2vh;" alt=""
+        @click="handleiconClick('海面', '其他')">
     </el-tooltip>
     <el-tooltip class="box-item" effect="dark" content="视角恢复" placement="left">
-      <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt="" @click="perspective">
+      <img src="../../assets/img/视角.png" class="imageicon" style="width: 2.3vh;" alt=""
+        @click="handleiconClick('视角', '其他')">
     </el-tooltip>
     <el-tooltip class="box-item" effect="dark" content="等深线" placement="left">
-      <img src="../../assets/img/等深线.png" class="imageicon" style="width: 2.3vh;" alt="" @click="contour">
+      <img src="../../assets/img/等深线.png" class="imageicon" style="width: 2.3vh;" alt=""
+        @click="handleiconClick('等深线', '其他')">
+    </el-tooltip>
+    <el-tooltip class="box-item" effect="dark" content="未来站点" placement="left">
+      <img src="../../assets/img/未来站点.png" class="imageicon" style="width: 2.3vh;" alt=""
+        @click="handleiconClick('未来站点', '其他')">
+    </el-tooltip>
+    <el-tooltip class="box-item" effect="dark" content="潮汐" placement="left">
+      <img src="../../assets/img/潮汐.png" class="imageicon" style="width: 2.3vh;" alt=""
+        @click="handleiconClick('潮汐', '其他')">
     </el-tooltip>
   </div>
   <div class="weatherBox" v-if="showWeather">
@@ -39,7 +50,7 @@
           <span class="bottombox-slider-span">{{ formattedTime }}</span>
         </div>
         <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-          style="position: relative; z-index: 1; width: 1725px" @change="gettimePlay">
+          style="position: relative; z-index: 1; width: 1560px" @change="gettimePlay">
         </el-slider>
       </div>
     </div>
@@ -163,21 +174,27 @@
       牡蛎示例图
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="oystersShow = false">
-    <div class="Carousel">
+    <div class="Carousel1">
       <el-carousel height="16vh">
         <el-carousel-item v-for="(image, index) in imageoysters" :key="index" v-if="imageoysters.length > 0">
           <img :src="image" alt="" style="width: 100%; height: 100%;">
         </el-carousel-item>
       </el-carousel>
     </div>
-    <!-- <div class="rightBox-top-title-dialog">
+    <div class="rightBox-top-title-dialog">
       牡蛎介绍
     </div>
-    <div>
-      长牡蛎(Crassostrea gigas)，俗称太平洋牡蛎、大连湾牡蛎，隶属于软体动物门(Mollusca)，双壳纲(Bivalvia)，牡蛎目(Ostreida)，牡蛎科(Ostridae)，巨蛎属(Crassostrea)。长牡蛎自然分布在我国长江以北沿海的潮间带与潮下带，是我国辽宁、河北、山东、江苏等省的主要养殖贝类。该物种在韩国和日本沿海也有自然分布，后经多次引种，目前也是法国、美国、澳大利亚和南非等国的主产牡蛎。
-长牡蛎为一种广温广盐性的海洋双壳贝类，适温范围为-3～32 ℃，最适生长温度为5～28 ℃，适盐范围为15～35，最适生长盐度为20～31。长牡蛎生活史中存在营浮游生活的幼虫期，至幼虫变态期以其左壳固定在外物上生活，终生不再移动。牡蛎是滤食性贝类，幼虫期可以摄食直径在10μm以内的有机颗粒和单胞藻；成体的食物包括浮游植物、有机碎屑、小型浮游动物等。具有群聚的特点，偏好以牡蛎壳等贝壳为附着基质，因此常形成由不同年龄的个体群聚而成的牡蛎礁。
-长牡蛎的性成熟年龄为1龄，一般为雌雄异体，亦有雌雄同体和性别转换现象。通常一龄时雄贝比例较高，二龄时则雌雄近等。长牡蛎属多次性产卵型贝类，丁字湾海域长牡蛎产卵期为5月上旬至7月下旬。温度、盐度和潮汐的变化均会诱导其产卵、排精。长牡蛎怀卵量较大，1龄牡蛎的平均怀卵量在800万粒～856.8万粒，2龄牡蛎的平均怀卵量在2333.80万粒～2900万粒之间。由于丁字湾牡蛎礁区附着基质丰富、长牡蛎幼虫补充量大，因此牡蛎礁能够正常发育，且造礁牡蛎密度较大。
-    </div> -->
+    <div class="oystersrightcontent">
+      <p>
+        长牡蛎(Crassostreagigas)，俗称太平洋牡蛎、大连湾牡蛎，隶属于软体动物门(Mollusca)，双壳纲(Bivalvia)，牡蛎目(Ostreida)，牡蛎科(Ostridae)，巨蛎属(Crassostrea)。长牡蛎自然分布在我国长江以北沿海的潮间带与潮下带，是我国辽宁、河北、山东、江苏等省的主要养殖贝类。该物种在韩国和日本沿海也有自然分布，后经多次引种，目前也是法国、美国、澳大利亚和南非等国的主产牡蛎。
+      </p>
+      <p>长牡蛎为一种广温广盐性的海洋双壳贝类，适温范围为-3～32
+        ℃，最适生长温度为5～28℃，适盐范围为15～35，最适生长盐度为20～31。长牡蛎生活史中存在营浮游生活的幼虫期，至幼虫变态期以其左壳固定在外物上生活，终生不再移动。牡蛎是滤食性贝类，幼虫期可以摄食直径在10μm以内的有机颗粒和单胞藻；成体的食物包括浮游植物、有机碎屑、小型浮游动物等。具有群聚的特点，偏好以牡蛎壳等贝壳为附着基质，因此常形成由不同年龄的个体群聚而成的牡蛎礁。
+      </p>
+      <p>
+        长牡蛎的性成熟年龄为1龄，一般为雌雄异体，亦有雌雄同体和性别转换现象。通常一龄时雄贝比例较高，二龄时则雌雄近等。长牡蛎属多次性产卵型贝类，丁字湾海域长牡蛎产卵期为5月上旬至7月下旬。温度、盐度和潮汐的变化均会诱导其产卵、排精。长牡蛎怀卵量较大，1龄牡蛎的平均怀卵量在800万粒～856.8万粒，2龄牡蛎的平均怀卵量在2333.80万粒～2900万粒之间。由于丁字湾牡蛎礁区附着基质丰富、长牡蛎幼虫补充量大，因此牡蛎礁能够正常发育，且造礁牡蛎密度较大。
+      </p>
+    </div>
   </div>
   <!-- 互花米草弹窗 -->
   <div class="Spartinaalterniflora" v-show="SpartinaalternifloraShow">
@@ -391,16 +408,28 @@
       生物种类多样性
     </div>
     <div class="oystersecharts" ref="chartRef6"></div>
+  </div>
+  <!-- 潮间带右侧 -->
+  <div class="Intertidalzoneright">
     <div class="rightBox-top-title-dialog">
       优势物种
     </div>
-    <div class="Carousel" style="margin-top: 1vh;">
+    <img src="../../assets/img/close.png" alt="" class="close" @click="aaa">
+    <div class="species">
+      <div class="species-item" v-for="(item, index) in tidalzoneList" :key="index" :class="{'odd-item': index % 2 === 0,'even-item': index % 2 !== 0,'active-item': activeIndex2 === index
+          }" @click="handletidalzoneClick(index, item)">
+        <div>{{ index + 1 }}</div>
+        <div>{{ item.name }}</div>
+        <div></div>
+      </div>
+    </div>
+    <!-- <div class="Carousel" style="margin-top: 1vh;">
       <el-carousel height="16vh">
         <el-carousel-item v-for="(image, index) in imageSediment" :key="index" v-if="imageSediment.length > 0">
           <img :src="image" alt="" style="width: 100%; height: 100%;">
         </el-carousel-item>
       </el-carousel>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -411,6 +440,51 @@ import { callUIInteraction, addResponseEventListener } from "../../module/webrtc
 import { ElMessage } from 'element-plus';
 import dayjs from 'dayjs'
 import axios from "axios";
+const tidalzoneDatacontent = ref(null);
+const aaa = () => {
+  const data = `{
+    "Function": "潮间带点击查询",
+    "Data": {
+        "name": "断面E",
+        "density": "1760.0个/m2",
+        "biomass": "362.56g/m2",
+        "statistics": {
+            "节肢动物": 5,
+            "软体动物": 8,
+            "环节动物": 8
+        },
+        "dominant": {
+            "contains": [
+                {
+                    "name": "长山椒螺",
+                    "description": "长山椒螺（学名：Assiminea vagans），属软体动物腹足类，螺层约6层，壳尖圆锥状。",
+                    "url": "/image/长山椒螺.png"
+                },
+                {
+                    "name": "光滑狭口螺",
+                    "description": "光滑狭口螺属于动物界，螺科，狭口螺属，定名人A. Adams。",
+                    "url": "/image/光滑狭口螺.png"
+                }
+            ]
+        }
+    }
+}`
+  const datajson = JSON.parse(data);
+  tidalzoneDatacontent.value = datajson;
+  toggleVisibility(['intertidalzone']);
+  activeIndex2.value = 0;
+  IntertidalzoneName.value = datajson.Data.name;
+  Intertidalzonedata.value = datajson.Data.density;
+  Intertidalzonedata2.value = datajson.Data.biomass;
+  tidalzoneList.value = datajson.Data.dominant.contains;
+  const statisticsData = datajson.Data.statistics;
+  const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
+  const chartData = Object.keys(statisticsData).map(key => ({
+    name: key,
+    value: parseFloat(((statisticsData[key] / total) * 100).toFixed(1)),
+  }));
+  initChart(chartRef6, chartData);
+}
 const radio = ref(2019)
 const radio2 = ref('2023.06')
 const Intertidalzonedata2 = ref(null);
@@ -670,23 +744,10 @@ const selectWeather = (weather) => {
       break;
   }
 };
-const offing = () => {
+const handleiconClick = (functionName, moduleName) => {
   callUIInteraction({
-    ModuleName: `其他`,
-    FunctionName: `海面`,
-  });
-}
-const perspective = () => {
-  callUIInteraction({
-    ModuleName: `其他`,
-    FunctionName: `视角`,
-  });
-}
-
-const contour = () => {
-  callUIInteraction({
-    ModuleName: `其他`,
-    FunctionName: `等深线`,
+    ModuleName: moduleName,
+    FunctionName: functionName,
   });
 }
 
@@ -733,7 +794,7 @@ const formattedTime = computed(() => {
 const style = computed(() => {
   const length = max.value - min.value,
     progress = timePlay.value - min.value,
-    left = (progress / length) * 93;
+    left = (progress / length) * 95;
   return {
     paddingLeft: `${left}%`,
   };
@@ -742,7 +803,7 @@ const style = computed(() => {
 const adjustedStyle = computed(() => {
   const baseStyle = style.value;
   const divWidth = 125; // 计算宽度为125px
-  const totalWidth = 1725;
+  const totalWidth = 1560;
   const leftPadding = parseFloat(baseStyle.paddingLeft);
 
   if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
@@ -794,18 +855,20 @@ const gettimePlay = (e) => {
 // 鸟弹窗
 const birdShow = ref(false);
 const speciesList = ref([]);
+const tidalzoneList = ref([]);
 const birdstation = ref(null)
 const activeIndex = ref(0);
+const activeIndex2 = ref(0);
 const animalData = ref([]);
 const animalDatalist = ref([]);
+const tidalzoneDataList = ref([]);
 const imageArray = ref([]);
-const imageSediment = ref([]);
+// const imageSediment = ref([]);
 const imageoysters = ref([
   '/img/牡蛎礁1.jpg',
   '/img/牡蛎礁2.jpg',
   '/img/牡蛎礁3.jpg'
 ]);
-console.log(imageoysters.value);
 // 点击动物名显示信息
 const handleClick = (index, item) => {
   activeIndex.value = index;
@@ -814,6 +877,11 @@ const handleClick = (index, item) => {
     animalDatalist.value = res.data.data.info.详细信息;
     imageArray.value = res.data.data.images.imageArray.map(image => window.VITE_APP_BASE_API + `${image.path}`);
   });
+};
+const handletidalzoneClick = (index) => {
+  activeIndex2.value = index;
+  // tidalzoneDataList.value = tidalzoneDatacontent.value;
+  // imageArray.value = res.data.data.images.imageArray.map(image => window.VITE_APP_BASE_API + `${image.path}`);
 };
 const countspeciesList = ref(0);
 const oystersShow = ref(false);
@@ -959,10 +1027,11 @@ const myHandleResponseFunction = (data) => {
 
     case '潮间带点击查询':
       toggleVisibility(['intertidalzone']);
+      activeIndex2.value = 0;
       IntertidalzoneName.value = datajson.Data.name;
       Intertidalzonedata.value = datajson.Data.density;
       Intertidalzonedata2.value = datajson.Data.biomass;
-
+      tidalzoneList.value = datajson.Data.dominant.contains;
       const statisticsData = datajson.Data.statistics;
       const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
       const chartData = Object.keys(statisticsData).map(key => ({
@@ -1097,8 +1166,8 @@ onUnmounted(() => {
 
 .bottomCalendar {
   position: absolute;
-  bottom: 12vh;
-  left: 3vh;
+  bottom: 3.5vh;
+  right: 3vh;
   width: 13.5vh;
   height: 2.5rem;
   color: rgb(0, 113, 204);
@@ -1143,7 +1212,7 @@ onUnmounted(() => {
 }
 
 .bottombox-left {
-  width: 97.5%;
+  width: 89%;
   height: 5vh;
   background-image: url('../../assets/img/timebackground.png');
   background-repeat: no-repeat;
@@ -1166,7 +1235,7 @@ onUnmounted(() => {
 .bottombox-button {
   position: absolute;
   bottom: 0.5vh;
-  left: 0.9%;
+  left: 0.8%;
   display: flex;
   align-items: center;
   z-index: 10;
@@ -1272,6 +1341,12 @@ onUnmounted(() => {
 }
 
 .Carousel {
+  width: 100%;
+  height: 16vh;
+  flex-shrink: 0;
+}
+
+.Carousel1 {
   width: 100%;
   height: 16vh;
   flex-shrink: 0;
@@ -1413,12 +1488,13 @@ onUnmounted(() => {
   flex-direction: column;
 }
 
-.oystersright{
+.oystersright {
   position: absolute;
   right: 7.4vh;
   top: 10vh;
   width: 30vh;
   max-height: 80vh;
+  overflow-y: auto;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
@@ -1475,7 +1551,7 @@ onUnmounted(() => {
 }
 
 .righticon {
-  height: 20vh;
+  height: 30vh;
   width: 4vh;
   position: absolute;
   display: flex;
@@ -1496,8 +1572,8 @@ onUnmounted(() => {
 .weatherBox {
   position: absolute;
   right: 2.4vh;
-  top: 28%;
-  transform: translateY(-28%);
+  top: 22%;
+  transform: translateY(-22%);
   width: 4vh;
   height: 18vh;
   background-image: url('../../assets/img/rightbox.png');
@@ -1556,7 +1632,25 @@ onUnmounted(() => {
   left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  height: 64.5vh;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.Intertidalzoneright {
+  position: absolute;
+  right: 7.4vh;
+  top: 10vh;
+  width: 30vh;
+  max-height: 80vh;
+  overflow-y: auto;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
@@ -1572,5 +1666,20 @@ onUnmounted(() => {
   z-index: 3;
   right: 2.4vh;
   bottom: 10vh;
+}
+
+.oystersrightcontent {
+  margin-top: 1vh;
+  color: #b7cffc;
+  font-size: 1.3vh;
+  max-height: 52vh;
+  overflow-y: auto;
+}
+
+.oystersrightcontent p {
+  text-indent: 2ch;
+  /* 每段行缩进2个字符 */
+  margin-bottom: 1em;
+  /* 段落之间的间距 */
 }
 </style>

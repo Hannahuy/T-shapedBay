@@ -56,7 +56,7 @@
                     <span class="bottombox-slider-span">{{ formattedTime }}</span>
                 </div>
                 <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-                    style="position: relative; z-index: 1; width: 1725px" @change="gettimePlay">
+                    style="position: relative; z-index: 1; width: 1560px" @change="gettimePlay">
                 </el-slider>
             </div>
         </div>
@@ -86,6 +86,36 @@
             <el-checkbox label="水面中下层" value="水面表层3级" />
             <el-checkbox label="水面底层" value="水面表层4级" />
         </el-checkbox-group>
+    </div>
+    <!-- 右上角查询表格 -->
+    <div class="smallWindow" v-if="showSmallWindow">
+        <img src="../../assets/img/close.png" alt="" class="close" @click="close">
+        <table class="custom-table2">
+            <thead>
+                <tr>
+                    <td>数据值</td>
+                    <td>{{ Datavar }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>类型</td>
+                    <td>{{ Datatype }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>时间</td>
+                    <td>{{ Datatime }}</td>
+                </tr>
+            </thead>
+            <thead>
+                <tr>
+                    <td>层级</td>
+                    <td>{{ layer }}</td>
+                </tr>
+            </thead>
+        </table>
     </div>
     <!-- 右下角颜色条 -->
     <div class="right-button" v-if="showselect">
@@ -409,7 +439,7 @@ const formattedTime = computed(() => {
 const style = computed(() => {
     const length = max.value - min.value,
         progress = timePlay.value - min.value,
-        left = (progress / length) * 93;
+        left = (progress / length) * 95;
     return {
         paddingLeft: `${left}%`,
     };
@@ -418,7 +448,7 @@ const style = computed(() => {
 const adjustedStyle = computed(() => {
     const baseStyle = style.value;
     const divWidth = 125; // 计算宽度为125px
-    const totalWidth = 1725;
+    const totalWidth = 1560;
     const leftPadding = parseFloat(baseStyle.paddingLeft);
 
     if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
@@ -517,6 +547,10 @@ const Datavar = ref(null);
 const Datatype = ref(null);
 const Datatime = ref(null);
 const layer = ref(null);
+const showSmallWindow = ref(false);
+const close = () => {
+    showSmallWindow.value = false;
+};
 const myHandleResponseFunction = (data) => {
     const datajson = JSON.parse(data);
     if (datajson.Function === '报错') {
@@ -530,6 +564,7 @@ const myHandleResponseFunction = (data) => {
         barMin.value = datajson.Data.NorMin;
         barMax.value = datajson.Data.NorMax;
     } else if (datajson.Function === '点击查询') {
+        showSmallWindow.value = true;
         Datavar.value = datajson.Data.var;
         Datatype.value = datajson.Data.type;
         Datatime.value = datajson.Data.time;
@@ -610,8 +645,8 @@ onMounted(() => {
 
 .bottomCalendar {
     position: absolute;
-    bottom: 12vh;
-    left: 3vh;
+    bottom: 3.5vh;
+    right: 3vh;
     width: 13.5vh;
     height: 2.5rem;
     color: rgb(0, 113, 204);
@@ -656,7 +691,7 @@ onMounted(() => {
 }
 
 .bottombox-left {
-    width: 97.5%;
+    width: 89%;
     height: 5vh;
     background-image: url('../../assets/img/timebackground.png');
     background-repeat: no-repeat;
@@ -679,7 +714,7 @@ onMounted(() => {
 .bottombox-button {
     position: absolute;
     bottom: 0.5vh;
-    left: 0.9%;
+    left: 0.8%;
     display: flex;
     align-items: center;
     z-index: 10;
@@ -773,9 +808,9 @@ onMounted(() => {
 .smallWindow {
     position: absolute;
     right: 2.4vh;
-    top: 12vh;
+    top: 42vh;
     width: 40vh;
-    height: 25vh;
+    height: 22vh;
     z-index: 10;
     background-image: url('../../assets/img/资源 71.png');
     background-repeat: no-repeat;
@@ -796,6 +831,23 @@ onMounted(() => {
 
 .custom-table th,
 .custom-table td {
+    border: 0.2vh solid #416491;
+    padding: 0.8vh;
+    text-align: center;
+    height: 3vh;
+    width: 50%;
+}
+
+.custom-table2{
+    border-collapse: collapse;
+    width: 90%;
+    color: #b7cffc;
+    margin-top: 1vh;
+    z-index: 3;
+}
+
+.custom-table2 th,
+.custom-table2 td {
     border: 0.2vh solid #416491;
     padding: 0.8vh;
     text-align: center;
@@ -896,7 +948,7 @@ onMounted(() => {
 
 .rightbox {
     position: absolute;
-    top: 10vh;
+    top: 7vh;
     right: 2.4vh;
     z-index: 3;
 }

@@ -1,8 +1,17 @@
 <template>
     <div class="Ecologpage">
+        <div class="contentmax" v-show="showChart">
+            <div class="contentmax-box">
+                <div class="closemax" @click="showChart = false"></div>
+                <div class="toptitlemax">
+                    食物网结构
+                </div>
+                <div class="chartmax" ref="chartRef3"></div>
+            </div>
+        </div>
         <div class="top">
             <div class="top-left">
-                <div class="toptitle">
+                <div class="toptitle" style="cursor: pointer;" @click="showChart = true">
                     食物网结构
                 </div>
                 <div class="container" ref="chartRef1"></div>
@@ -15,114 +24,75 @@
             </div>
             <div class="top-right">
                 <div class="toptitle">
-                    食物网关键物种
+                    食物网监控状况等级
                 </div>
-                <div class="container1">
-                    <div class="content1 ha">口虾姑</div>
-                    <div class="content1 hb">环节动物</div>
-                    <div class="content1 hc">浮游动物</div>
-                    <div class="content2 hd">其他贝类</div>
-                    <div class="content2 he">其他底层鱼类</div>
-                    <div class="content2 hf">小型底栖生物</div>
-                    <div class="content2 hg">扁平螺</div>
-                    <div class="content3 hi">脉红螺</div>
-                    <div class="content3 hj">海 胆</div>
-                    <div class="content3 hk">节肢动物</div>
-                    <div class="content3 hl">鍛虎鱼</div>
-                    <div class="content4 hm">鮞 鱼</div>
-                    <div class="content4 hn">许氏平鲉</div>
-                    <div class="content4 ho">日本鲟</div>
-                    <div class="content5 hp">海 星</div>
+                <div class="container">
+                    <div class="container-top">
+                        <div style="margin-bottom: 2vh;">当前状态：
+                            <span :style="{ color: getColor('良') }">良 Ⅱ</span>
+                        </div>
+                    </div>
+                    <div class="container-bottom">
+                        <div class="container-bottom-left">
+                            <div class="container-bottom-level">Ⅰ</div>
+                            <div class="container-bottom-font">优</div>
+                        </div>
+                        <div class="container-bottom-middle">
+                            <div class="container-bottom-level">Ⅱ</div>
+                            <div class="container-bottom-font">良</div>
+                        </div>
+                        <div class="container-bottom-middle2">
+                            <div class="container-bottom-level">Ⅲ</div>
+                            <div class="container-bottom-font">中</div>
+                        </div>
+                        <div class="container-bottom-right">
+                            <div class="container-bottom-level">Ⅳ</div>
+                            <div class="container-bottom-font">差</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="middle">
             <div class="middle-left">
                 <div class="toptitle">
-                    食物网监控状况等级
+                    食物网关键物种
                 </div>
-                <div class="container" ref="chartRef3"></div>
+                <div class="container1">
+                    <div class="content1 hq">方氏云鳚</div>
+                    <div class="content1 hr">扁玉螺</div>
+                    <div class="content1 hs">细纹狮子鱼</div>
+                    <div class="content1 ht">口虾蛄</div>
+                    <div class="content1 ha">牡蛎</div>
+                    <div class="content1 hb">尖海龙</div>
+                    <div class="content2 hc">其它蟹类</div>
+                    <div class="content2 hd">中国蛤蜊</div>
+                    <div class="content2 he">长蛇鲻</div>
+                    <div class="content2 hf">脉红螺</div>
+                    <div class="content3 hg">鰕虎鱼类</div>
+                    <div class="content3 hi">头足类</div>
+                    <div class="content3 hj">花鲈</div>
+                    <div class="content3 hk">中上层鱼类</div>
+                    <div class="content4 hl">半滑舌鳎</div>
+                    <div class="content4 hm">虾类</div>
+                    <div class="content5 hn">三疣梭子蟹</div>
+                    <div class="content5 ho">日本蟳</div>
+                    <div class="content5 hp">鲬</div>
+                </div>
             </div>
             <div class="middle-middle">
                 <div class="toptitle">
                     食物网不同营养级间能量传递情况
                 </div>
-                <div class="container3"></div>
+                <div class="container3">
+                    <div class="container3-content"></div>
+                </div>
             </div>
             <div class="middle-right">
                 <div class="toptitle">
-                    生物量金字塔(t/km²)
+                    生物量金字塔
                 </div>
-                <div class="middle-right-content">
-                    <div class="middle-right-content-left">
-                        <div class="content-left-title">
-                            系统平均路径长度
-                        </div>
-                        <div class="content-left-content">
-                            <div
-                                style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                <span class="content-left-content-span">4151</span>
-                                <span class="content-left-content-span2">Finn's循环指数(%)</span>
-                            </div>
-                            <div
-                                style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                <span class="content-left-content-span">4151</span>
-                                <span class="content-left-content-span2">系统平均路径长度</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="middle-right-content-right">
-                        <div class="content-right-title">
-                            组织程度参数
-                        </div>
-                        <div style="display: flex;justify-content: space-evenly;">
-                            <div>
-                                <div
-                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                    <span class="content-left-content-span1">4151</span>
-                                    <span class="content-left-content-span2">聚合度</span>
-                                </div>
-                                <div
-                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                    <span class="content-left-content-span1">4151</span>
-                                    <span class="content-left-content-span2">相对冗余度</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div
-                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                    <span class="content-left-content-span1">4151</span>
-                                    <span class="content-left-content-span2">相对聚合度</span>
-                                </div>
-                                <div
-                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                    <span class="content-left-content-span1">4151</span>
-                                    <span class="content-left-content-span2">总信息容量</span>
-                                </div>
-                            </div>
-                            <div>
-                                <div
-                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                    <span class="content-left-content-span1">4151</span>
-                                    <span class="content-left-content-span2">冗余度</span>
-                                </div>
-                                <div
-                                    style="display: flex;flex-direction: column;position: relative;justify-content: center;align-items: center;">
-                                    <img src="../../assets/img/EcologicalGrid/资源 31.png" alt="" class="image-raido">
-                                    <span class="content-left-content-span1">4151</span>
-                                    <span class="content-left-content-span2">Capacity</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="middle-right-content" ref="chartRef4"></div>
             </div>
         </div>
         <div class="bottom">
@@ -130,16 +100,7 @@
                 <div class="toptitle">
                     食物网中个生物所在营养级
                 </div>
-                <div class="container" ref="chartRef4"></div>
-            </div>
-            <div class="bottom-right">
-                <div class="toptitle">
-                    生产力利用情况
-                </div>
-                <div style="display: flex;width: 100%;height: cala(100% - 3.5vh);">
-                    <div class="container5" ref="chartRef5"></div>
-                    <div class="container6" ref="chartRef6"></div>
-                </div>
+                <div class="container" ref="chartRef5"></div>
             </div>
         </div>
     </div>
@@ -149,15 +110,12 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import * as echarts from 'echarts'
 import animal from '/public/data/animal.json'
+import animal1 from '/public/data/animal1.json'
 import appraise from '/public/data/评价指数.json'
 
 const charts = [];
 const chartRef1 = ref(null);
 const chartRef2 = ref(null);
-const chartRef3 = ref(null);
-const chartRef4 = ref(null);
-const chartRef5 = ref(null);
-const chartRef6 = ref(null);
 let initChart1 = () => {
     let chart = echarts.init(chartRef1.value);
     charts.push(() => {
@@ -275,7 +233,125 @@ let initChart1 = () => {
         });
     });
 };
+const chartRef3 = ref(null);
+let initChart3 = () => {
+    let chart = echarts.init(chartRef3.value);
+    charts.push(() => {
+        chart.dispose();
+        chartRef3();
+    });
+    chart.setOption({
+        tooltip: {
+            trigger: 'item',
+        },
+        animationDurationUpdate: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series: [
+            {
+                type: 'graph',
+                layout: 'none',
+                symbolSize: 20,
+                roam: true,
+                label: {
+                    show: true,
+                    color: '#CFEFFF'
+                },
+                edgeSymbolSize: [4, 10],
+                edgeLabel: {
+                    fontSize: 20,
+                    color: '#FFFFFF'
+                },
+                data: animal1.data.map(item => {
+                    const colorMap = {
+                        'red': ["浮游植物", "浮游动物", "海仙人掌"],
+                        'orange': ["其它甲壳动物", "环节动物", "其它软体动物", "棘皮动物", "纵肋织纹螺", "扁玉螺", "经氏壳蛞蝓"],
+                        '#f2cc01': ["中国蛤蜊", "牡蛎", "脉红螺"],
+                        '#D6ee01': ["其它虾类", "其它蟹类", "日本蟳", "头足类", "三疣梭子蟹", "其它底层鱼类", "口虾蛄"],
+                        '#01efef': ["碎屑", "方氏云鳚", "细纹狮子鱼", "尖海龙", "花鲈", "鲬", "长蛇鲻", "半滑舌鳎"],
+                        '#75ff8d': ["鰕虎鱼类", "其它中上层鱼类"]
+                    };
+                    const sizeMap = {
+                        "碎屑": 30,
+                        "浮游植物": 24,
+                        "其它软体动物": 27,
+                        "中国蛤蜊": 27,
+                        "浮游动物": 21,
+                        "牡蛎": 18,
+                        "棘皮动物": 18,
+                        "其它虾类": 15,
+                        "其它中上层鱼类": 15
+                    };
 
+                    let color = '#FFFFFF'; // 默认颜色
+                    let size = 9; // 默认大小
+
+                    for (const [key, values] of Object.entries(colorMap)) {
+                        if (values.includes(item.name)) {
+                            color = key;
+                            size = sizeMap[item.name] || 9; // 根据项目名称设置大小，默认值为9
+                            break;
+                        }
+                    }
+                    // 根据 item.name 的长度计算 position 的第一个值
+                    const positionOffset = -4 * Math.min(item.name.length, 6); // 限制最大长度为6
+                    return {
+                        ...item,
+                        itemStyle: {
+                            color: color,
+                            borderColor: '#4085a6',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: true,
+                            color: '#CFEFFF',
+                            position: [positionOffset, size],
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            padding: [4, 4],
+                            borderRadius: 4
+                        },
+                        symbolSize: size
+                    };
+                }),
+                links: animal1.links,
+                lineStyle: {
+                    opacity: 0.9,
+                    width: 1,
+                    curveness: 0
+                }
+            }
+        ]
+    });
+    // 监听鼠标事件
+    chart.on('mouseover', function (params) {
+        if (params.dataType === 'edge') {
+            const highlightedLink = params.data;
+            // 更新线条样式
+            const updatedLinks = animal1.links.map(link => {
+                return {
+                    ...link,
+                    lineStyle: {
+                        ...link.lineStyle,
+                        opacity: link.source === highlightedLink.source && link.target === highlightedLink.target ? 1 : 0.2,
+                        width: link.source === highlightedLink.source && link.target === highlightedLink.target ? 4 : 2
+                    }
+                };
+            });
+            chart.setOption({
+                series: [{
+                    links: updatedLinks
+                }]
+            });
+        }
+    });
+    chart.on('mouseout', function () {
+        chart.setOption({
+            series: [{
+                links: animal1.links
+            }]
+        });
+    });
+};
+const showChart = ref(false);
 let initChart2 = () => {
     let chart = echarts.init(chartRef2.value);
     charts.push(() => {
@@ -449,437 +525,214 @@ let initChart2 = () => {
         series: buildSeries(Dataarr)
     });
 };
-
-let initChart3 = () => {
-    let chart = echarts.init(chartRef3.value);
-    charts.push(() => {
-        chart.dispose();
-        initChart3();
-    });
-    chart.setOption({
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        legend: {
-            data: ['建设前', '建设中', '建设后'],
-            align: 'left',
-            right: 10,
-            textStyle: {
-                color: "#CFEFFF"
-            },
-            itemWidth: 10,
-            itemHeight: 10,
-            itemGap: 35
-        },
-        grid: {
-            left: '2%',
-            right: '2%',
-            bottom: '2%',
-            top: '15%',
-            containLabel: true
-        },
-        xAxis: [{
-            type: 'category',
-            data: ['总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-                '总生产力',
-            ],
-            axisLine: {
-                show: true,
-                lineStyle: {
-                    color: "#063374",
-                    width: 1,
-                    type: "solid",
-                }
-            },
-            axisTick: {
-                show: false,
-            },
-            axisLabel: {
-                show: true,
-                textStyle: {
-                    color: "#CFEFFF",
-                    fontSize: 10
-                },
-                interval: 0
-            },
-        }],
-        yAxis: [{
-            type: 'value',
-            axisLabel: {
-                // formatter: '{value} %',
-                textStyle: {
-                    color: "#CFEFFF",
-                }
-            },
-            axisTick: {
-                show: false,
-            },
-            axisLine: {
-                show: false,
-                lineStyle: {
-                    color: "#00c7ff",
-                    width: 1,
-                    type: "solid"
-                },
-            },
-            splitLine: {
-                show: false,
-            }
-        }],
-        series: [{
-            name: '建设前',
-            type: 'bar',
-            data: [20, 50, 80, 58, 83, 68, 57, 80, 42, 66, 78, 89],
-            barWidth: 5, //柱子宽度
-            barGap: 1, //柱子之间间距
-            itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#16cef9'
-                    }, {
-                        offset: 1,
-                        color: '#0a2f45'
-                    }]),
-                    opacity: 1,
-                }
-            }
-        }, {
-            name: '建设中',
-            type: 'bar',
-            data: [50, 70, 60, 61, 75, 87, 60, 62, 86, 46, 52, 68],
-            barWidth: 5,
-            barGap: 1,
-            itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#dcfafc'
-                    }, {
-                        offset: 1,
-                        color: '#3c5569'
-                    }]),
-                    opacity: 1,
-                }
-            }
-        }, {
-            name: '建设后',
-            type: 'bar',
-            data: [70, 48, 73, 68, 53, 47, 50, 72, 96, 86, 92, 95],
-            barWidth: 5,
-            barGap: 1,
-            itemStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#f8ad3a'
-                    }, {
-                        offset: 1,
-                        color: '#192b34'
-                    }]),
-                    opacity: 1,
-                }
-            }
-        }]
-    });
+const getColor = (status) => {
+    switch (status) {
+        case '优':
+            return '#78EC40';
+        case '良':
+            return '#3EA9F3';
+        case '中':
+            return '#FBED21';
+        case '差':
+            return '#E95925';
+        default:
+            return '#FFFFFF'; // 默认颜色
+    }
 };
+const chartRef4 = ref(null);
 let initChart4 = () => {
-    const names = [
-        '环节动物',
-        '浮游植物',
-        '浮游动物',
-        '小型底栖动物',
-        '日本鳟',
-        '头足类',
-        '海胆',
-        '节肢动物',
-        '口虾姑'
-    ];
-    const years = ['2001', '2002', '2003', '2004', '2005', '2006'];
-    const shuffle = (array) => {
-        let currentIndex = array.length;
-        let randomIndex = 0;
-        while (currentIndex > 0) {
-            randomIndex = Math.floor(Math.random() * currentIndex);
-            currentIndex--;
-            [array[currentIndex], array[randomIndex]] = [
-                array[randomIndex],
-                array[currentIndex]
-            ];
-        }
-        return array;
-    };
-    const generateRankingData = () => {
-        const map = new Map();
-        const defaultRanking = Array.from({ length: names.length }, (_, i) => i * 10); // y轴数据
-        for (const _ of years) {
-            const shuffleArray = shuffle(defaultRanking);
-            names.forEach((name, i) => {
-                map.set(name, (map.get(name) || []).concat(shuffleArray[i]));
-            });
-        }
-        return map;
-    };
-    const generateSeriesList = () => {
-        const seriesList = [];
-        const rankingMap = generateRankingData();
-        rankingMap.forEach((data, name) => {
-            const series = {
-                name,
-                symbol: 'circle', // 使用圆点
-                symbolSize: 8, // 设置圆点大小为5
-                type: 'line',
-                smooth: true,
-                emphasis: {
-                    focus: 'series'
-                },
-                endLabel: {
-                    show: true,
-                    formatter: '{a}',
-                    distance: 20,
-                    color: '#CFEFFF'
-                },
-                lineStyle: {
-                    width: 4,
-                },
-                data
-            };
-            seriesList.push(series);
-        });
-        return seriesList;
-    };
     let chart = echarts.init(chartRef4.value);
     charts.push(() => {
         chart.dispose();
         initChart4();
     });
+
+    // 更新数据
+    let data = [
+        { value: 8.79, name: 'Ⅰ' },
+        { value: 32.81, name: 'Ⅱ' },
+        { value: 4.98, name: 'Ⅲ' },
+        { value: 0.63, name: 'Ⅳ' }
+    ];
+
+    let sum = data.length; // 由于要等分，sum 直接用数据的数量
+
+    let addUp = 0;
+    let top = 5;
+    let heightFactor = 2; // 增加高度的系数
+    let color = ['RGBA(0,0,255,1)', 'RGBA(34,230,111, 1)', 'RGBA(209,155,16,1)', 'RGBA(255,0,0,1)']; // 添加颜色以适应四个数据
+
+    data = data.map((item, index) => {
+        let itemValue = (70 / sum) * heightFactor; // 每个项的高度等分并放大
+        top += itemValue;
+        return {
+            value: addUp += itemValue,
+            name: item.name,
+            realValue: item.value,
+            label: {
+                show: true,
+                color: '#CFEFFF',
+                fontSize: 18,
+                position: 'inside',
+                formatter: () => {
+                    return `${item.name} ${item.value} t/km²`;
+                }
+            },
+            itemStyle: {
+                height: `${itemValue}%`,
+                borderColor: color[index],
+                shadowColor: color[index],
+                shadowBlur: 100
+            }
+        };
+    });
     chart.setOption({
         tooltip: {
-            trigger: 'item'
-        },
-        grid: {
-            left: 15,
-            right: 100,
-            bottom: 0,
-            top: 15,
-            containLabel: true
-        },
-        xAxis: {
-            type: 'category',
-            splitLine: {
-                show: true,
-                lineStyle: {
-                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
-                }
-            },
-            axisLabel: {
-                margin: 15,
-                fontSize: 16,
-                color: '#CFEFFF'
-            },
-            boundaryGap: false,
-            data: years,
-            axisLine: {
-                lineStyle: {
-                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
-                }
+            trigger: 'item',
+            formatter: (params) => {
+                return `${params.name} ${params.value} t/km²`;
             }
         },
-        yAxis: {
-            type: 'value',
-            axisLabel: {
-                margin: 15,
-                fontSize: 16,
-                formatter: '{value}',
-                color: '#CFEFFF'
-            },
-            min: 0,
-            max: 90,
-            interval: 10,
-            axisLine: {
-                lineStyle: {
-                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
-                }
-            },
-            splitLine: {
-                lineStyle: {
-                    color: 'rgba(207, 239, 255, 0.2)' // 设置为淡色
-                }
-            }
-        },
-        series: generateSeriesList()
+        color: [{
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: 'RGBA(0,0,255,0.7)' // 0% 处的颜色
+            }, {
+                offset: 1, color: 'RGBA(0,0,255,0.2)' // 100% 处的颜色
+            }],
+            global: false // 缺省为 false
+        }, {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: 'RGBA(34,230,111, 0.5)' // 0% 处的颜色
+            }, {
+                offset: 1, color: 'RGBA(34,230,111, 0.2)' // 100% 处的颜色
+            }],
+            global: false // 缺省为 false
+        }, {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: 'RGBA(209,155,16,0.5)' // 新颜色
+            }, {
+                offset: 1, color: 'RGBA(209,155,16,0.2)' // 新颜色
+            }],
+            global: false // 缺省为 false
+        }, {
+            type: 'linear',
+            x: 0,
+            y: 0,
+            x2: 0,
+            y2: 1,
+            colorStops: [{
+                offset: 0, color: 'RGBA(255,0,0,0.5)' // 新颜色
+            }, {
+                offset: 1, color: 'RGBA(255,0,0,0.2)' // 新颜色
+            }],
+            global: false // 缺省为 false
+        }],
+        series: [{
+            type: 'funnel',
+            sort: 'ascending',
+            data: data,
+            bottom: "5%"
+        }]
     });
 };
+const chartRef5 = ref(null);
 let initChart5 = () => {
     let chart = echarts.init(chartRef5.value);
     charts.push(() => {
         chart.dispose();
         initChart5();
     });
+    let xAxisData = ['方氏云鳚', '小型甲壳动物', '长蛇鲻', '纵肋织纹螺', '口虾蛄', '细纹狮子鱼', '其它底层鱼类',
+        '海仙人掌', '头足类', '扁玉螺', '其它蟹类', '半滑舌鳎', '花鲈', '尖海龙',
+        '三疣梭子蟹', '鰕虎鱼类', '环节动物', '鲬', '脉红螺', '日本蟳', '经氏壳蛞蝓',
+        '虾类', '浮游动物', '其它中上层鱼类', '中国蛤蜊', '牡蛎', '棘皮动物', '浮游植物',
+        '其它软体动物'];
+
+    let seriesData = [-1.92116, -1.69897, -1.57946, -1.54942, -1.50805, -1.47432, -1.45593,
+    -1.39794, -1.22185, -1.08295, -1.0739, -0.96613, -0.9029, -0.84063,
+    -0.69151, -0.67778, -0.46852, -0.43123, -0.22064, -0.1827, -0.18046,
+        0.15062, 0.16137, 0.19285, 0.50515, 0.58092, 0.5977, 0.94399, 1.28353];
+
     chart.setOption({
-        dataset: {
-            source: [
-                ['score', 'amount', 'product'],
-                [0.8, 58212, '环节动物'],
-                [0.21, 78254, '许氏平鼬'],
-                [0.4, 41032, '浮游植物'],
-                [0.31, 12755, '浮游动物'],
-                [0.7, 20145, '海胆'],
-                [0.41, 79146, '小型底栖动物'],
-                [0.6, 91852, '其它贝类'],
-                [0.54, 101852, '日本鳟'],
-                [0.7, 20112, '头足类']
-            ]
-        },
-        xAxis: {
-            name: '',
-            show: false, // 隐藏 x 轴
-            axisLabel: {
-                textStyle: {
-                    color: '#CFEFFF'
-                }
-            }
-        },
-        yAxis: {
-            type: 'category',
-            axisLabel: {
-                textStyle: {
-                    color: '#CFEFFF'
-                }
-            }
-        },
-        visualMap: {
-            show: false,
-            orient: 'horizontal',
-            right: '5%',  // 设置右边距
-            top: '5%',     // 设置上边距
-            min: 0,
-            max: 1,
-            text: ['1.0 ', '0.0 '],
-            dimension: 0,
-            inRange: {
-                color: ['#f4ac3d', '#C0B777', '#16cffb']
-            }
-        },
         tooltip: {
-            trigger: 'item',
-            formatter: function (params) {
-                const score = params.data[0].toFixed(2); // 保留两位小数
-                const product = params.data[2];
-                return `Product: ${product}<br/>Score: ${score}<br/>`;
-            }
+            trigger: 'axis'
         },
         grid: {
-            left: '2%',
-            right: '5%',
+            left: '1%',
+            right: '3%',
             bottom: '1%',
             top: '15%',
             containLabel: true
         },
-        series: [
-            {
-                type: 'bar',
-                showBackground: true,
-                encode: {
-                    y: 'product'
-                }
-            }
-        ]
-    });
-}
-let initChart6 = () => {
-    let chart = echarts.init(chartRef6.value);
-    charts.push(() => {
-        chart.dispose();
-        initChart6();
-    });
-    chart.setOption({
-        dataset: {
-            source: [
-                ['score', 'amount', 'product'],
-                [0.8, 58212, '环节动物'],
-                [0.21, 78254, '许氏平鼬'],
-                [0.4, 41032, '浮游植物'],
-                [0.31, 12755, '浮游动物'],
-                [0.7, 20145, '海胆'],
-                [0.41, 79146, '小型底栖动物'],
-                [0.6, 91852, '其它贝类'],
-                [0.54, 101852, '日本鳟'],
-                [0.7, 20112, '头足类']
-            ]
-        },
         xAxis: {
-            name: '',
-            show: false, // 隐藏 x 轴
+            type: 'category',
+            data: xAxisData,
             axisLabel: {
+                interval: 0,
                 textStyle: {
-                    color: '#CFEFFF'
+                    color: '#CFEFFF',
+                    fontSize: 10
                 }
             }
         },
         yAxis: {
-            type: 'category',
-            axisLabel: {
-                textStyle: {
-                    color: '#CFEFFF'
-                }
-            }
-        },
-        visualMap: {
-            // show: false,
-            orient: 'horizontal',
-            right: '5%',  // 设置右边距
-            top: '0%',     // 设置上边距
-            min: 0,
-            max: 1,
-            text: ['1.0 ', '0.0 '],
-            dimension: 0,
-            inRange: {
-                color: ['#f4ac3d', '#C0B777', '#16cffb']
+            type: 'value',
+            name: 't/km²',
+            nameTextStyle: {
+                color: '#CFEFFF',
+                fontSize: 12
             },
-            textStyle: {
-                color: '#CFEFFF' // 设置文字颜色
-            }
-        },
-        tooltip: {
-            trigger: 'item',
-            formatter: function (params) {
-                const score = params.data[0].toFixed(2); // 保留两位小数
-                const product = params.data[2];
-                return `Product: ${product}<br/>Score: ${score}<br/>`;
-            }
-        },
-        grid: {
-            left: '2%',
-            right: '5%',
-            bottom: '1%',
-            top: '15%',
-            containLabel: true
-        },
-        series: [
-            {
-                type: 'bar',
-                showBackground: true,
-                encode: {
-                    y: 'product'
+            splitLine: {
+                show: true,
+                lineStyle: {
+                    color: 'rgba(0, 0, 0, 0.2)',
+                    type: 'dashed'
+                }
+            },
+            axisLabel: {
+                textStyle: {
+                    color: '#CFEFFF',
+                    fontSize: 12
                 }
             }
-        ]
+        },
+        series: [{
+            name: '生物量',
+            type: 'bar',
+            data: seriesData,
+            itemStyle: {
+                // 使用蓝色渐变
+                color: {
+                    type: 'linear',
+                    x: 0,
+                    y: 0,
+                    x2: 0,
+                    y2: 1,
+                    colorStops: [
+                        { offset: 0, color: '#2196F3' }, // 深蓝色
+                        { offset: 1, color: '#64B5F6' }  // 浅蓝色
+                    ],
+                    global: false // 缺省为 false
+                }
+            }
+        }]
     });
-}
+};
 const reloadChart = () => {
     charts.forEach((chart) => chart());
 };
@@ -889,7 +742,6 @@ onMounted(() => {
     initChart3();
     initChart4();
     initChart5();
-    initChart6();
     window.addEventListener("resize", reloadChart);
 });
 onUnmounted(() => {
@@ -962,21 +814,21 @@ onUnmounted(() => {
 .middle-left {
     width: 64vh;
     height: 100%;
-    background-image: url('../../assets/img/EcologicalGrid/middleright.png');
+    background-image: url('../../assets/img/EcologicalGrid/middleleft.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 .middle-middle {
-    width: 62.5vh;
+    width: 72.5vh;
     height: 100%;
-    background-image: url('../../assets/img/EcologicalGrid/middleright.png');
+    background-image: url('../../assets/img/EcologicalGrid/middlemiddle.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
 .middle-right {
-    width: 64.5vh;
+    width: 54.5vh;
     height: 100%;
     background-image: url('../../assets/img/EcologicalGrid/middleright.png');
     background-repeat: no-repeat;
@@ -984,17 +836,9 @@ onUnmounted(() => {
 }
 
 .bottom-left {
-    width: 96vh;
+    width: 100%;
     height: 100%;
-    background-image: url('../../assets/img/EcologicalGrid/bottomright.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.bottom-right {
-    width: 96vh;
-    height: 100%;
-    background-image: url('../../assets/img/EcologicalGrid/bottomright.png');
+    background-image: url('../../assets/img/EcologicalGrid/bottomleft.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
@@ -1028,14 +872,6 @@ onUnmounted(() => {
     padding: 1.5vh 1vh 1vh 1vh;
     box-sizing: border-box;
     position: relative;
-}
-
-.container5,
-.container6 {
-    width: 100%;
-    height: 26vh;
-    padding: 1.5vh 0vh 1vh 0vh;
-    box-sizing: border-box;
 }
 
 .content1 {
@@ -1090,105 +926,105 @@ onUnmounted(() => {
 }
 
 .ha {
-    width: 8vh;
+    width: 6vh;
     position: absolute;
-    top: 13vh;
-    right: 10vh;
-    font-size: 1.4vh;
+    bottom: 3vh;
+    left: 7vh;
+    font-size: 1.2vh;
 }
 
 .hb {
-    width: 9vh;
+    width: 7vh;
     position: absolute;
-    top: 2vh;
-    right: 12vh;
-    font-size: 1.4vh;
+    top: 6vh;
+    left: 8vh;
+    font-size: 1.2vh;
 }
 
 .hc {
-    width: 9vh;
+    width: 8vh;
     position: absolute;
-    top: 20vh;
-    left: 2vh;
-    font-size: 1.4vh;
+    top: 10vh;
+    left: 4vh;
+    font-size: 1.3vh;
 }
 
 .hd {
     width: 8vh;
     position: absolute;
-    top: 4vh;
+    top: 10vh;
     right: 2vh;
-    font-size: 1.4vh;
+    font-size: 1.3vh;
 }
 
 .he {
-    width: 12vh;
+    width: 8vh;
     position: absolute;
     font-size: 1.3vh;
-    left: 2vh;
-    top: 2vh;
+    left: 7vh;
+    bottom: 8.5vh;
 }
 
 .hf {
-    width: 12vh;
+    width: 8vh;
     position: absolute;
     top: 17vh;
-    right: 1vh;
-    font-size: 1.4vh;
+    right: 9vh;
+    font-size: 1.3vh;
 }
 
 .hg {
-    width: 7vh;
+    width: 9vh;
     position: absolute;
-    left: 20vh;
-    bottom: 2vh;
+    right: 18vh;
+    bottom: 8vh;
     font-size: 1.4vh;
 }
 
 .hi {
-    width: 10vh;
+    width: 8vh;
     position: absolute;
     right: 10vh;
-    bottom: 1vh;
-    font-size: 1.8vh;
+    top: 4vh;
+    font-size: 1.4vh;
 }
 
 .hj {
     width: 9vh;
     position: absolute;
-    left: 4vh;
-    bottom: 11vh;
-    font-size: 1.8vh;
+    right: 13vh;
+    bottom: 13vh;
+    font-size: 1.4vh;
 }
 
 .hk {
-    width: 10vh;
+    width: 11vh;
     position: absolute;
-    left: 10vh;
-    bottom: 16vh;
-    font-size: 1.8vh;
+    left: 15vh;
+    bottom: 14vh;
+    font-size: 1.4vh;
 }
 
 .hl {
-    width: 10vh;
+    width: 11vh;
     position: absolute;
     left: 28vh;
-    bottom: 6vh;
-    font-size: 1.8vh;
+    bottom: 3vh;
+    font-size: 1.6vh;
 }
 
 .hm {
     width: 10vh;
     position: absolute;
-    right: 6vh;
-    top: 8vh;
-    font-size: 1.8vh;
+    right: 20vh;
+    top: 5vh;
+    font-size: 1.6vh;
 }
 
 .hn {
-    width: 10vh;
+    width: 12vh;
     position: absolute;
-    right: 26vh;
+    right: 32vh;
     top: 3vh;
     font-size: 1.8vh;
 }
@@ -1196,99 +1032,56 @@ onUnmounted(() => {
 .ho {
     width: 10vh;
     position: absolute;
-    left: 11vh;
-    bottom: 6vh;
+    left: 20vh;
+    bottom: 8vh;
     font-size: 1.8vh;
 }
 
 .hp {
     width: 10vh;
     position: absolute;
-    left: 24vh;
+    left: 28vh;
     top: 10vh;
     font-size: 2vh;
+}
+
+.hq {
+    width: 7vh;
+    position: absolute;
+    right: 12vh;
+    bottom: 1vh;
+    font-size: 1vh;
+}
+
+.hr {
+    width: 6vh;
+    position: absolute;
+    left: 15vh;
+    bottom: 1.5vh;
+    font-size: 1vh;
+}
+
+.hs {
+    width: 8vh;
+    position: absolute;
+    left: 3vh;
+    top: 2vh;
+    font-size: 1.2vh;
+}
+
+.ht {
+    width: 6vh;
+    position: absolute;
+    right: 4vh;
+    top: 1.5vh;
+    font-size: 1.2vh;
 }
 
 .middle-right-content {
     width: 100%;
     height: calc(100% - 3.5vh);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 2vh 1.5vh 1vh 1.5vh;
     box-sizing: border-box;
-}
-
-.middle-right-content-left {
-    height: 100%;
-    width: 22vh;
-    background-image: url('../../assets/img/EcologicalGrid/资源 29.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.middle-right-content-right {
-    height: 100%;
-    width: 38.5vh;
-    background-image: url('../../assets/img/EcologicalGrid/资源 30.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.content-left-title {
-    height: 3.2vh;
-    text-align: center;
-    color: #FFFFFF;
-    letter-spacing: 0.2vh;
-    line-height: 3.2vh;
-}
-
-.content-right-title {
-    height: 3.2vh;
-    text-align: center;
-    color: #FFFFFF;
-    letter-spacing: 0.5vh;
-    line-height: 3.2vh;
-}
-
-.content-left-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.content-right-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.image-raido {
-    width: 8vh;
-    height: 8vh;
-}
-
-.content-left-content-span {
-    position: absolute;
-    color: #00FFFD;
-    font-weight: bold;
-    top: 2.9vh;
-    left: 4.6vh;
-}
-
-.content-left-content-span1 {
-    position: absolute;
-    color: #00FFFD;
-    font-weight: bold;
-    top: 2.9vh;
-    left: 2vh;
-}
-
-.content-left-content-span2 {
-    color: #C7E4FF;
-    font-size: 1.6vh;
 }
 
 .container3 {
@@ -1296,8 +1089,147 @@ onUnmounted(() => {
     height: calc(100% - 3.5vh);
     padding: 1.5vh 1vh 1vh 1vh;
     box-sizing: border-box;
+}
+
+.container3-content {
+    width: 100%;
+    height: 100%;
     background-image: url('../../assets/img/EcologicalGrid/贴图.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
+}
+
+.container-top {
+    margin-top: 1vh;
+    width: 100%;
+    height: 8vh;
+    background-image: url('../../assets/img/EcologicalGrid/toprightstatus.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #C7E4FF;
+    font-size: 1.8vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.2vh;
+}
+
+.container-top span {
+    font-weight: bold;
+    font-size: 2.2vh;
+}
+
+.container-bottom {
+    width: 100%;
+    height: 14vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.container-bottom-left {
+    width: 13.5vh;
+    height: 13.5vh;
+    background-image: url('../../assets/img/EcologicalGrid/优.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.container-bottom-middle {
+    width: 13.5vh;
+    height: 13.5vh;
+    background-image: url('../../assets/img/EcologicalGrid/良.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.container-bottom-middle2 {
+    width: 13.5vh;
+    height: 13.5vh;
+    background-image: url('../../assets/img/EcologicalGrid/中.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.container-bottom-right {
+    width: 13.5vh;
+    height: 13.5vh;
+    background-image: url('../../assets/img/EcologicalGrid/差.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+.container-bottom-level {
+    color: white;
+    font-weight: bold;
+    font-size: 2vh;
+    position: absolute;
+    left: 50%;
+    top: 4vh;
+    transform: translate(-50%);
+}
+
+.container-bottom-font {
+    color: #C7E4FF;
+    font-size: 1.8vh;
+    position: absolute;
+    bottom: 1.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.contentmax {
+    position: absolute;
+    top: 9vh;
+    width: 180vh;
+    height: 88vh;
+    z-index: 4;
+    background-image: url('../../assets/img/EcologicalGrid/contentmaxback.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.contentmax-box {
+    width: 180vh;
+    height: 88vh;
+    background-image: url('../../assets/img/EcologicalGrid/contentmax.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.chartmax {
+    width: 180vh;
+    height: 88vh;
+}
+
+.toptitlemax {
+    width: 100%;
+    height: 8.5vh;
+    font-family: HYLingXinJ;
+    font-weight: bold;
+    font-size: 3vh;
+    line-height: 8.5vh;
+    color: #FEFFFF;
+    text-align: center;
+    background: linear-gradient(0deg, #C7E4FF 24.072265625%, #FFFFFF 24.560546875%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.2vh;
+    margin-left: 0.3vh;
+    position: absolute;
+}
+
+.closemax {
+    position: absolute;
+    top: 2vh;
+    right: 2vh;
+    width: 4vh;
+    height: 4vh;
+    cursor: pointer;
+    z-index: 5;
 }
 </style>

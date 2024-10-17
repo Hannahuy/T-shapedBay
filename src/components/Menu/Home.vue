@@ -2,65 +2,9 @@
   <div class="leftBox">
     <div class="rightBox-top">
       <div class="rightBox-top-title">
-        生物多样性评价结果
-      </div>
-      <div class="leftBox-top-table">
-        <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.2vh',
-          'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="Stations" label="站位" width="40" align="center" />
-          <el-table-column prop="Diversity" label="多样性指数" width="70" align="center" />
-          <el-table-column prop="Uniformity" label="均匀度" width="50" align="center" />
-          <el-table-column prop="Dominance" label="优势度" width="50" align="center" />
-          <el-table-column prop="Richness" label="丰富度" width="50" align="center" />
-          <el-table-column prop="threshold" label="指数阈值" width="60" align="center" />
-          <el-table-column prop="level" label="等级" width="70" align="center" />
-        </el-table>
-      </div>
-    </div>
-    <div class="rightBox-middle">
-      <div class="rightBox-bottom-title">
-        水质沉积物单指标评价结果
-      </div>
-      <div class="leftBox-bottom-table">
-        <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.2vh',
-          'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="StationNumber" label="站号" width="50" align="center" />
-          <el-table-column prop="PH" label="PH" width="40" align="center" />
-          <el-table-column prop="DO" label="DO" width="40" align="center" />
-          <el-table-column prop="COD" label="COD" width="40" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
-          <el-table-column prop="phosphate" label="磷酸盐" width="50" align="center" />
-          <el-table-column prop="Nutritionalization" label="是否富营养化" width="80" align="center" />
-        </el-table>
-      </div>
-    </div>
-    <div class="rightBox-middle2">
-      <div class="rightBox-bottom-title">
-        海水水质评价参数及标准
-      </div>
-      <div class="leftBox-middle2-content">
-        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.2vh',
-          'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="project" label="项目" width="40" align="center" />
-          <el-table-column prop="PH" label="PH" width="50" align="center" />
-          <el-table-column prop="DO" label="DO" width="40" align="center" />
-          <el-table-column prop="COD" label="COD" width="40" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
-          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="70" align="center" />
-        </el-table>
-      </div>
-    </div>
-    <div class="rightBox-bottom">
-      <div class="rightBox-bottom-title">
         总体评价
       </div>
-      <div class="leftBox-bottom-content">
+      <div class="leftBox-top-table">
         <el-table :data="tableData4" style="width: 100%;" :header-cell-style="{
           background: 'transparent', fontSize: '1.6vh',
           'text-align': 'center',
@@ -79,7 +23,7 @@
               <span :style="{ color: getStatusColor(row.status) }">{{ row.Composite }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="稳定状态" align="center">
+          <el-table-column label="健康状况" align="center">
             <template #default="{ row }">
               <span :style="{ color: getStatusColor(row.status) }">{{ row.status }}</span>
             </template>
@@ -88,35 +32,88 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="rightBox">
-    <div class="rightBox-top">
-      <div class="rightBox-top-title">
-        xxxxx
-      </div>
-      <div class="rightBox-top-table">
-
-      </div>
-    </div>
     <div class="rightBox-middle">
       <div class="rightBox-bottom-title">
-        xxxxx
+        海水水质评价参数及标准
       </div>
-      <div class="rightBox-bottom-table">
-
+      <div class="leftBox-bottom-table">
+        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.2vh',
+          'text-align': 'center',
+        }" height="16.25vh">
+          <el-table-column prop="project" label="项目" width="40" align="center" />
+          <el-table-column prop="PH" label="PH" width="50" align="center" />
+          <el-table-column prop="DO" label="DO" width="40" align="center" />
+          <el-table-column prop="COD" label="COD" width="40" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
+          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="70" align="center" />
+        </el-table>
       </div>
     </div>
     <div class="rightBox-middle2">
       <div class="rightBox-bottom-title">
-        xxxxx
+        水质沉积物单指标评价结果
       </div>
-      <div class="rightBox-middle2-content"></div>
+      <div class="leftBox-middle2-content">
+        <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.2vh',
+          'text-align': 'center',
+        }" height="16.25vh">
+          <el-table-column prop="StationNumber" label="站号" width="50" align="center" />
+          <el-table-column prop="PH" label="PH" width="40" align="center" />
+          <el-table-column prop="DO" label="DO" width="40" align="center" />
+          <el-table-column prop="COD" label="COD" width="40" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
+          <el-table-column prop="phosphate" label="磷酸盐" width="50" align="center" />
+          <el-table-column prop="Nutritionalization" label="是否富营养化" width="80" align="center" />
+        </el-table>
+      </div>
     </div>
     <div class="rightBox-bottom">
       <div class="rightBox-bottom-title">
-        xxxxx
+        生物多样性评价结果
       </div>
-      <div class="rightBox-bottom-content"></div>
+      <div class="leftBox-bottom-content">
+        <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
+          background: 'transparent', fontSize: '1.2vh',
+          'text-align': 'center',
+        }" height="16.25vh">
+          <el-table-column prop="Stations" label="站位" width="40" align="center" />
+          <el-table-column prop="Diversity" label="多样性指数" width="70" align="center" />
+          <el-table-column prop="Uniformity" label="均匀度" width="50" align="center" />
+          <el-table-column prop="Dominance" label="优势度" width="50" align="center" />
+          <el-table-column prop="Richness" label="丰富度" width="50" align="center" />
+          <el-table-column prop="threshold" label="指数阈值" width="60" align="center" />
+          <el-table-column prop="level" label="等级" width="70" align="center" />
+        </el-table>
+      </div>
+    </div>
+  </div>
+  <div class="rightBox">
+    <div class="rightBox-top-right">
+      <div class="rightBox-top-title">
+        丁字湾简介
+      </div>
+      <div class="rightBox-top-table">
+        <p>丁字湾位于青岛市即墨区， 莱阳，海阳三地的交界处，北纬36度32'40”，东经120度44'58”， 海湾主体呈北西-南东走向，湾顶部在麻姑岛附近折而向西，
+        继五龙河口向延伸，湾口则转向东偏南方向，整个形态大致呈”丁”字形，故名丁字湾。海呈狭长的半封闭的状深入陆地，从湾口到湾顶长22公里，最宽处(底坊滩至鲁岛附近)约12.3公里，
+        最窄处(香岛附近)约2.5公里，口门宽(栲栳岛至宅南嘴) 约2.8公里，湾内岸线蜿蜒曲折，岬湾相间，又被分成几个海湾(或称滩地) ，计有栲栳滩，芝坊滩，鲁岛滩，力岛滩，湾顶滩及五龙河三角洲等，
+        岬角处多为基岩裸露，形成海蚀崖，但多数因泥沙淤积已为潮水所不及。</p>
+        <p>丁字湾周围被山丘环抱，南，北方向为剥蚀山丘，高程为70米上，下为切割山坡地，表面被残积-坡积物覆盖，西北方向为冲积平原。 流入丁字湾流有五龙河，白沙可，蓬险河，店集河，贤友河，黄塘河，
+        鳌子河，朱埠河，羊郡河等。</p>
+      </div>
+    </div>
+    <div class="rightBox-middle-right">
+      <div class="rightBox-bottom-title">
+        潜在风险点
+      </div>
+      <div class="rightBox-bottom-table">
+        <p>养殖废水和河流输入氮磷营养盐，海水呈现富营养化，夏季尤甚；</p>
+        <p>环湾人为用海程度较为剧烈，人工岸线占比较高，以水产养殖业、制盐业、道路交通和能源工业为主；</p>
+        <p>互花米草入侵致使淤积加剧，并导致滩涂湿地和原生盐沼生态系统退化，滨海鸟类受到威胁；</p>
+        <p>陆源径流量萎缩，滨海半咸水生态系统趋于海洋化；</p>
+        <p>水体连通性差，容易遭受海洋热浪侵袭，对围堰养殖业威胁最大。</p>
+      </div>
     </div>
   </div>
 </template>
@@ -238,10 +235,10 @@ const tableData3 = ref([
 ])
 const tableData4 = ref([
   {
-    habitat: '38.125',
-    creature: '28.75',
+    habitat: '38.1',
+    creature: '28.8',
     threatFactors: '20',
-    Composite: '86.875',
+    Composite: '86.9',
     status: '稳定',
   }
 ])
@@ -310,20 +307,23 @@ onUnmounted(() => {
   width: 100%;
   height: 21.25vh;
 }
-
-.rightBox-middle {
+.rightBox-top-right{
   width: 100%;
-  height: 21.25vh;
+  color: #b7cffc;
+  max-height: 58.5vh;
+  overflow-y: auto;
+}
+.rightBox-middle-right{
+  width: 100%;
+  color: #b7cffc;
 }
 
-.rightBox-middle2 {
-  width: 100%;
-  height: 21.25vh;
-}
-
-.rightBox-bottom {
-  width: 100%;
-  height: 21.25vh;
+.rightBox-top-right p, .rightBox-middle-right p{
+  text-indent: 3.5ch;
+  /* 每段行缩进2个字符 */
+  margin-bottom: 0.5em;
+  font-size: 1.5vh;
+  line-height: 2.05vh;
 }
 
 .rightBox-top-title,
@@ -340,11 +340,14 @@ onUnmounted(() => {
   padding-left: 3vh;
   box-sizing: border-box;
 }
+.rightBox-top-table {
+  margin: 1vh 0;
+}
 
-.rightBox-top-table,
-.rightBox-bottom-table,
-.rightBox-bottom-content,
-.rightBox-middle2-content,
+.rightBox-bottom-table{
+  margin: 1vh 0;
+}
+
 .leftBox-top-table,
 .leftBox-bottom-table,
 .leftBox-middle2-content,
@@ -413,7 +416,7 @@ onUnmounted(() => {
   color: #b7cffc;
   padding: 0 0.5vh
 }
-.leftBox-bottom-content :deep(.el-table__body-wrapper){
+.leftBox-top-table :deep(.el-table__body-wrapper){
   font-size: 1.4vh;
 }
 .bottom-table :deep(.el-table__body-wrapper){

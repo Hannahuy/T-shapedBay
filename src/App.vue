@@ -24,7 +24,7 @@ div {
 }
 
 .el-picker__popper.el-popper {
-  inset: 47% auto auto 1.5vh !important;
+  inset: auto auto 10vh 81.7% !important
 }
 
 .el-popper__arrow::before {
