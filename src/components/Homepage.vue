@@ -108,13 +108,11 @@ const selectMenu = (menu) => {
         State: false,
       });
     }
-    if (menu !== '趋势预测') {
       callUIInteraction({
         ModuleName: `${menu}`,
         FunctionName: `${menu}`,
         State: true,
       });
-    }
   }
 }
 const interval = ref(null);

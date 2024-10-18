@@ -410,26 +410,68 @@
     <div class="oystersecharts" ref="chartRef6"></div>
   </div>
   <!-- 潮间带右侧 -->
-  <div class="Intertidalzoneright">
+  <div class="Intertidalzoneright" v-show="showIntertidalzone">
     <div class="rightBox-top-title-dialog">
       优势物种
     </div>
-    <img src="../../assets/img/close.png" alt="" class="close" @click="aaa">
+    <img src="../../assets/img/close.png" alt="" class="close" @click="showIntertidalzone = false">
     <div class="species">
-      <div class="species-item" v-for="(item, index) in tidalzoneList" :key="index" :class="{'odd-item': index % 2 === 0,'even-item': index % 2 !== 0,'active-item': activeIndex2 === index
-          }" @click="handletidalzoneClick(index, item)">
+      <div class="species-item" v-for="(item, index) in tidalzoneList" :key="index" :class="{
+    'odd-item': index % 2 === 0, 'even-item': index % 2 !== 0, 'active-item': activeIndex2 === index
+  }" @click="handletidalzoneClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div></div>
       </div>
     </div>
-    <!-- <div class="Carousel" style="margin-top: 1vh;">
+    <div class="Carousel" style="margin-top: 1vh;">
       <el-carousel height="16vh">
-        <el-carousel-item v-for="(image, index) in imageSediment" :key="index" v-if="imageSediment.length > 0">
-          <img :src="image" alt="" style="width: 100%; height: 100%;">
+        <el-carousel-item v-for="(image2, index) in imageSediment" :key="index" v-if="imageSediment.length > 0">
+          <img :src="image2" alt="" style="width: 100%; height: 100%;">
         </el-carousel-item>
       </el-carousel>
-    </div> -->
+    </div>
+    <div class="introduce">
+      <div class="rightBox-top-title-dialog">
+        物种介绍
+      </div>
+      <div class="introduce-content">
+        {{ introduceContent }}
+      </div>
+    </div>
+  </div>
+  <!-- 渔业弹窗 -->
+  <div class="fishbox" v-show="showFish">
+    <div class="rightBox-top-title-dialog">
+      {{ fishName }}
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="showFish = false">
+    <div class="fishcharts" ref="chartRef9"></div>
+    <div class="rightBox-top-title-dialog">
+      优势物种
+    </div>
+    <div class="species">
+      <div class="species-item" v-for="(item, index) in fishList" :key="index" :class="{
+    'odd-item': index % 2 === 0, 'even-item': index % 2 !== 0, 'active-item': activeIndex3 === index
+  }" @click="handlefishClick(index, item)">
+        <div>{{ index + 1 }}</div>
+        <div>{{ item.name }}</div>
+        <div></div>
+      </div>
+    </div>
+    <div class="Carousel" style="margin-top: 1vh;">
+      <el-carousel height="16vh">
+        <el-carousel-item v-for="(image3, index) in imagefish" :key="index" v-if="imagefish.length > 0">
+          <img :src="image3" alt="" style="width: 100%; height: 100%;">
+        </el-carousel-item>
+      </el-carousel>
+    </div>
+    <div class="rightBox-top-title-dialog">
+      物种介绍
+    </div>
+    <div class="fish-content">
+      {{ fishContent }}
+    </div>
   </div>
 </template>
 
@@ -441,58 +483,19 @@ import { ElMessage } from 'element-plus';
 import dayjs from 'dayjs'
 import axios from "axios";
 const tidalzoneDatacontent = ref(null);
-const aaa = () => {
-  const data = `{
-    "Function": "潮间带点击查询",
-    "Data": {
-        "name": "断面E",
-        "density": "1760.0个/m2",
-        "biomass": "362.56g/m2",
-        "statistics": {
-            "节肢动物": 5,
-            "软体动物": 8,
-            "环节动物": 8
-        },
-        "dominant": {
-            "contains": [
-                {
-                    "name": "长山椒螺",
-                    "description": "长山椒螺（学名：Assiminea vagans），属软体动物腹足类，螺层约6层，壳尖圆锥状。",
-                    "url": "/image/长山椒螺.png"
-                },
-                {
-                    "name": "光滑狭口螺",
-                    "description": "光滑狭口螺属于动物界，螺科，狭口螺属，定名人A. Adams。",
-                    "url": "/image/光滑狭口螺.png"
-                }
-            ]
-        }
-    }
-}`
-  const datajson = JSON.parse(data);
-  tidalzoneDatacontent.value = datajson;
-  toggleVisibility(['intertidalzone']);
-  activeIndex2.value = 0;
-  IntertidalzoneName.value = datajson.Data.name;
-  Intertidalzonedata.value = datajson.Data.density;
-  Intertidalzonedata2.value = datajson.Data.biomass;
-  tidalzoneList.value = datajson.Data.dominant.contains;
-  const statisticsData = datajson.Data.statistics;
-  const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
-  const chartData = Object.keys(statisticsData).map(key => ({
-    name: key,
-    value: parseFloat(((statisticsData[key] / total) * 100).toFixed(1)),
-  }));
-  initChart(chartRef6, chartData);
-}
-const radio = ref(2019)
-const radio2 = ref('2023.06')
+const fishDatacontent = ref(null);
+const introduceContent = ref('');
+const fishContent = ref('');
+const radio = ref(2019);
+const radio2 = ref('2023.06');
 const Intertidalzonedata2 = ref(null);
 const Intertidalzonedata = ref(null);
 const IntertidalzoneName = ref(null);
 const showSediment = ref(false);
 const showIntertidalzone = ref(false);
-const showNorth = ref(false)
+const showNorth = ref(false);
+const showFish = ref(false);
+const fishName = ref(null);
 const charts = [];
 const chartRef1 = ref(null);
 const chartRef2 = ref(null);
@@ -502,6 +505,7 @@ const chartRef5 = ref(null);
 const chartRef6 = ref(null);
 const chartRef7 = ref(null);
 const chartRef8 = ref(null);
+const chartRef9 = ref(null);
 const initChart = (chartRef, source) => {
   const chart = echarts.init(chartRef.value);
   charts.push(() => {
@@ -512,7 +516,7 @@ const initChart = (chartRef, source) => {
     tooltip: {
       trigger: 'item',
       valueFormatter: function (value) {
-        return value + ' %';
+        return value;
       }
     },
     series: [
@@ -856,14 +860,18 @@ const gettimePlay = (e) => {
 const birdShow = ref(false);
 const speciesList = ref([]);
 const tidalzoneList = ref([]);
+const fishList = ref([]);
 const birdstation = ref(null)
 const activeIndex = ref(0);
 const activeIndex2 = ref(0);
+const activeIndex3 = ref(0);
 const animalData = ref([]);
 const animalDatalist = ref([]);
 const tidalzoneDataList = ref([]);
+const fishDataList = ref([]);
 const imageArray = ref([]);
-// const imageSediment = ref([]);
+const imageSediment = ref([]);
+const imagefish = ref([]);
 const imageoysters = ref([
   '/img/牡蛎礁1.jpg',
   '/img/牡蛎礁2.jpg',
@@ -880,9 +888,29 @@ const handleClick = (index, item) => {
 };
 const handletidalzoneClick = (index) => {
   activeIndex2.value = index;
-  // tidalzoneDataList.value = tidalzoneDatacontent.value;
-  // imageArray.value = res.data.data.images.imageArray.map(image => window.VITE_APP_BASE_API + `${image.path}`);
+  tidalzoneDataList.value = tidalzoneDatacontent.value;
+  imageSediment.value = [];
+  if (tidalzoneDatacontent.value && tidalzoneDatacontent.value.Data.dominant.contains.length > 0) {
+    const selectedItem = tidalzoneDatacontent.value.Data.dominant.contains[index];
+    if (selectedItem) {
+      imageSediment.value.push(window.VITE_APP_BASE_API + selectedItem.url);
+      introduceContent.value = selectedItem.description;
+    }
+  }
 };
+const handlefishClick = (index) => {
+  activeIndex3.value = index;
+  fishDataList.value = fishDatacontent.value;
+  imagefish.value = [];
+  if (fishDatacontent.value && fishDatacontent.value.Data.dominant.contains.length > 0) {
+    const selectedItem = fishDatacontent.value.Data.dominant.contains[index];
+    if (selectedItem) {
+      imagefish.value.push(window.VITE_APP_BASE_API + selectedItem.url);
+      fishContent.value = selectedItem.description;
+    }
+  }
+}
+
 const countspeciesList = ref(0);
 const oystersShow = ref(false);
 const SpartinaalternifloraShow = ref(false);
@@ -933,6 +961,7 @@ const toggleVisibility = (visibleEntities) => {
   SpartinaalternifloraShow.value = visibleEntities.includes('Spartinaalterniflora');
   showSediment.value = visibleEntities.includes('sediment');
   showIntertidalzone.value = visibleEntities.includes('intertidalzone');
+  showFish.value = visibleEntities.includes('fishbox');
 };
 
 const initChartsByData = (charts, data) => {
@@ -940,7 +969,6 @@ const initChartsByData = (charts, data) => {
 };
 
 const myHandleResponseFunction = (data) => {
-  // console.log(data);
   const datajson = JSON.parse(data);
 
   if (datajson.Function === '报错') {
@@ -1027,18 +1055,39 @@ const myHandleResponseFunction = (data) => {
 
     case '潮间带点击查询':
       toggleVisibility(['intertidalzone']);
+      imageSediment.value = [];
+      if (datajson.Data.dominant.contains.length > 0) {
+        imageSediment.value.push(window.VITE_APP_BASE_API + datajson.Data.dominant.contains[0].url);
+        introduceContent.value = datajson.Data.dominant.contains[0].description; // 设置默认描述
+      }
+      tidalzoneDatacontent.value = datajson;
       activeIndex2.value = 0;
       IntertidalzoneName.value = datajson.Data.name;
       Intertidalzonedata.value = datajson.Data.density;
       Intertidalzonedata2.value = datajson.Data.biomass;
       tidalzoneList.value = datajson.Data.dominant.contains;
       const statisticsData = datajson.Data.statistics;
-      const total = Object.values(statisticsData).reduce((sum, value) => sum + value, 0);
       const chartData = Object.keys(statisticsData).map(key => ({
         name: key,
-        value: parseFloat(((statisticsData[key] / total) * 100).toFixed(1)),
+        value: statisticsData[key],
       }));
       initChart(chartRef6, chartData);
+      break;
+
+    case '渔业点击查询':
+      toggleVisibility(['fishbox']);
+      showFish.value = true;
+      fishDatacontent.value = datajson;
+      imagefish.value = [];
+      fishName.value = datajson.Data.name;
+      const fishrecords = datajson.Data.statistics.data;
+      initChart(chartRef9, fishrecords);
+      fishList.value = datajson.Data.dominant.contains;
+      activeIndex2.value = 0;
+      if (datajson.Data.dominant.contains.length > 0) {
+        imagefish.value.push(window.VITE_APP_BASE_API + datajson.Data.dominant.contains[0].url);
+        fishContent.value = datajson.Data.dominant.contains[0].description; // 设置默认描述
+      }
       break;
 
     case '指北针':
@@ -1511,6 +1560,12 @@ onUnmounted(() => {
   margin-top: 1vh;
 }
 
+.fishcharts {
+  width: 26.75vh;
+  height: 20vh;
+  margin-top: 1vh;
+}
+
 :deep(.el-tabs__item) {
   width: 13.5vh;
   padding: 0 !important;
@@ -1681,5 +1736,51 @@ onUnmounted(() => {
   /* 每段行缩进2个字符 */
   margin-bottom: 1em;
   /* 段落之间的间距 */
+}
+
+.introduce {
+  margin-top: 1vh;
+  width: 100%;
+}
+
+.introduce-content {
+  margin-top: 1vh;
+  width: 100%;
+  min-height: 4vh;
+  max-height: 44vh;
+  overflow-y: auto;
+  color: #b7cffc;
+  font-size: 1.5vh;
+  text-indent: 3.5ch;
+  line-height: 1.5;
+  /* 设置行高 */
+}
+
+.fishbox {
+  position: absolute;
+  left: 2.4vh;
+  top: 10vh;
+  width: 30vh;
+  max-height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.fish-content {
+  margin-top: 1vh;
+  width: 100%;
+  min-height: 4vh;
+  max-height: 20vh;
+  overflow-y: auto;
+  color: #b7cffc;
+  font-size: 1.5vh;
+  text-indent: 3.5ch;
+  line-height: 1.5;
 }
 </style>
