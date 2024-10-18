@@ -125,14 +125,47 @@
             <span>{{ barMax }}</span>
         </div>
     </div>
+    <!-- 图表弹窗 -->
+    <el-button class="elbutton" type="primary" v-if="showselect" @click="handlechart">查看数据</el-button>
+    <div class="fishecharts" v-if="showChart">
+        <img src="../../assets/img/close.png" alt="" class="close2" @click="showChart = false">
+        <div class="chartcontent" ref="chartcontent"></div>
+    </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import FunctionMenu from '../Common/FunctionMenu.vue'
 import dayjs from 'dayjs'
+import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
+import axios from "axios";
+
+const showChart = ref(false);
+const chartcontent = ref(null);
+const radioEng = ref(null);
+const getRandomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+};
+
+const handlechart = () => {
+    showChart.value = true;
+    if (radioselection.value == '浒苔情景') {
+        radioEng.value = 'Hutai';
+    } else if (radioselection.value == '陆源污染情景') {
+        radioEng.value = 'HighRiver';
+    }
+    axios.get(window.VITE_APP_BASE_API + `/biomass/getAllBTP/${radioEng.value}`).then((res) => {
+        const btpLineList = res.data.data.btpLineList;
+        initChart(btpLineList);
+    });
+};
 
 const radio = ref('浒苔情景');
 const tablehead = ref('浒苔面积（㎡）');
@@ -552,6 +585,7 @@ const close = () => {
     showSmallWindow.value = false;
 };
 const myHandleResponseFunction = (data) => {
+    console.log(data);
     const datajson = JSON.parse(data);
     if (datajson.Function === '报错') {
         ElMessage({
@@ -619,6 +653,83 @@ const selectchange = (selectedValues) => {
     //     Type: selectedItemname.value
     // });
 }
+const charts = [];
+let initChart = (source) => {
+    let chart = echarts.init(chartcontent.value);
+    charts.push(() => {
+        chart.dispose();
+        initChart(source);
+    });
+
+    const seriesData = source.map(item => ({
+        name: item.name,
+        type: 'line',
+        data: item.data,
+        itemStyle: {
+            color: getRandomColor() // 随机颜色
+        },
+        areaStyle: {
+            color: 'rgba(0, 176, 255, 0.3)'
+        }
+    }));
+
+    // 获取x轴的标签
+    const xAxisData = source[0].data.map((_, index) => `时段 ${index + 1}`);
+
+    chart.setOption({
+        tooltip: {
+            trigger: 'axis',
+        },
+        legend: {
+            textStyle: {
+                color: '#CFEFFF' // 设置图例文字颜色
+            },
+            padding: [10, 20] // 增加上下左右的边距
+        },
+        xAxis: {
+            type: 'category',
+            data: xAxisData,
+            axisLabel: {
+                color: '#CFEFFF'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#CFEFFF'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            // name: '面积 (km²)',
+            axisLabel: {
+                color: '#CFEFFF'
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#CFEFFF'
+                }
+            },
+            splitLine: {
+                show: true, // 显示分割线
+                lineStyle: {
+                    color: 'rgba(207, 239, 255, 0.5)', // 设置线的颜色为浅色
+                    type: 'dashed' // 设置为虚线
+                }
+            }
+        },
+        grid: {
+            left: '5%',
+            right: '4%',
+            bottom: '5%',
+            top: '28%'
+        },
+        series: seriesData
+    });
+};
+
+const reloadChart = () => {
+    charts.forEach((chart) => chart());
+};
 
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
@@ -630,8 +741,11 @@ onMounted(() => {
         timePick.value = dayjs('2024-08-01').toDate(); // 默认值
     }
     addResponseEventListener("handle_responses", myHandleResponseFunction);
+    window.addEventListener("resize", reloadChart);
 });
-
+onUnmounted(() => {
+    window.removeEventListener("resize", reloadChart);
+});
 </script>
 
 <style scoped>
@@ -838,7 +952,7 @@ onMounted(() => {
     width: 50%;
 }
 
-.custom-table2{
+.custom-table2 {
     border-collapse: collapse;
     width: 90%;
     color: #b7cffc;
@@ -907,6 +1021,15 @@ onMounted(() => {
     position: absolute;
     right: 0.5vh;
     top: 0.5vh;
+}
+
+.close2 {
+    cursor: pointer;
+    width: 2.5vh;
+    position: absolute;
+    right: 1.5vh;
+    top: 0.5vh;
+    z-index: 20;
 }
 
 .top-leftbox-middle-content-div-2 {
@@ -1035,5 +1158,32 @@ onMounted(() => {
 
 :deep(.el-input__wrapper) {
     border-radius: 0;
+}
+
+.fishecharts {
+    width: 110vh;
+    height: 45vh;
+    z-index: 3;
+    position: absolute;
+    bottom: 10vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: url("../../assets/img/框-bg.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 1.5vh;
+    box-sizing: border-box;
+}
+
+.chartcontent {
+    width: 107vh;
+    height: 42vh;
+}
+
+.elbutton {
+    position: absolute;
+    z-index: 4;
+    bottom: 15vh;
+    right: 20vh;
 }
 </style>
