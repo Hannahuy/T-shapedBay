@@ -98,7 +98,7 @@
         <div class="bottom">
             <div class="bottom-left">
                 <div class="toptitle">
-                    食物网中个生物所在营养级
+                    食物网中各生物功能组生物量
                 </div>
                 <div class="container" ref="chartRef5"></div>
             </div>
