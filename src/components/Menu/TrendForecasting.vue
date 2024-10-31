@@ -322,6 +322,18 @@ const drive = () => {
                         "../../assets/img/溶解氧-active.png",
                         import.meta.url
                     ).href,
+                },
+                {
+                    name: "半滑舌鳎",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/溶解氧.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/溶解氧-active.png",
+                        import.meta.url
+                    ).href,
                 }
             ];
         } else if (radioselection.value === '陆源污染情景') {
@@ -412,6 +424,18 @@ const drive = () => {
                 },
                 {
                     name: "溶解氧",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/溶解氧.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/溶解氧-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "半滑舌鳎",
                     check: false,
                     image: new URL(
                         "../../assets/img/溶解氧.png",
