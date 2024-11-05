@@ -126,39 +126,15 @@ defineExpose({
 </script>
 <style scoped>
 .container {
-    position: absolute;
-    top: 50vh;
-    transform: translateY(-50%);
-    left: 20vh;
-    z-index: 9;
-    max-height: 50vh;
-    width: 21vh;
-    overflow-y: auto;
-    background-image: url('../../assets/img/资源 172.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding: 1vh;
-}
-.container::-webkit-scrollbar {
-    width: 0.8vh; /* 滚动条的宽度 */
-}
-
-.container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1); /* 滚动条轨道的背景色 */
-    border-radius: 1vh; /* 轨道的圆角 */
-}
-
-.container::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.5); /* 滚动条的颜色 */
-    border-radius: 1vh; /* 滚动条的圆角 */
-}
-
-.container::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.8); /* 滚动条悬停时的颜色 */
+  position: absolute;
+  top: 50vh;
+  transform: translateY(-50%);
+  left: 3vh;
+  z-index: 9;
 }
 
 .container>div {
-  margin: 2vh 0;
+  margin: 3vh 0;
   white-space: nowrap;
 }
 

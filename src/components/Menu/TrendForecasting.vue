@@ -45,7 +45,7 @@
         </div>
     </div>
     <div class="left-button" v-if="showselect">
-        <FunctionMenu :functionData="layerFunction" :defaultSelect="false" :Multiple="false"
+        <FunctionMenuoth :functionData="layerFunction" :defaultSelect="false" :Multiple="false"
             @functionSelected="handleFunctionSelection" />
     </div>
     <div class="left-button-2" v-if="showselect2">
@@ -146,7 +146,7 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
-import FunctionMenu from '../Common/FunctionMenu.vue'
+import FunctionMenuoth from '../Common/FunctionMenuoth.vue'
 import FunctionMenuother from '../Common/FunctionMenuother.vue'
 import dayjs from 'dayjs'
 import * as echarts from "echarts";
@@ -250,6 +250,18 @@ const changeRadio = (e) => {
 }
 const layerFunction = ref([]);
 const layerFunction2 = ref([
+    {
+        name: "半滑舌鳎",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
     {
         name: "扁玉螺",
         check: false,
