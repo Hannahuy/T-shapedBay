@@ -37,8 +37,19 @@
             </div>
         </div>
     </div>
+    <!-- 左侧菜单 -->
+    <div class="left-menu" v-if="showmenu">
+        <div class="itemMenu" :class="{ active: activeIndex === index }" v-for="(item, index) in menuItems" :key="index"
+            @click="changeBackground(index)">
+            {{ item }}
+        </div>
+    </div>
     <div class="left-button" v-if="showselect">
         <FunctionMenu :functionData="layerFunction" :defaultSelect="false" :Multiple="false"
+            @functionSelected="handleFunctionSelection" />
+    </div>
+    <div class="left-button-2" v-if="showselect2">
+        <FunctionMenuother :functionData="layerFunction2" :defaultSelect="false" :Multiple="false"
             @functionSelected="handleFunctionSelection" />
     </div>
     <!-- 时间轴 -->
@@ -118,7 +129,7 @@
         </table>
     </div>
     <!-- 右下角颜色条 -->
-    <div class="right-button" v-if="showselect">
+    <div class="right-button" v-if="showselectbar">
         <div class="leftbar">{{ barType }}</div>
         <div class="rightbar">
             <span>{{ barMin }}</span>
@@ -136,12 +147,37 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from "vue";
 import FunctionMenu from '../Common/FunctionMenu.vue'
+import FunctionMenuother from '../Common/FunctionMenuother.vue'
 import dayjs from 'dayjs'
 import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
 import axios from "axios";
 
+const menuItems = ref(['生态要素预测', '生物量空间预测']);
+const showselect2 = ref(false);
+const activeIndex = ref(null);
+const showselectbar = ref(false);
+const showmenu = ref(false)
+const changeBackground = (index) => {
+  if (activeIndex.value === index) {
+    activeIndex.value = null;
+    showselect.value = false;
+    showselectbar.value = false;
+    showselect2.value = false;
+  } else {
+    activeIndex.value = index;
+    if (index === 0) {
+      showselect.value = true;
+      showselectbar.value = true;
+      showselect2.value = false;
+    } else if (index === 1) {
+      showselect2.value = true;
+      showselect.value = false;
+      showselectbar.value = true;
+    }
+  }
+}
 const showChart = ref(false);
 const chartcontent = ref(null);
 const radioEng = ref(null);
@@ -177,17 +213,24 @@ const changeRadio = (e) => {
     radioselection.value = e;
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     const currentSelectValues = Array.from(selectvalue.value);
+    activeIndex.value = null;
+    showmenu.value = false;
+    showselect.value = false;
+    showselectbar.value = false;
+    showselect2.value = false;
+
     if (e == '浒苔情景') {
-        tablehead.value = '浒苔面积（㎡）'
-        tablehead2.value = '浒苔生物量（kg/㎡）'
+        tablehead.value = '浒苔面积（㎡）';
+        tablehead2.value = '浒苔生物量（kg/㎡）';
         tabledata.value = 218300;
         tabledata2.value = 2;
     } else {
-        tablehead.value = '无机氮（mg/m³）'
-        tablehead2.value = '无机磷（mg/m³）'
+        tablehead.value = '无机氮（mg/m³）';
+        tablehead2.value = '无机磷（mg/m³）';
         tabledata.value = 200;
         tabledata2.value = 100;
     }
+    
     callUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: radioselection.value,
@@ -206,12 +249,362 @@ const changeRadio = (e) => {
     // });
 }
 const layerFunction = ref([]);
+const layerFunction2 = ref([
+    {
+        name: "扁玉螺",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "方氏云鳚",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "浮游动物",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "浮游植物",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "海仙人掌",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "花鲈",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "环节动物",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "棘皮动物",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "尖海龙",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "经氏壳蛞蝓",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "口虾蛄",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "脉红螺",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "牡蛎",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "其它底层鱼类",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "其它甲壳动物",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "其它软体动物",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "其它虾类",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "其它蟹类",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "其它中上层鱼类",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "日本蟳",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "三疣梭子蟹",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "碎屑",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "头足类",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "细纹狮子鱼",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "鰕虎鱼类",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "鲬",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "长蛇鲻",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "中国蛤蜊",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+    {
+        name: "纵肋织纹螺",
+        check: false,
+        image: new URL(
+            "../../assets/img/溶解氧.png",
+            import.meta.url
+        ).href,
+        imageActive: new URL(
+            "../../assets/img/溶解氧-active.png",
+            import.meta.url
+        ).href,
+    },
+]);
 const drive = () => {
     if (tabledata.value == '' || tabledata2.value == '') {
         ElMessage.warning('请输入数据');
         return;
     } else {
-        showselect.value = true;
+        showmenu.value = true;
         // 根据选中的情景设置 layerFunction
         if (radioselection.value === '浒苔情景') {
             layerFunction.value = [
@@ -322,18 +715,6 @@ const drive = () => {
                         "../../assets/img/溶解氧-active.png",
                         import.meta.url
                     ).href,
-                },
-                {
-                    name: "半滑舌鳎",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/溶解氧.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/溶解氧-active.png",
-                        import.meta.url
-                    ).href,
                 }
             ];
         } else if (radioselection.value === '陆源污染情景') {
@@ -424,18 +805,6 @@ const drive = () => {
                 },
                 {
                     name: "溶解氧",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/溶解氧.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/溶解氧-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "半滑舌鳎",
                     check: false,
                     image: new URL(
                         "../../assets/img/溶解氧.png",
@@ -774,6 +1143,14 @@ onUnmounted(() => {
 
 <style scoped>
 .left-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+}
+
+.left-button-2 {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -1209,5 +1586,33 @@ onUnmounted(() => {
     z-index: 4;
     bottom: 15vh;
     right: 20vh;
+}
+
+.left-menu {
+    position: absolute;
+    height: 18vh;
+    width: 20vh;
+    left: 3vh;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    color: white;
+    z-index: 2;
+}
+
+.itemMenu {
+    width: 15vh;
+    height: 4vh;
+    background-image: url('../../assets/img/icontitile-1.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    line-height: 3.5vh;
+    cursor: pointer;
+}
+
+.itemMenu.active {
+  background-image: url('../../assets/img/icontitile-active-1.png');
 }
 </style>
