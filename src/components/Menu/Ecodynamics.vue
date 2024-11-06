@@ -51,7 +51,7 @@
     <!-- 右下角颜色条 -->
     <div class="right-button">
         <div class="leftbar">{{ barType }}</div>
-        <div class="rightbar">
+        <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
             <span>{{ barMin }}</span>
             <span>{{ barMax }}</span>
         </div>
@@ -598,7 +598,6 @@ onMounted(() => {
     width: 82%;
     border-top-right-radius: 0.5vh;
     border-bottom-right-radius: 0.5vh;
-    background-image: url('../../assets/img/colorbar.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     color: white;
@@ -609,6 +608,14 @@ onMounted(() => {
     padding: 0 1vh;
     box-sizing: border-box;
     justify-content: space-between;
+}
+
+.rightbar-flow {
+    background-image: url('../../assets/img/colorbar2.png');
+}
+
+.rightbar-normal {
+    background-image: url('../../assets/img/colorbar.png');
 }
 
 .smallWindow {
