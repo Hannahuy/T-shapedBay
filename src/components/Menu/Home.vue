@@ -5,67 +5,65 @@
         总体评价
       </div>
       <div class="leftBox-top-table">
-        <el-table :data="tableData4" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.6vh',
-          'text-align': 'center',
-        }" height="8.5vh">
-          <el-table-column prop="habitat" label="海湾生境" align="center" />
-          <el-table-column prop="creature" label="海湾生物" align="center" />
-          <el-table-column prop="threatFactors" label="威胁因素" align="center" />
-        </el-table>
-        <div class="bottom-table">
-          <el-table :data="tableData4" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.6vh',
-          'text-align': 'center',
-        }" height="8.5vh">
-          <el-table-column label="综合指数" align="center">
-            <template #default="{ row }">
-              <span :style="{ color: getStatusColor(row.status) }">{{ row.Composite }}</span>
-            </template>
-          </el-table-column>
-          <el-table-column label="健康状况" align="center">
-            <template #default="{ row }">
-              <span :style="{ color: getStatusColor(row.status) }">{{ row.status }}</span>
-            </template>
-          </el-table-column>
-        </el-table>
+        <div class="lefttopbox">
+          <div class="lefttopbox-item">
+            <div style="margin-top: 0.2vh;font-weight: bold;font-size: 1.6vh;">{{ bayEnv }}</div>
+            <div style="margin-top: 4vh;font-size: 1.5vh;">海湾生境</div>
+          </div>
+          <div class="lefttopbox-item">
+            <div style="margin-top: 0.2vh;font-weight: bold;font-size: 1.6vh;">{{ bayBio }}</div>
+            <div style="margin-top: 4vh;font-size: 1.5vh;">海湾生物</div>
+          </div>
+          <div class="lefttopbox-item">
+            <div style="margin-top: 0.2vh;font-weight: bold;font-size: 1.6vh;">{{ bayThreat }}</div>
+            <div style="margin-top: 4vh;font-size: 1.5vh;">威胁因素</div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="rightBox-middle">
-      <div class="rightBox-bottom-title">
-        海水水质评价参数及标准
-      </div>
-      <div class="leftBox-bottom-table">
-        <el-table :data="tableData1" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.2vh',
-          'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="project" label="项目" width="40" align="center" />
-          <el-table-column prop="PH" label="PH" width="50" align="center" />
-          <el-table-column prop="DO" label="DO" width="40" align="center" />
-          <el-table-column prop="COD" label="COD" width="40" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
-          <el-table-column prop="Activephosphate" label="活性磷酸盐" width="70" align="center" />
-        </el-table>
+        <div class="lefttopbox2">
+          <div class="lefttopbox-item2">
+            <div style="color: #FFFFFF;font-size: 1.5vh;margin-left: 5.5vh;margin-top: .8vh;margin-bottom: .5vh;">综合指数
+            </div>
+            <div style="color: aqua;font-size: 1.6vh;font-weight: bold;margin-left: 5.5vh;">
+              {{ overall }}
+            </div>
+          </div>
+          <div class="lefttopbox-item2">
+            <div style="color: #FFFFFF;font-size: 1.5vh;margin-left: 5.5vh;margin-top: .8vh;margin-bottom: .5vh;">健康状况
+            </div>
+            <div style="color: aqua;font-size: 1.6vh;font-weight: bold;margin-left: 5.5vh;">
+              {{ bayHealth }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="rightBox-middle2">
       <div class="rightBox-bottom-title">
         水质沉积物单指标评价结果
+        <div class="moretable" @click="Seemore"></div>
       </div>
       <div class="leftBox-middle2-content">
-        <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
+        <el-table :data="tableData" style="width: 100%;" :header-cell-style="{
           background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="StationNumber" label="站号" width="50" align="center" />
+        }" height="27.5vh">
+          <el-table-column prop="Stations" label="站号" width="60" align="center" />
           <el-table-column prop="PH" label="PH" width="40" align="center" />
           <el-table-column prop="DO" label="DO" width="40" align="center" />
           <el-table-column prop="COD" label="COD" width="40" align="center" />
           <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
           <el-table-column prop="phosphate" label="磷酸盐" width="50" align="center" />
           <el-table-column prop="Nutritionalization" label="是否富营养化" width="80" align="center" />
+          <el-table-column prop="有机碳" label="有机碳" width="50" align="center">
+            <template #header>
+              <span style="color: rgb(251, 255, 0);">有机碳</span>
+            </template>
+          </el-table-column>
+          <el-table-column prop="硫化物" label="硫化物" width="50" align="center">
+            <template #header>
+              <span style="color: rgb(251, 255, 0);">硫化物</span>
+            </template>
+          </el-table-column>
         </el-table>
       </div>
     </div>
@@ -74,17 +72,22 @@
         生物多样性评价结果
       </div>
       <div class="leftBox-bottom-content">
+        <div class="tablebtn-box">
+          <div class="tablebtn" :class="{ active: selectedButton === '浮游植物' }" @click="selectButton('浮游植物')">浮游植物</div>
+          <div class="tablebtn" :class="{ active: selectedButton === '浮游动物' }" @click="selectButton('浮游动物')">浮游动物</div>
+          <div class="tablebtn" :class="{ active: selectedButton === '底栖生物' }" @click="selectButton('底栖生物')">底栖生物</div>
+        </div>
         <el-table :data="tableData2" style="width: 100%;" :header-cell-style="{
-          background: 'transparent', fontSize: '1.2vh',
+          background: 'transparent', fontSize: '1.3vh',
           'text-align': 'center',
-        }" height="16.25vh">
-          <el-table-column prop="Stations" label="站位" width="40" align="center" />
-          <el-table-column prop="Diversity" label="多样性指数" width="70" align="center" />
+        }" height="24.5vh">
+          <el-table-column prop="Stations" label="站号" width="50" align="center" />
+          <el-table-column prop="Diversity" label="多样性指数" width="80" align="center" />
           <el-table-column prop="Uniformity" label="均匀度" width="50" align="center" />
           <el-table-column prop="Dominance" label="优势度" width="50" align="center" />
           <el-table-column prop="Richness" label="丰富度" width="50" align="center" />
-          <el-table-column prop="threshold" label="指数阈值" width="60" align="center" />
-          <el-table-column prop="level" label="等级" width="70" align="center" />
+          <el-table-column prop="level" label="多样性等级" width="80" align="center" />
+          <el-table-column prop="threshold" label="生物多样性指数阈值" width="130" align="center" />
         </el-table>
       </div>
     </div>
@@ -96,11 +99,11 @@
       </div>
       <div class="rightBox-top-table">
         <p>丁字湾位于青岛市即墨区， 莱阳，海阳三地的交界处，北纬36度32'40”，东经120度44'58”， 海湾主体呈北西-南东走向，湾顶部在麻姑岛附近折而向西，
-        继五龙河口向延伸，湾口则转向东偏南方向，整个形态大致呈”丁”字形，故名丁字湾。海呈狭长的半封闭的状深入陆地，从湾口到湾顶长22公里，最宽处(底坊滩至鲁岛附近)约12.3公里，
-        最窄处(香岛附近)约2.5公里，口门宽(栲栳岛至宅南嘴) 约2.8公里，湾内岸线蜿蜒曲折，岬湾相间，又被分成几个海湾(或称滩地) ，计有栲栳滩，芝坊滩，鲁岛滩，力岛滩，湾顶滩及五龙河三角洲等，
-        岬角处多为基岩裸露，形成海蚀崖，但多数因泥沙淤积已为潮水所不及。</p>
+          继五龙河口向延伸，湾口则转向东偏南方向，整个形态大致呈”丁”字形，故名丁字湾。海呈狭长的半封闭的状深入陆地，从湾口到湾顶长22公里，最宽处(底坊滩至鲁岛附近)约12.3公里，
+          最窄处(香岛附近)约2.5公里，口门宽(栲栳岛至宅南嘴) 约2.8公里，湾内岸线蜿蜒曲折，岬湾相间，又被分成几个海湾(或称滩地) ，计有栲栳滩，芝坊滩，鲁岛滩，力岛滩，湾顶滩及五龙河三角洲等，
+          岬角处多为基岩裸露，形成海蚀崖，但多数因泥沙淤积已为潮水所不及。</p>
         <p>丁字湾周围被山丘环抱，南，北方向为剥蚀山丘，高程为70米上，下为切割山坡地，表面被残积-坡积物覆盖，西北方向为冲积平原。 流入丁字湾流有五龙河，白沙可，蓬险河，店集河，贤友河，黄塘河，
-        鳌子河，朱埠河，羊郡河等。</p>
+          鳌子河，朱埠河，羊郡河等。</p>
       </div>
     </div>
     <div class="rightBox-middle-right">
@@ -116,145 +119,375 @@
       </div>
     </div>
   </div>
+  <div class="selectbox">
+    <a-select v-model:value="selectedEcological" style="width: 20vh" @change="onEcologicalChange">
+      <a-select-option v-for="Ecological in EcologicalOptions" :key="Ecological.value" :value="Ecological.value">
+        {{ Ecological.label }}
+      </a-select-option>
+    </a-select>
+  </div>
+  <div class="morebox" v-show="morebox">
+    <div class="close" @click="morebox = false"></div>
+    <div class="moreboxtitle">水质评价因子质量指数</div>
+    <div style="width: 100%;height:33.5vh;padding:1vh;boxsizing: border-box;">
+      <div class="tablebtn-box">
+        <div class="tablebtn" :class="{ active: selectedButton2 === '一类' }" @click="selectButton2('一类')">一类</div>
+        <div class="tablebtn" :class="{ active: selectedButton2 === '二类' }" @click="selectButton2('二类')">二类</div>
+        <div class="tablebtn" :class="{ active: selectedButton2 === '三类' }" @click="selectButton2('三类')">三类</div>
+        <div class="tablebtn" :class="{ active: selectedButton2 === '四类' }" @click="selectButton2('四类')">四类</div>
+      </div>
+      <el-table :data="tableData3" style="width: 100%;" :header-cell-style="{
+        background: 'transparent', fontSize: '1.3vh',
+        'text-align': 'center',
+      }" height="16vh">
+        <el-table-column prop="station" label="站号" width="100" align="center" />
+        <el-table-column prop="pH" label="pH" width="100" align="center" />
+        <el-table-column prop="DO" label="DO" width="100" align="center" />
+        <el-table-column prop="COD" label="COD" width="100" align="center" />
+        <el-table-column prop="inorganicNitrogen" label="无机氮" width="100" align="center" />
+        <el-table-column prop="phosphate" label="磷酸盐" width="100" align="center" />
+        <el-table-column prop="sulfur" label="硫化物" width="100" align="center">
+          <template #header>
+            <span style="color: rgb(251, 255, 0);">硫化物</span>
+          </template>
+        </el-table-column>
+        <el-table-column prop="organicCarbon" label="有机碳" width="100" align="center">
+          <template #header>
+            <span style="color: rgb(251, 255, 0);">有机碳</span>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="nexttitle">
+        超标率
+      </div>
+      <el-table :data="tableRateData" style="width: 100%;" :header-cell-style="{
+        background: 'transparent', fontSize: '1.3vh',
+        'text-align': 'center',
+      }" height="8.5vh">
+        <el-table-column v-for="(rate, indicator) in tableRateData[0]" :key="indicator" :label="indicator"
+          :prop="indicator" align="center" />
+      </el-table>
+    </div>
+    <div class="chart" ref="chartRef"></div>
+  </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from 'element-plus';
-const tableData1 = ref([
-  {
-    project: '一类',
-    PH: '7.8~8.5',
-    DO: '>6',
-    COD: '≤2',
-    Inorganicnitrogen: '≤0.20',
-    Activephosphate: '≤0.015'
-  },
-  {
-    project: '二类',
-    PH: '7.8~8.5',
-    DO: '>5',
-    COD: '≤3',
-    Inorganicnitrogen: '≤0.30',
-    Activephosphate: '≤0.030'
-  },
-  {
-    project: '三类',
-    PH: '6.8~8.8',
-    DO: '>4',
-    COD: '≤4',
-    Inorganicnitrogen: '≤0.40',
-    Activephosphate: '≤0.030'
-  },
-  {
-    project: '四类',
-    PH: '6.8~8.8',
-    DO: '>3',
-    COD: '≤25',
-    Inorganicnitrogen: '≤0.50',
-    Activephosphate: '≤0.045'
+import axios from "axios";
+
+const selectedEcological = ref('2024-04-01');
+const EcologicalOptions = [
+  { value: '2024-04-01', label: '2024-04-01' },
+  { value: '2023-06-01', label: '2023-06-01' },
+  { value: '2023-08-01', label: '2023-08-01' },
+  { value: '2023-11-01', label: '2023-11-01' }
+];
+const tableData = ref([])
+const tableData2 = ref([])
+const tableData3 = ref([])
+const tableRateData = ref([]);
+const bayBio = ref(null);
+const bayEnv = ref(null);
+const bayHealth = ref(null);
+const bayThreat = ref(null);
+const overall = ref(null);
+const selectedButton = ref('浮游植物');
+
+const selectButton = (button) => {
+  selectedButton.value = button;
+  CreatureEvaluation();
+};
+const OverallRating = () => {
+  axios.get(window.VITE_APP_BASE_API + '/overall/getOverall/' + selectedEcological.value).then(res => {
+    bayBio.value = res.data.data.bayBio;
+    bayEnv.value = res.data.data.bayEnv;
+    bayHealth.value = res.data.data.bayHealth;
+    bayThreat.value = res.data.data.bayThreat;
+    overall.value = res.data.data.overall;
+  });
+};
+const WaterEvaluation = () => {
+  tableData.value = [];
+  const params = {
+    category: '',
+    name: '',
+    time: selectedEcological.value
+  };
+
+  axios.post(window.VITE_APP_BASE_API + '/water/getEvaReAll', params)
+    .then(res => {
+      const data = res.data.data;
+      const qualityData = data.quality.map(item => {
+        const sedimentItem = data.sediment.find(s => s.name === item.name) || {};
+        return {
+          Stations: item.name,
+          有机碳: sedimentItem.evaRe ? sedimentItem.evaRe['有机碳'] : '无数据',
+          硫化物: sedimentItem.evaRe ? sedimentItem.evaRe['硫化物'] : '无数据',
+          PH: item.evaRe['pH'],
+          DO: item.evaRe['DO'],
+          COD: item.evaRe['COD'],
+          Inorganicnitrogen: item.evaRe['无机氮'],
+          phosphate: item.evaRe['磷酸盐'],
+          Nutritionalization: item.evaRe['是否富营养化']
+        };
+      });
+      tableData.value = qualityData;
+    })
+    .catch(error => {
+      ElMessage.warning("未获取水质沉积物数据！");
+    });
+};
+
+const CreatureEvaluation = () => {
+  tableData2.value = [];
+  const params = {
+    category: selectedButton.value,
+    name: '',
+    time: selectedEcological.value
+  };
+  axios.post(window.VITE_APP_BASE_API + '/animal/getEvaReAll', params)
+    .then(res => {
+      const data = res.data.data;
+      tableData2.value = data.map(item => ({
+        Stations: item.name,
+        Diversity: item.evaRe['多样性指数'],
+        Uniformity: item.evaRe['均匀度'],
+        Dominance: item.evaRe['优势度'],
+        Richness: item.evaRe['丰富度'],
+        threshold: item.evaRe['生物多样性指数阈值'],
+        level: item.evaRe['多样性等级']
+      }));
+    })
+    .catch(error => {
+      ElMessage.warning("未获取生物多样性数据！");
+    });
+};
+const onEcologicalChange = (e) => {
+  morebox.value = false;
+  OverallRating();
+  WaterEvaluation();
+  CreatureEvaluation();
+};
+const morebox = ref(false);
+const selectedButton2 = ref('一类')
+const selectButton2 = (button) => {
+  selectedButton2.value = button;
+  getmoretabledata();
+};
+const Seemore = () => {
+  if (tableData.value.length === 0) {
+    ElMessage.warning("水质沉积物数据为空，无法查看更多信息！");
+    return;
   }
-])
-const tableData2 = ref([
-  {
-    Stations: '1',
-    Diversity: '1.00',
-    Uniformity: '1.00',
-    Dominance: '1.00',
-    Richness: '1.00',
-    threshold: '1.00',
-    level: '多样性一般',
-  },
-  {
-    Stations: '2',
-    Diversity: '1.50',
-    Uniformity: '0.95',
-    Dominance: '0.75',
-    Richness: '1.00',
-    threshold: '1.42',
-    level: '多样性一般',
-  },
-  {
-    Stations: '3',
-    Diversity: '1.25',
-    Uniformity: '0.79',
-    Dominance: '0.83',
-    Richness: '0.77',
-    threshold: '0.99',
-    level: '多样性一般',
-  },
-  {
-    Stations: '4',
-    Diversity: '1.00',
-    Uniformity: '1.00',
-    Dominance: '1.00',
-    Richness: '1.00',
-    threshold: '1.00',
-    level: '多样性一般',
-  },
-])
-const tableData3 = ref([
-  {
-    StationNumber: '1',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '一类',
-    phosphate: '一类',
-    Nutritionalization: '否',
-  },
-  {
-    StationNumber: '2',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '一类',
-    phosphate: '一类',
-    Nutritionalization: '否',
-  },
-  {
-    StationNumber: '3',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '二类',
-    phosphate: '二类',
-    Nutritionalization: '否',
-  },
-  {
-    StationNumber: '4',
-    PH: '一类',
-    DO: '一类',
-    COD: '一类',
-    Inorganicnitrogen: '四类',
-    phosphate: '一类',
-    Nutritionalization: '富营养化',
-  },
-])
-const tableData4 = ref([
-  {
-    habitat: '38.1',
-    creature: '28.8',
-    threatFactors: '20',
-    Composite: '86.9',
-    status: '稳定',
-  }
-])
-const getStatusColor = (status) => {
-  switch (status) {
-    case '稳定':
-      return '#2EA043';
-    case '受损':
-      return '#D18616';
-    case '严重受损':
-      return '#F85149';
-    default:
-      return '#b7cffc'; // 默认颜色
+  morebox.value = !morebox.value;
+  if (morebox.value) {
+    getmoretabledata();
   }
 };
 
+const getmoretabledata = () => {
+  const params = {
+    time: selectedEcological.value,
+    category: selectedButton2.value
+  };
+
+  axios.post(window.VITE_APP_BASE_API + '/water/getExeStdByCategory', params).then((res) => {
+    const data = res.data.data;
+    const formattedData = [];
+    const rateData = {};
+    let chartData = [['指标', '最小值', '最大值']];
+
+    for (const station in data) {
+      if (station === '最小值' || station === '最大值') {
+        const quality = data[station].quality;
+        const sediment = data[station].sediment;
+
+        for (const key in quality) {
+          const row = chartData.find(row => row[0] === key);
+          if (row) {
+            row[station === '最小值' ? 1 : 2] = quality[key];
+          } else {
+            const newRow = [key, station === '最小值' ? quality[key] : null, station === '最大值' ? quality[key] : null];
+            chartData.push(newRow);
+          }
+        }
+        for (const key in sediment) {
+          const row = chartData.find(row => row[0] === key);
+          if (row) {
+            row[station === '最小值' ? 1 : 2] = sediment[key];
+          } else {
+            const newRow = [key, station === '最小值' ? sediment[key] : null, station === '最大值' ? sediment[key] : null];
+            chartData.push(newRow);
+          }
+        }
+      }
+
+      if (station !== '最小值' && station !== '最大值' && station !== '超标率') {
+        const quality = data[station].quality;
+        const sediment = data[station].sediment;
+
+        formattedData.push({
+          station: station,
+          pH: quality.pH,
+          DO: quality.DO,
+          COD: quality.COD,
+          inorganicNitrogen: quality['无机氮'],
+          phosphate: quality['磷酸盐'],
+          sulfur: sediment['硫化物'],
+          organicCarbon: sediment['有机碳']
+        });
+      }
+    }
+    console.log(JSON.stringify(chartData));
+
+    tableData3.value = formattedData;
+
+    if (data['超标率']) {
+      for (const indicator in data['超标率'].quality) {
+        rateData[indicator] = data['超标率'].quality[indicator];
+      }
+    }
+    tableRateData.value = [rateData];
+    initChart1(chartData);
+  }).catch(error => {
+    console.error("数据获取失败:", error);
+  });
+};
+
+let chartRef = ref(null);
+let charts = [];
+let initChart1 = source => {
+  let fontSize = (document.body.clientHeight / 100) * 1.2;
+  let chart = echarts.init(chartRef.value);
+  charts.push(() => {
+    chart.dispose();
+    initChart1(source);
+  });
+  chart.setOption({
+    dataset: {
+      sourceHeader: true, 
+      source: source
+    },
+    grid: {
+      top: "15%",
+      bottom: "3%",
+      left: fontSize,
+      right: "3%",
+      containLabel: true
+    },
+    tooltip: {
+      trigger: "axis",
+      textStyle: {
+        fontSize: fontSize * 1.2
+      },
+      formatter: params => {
+        if (!params.length) return '';
+        const name = params[0].name;
+        const minValue = params.find(item => item.seriesName === '最小值')?.data[1];
+        const maxValue = params.find(item => item.seriesName === '最大值')?.data[2];
+
+        return `
+        数据名称：${name}<br>
+        最小值：${minValue || '无'}<br>
+        最大值：${maxValue || '无'}
+      `;
+      }
+    },
+    legend: {
+      data: ['最小值', '最大值'],
+      textStyle: {
+        color: "#C5F1FF",
+        fontSize: fontSize
+      },
+      top: "1%",
+      left: "center"
+    },
+    xAxis: {
+      type: "category",
+      axisLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.1)"
+        }
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.1)"
+        }
+      },
+      axisTick: {
+        show: false
+      },
+      boundaryGap: true,
+      axisLabel: {
+        textStyle: {
+          color: "#C5F1FF",
+          fontSize
+        }
+      }
+    },
+    yAxis: {
+      name: "指数",
+      nameTextStyle: {
+        color: "#C5F1FF",
+        fontSize
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.2)"
+        }
+      },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          width: 1,
+          color: "rgba(255,255,255,0.2)"
+        }
+      },
+      axisLabel: {
+        interval: 3,
+        textStyle: {
+          color: "#C5F1FF",
+          fontSize
+        }
+      },
+    },
+    series: [
+      {
+        name: "最小值",
+        type: "bar",
+        itemStyle: {
+          color: "#00FFFF"
+        },
+        encode: { x: 0, y: 1 }
+      },
+      {
+        name: "最大值",
+        type: "bar",
+        itemStyle: {
+          color: "#FF5733"
+        },
+        encode: { x: 0, y: 2 }
+      }
+    ]
+  });
+
+};
+
+let reloadChart = () => {
+  charts.splice(-2).forEach(chart => {
+    chart();
+  });
+};
 const myHandleResponseFunction = (data) => {
   const datajson = JSON.parse(data);
   if (datajson.Function === '报错') {
@@ -267,10 +500,14 @@ const myHandleResponseFunction = (data) => {
 }
 
 onMounted(() => {
+  OverallRating();
+  WaterEvaluation();
+  CreatureEvaluation();
   addResponseEventListener("handle_responses", myHandleResponseFunction);
+  window.addEventListener("resize", reloadChart);
 });
 onUnmounted(() => {
-
+  window.removeEventListener("resize", reloadChart);
 });
 </script>
 
@@ -279,13 +516,13 @@ onUnmounted(() => {
   position: absolute;
   left: 2.4vh;
   top: 10vh;
-  width: 30vh;
+  width: 33vh;
   height: 88vh;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   z-index: 10;
-  padding: 1.5vh;
+  padding: 1vh;
   box-sizing: border-box;
 }
 
@@ -293,37 +530,48 @@ onUnmounted(() => {
   position: absolute;
   right: 2.4vh;
   top: 10vh;
-  width: 30vh;
+  width: 33vh;
   height: 88vh;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   z-index: 10;
-  padding: 1.5vh;
+  padding: 1vh;
   box-sizing: border-box;
 }
 
 .rightBox-top {
   width: 100%;
-  height: 21.25vh;
+  height: 23.25vh;
 }
-.rightBox-top-right{
+
+.rightBox-top-right {
   width: 100%;
-  color: #b7cffc;
   max-height: 58.5vh;
   overflow-y: auto;
 }
-.rightBox-middle-right{
+
+.rightBox-middle-right {
   width: 100%;
   color: #b7cffc;
 }
 
-.rightBox-top-right p, .rightBox-middle-right p{
-  text-indent: 3.5ch;
+.rightBox-top-right p {
+  text-indent: 3.2ch;
   /* 每段行缩进2个字符 */
-  margin-bottom: 0.5em;
+  margin-bottom: 0.1em;
   font-size: 1.5vh;
-  line-height: 2.05vh;
+  line-height: 2.3vh;
+  color: #E9FAFF;
+}
+
+.rightBox-middle-right p {
+  text-indent: 3.2ch;
+  /* 每段行缩进2个字符 */
+  margin-bottom: 0.1em;
+  font-size: 1.5vh;
+  line-height: 2.1vh;
+  color: #E9FAFF;
 }
 
 .rightBox-top-title,
@@ -339,22 +587,123 @@ onUnmounted(() => {
   line-height: 3vh;
   padding-left: 3vh;
   box-sizing: border-box;
-}
-.rightBox-top-table {
-  margin: 1vh 0;
+  position: relative;
 }
 
-.rightBox-bottom-table{
+.rightBox-top-table {
+  height: 50vh;
   margin: 1vh 0;
+  background-image: url('../../assets/img/图层 62.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: .5vh 1vh;
+}
+
+.rightBox-bottom-table {
+  height: 26.5vh;
+  margin: 1vh 0;
+  background-image: url('../../assets/img/图层 42.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: .5vh 1vh;
 }
 
 .leftBox-top-table,
-.leftBox-bottom-table,
+.leftBox-bottom-table {
+  margin: 1vh 0;
+  height: 16.25vh;
+}
+
 .leftBox-middle2-content,
 .leftBox-bottom-content {
   margin: 1vh 0;
-  width: 27vh;
-  height: 16.25vh;
+  height: 27.5vh;
+}
+
+.lefttopbox {
+  margin-top: 1.5vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lefttopbox-item {
+  width: 8vh;
+  height: 8vh;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lefttopbox-item:nth-child(1) {
+  background-image: url('../../assets/img/leftblue.png');
+}
+
+.lefttopbox-item:nth-child(2) {
+  background-image: url('../../assets/img/middlegreen.png');
+}
+
+.lefttopbox-item:nth-child(3) {
+  background-image: url('../../assets/img/rightgreen.png');
+}
+
+.lefttopbox2 {
+  margin-top: 2vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lefttopbox-item2 {
+  width: 14vh;
+  height: 7vh;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lefttopbox-item2:nth-child(1) {
+  background-image: url('../../assets/img/left2box (2).png');
+}
+
+.lefttopbox-item2:nth-child(2) {
+  background-image: url('../../assets/img/left2box (1).png');
+}
+
+::-webkit-scrollbar-track {
+  background: #084077;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(0, #6BEBFF 0%, #0071BC 100%);
+}
+
+.selectbox {
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  top: 10vh;
+  z-index: 3;
+}
+
+:deep(.ant-select-selector) {
+  background-color: unset !important;
+  border: 1px solid rgb(59, 99, 187) !important;
+  color: #fff !important;
+  font-size: 1.4vh;
+  background-image: url("../../assets/img/back-btn.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+:deep(.ant-select-arrow) {
+  color: white;
 }
 
 :deep(.el-table__body-wrapper) {
@@ -378,6 +727,28 @@ onUnmounted(() => {
 :deep(.el-table tr) {
   background-color: transparent;
   border: none;
+}
+
+:deep(.el-table__row) {
+  color: white;
+}
+
+:deep(.el-table__row:nth-child(odd)) {
+  background: url("../../assets/img/osi-item2.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+:deep(.el-table__row:nth-child(even)) {
+  background: url("../../assets/img/osi-item3.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+:deep(.el-table__row:hover) {
+  background: url("../../assets/img/osi-item4.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 :deep(.el-table--enable-row-transition .el-table__body td, .el-table .cell) {
@@ -413,13 +784,98 @@ onUnmounted(() => {
 }
 
 :deep(.el-table .cell) {
-  color: #b7cffc;
   padding: 0 0.5vh
 }
-.leftBox-top-table :deep(.el-table__body-wrapper){
-  font-size: 1.4vh;
+
+:deep(.el-table thead) {
+  color: #00FFFF;
 }
-.bottom-table :deep(.el-table__body-wrapper){
+
+:deep(.el-scrollbar__thumb) {
+  background: linear-gradient(0, #6BEBFF 0%, #0071BC 100%);
+}
+
+.moretable {
+  width: 2.5vh;
+  height: 2.5vh;
+  background-image: url('../../assets/img/moretable.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  right: 1vh;
+  top: 0.2vh;
+  cursor: pointer;
+}
+
+.tablebtn-box {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.tablebtn {
+  width: 8vh;
+  height: 3vh;
+  background-image: url('../../assets/img/button-bt.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  font-size: 1.4vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-image 0.3s;
+}
+
+.tablebtn.active {
+  background-image: url('../../assets/img/button-at.png');
+}
+
+.morebox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85vh;
+  height: 65vh;
+  background-image: url('../../assets/img/morebox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.close {
+  width: 2vh;
+  height: 2vh;
+  background-image: url('../../assets/img/close2.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 2vh;
+  right: 1vh;
+  cursor: pointer;
+}
+
+.moreboxtitle {
+  width: 100%;
+  height: 6vh;
+  color: white;
+  line-height: 6vh;
   font-size: 1.8vh;
+  font-weight: bold;
+  margin-left: 4vh;
+}
+
+.nexttitle {
+  width: 100%;
+  text-align: center;
+  padding: 1vh;
+  color: white;
+  font-size: 1.8vh;
+  font-weight: bold;
+}
+
+.chart {
+  width: 85vh;
+  height: 25vh;
 }
 </style>
