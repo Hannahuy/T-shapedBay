@@ -254,7 +254,8 @@ let initChart3 = () => {
                 roam: true,
                 label: {
                     show: true,
-                    color: '#CFEFFF'
+                    color: '#CFEFFF',
+                    fontSize: 16 
                 },
                 edgeSymbolSize: [4, 10],
                 edgeLabel: {
@@ -271,19 +272,19 @@ let initChart3 = () => {
                         '#75ff8d': ["鰕虎鱼类", "其它中上层鱼类"]
                     };
                     const sizeMap = {
-                        "碎屑": 30,
-                        "浮游植物": 24,
-                        "其它软体动物": 27,
-                        "中国蛤蜊": 27,
-                        "浮游动物": 21,
-                        "牡蛎": 18,
-                        "棘皮动物": 18,
-                        "其它虾类": 15,
-                        "其它中上层鱼类": 15
+                        "碎屑": 50,
+                        "浮游植物": 44,
+                        "其它软体动物": 47,
+                        "中国蛤蜊": 47,
+                        "浮游动物": 41,
+                        "牡蛎": 38,
+                        "棘皮动物": 38,
+                        "其它虾类": 35,
+                        "其它中上层鱼类": 35
                     };
 
                     let color = '#FFFFFF'; // 默认颜色
-                    let size = 9; // 默认大小
+                    let size = 19; // 默认大小
 
                     for (const [key, values] of Object.entries(colorMap)) {
                         if (values.includes(item.name)) {
@@ -307,7 +308,8 @@ let initChart3 = () => {
                             position: [positionOffset, size],
                             backgroundColor: 'rgba(0, 0, 0, 0.5)',
                             padding: [4, 4],
-                            borderRadius: 4
+                            borderRadius: 4,
+                            fontSize: 16
                         },
                         symbolSize: size
                     };
@@ -351,6 +353,7 @@ let initChart3 = () => {
         });
     });
 };
+
 const showChart = ref(false);
 let initChart2 = () => {
     let chart = echarts.init(chartRef2.value);
