@@ -1233,7 +1233,7 @@ onUnmounted(() => {
     position: absolute;
     z-index: 1000;
     width: 15vh;
-    height: 3rem;
+    height: 4rem;
     color: rgb(255, 255, 255);
     line-height: 2.5rem;
     border: 0;

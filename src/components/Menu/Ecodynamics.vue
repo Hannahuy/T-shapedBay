@@ -754,7 +754,7 @@ onMounted(() => {
     position: absolute;
     z-index: 1000;
     width: 15vh;
-    height: 3rem;
+    height: 4rem;
     color: rgb(255, 255, 255);
     line-height: 2.5rem;
     border: 0;
@@ -869,7 +869,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     position: absolute;
-    bottom: 1.5vh;
+    bottom: 2vh;
     right: 1vh;
     z-index: 3;
 }
@@ -890,7 +890,7 @@ onMounted(() => {
 
 .rightbar {
     width: 3vh;
-    height: 31vh;
+    height: 32vh;
     border-bottom-left-radius: 0.5vh;
     border-bottom-right-radius: 0.5vh;
     background-size: 100% 100%;
