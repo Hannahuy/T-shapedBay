@@ -1214,61 +1214,66 @@ onUnmounted(() => {
 }
 
 .bottomCalendar {
-  position: absolute;
-  bottom: 3.5vh;
-  right: 3vh;
-  width: 13.5vh;
-  height: 2.5rem;
-  color: rgb(0, 113, 204);
-  border-radius: 1.25rem;
-  line-height: 2.5rem;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-  font-size: 1.8vh;
-  z-index: 3;
+    position: absolute;
+    bottom: 3vh;
+    right: 6vh;
+    width: 13.5vh;
+    height: 3rem;
+    color: rgb(255, 255, 255);
+    line-height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.8vh;
+    z-index: 3;
+    font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__wrapper) {
-  position: absolute;
-  z-index: 1000;
-  width: 13.5vh;
-  height: 2.5rem;
-  color: rgb(0, 113, 204);
-  border-radius: 1.25rem;
-  background: #fff;
-  line-height: 2.5rem;
-  border: 0;
-  cursor: pointer;
-  padding: 0;
-  font-size: 1.8vh;
+    position: absolute;
+    z-index: 1000;
+    width: 15vh;
+    height: 3rem;
+    color: rgb(255, 255, 255);
+    line-height: 2.5rem;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.8vh;
+    background-image: url('../../assets/img/timebox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-radius: none;
+    box-shadow: none;
+    font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__prefix-inner) {
-  display: none !important;
+    margin-left: 1vh;
 }
 
 .bottomCalendar :deep(.el-input__inner) {
-  margin-right: 1.5vh;
-  color: rgb(0, 113, 204);
-  cursor: pointer;
-  text-align: center;
-  margin: 0;
+    margin-right: 1.5vh;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin: 0;
+    font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__suffix-inner) {
-  display: none !important;
+    display: none !important;
 }
 
 .bottombox-left {
   width: 89%;
-  height: 5vh;
+  height: 6vh;
   background-image: url('../../assets/img/timebackground.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: absolute;
-  bottom: 2.5vh;
-  margin-left: 2.4vh;
+  bottom: 1.5vh;
+  margin-left: 1.5vh;
   z-index: 10;
 }
 
@@ -1283,7 +1288,7 @@ onUnmounted(() => {
 
 .bottombox-button {
   position: absolute;
-  bottom: 0.5vh;
+  bottom: 1vh;
   left: 0.8%;
   display: flex;
   align-items: center;

@@ -1172,45 +1172,50 @@ onUnmounted(() => {
 
 .bottomCalendar {
     position: absolute;
-    bottom: 3.5vh;
-    right: 3vh;
+    bottom: 3vh;
+    right: 6vh;
     width: 13.5vh;
-    height: 2.5rem;
-    color: rgb(0, 113, 204);
-    border-radius: 1.25rem;
+    height: 3rem;
+    color: rgb(255, 255, 255);
     line-height: 2.5rem;
     border: 0;
     cursor: pointer;
     padding: 0;
     font-size: 1.8vh;
     z-index: 3;
+    font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__wrapper) {
     position: absolute;
     z-index: 1000;
-    width: 13.5vh;
-    height: 2.5rem;
-    color: rgb(0, 113, 204);
-    border-radius: 1.25rem;
-    background: #fff;
+    width: 15vh;
+    height: 3rem;
+    color: rgb(255, 255, 255);
     line-height: 2.5rem;
     border: 0;
     cursor: pointer;
     padding: 0;
     font-size: 1.8vh;
+    background-image: url('../../assets/img/timebox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-color: transparent;
+    border-radius: none;
+    box-shadow: none;
+    font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__prefix-inner) {
-    display: none !important;
+    margin-left: 1vh;
 }
 
 .bottomCalendar :deep(.el-input__inner) {
     margin-right: 1.5vh;
-    color: rgb(0, 113, 204);
+    color: rgb(255, 255, 255);
     cursor: pointer;
-    text-align: center;
     margin: 0;
+    font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__suffix-inner) {
@@ -1219,20 +1224,20 @@ onUnmounted(() => {
 
 .bottombox-left {
     width: 89%;
-    height: 5vh;
+    height: 6vh;
     background-image: url('../../assets/img/timebackground.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    bottom: 2.5vh;
-    margin-left: 2.4vh;
+    bottom: 1.5vh;
+    margin-left: 1.5vh;
     z-index: 10;
 }
 
 .bottombox {
     padding: 0 3vh 0 11vh;
     position: absolute;
-    bottom: 2vh;
+    bottom: 1vh;
     box-sizing: border-box;
     display: flex;
     z-index: 5;
@@ -1240,7 +1245,7 @@ onUnmounted(() => {
 
 .bottombox-button {
     position: absolute;
-    bottom: 0.5vh;
+    bottom: 1vh;
     left: 0.8%;
     display: flex;
     align-items: center;
@@ -1295,29 +1300,33 @@ onUnmounted(() => {
 }
 
 .right-button {
-    width: 15%;
-    height: 2vh;
+    width: 3vh;
+    height: 30vh;
     display: flex;
+    flex-direction: column;
     position: absolute;
-    bottom: 11vh;
-    right: 2.4vh;
+    bottom: 3vh;
+    right: 1vh;
     z-index: 3;
 }
 
 .leftbar {
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     border-top-left-radius: 0.5vh;
-    border-bottom-left-radius: 0.5vh;
-    width: 18%;
-    background-color: #FFFFFF;
+    border-top-right-radius: 0.5vh;
+    width: 3vh;
+    height: 2.5vh;
     font-size: 1.6vh;
+    color: white;
+    direction: rtl; /* 右到左的文本方向 */
 }
 
 .rightbar {
-    width: 82%;
-    border-top-right-radius: 0.5vh;
+    width: 3vh;
+    height: 27.5vh;
+    border-bottom-left-radius: 0.5vh;
     border-bottom-right-radius: 0.5vh;
     background-image: url('../../assets/img/colorbar.png');
     background-size: 100% 100%;
@@ -1326,6 +1335,7 @@ onUnmounted(() => {
     font-size: 1.6vh;
     font-weight: bold;
     display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 0 1vh;
     box-sizing: border-box;

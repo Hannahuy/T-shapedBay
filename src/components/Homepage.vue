@@ -175,6 +175,7 @@ onUnmounted(() => {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 2;
+  pointer-events: none !important;
 }
 
 .bottom {
@@ -186,6 +187,7 @@ onUnmounted(() => {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 2;
+  pointer-events: none !important;
 }
 
 .right {
@@ -197,6 +199,7 @@ onUnmounted(() => {
   background-size: 100% 100%;
   background-repeat: no-repeat;
   z-index: 2;
+  pointer-events: none !important;
 }
 
 .top-title {
