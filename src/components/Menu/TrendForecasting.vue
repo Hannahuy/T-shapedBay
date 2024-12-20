@@ -5,34 +5,25 @@
                 <div class="rightBox-top-title-dialog">
                     情景选择
                 </div>
-                <div style="margin-top: 1vh;margin-bottom: 1vh;">
-                    <el-radio-group v-model="radio" style="display: flex;justify-content: center;align-items: center;"
-                        @change="changeRadio">
-                        <el-radio value="浒苔情景">浒苔情景</el-radio>
-                        <el-radio value="陆源污染情景">陆源污染情景</el-radio>
-                    </el-radio-group>
+                <div class="radiobox-container">
+                    <div class="radiobox" :class="{ active: selectedButton === '浒苔情景' }" @click="selectButton('浒苔情景')">浒苔情景
+                    </div>
+                    <div class="radiobox" :class="{ active: selectedButton === '陆源污染情景' }" @click="selectButton('陆源污染情景')">
+                        陆源污染情景</div>
                 </div>
                 <div class="rightBox-top-title-dialog">
                     参数名称
                 </div>
                 <div class="rightbox-table">
-                    <table class="custom-table">
-                        <thead>
-                            <tr>
-                                <td>{{ tablehead }}</td>
-                                <td><el-input v-model="tabledata" /></td>
-                            </tr>
-                        </thead>
-                        <thead>
-                            <tr>
-                                <td>{{ tablehead2 }}</td>
-                                <td><el-input v-model="tabledata2" /></td>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div>
-                        <el-button class="buttonstyles" type="primary" @click="drive">驱动模型</el-button>
+                    <div class="rightbox-table1">
+                        <div class="rightbox-tabletitle">{{ tablehead }}：</div>
+                        <el-input v-model="tabledata" style="width: 12vh;" placeholder="请输入数值" />
                     </div>
+                    <div class="rightbox-table2">
+                        <div class="rightbox-tabletitle">{{ tablehead2 }}：</div>
+                        <el-input v-model="tabledata2" style="width: 12vh;" placeholder="请输入数值" />
+                    </div>
+                    <div class="buttonstyles" @click="drive">驱动模型</div>
                 </div>
             </div>
         </div>
@@ -74,22 +65,6 @@
     </div>
     <!-- 右下角选择 -->
     <div class="right-select" v-if="showselect">
-        <!-- <div class="top-leftbox-middle-content-div-2">
-            <div class="top-leftbox-middle-content-div-2-content">
-                <div class="color-bar-one">
-                    <a-slider v-model:value="Zaxis" vertical :reverse="true" @change="getZaxis" :min="0" :max="20"
-                        :step="1" tooltipPlacement="top" />
-                </div>
-                <span class="top-leftbox-middle-content-div-2-span">层级</span>
-            </div>
-            <div class="top-leftbox-middle-content-div-2-content">
-                <div class="color-bar-two">
-                    <a-slider v-model:value="threshold" vertical :reverse="true" @change="getthreshold" :min="0"
-                        :max="1" :step="0.01" tooltipPlacement="top" />
-                </div>
-                <span class="top-leftbox-middle-content-div-2-span">特征范围</span>
-            </div>
-        </div> -->
         <el-checkbox-group v-model="selectvalue" @change="selectchange" class="checkbox-group">
             <el-checkbox label="水面表层" value="水面表层0级" />
             <el-checkbox label="水面中上层" value="水面表层1级" />
@@ -160,23 +135,23 @@ const activeIndex = ref(null);
 const showselectbar = ref(false);
 const showmenu = ref(false)
 const changeBackground = (index) => {
-  if (activeIndex.value === index) {
-    activeIndex.value = null;
-    showselect.value = false;
-    showselectbar.value = false;
-    showselect2.value = false;
-  } else {
-    activeIndex.value = index;
-    if (index === 0) {
-      showselect.value = true;
-      showselectbar.value = true;
-      showselect2.value = false;
-    } else if (index === 1) {
-      showselect2.value = true;
-      showselect.value = false;
-      showselectbar.value = true;
+    if (activeIndex.value === index) {
+        activeIndex.value = null;
+        showselect.value = false;
+        showselectbar.value = false;
+        showselect2.value = false;
+    } else {
+        activeIndex.value = index;
+        if (index === 0) {
+            showselect.value = true;
+            showselectbar.value = true;
+            showselect2.value = false;
+        } else if (index === 1) {
+            showselect2.value = true;
+            showselect.value = false;
+            showselectbar.value = true;
+        }
     }
-  }
 }
 const showChart = ref(false);
 const chartcontent = ref(null);
@@ -203,51 +178,11 @@ const handlechart = () => {
     });
 };
 
-const radio = ref('浒苔情景');
 const tablehead = ref('浒苔面积（㎡）');
 const tablehead2 = ref('浒苔生物量（kg/㎡）');
 const tabledata = ref(218300);
 const tabledata2 = ref(2);
 const radioselection = ref('浒苔情景');
-const changeRadio = (e) => {
-    radioselection.value = e;
-    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
-    const currentSelectValues = Array.from(selectvalue.value);
-    activeIndex.value = null;
-    showmenu.value = false;
-    showselect.value = false;
-    showselectbar.value = false;
-    showselect2.value = false;
-
-    if (e == '浒苔情景') {
-        tablehead.value = '浒苔面积（㎡）';
-        tablehead2.value = '浒苔生物量（kg/㎡）';
-        tabledata.value = 218300;
-        tabledata2.value = 2;
-    } else {
-        tablehead.value = '无机氮（mg/m³）';
-        tablehead2.value = '无机磷（mg/m³）';
-        tabledata.value = 200;
-        tabledata2.value = 100;
-    }
-    
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: radioselection.value,
-        State: true,
-        Time: formattedTime,
-        Type: selectedItemname.value,
-        Layer: currentSelectValues,
-    });
-    // console.log({
-    //     ModuleName: `趋势预测`,
-    //     FunctionName: e,
-    //     State: true,
-    //     Time: formattedTime,
-    //     Type: selectedItemname.value,
-    //     Layer: currentSelectValues,
-    // });
-}
 const layerFunction = ref([]);
 const layerFunction2 = ref([
     {
@@ -611,6 +546,47 @@ const layerFunction2 = ref([
         ).href,
     },
 ]);
+const selectedButton = ref('浒苔情景');
+const selectButton = (button) => {
+    selectedButton.value = button;
+    radioselection.value = button;
+    const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
+    const currentSelectValues = Array.from(selectvalue.value);
+    activeIndex.value = null;
+    showmenu.value = false;
+    showselect.value = false;
+    showselectbar.value = false;
+    showselect2.value = false;
+
+    if (button == '浒苔情景') {
+        tablehead.value = '浒苔面积（㎡）';
+        tablehead2.value = '浒苔生物量（kg/㎡）';
+        tabledata.value = 218300;
+        tabledata2.value = 2;
+    } else {
+        tablehead.value = '无机氮（mg/m³）';
+        tablehead2.value = '无机磷（mg/m³）';
+        tabledata.value = 200;
+        tabledata2.value = 100;
+    }
+
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: radioselection.value,
+        State: true,
+        Time: formattedTime,
+        Type: selectedItemname.value,
+        Layer: currentSelectValues,
+    });
+    // console.log({
+    //     ModuleName: `趋势预测`,
+    //     FunctionName: e,
+    //     State: true,
+    //     Time: formattedTime,
+    //     Type: selectedItemname.value,
+    //     Layer: currentSelectValues,
+    // });
+};
 const drive = () => {
     if (tabledata.value == '' || tabledata2.value == '') {
         ElMessage.warning('请输入数据');
@@ -990,7 +966,6 @@ const close = () => {
     showSmallWindow.value = false;
 };
 const myHandleResponseFunction = (data) => {
-    console.log(data);
     const datajson = JSON.parse(data);
     if (datajson.Function === '报错') {
         ElMessage({
@@ -1320,7 +1295,8 @@ onUnmounted(() => {
     height: 2.5vh;
     font-size: 1.6vh;
     color: white;
-    direction: rtl; /* 右到左的文本方向 */
+    direction: rtl;
+    /* 右到左的文本方向 */
 }
 
 .rightbar {
@@ -1356,23 +1332,6 @@ onUnmounted(() => {
     justify-content: center;
     align-items: center;
     z-index: 3;
-}
-
-.custom-table {
-    border-collapse: collapse;
-    width: 90%;
-    color: #b7cffc;
-    margin-top: 1vh;
-    z-index: 3;
-}
-
-.custom-table th,
-.custom-table td {
-    border: 0.2vh solid #416491;
-    padding: 0.8vh;
-    text-align: center;
-    height: 3vh;
-    width: 50%;
 }
 
 .custom-table2 {
@@ -1495,27 +1454,19 @@ onUnmounted(() => {
 .rightbox {
     position: absolute;
     top: 7vh;
-    right: 2.4vh;
+    left: 2.4vh;
     z-index: 3;
 }
 
 .rightbox-middle {
     width: 40vh;
     height: 32.5vh;
-    background-image: url("../../assets/img/框-bg.png");
+    background-image: url("../../assets/img/bacg-bg.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin-top: 2vh;
     padding: 2vh;
     box-sizing: border-box;
-    color: #b7cffc;
-}
-
-:deep(.el-radio.el-radio--large) {
-    height: auto;
-}
-
-:deep(.el-radio.el-radio--large .el-radio__label) {
     color: #b7cffc;
 }
 
@@ -1530,45 +1481,50 @@ onUnmounted(() => {
 
 .rightBox-top-title-dialog {
     width: 100%;
-    height: 3vh;
-    background-image: url('../../assets/img/rightboxtitle.png');
+    height: 2.5vh;
+    background-image: url('../../assets/img/rightboxtitle2.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     color: #FFFFFF;
-    font-size: 1.6vh;
+    font-size: 1.65vh;
     font-weight: bold;
-    line-height: 3vh;
-    padding-left: 3vh;
+    line-height: 1vh;
+    padding-left: 2vh;
     box-sizing: border-box;
 }
 
 .rightbox-table {
-    margin-top: 1vh;
-}
-
-.custom-table {
-    border-collapse: collapse;
     width: 100%;
-}
-
-.custom-table th,
-.custom-table td {
-    border: 0.1vh solid #416491;
-    padding: 0.8vh;
-    text-align: center;
-    height: 4vh;
-    width: 50%;
+    height: 11vh;
+    margin-top: 1vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .buttonstyles {
+    width: 12vh;
+    height: 4vh;
     margin-top: 2vh;
     margin-left: 37vh;
     border-radius: 0;
-    background-color: #0a6adf;
+    background-image: url('../../assets/img/drive.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     border: 0;
     position: absolute;
     right: 2vh;
     bottom: 2.4vh;
+    color: white;
+    font-size: 1.7vh;
+    font-weight: bold;
+    letter-spacing: 0.3vh;
+    margin-left: 0.3vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 :deep(.el-radio__label) {
@@ -1635,6 +1591,81 @@ onUnmounted(() => {
 }
 
 .itemMenu.active {
-  background-image: url('../../assets/img/icontitile-active-1.png');
+    background-image: url('../../assets/img/icontitile-active-1.png');
+}
+
+.radiobox-container {
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.radiobox {
+    width: 14.5vh;
+    height: 3vh;
+    background-image: url('../../assets/img/btn2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 3.2vh;
+    box-sizing: border-box;
+    color: #E6F8FF;
+    font-weight: bold;
+    font-size: 1.6vh;
+    cursor: pointer;
+}
+
+.radiobox.active {
+    background-image: url('../../assets/img/btn2-act.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #ffffff;
+}
+
+.rightbox-table1 {
+    width: 35vh;
+    height: 4vh;
+    background-image: url('../../assets/img/areatable.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1vh;
+}
+
+.rightbox-table2 {
+    width: 35vh;
+    height: 4vh;
+    background-image: url('../../assets/img/numtable.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1vh;
+}
+.rightbox-tabletitle{
+    height: 4vh;
+    color: #E6F8FF;
+    font-size: 1.6vh;
+    display: flex;
+    align-items: center;
+}
+.rightbox-table :deep(.el-input__wrapper:hover){
+    box-shadow: none;
+}
+.rightbox-table :deep(.el-input__wrapper){
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+}
+.rightbox-table :deep(.el-input__inner){
+    color: #00FFFF;
+    font-size: 1.6vh;
+    font-weight: bold;
 }
 </style>
