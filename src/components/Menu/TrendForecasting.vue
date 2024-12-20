@@ -159,7 +159,7 @@
         </div>
     </div>
     <!-- 图表弹窗 -->
-    <div class="buttonstyles2" v-if="!showselect" @click="handlechart">查看数据</div>
+    <div class="buttonstyles2" v-if="showselect2" @click="handlechart">查看数据</div>
     <div class="fishecharts" v-if="showChart">
         <img src="../../assets/img/close.png" alt="" class="close2" @click="showChart = false">
         <div class="chartcontent" ref="chartcontent"></div>
@@ -1081,20 +1081,20 @@ const reloadChart = () => {
     charts.forEach((chart) => chart());
 };
 
-const TOP = ref(0.3);
-const BOTTOM = ref(0.5);
-const LEFT = ref(0.3);
-const RIGHT = ref(0.5);
-const FRONT = ref(0.3);
-const BACK = ref(0.5);
+const TOP = ref(0);
+const BOTTOM = ref(1);
+const LEFT = ref(0);
+const RIGHT = ref(1);
+const FRONT = ref(0);
+const BACK = ref(1);
 const CROSSX = ref(0);
 const CROSSY = ref(0);
 const THICK = ref(0);
 const THRESHOLD = ref(1);
 const selectedButton2 = ref('体剖切');
-const slidervalue = ref([0.3, 0.5])
-const slidervalue2 = ref([0.3, 0.5])
-const slidervalue3 = ref([0.3, 0.5])
+const slidervalue = ref([0, 1])
+const slidervalue2 = ref([0, 1])
+const slidervalue3 = ref([0, 1])
 const selectButton2 = (button) => {
     selectedButton2.value = button;
 };

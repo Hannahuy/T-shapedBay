@@ -179,12 +179,12 @@ import { callUIInteraction, addResponseEventListener } from "../../module/webrtc
 import { ElMessage } from 'element-plus';
 import axios from "axios";
 
-const selectedEcological = ref('2024-04-01');
+const selectedEcological = ref('2024-04-29');
 const EcologicalOptions = [
-  { value: '2024-04-01', label: '2024-04-01' },
-  { value: '2023-06-01', label: '2023-06-01' },
-  { value: '2023-08-01', label: '2023-08-01' },
-  { value: '2023-11-01', label: '2023-11-01' }
+  { value: '2023-06-15', label: '2023-06-15' },
+  { value: '2023-08-09', label: '2023-08-09' },
+  { value: '2023-11-07', label: '2023-11-07' },
+  { value: '2024-04-29', label: '2024-04-29' }
 ];
 const tableData = ref([])
 const tableData2 = ref([])

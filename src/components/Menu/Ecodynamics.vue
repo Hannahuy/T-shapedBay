@@ -394,23 +394,76 @@ const myHandleResponseFunction = (data) => {
     }
 }
 
-const TOP = ref(0.3);
-const BOTTOM = ref(0.5);
-const LEFT = ref(0.3);
-const RIGHT = ref(0.5);
-const FRONT = ref(0.3);
-const BACK = ref(0.5);
+const TOP = ref(0);
+const BOTTOM = ref(1);
+const LEFT = ref(0);
+const RIGHT = ref(1);
+const FRONT = ref(0);
+const BACK = ref(1);
 const CROSSX = ref(0);
 const CROSSY = ref(0);
-const THICK = ref(0);
+const THICK = ref(0.001);
 const THRESHOLD = ref(1);
 const selectedButton = ref('体剖切');
 const colorbar = ref(0);
-const slidervalue = ref([0.3, 0.5])
-const slidervalue2 = ref([0.3, 0.5])
-const slidervalue3 = ref([0.3, 0.5])
+const slidervalue = ref([0, 1])
+const slidervalue2 = ref([0, 1])
+const slidervalue3 = ref([0, 1])
 const selectButton = (button) => {
     selectedButton.value = button;
+    if (button == '体剖切') {
+        callUIInteraction({
+            ModuleName: `生态动力`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton.value,
+            Values: {
+                TOP: TOP.value,
+                BOTTOM: BOTTOM.value,
+                RIGHT: RIGHT.value,
+                LEFT: LEFT.value,
+                FRONT: FRONT.value,
+                BACK: BACK.value,
+                THRESHOLD: THRESHOLD.value
+            }
+        });
+        console.log({
+            ModuleName: `生态动力`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton.value,
+            Values: {
+                TOP: TOP.value,
+                BOTTOM: BOTTOM.value,
+                RIGHT: RIGHT.value,
+                LEFT: LEFT.value,
+                FRONT: FRONT.value,
+                BACK: BACK.value,
+                THRESHOLD: THRESHOLD.value
+            }
+        });
+    } else {
+        callUIInteraction({
+            ModuleName: `生态动力`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton.value,
+            Values: {
+                'CROSS-X': pointPosition.value.x,
+                'CROSS-Y': pointPosition.value.y,
+                "THICK": THICK.value,
+                "THRESHOLD": THRESHOLD.value
+            }
+        });
+        console.log({
+            ModuleName: `生态动力`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton.value,
+            Values: {
+                'CROSS-X': pointPosition.value.x,
+                'CROSS-Y': pointPosition.value.y,
+                "THICK": THICK.value,
+                "THRESHOLD": THRESHOLD.value
+            }
+        });
+    }
 };
 const getslidervalue = (e) => {
     TOP.value = e[0];
@@ -664,9 +717,9 @@ const movePoint = (event) => {
     CROSSX.value = Math.max(0, Math.min(1, (x / rect.width)));
     CROSSY.value = Math.max(0, Math.min(1, (y / rect.height)));
 
-    pointPosition.value = { 
-        x: parseFloat(CROSSX.value.toFixed(2)), 
-        y: parseFloat(CROSSY.value.toFixed(2)) 
+    pointPosition.value = {
+        x: parseFloat(CROSSX.value.toFixed(2)),
+        y: parseFloat(CROSSY.value.toFixed(2))
     };
 
     callUIInteraction({
@@ -680,7 +733,7 @@ const movePoint = (event) => {
             "THRESHOLD": THRESHOLD.value
         }
     });
-    
+
     console.log({
         ModuleName: `生态动力`,
         FunctionName: `空间分析`,
