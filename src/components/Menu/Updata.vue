@@ -813,7 +813,7 @@ const inputHarmfulRedTideAreaReference = ref('');
     margin-top: 1vh;
     display: flex;
     justify-content: space-between;
-    width: 16vh;
+    width: 20vh;
     position: absolute;
     bottom: 1.5vh;
     right: 1.5vh;
@@ -830,7 +830,7 @@ const inputHarmfulRedTideAreaReference = ref('');
 }
 
 .next {
-    width: 7vh;
+    width: 9vh;
     height: 3vh;
     display: flex;
     justify-content: center;
@@ -841,7 +841,7 @@ const inputHarmfulRedTideAreaReference = ref('');
 }
 
 .pre {
-    width: 7vh;
+    width: 9vh;
     height: 3vh;
     display: flex;
     justify-content: center;
