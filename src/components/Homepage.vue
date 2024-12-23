@@ -6,7 +6,7 @@
           <div style="width: 10.5vh;">晴天</div>
           <div>18℃ ~ 27℃</div>
         </div>
-        <div class="top-title-middle">丁字湾典型生态数字孪生系统</div>
+        <div class="top-title-middle" @click="addData">丁字湾典型生态数字孪生系统</div>
         <div class="top-title-right">{{ dayTime }}</div>
       </div>
     </div>
@@ -48,6 +48,9 @@
     <div v-show="!selected">
       <Home />
     </div>
+    <div class="databox" v-if="showDatabox">
+      <Updata />
+    </div>
   </div>
   <UEpage />
 </template>
@@ -60,7 +63,8 @@ import Ecodynamics from './Menu/Ecodynamics.vue';
 import MonitoringSurveys from './Menu/MonitoringSurveys.vue';
 import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
-import Home from './Menu/Home.vue'
+import Home from './Menu/Home.vue';
+import Updata from './Menu/Updata.vue';
 
 const dayTime = ref('');
 const updateTime = () => {
@@ -116,6 +120,11 @@ const selectMenu = (menu) => {
   }
 }
 const interval = ref(null);
+
+const showDatabox = ref(false);
+const addData = () => {
+  showDatabox.value = !showDatabox.value;
+}
 
 onMounted(() => {
   if (window.performance.navigation.type == 1) {
@@ -237,6 +246,8 @@ onUnmounted(() => {
 
 .top-title-middle {
   margin-bottom: 3vh;
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 
 .top-title-right {

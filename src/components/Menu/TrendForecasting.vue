@@ -78,33 +78,29 @@
                     <div>TOP</div>
                     <div>BOTTOM</div>
                 </div>
-                <el-slider v-model="slidervalue" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;"
-                    @change="getslidervalue" />
+                <el-slider v-model="slidervalue" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
             </div>
             <div>
                 <div class="rightbottombox-content-title">
                     <div>LEFT</div>
                     <div>RIGHT</div>
                 </div>
-                <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;"
-                    @change="getslidervalue2" />
+                <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
             </div>
             <div>
                 <div class="rightbottombox-content-title">
                     <div>FRONT</div>
                     <div>BACK</div>
                 </div>
-                <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;"
-                    @change="getslidervalue3" />
+                <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
             </div>
         </div>
-
         <div class="rightbottombox-content" v-if="selectedButton2 === '十字切片'">
             <div>
                 <div class="rightbottombox-content-title2">
                     CROSS POSITION
                 </div>
-                <div class="crossback" @click="movePoint">
+                <div class="crossback" @mousedown="startDragging">
                     <div class="crossback-point" :style="pointStyle"></div>
                 </div>
             </div>
@@ -1098,103 +1094,54 @@ const slidervalue3 = ref([0, 1])
 const selectButton2 = (button) => {
     selectedButton2.value = button;
 };
-const getslidervalue = (e) => {
-    TOP.value = e[0];
-    BOTTOM.value = e[1];
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            TOP: TOP.value,
-            BOTTOM: BOTTOM.value,
-            RIGHT: RIGHT.value,
-            LEFT: LEFT.value,
-            FRONT: FRONT.value,
-            BACK: BACK.value,
-            THRESHOLD: THRESHOLD.value
-        }
-    });
-    console.log({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            TOP: TOP.value,
-            BOTTOM: BOTTOM.value,
-            RIGHT: RIGHT.value,
-            LEFT: LEFT.value,
-            FRONT: FRONT.value,
-            BACK: BACK.value,
-            THRESHOLD: THRESHOLD.value
-        }
-    });
-}
-const getslidervalue2 = (e) => {
-    LEFT.value = e[0];
-    RIGHT.value = e[1];
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            TOP: TOP.value,
-            BOTTOM: BOTTOM.value,
-            RIGHT: RIGHT.value,
-            LEFT: LEFT.value,
-            FRONT: FRONT.value,
-            BACK: BACK.value,
-            THRESHOLD: THRESHOLD.value
-        }
-    });
-    console.log({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            TOP: TOP.value,
-            BOTTOM: BOTTOM.value,
-            RIGHT: RIGHT.value,
-            LEFT: LEFT.value,
-            FRONT: FRONT.value,
-            BACK: BACK.value,
-            THRESHOLD: THRESHOLD.value
-        }
-    });
-}
-const getslidervalue3 = (e) => {
-    FRONT.value = e[0];
-    BACK.value = e[1];
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            TOP: TOP.value,
-            BOTTOM: BOTTOM.value,
-            RIGHT: RIGHT.value,
-            LEFT: LEFT.value,
-            FRONT: FRONT.value,
-            BACK: BACK.value,
-            THRESHOLD: THRESHOLD.value
-        }
-    });
-    console.log({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            TOP: TOP.value,
-            BOTTOM: BOTTOM.value,
-            RIGHT: RIGHT.value,
-            LEFT: LEFT.value,
-            FRONT: FRONT.value,
-            BACK: BACK.value,
-            THRESHOLD: THRESHOLD.value
-        }
-    });
-}
+watch(slidervalue, (newVal) => {
+    TOP.value = newVal[0];
+    BOTTOM.value = newVal[1];
+    logSliderValues();
+});
 
+watch(slidervalue2, (newVal) => {
+    LEFT.value = newVal[0];
+    RIGHT.value = newVal[1];
+    logSliderValues();
+});
+
+watch(slidervalue3, (newVal) => {
+    FRONT.value = newVal[0];
+    BACK.value = newVal[1];
+    logSliderValues();
+});
+
+const logSliderValues = () => {
+    callUIInteraction({
+        ModuleName: `生态动力`,
+        FunctionName: `空间分析`,
+        SelectFunction: selectedButton.value,
+        Values: {
+            TOP: TOP.value,
+            BOTTOM: BOTTOM.value,
+            RIGHT: RIGHT.value,
+            LEFT: LEFT.value,
+            FRONT: FRONT.value,
+            BACK: BACK.value,
+            THRESHOLD: THRESHOLD.value
+        }
+    });
+    // console.log({
+    //     ModuleName: `生态动力`,
+    //     FunctionName: `空间分析`,
+    //     SelectFunction: selectedButton.value,
+    //     Values: {
+    //         TOP: TOP.value,
+    //         BOTTOM: BOTTOM.value,
+    //         RIGHT: RIGHT.value,
+    //         LEFT: LEFT.value,
+    //         FRONT: FRONT.value,
+    //         BACK: BACK.value,
+    //         THRESHOLD: THRESHOLD.value
+    //     }
+    // });
+};
 // 增加
 const increase = () => {
     const nextValue = parseFloat((THICK.value + 0.001).toFixed(3));
@@ -1212,17 +1159,17 @@ const increase = () => {
             "THRESHOLD": THRESHOLD.value
         }
     });
-    console.log({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            'CROSS-X': pointPosition.value.x,
-            'CROSS-Y': pointPosition.value.y,
-            "THICK": THICK.value,
-            "THRESHOLD": THRESHOLD.value
-        }
-    });
+    // console.log({
+    //     ModuleName: `趋势预测`,
+    //     FunctionName: `空间分析`,
+    //     SelectFunction: selectedButton2.value,
+    //     Values: {
+    //         'CROSS-X': pointPosition.value.x,
+    //         'CROSS-Y': pointPosition.value.y,
+    //         "THICK": THICK.value,
+    //         "THRESHOLD": THRESHOLD.value
+    //     }
+    // });
 };
 
 // 减少
@@ -1242,17 +1189,17 @@ const decrease = () => {
             "THRESHOLD": THRESHOLD.value
         }
     });
-    console.log({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            'CROSS-X': pointPosition.value.x,
-            'CROSS-Y': pointPosition.value.y,
-            "THICK": THICK.value,
-            "THRESHOLD": THRESHOLD.value
-        }
-    });
+    // console.log({
+    //     ModuleName: `趋势预测`,
+    //     FunctionName: `空间分析`,
+    //     SelectFunction: selectedButton2.value,
+    //     Values: {
+    //         'CROSS-X': pointPosition.value.x,
+    //         'CROSS-Y': pointPosition.value.y,
+    //         "THICK": THICK.value,
+    //         "THRESHOLD": THRESHOLD.value
+    //     }
+    // });
 };
 
 const validateInput = () => {
@@ -1269,47 +1216,95 @@ const validateInput = () => {
 };
 
 const pointPosition = ref({ x: 0.5, y: 0.5 }); // 初始位置为中心
+let lastPrintedPosition = { x: null, y: null }; 
+const isDragging = ref(false); // 标记是否正在拖拽
 
 const movePoint = (event) => {
-    const crossbackElement = event.currentTarget;
-    const rect = crossbackElement.getBoundingClientRect();
+    if (!isDragging.value) {
+        const crossbackElement = event.currentTarget;
+        const rect = crossbackElement.getBoundingClientRect();
 
-    // 获取点击位置相对于 crossback 的位置
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+        // 获取点击位置相对于 crossback 的位置
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
 
-    // 计算百分比位置，确保在 0 到 1 之间
-    CROSSX.value = Math.max(0, Math.min(1, (x / rect.width)));
-    CROSSY.value = Math.max(0, Math.min(1, (y / rect.height)));
+        // 计算百分比位置，确保在 0 到 1 之间
+        CROSSX.value = Math.max(0, Math.min(1, (x / rect.width)));
+        CROSSY.value = Math.max(0, Math.min(1, (y / rect.height)));
 
-    pointPosition.value = {
-        x: parseFloat(CROSSX.value.toFixed(2)),
-        y: parseFloat(CROSSY.value.toFixed(2))
-    };
+        pointPosition.value = {
+            x: parseFloat(CROSSX.value.toFixed(2)),
+            y: parseFloat(CROSSY.value.toFixed(2))
+        };
 
-    callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            'CROSS-X': pointPosition.value.x,
-            'CROSS-Y': pointPosition.value.y,
-            "THICK": THICK.value,
-            "THRESHOLD": THRESHOLD.value
-        }
-    });
+        updatePointPosition();
+    }
+};
 
-    console.log({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-            'CROSS-X': pointPosition.value.x,
-            'CROSS-Y': pointPosition.value.y,
-            "THICK": THICK.value,
-            "THRESHOLD": THRESHOLD.value
-        }
-    });
+// 开始拖拽
+const startDragging = (event) => {
+    isDragging.value = true;
+    movePoint(event); // 初始化位置
+    document.addEventListener('mousemove', dragPoint);
+    document.addEventListener('mouseup', stopDragging);
+};
+
+// 拖拽中
+const dragPoint = (event) => {
+    if (isDragging.value) {
+        const crossbackElement = document.querySelector('.crossback');
+        const rect = crossbackElement.getBoundingClientRect();
+
+        // 获取鼠标位置相对于 crossback 的位置
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        CROSSX.value = Math.max(0, Math.min(1, (x / rect.width)));
+        CROSSY.value = Math.max(0, Math.min(1, (y / rect.height)));
+
+        pointPosition.value = {
+            x: parseFloat(CROSSX.value.toFixed(2)),
+            y: parseFloat(CROSSY.value.toFixed(2))
+        };
+        updatePointPosition();
+    }
+};
+
+// 停止拖拽
+const stopDragging = () => {
+    isDragging.value = false;
+    document.removeEventListener('mousemove', dragPoint);
+    document.removeEventListener('mouseup', stopDragging);
+};
+
+const updatePointPosition = () => {
+    if (pointPosition.value.x !== lastPrintedPosition.x || pointPosition.value.y !== lastPrintedPosition.y) {
+        callUIInteraction({
+            ModuleName: `生态动力`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton.value,
+            Values: {
+                'CROSS-X': pointPosition.value.x,
+                'CROSS-Y': pointPosition.value.y,
+                "THICK": THICK.value,
+                "THRESHOLD": THRESHOLD.value
+            }
+        });
+        // console.log({
+        //     ModuleName: `生态动力`,
+        //     FunctionName: `空间分析`,
+        //     SelectFunction: selectedButton.value,
+        //     Values: {
+        //         'CROSS-X': pointPosition.value.x,
+        //         'CROSS-Y': pointPosition.value.y,
+        //         "THICK": THICK.value,
+        //         "THRESHOLD": THRESHOLD.value
+        //     }
+        // });
+        // 更新上一次打印的坐标
+        lastPrintedPosition.x = pointPosition.value.x;
+        lastPrintedPosition.y = pointPosition.value.y;
+    }
 };
 
 

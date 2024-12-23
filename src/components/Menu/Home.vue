@@ -47,14 +47,14 @@
           background: 'transparent', fontSize: '1.2vh',
           'text-align': 'center',
         }" height="27.5vh">
-          <el-table-column prop="Stations" label="站号" width="60" align="center" />
-          <el-table-column prop="PH" label="PH" width="40" align="center" />
-          <el-table-column prop="DO" label="DO" width="40" align="center" />
-          <el-table-column prop="COD" label="COD" width="40" align="center" />
-          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="50" align="center" />
-          <el-table-column prop="phosphate" label="磷酸盐" width="50" align="center" />
-          <el-table-column prop="Nutritionalization" label="是否富营养化" width="80" align="center" />
-          <el-table-column prop="有机碳" label="有机碳" width="50" align="center">
+          <el-table-column prop="Stations" label="站号" width="70" align="center" />
+          <el-table-column prop="PH" label="PH" width="50" align="center" />
+          <el-table-column prop="DO" label="DO" width="50" align="center" />
+          <el-table-column prop="COD" label="COD" width="50" align="center" />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
+          <el-table-column prop="phosphate" label="磷酸盐" width="60" align="center" />
+          <el-table-column prop="Nutritionalization" label="是否富营养化" width="90" align="center" />
+          <el-table-column prop="有机碳" label="有机碳" width="60" align="center">
             <template #header>
               <span style="color: rgb(251, 255, 0);">有机碳</span>
             </template>
@@ -81,13 +81,13 @@
           background: 'transparent', fontSize: '1.3vh',
           'text-align': 'center',
         }" height="24.5vh">
-          <el-table-column prop="Stations" label="站号" width="50" align="center" />
-          <el-table-column prop="Diversity" label="多样性指数" width="80" align="center" />
-          <el-table-column prop="Uniformity" label="均匀度" width="50" align="center" />
-          <el-table-column prop="Dominance" label="优势度" width="50" align="center" />
-          <el-table-column prop="Richness" label="丰富度" width="50" align="center" />
-          <el-table-column prop="level" label="多样性等级" width="80" align="center" />
-          <el-table-column prop="threshold" label="生物多样性指数阈值" width="130" align="center" />
+          <el-table-column prop="Stations" label="站号" width="70" align="center" />
+          <el-table-column prop="Diversity" label="多样性指数" width="90" align="center" />
+          <el-table-column prop="Uniformity" label="均匀度" width="60" align="center" />
+          <el-table-column prop="Dominance" label="优势度" width="60" align="center" />
+          <el-table-column prop="Richness" label="丰富度" width="60" align="center" />
+          <el-table-column prop="level" label="多样性等级" width="90" align="center" />
+          <el-table-column prop="threshold" label="生物多样性指数阈值" width="140" align="center" />
         </el-table>
       </div>
     </div>
@@ -342,7 +342,7 @@ const getmoretabledata = () => {
         });
       }
     }
-    console.log(JSON.stringify(chartData));
+    // console.log(JSON.stringify(chartData));
 
     tableData3.value = formattedData;
 
