@@ -26,35 +26,44 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedSaltMarshAreaChange" label="a.盐沼面积变化率" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedSaltMarshAreaChange" label="a.盐沼面积变化率" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSaltMarshAreaChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSaltMarshAreaChange" />
+                                <el-input v-model="inputSaltMarshAreaChangeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSaltMarshAreaChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSaltMarshAreaChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSaltMarshAreaChange" />
+                                <el-input v-model="inputSaltMarshAreaChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedSaltMarshAreaChange" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedSaltMarshVegetationCoverChange" label="b.盐沼植被盖度变化率" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedSaltMarshVegetationCoverChange" label="b.盐沼植被盖度变化率"
+                                    size="large" style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSaltMarshVegetationCoverChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSaltMarshVegetationCoverChange" />
+                                <el-input v-model="inputSaltMarshVegetationCoverChangeYear" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedSaltMarshVegetationCoverChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSaltMarshVegetationCoverChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSaltMarshVegetationCoverChange" />
+                                <el-input v-model="inputSaltMarshVegetationCoverChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedSaltMarshVegetationCoverChange" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedSaltMarshWidthChange" label="c.盐沼植被宽度变化率" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedSaltMarshWidthChange" label="c.盐沼植被宽度变化率" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSaltMarshWidthChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSaltMarshWidthChange" />
+                                <el-input v-model="inputSaltMarshWidthChangeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSaltMarshWidthChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSaltMarshWidthChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSaltMarshWidthChange" />
+                                <el-input v-model="inputSaltMarshWidthChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedSaltMarshWidthChange" />
                             </div>
                         </div>
                     </div>
@@ -68,24 +77,30 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedBenthicAnimalDensityChange" label="a.大型底栖动物密度变化率" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedBenthicAnimalDensityChange" label="a.大型底栖动物密度变化率" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputBenthicAnimalDensityChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedBenthicAnimalDensityChange" />
+                                <el-input v-model="inputBenthicAnimalDensityChangeYear" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedBenthicAnimalDensityChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputBenthicAnimalDensityChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedBenthicAnimalDensityChange" />
+                                <el-input v-model="inputBenthicAnimalDensityChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedBenthicAnimalDensityChange" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedBenthicAnimalBiomassChange" label="b.大型底栖动物生物量变化率" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedBenthicAnimalBiomassChange" label="b.大型底栖动物生物量变化率" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputBenthicAnimalBiomassChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedBenthicAnimalBiomassChange" />
+                                <el-input v-model="inputBenthicAnimalBiomassChangeYear" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedBenthicAnimalBiomassChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputBenthicAnimalBiomassChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedBenthicAnimalBiomassChange" />
+                                <el-input v-model="inputBenthicAnimalBiomassChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedBenthicAnimalBiomassChange" />
                             </div>
                         </div>
                     </div>
@@ -99,24 +114,30 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedSedimentPH" label="a.沉积物pH" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedSedimentPH" label="a.沉积物pH" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSedimentPHYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSedimentPH" />
+                                <el-input v-model="inputSedimentPHYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSedimentPH" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSedimentPHValue" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSedimentPH" />
+                                <el-input v-model="inputSedimentPHValue" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSedimentPH" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedSedimentSalinity" label="b.沉积物水溶性盐总量" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedSedimentSalinity" label="b.沉积物水溶性盐总量" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSedimentSalinityYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSedimentSalinity" />
+                                <el-input v-model="inputSedimentSalinityYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSedimentSalinity" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSedimentSalinityValue" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSedimentSalinity" />
+                                <el-input v-model="inputSedimentSalinityValue" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSedimentSalinity" />
                             </div>
                         </div>
                     </div>
@@ -132,24 +153,30 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedTidalVolume" label="纳潮量" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedTidalVolume" label="纳潮量" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputTidalVolumeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedTidalVolume" />
+                                <el-input v-model="inputTidalVolumeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedTidalVolume" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputTidalVolumeReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedTidalVolume" />
+                                <el-input v-model="inputTidalVolumeReference" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedTidalVolume" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedWaterExchangeRate" label="水交换率" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedWaterExchangeRate" label="水交换率" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputWaterExchangeRateYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedWaterExchangeRate" />
+                                <el-input v-model="inputWaterExchangeRateYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedWaterExchangeRate" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputWaterExchangeRateReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedWaterExchangeRate" />
+                                <el-input v-model="inputWaterExchangeRateReference" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedWaterExchangeRate" />
                             </div>
                         </div>
                     </div>
@@ -162,10 +189,12 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 72.5%;">
-                                <el-checkbox v-model="checkedOrganicMatter" label="有机物" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedOrganicMatter" label="有机物" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOrganicMatterAverage" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOrganicMatter" />
+                                <el-input v-model="inputOrganicMatterAverage" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedOrganicMatter" />
                             </div>
                         </div>
                         <div class="content-body-item">
@@ -173,7 +202,8 @@
                                 <el-checkbox v-model="checkedSulfide" label="硫化物" size="large" style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSulfideAverage" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSulfide" />
+                                <el-input v-model="inputSulfideAverage" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSulfide" />
                             </div>
                         </div>
                     </div>
@@ -202,10 +232,12 @@
                         <div class="content-body-item">
                             <div class="content-title2" style="width: 35%;">d.水中初级生产力</div>
                             <div style="width: 37.5%;">
-                                <el-input v-model="inputWaterPrimaryProductivity" placeholder="请输入内容" style="width: 22vh;" />
+                                <el-input v-model="inputWaterPrimaryProductivity" placeholder="请输入内容"
+                                    style="width: 22vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputReferencePrimaryProductivity" placeholder="请输入内容" style="width: 16vh;" />
+                                <el-input v-model="inputReferencePrimaryProductivity" placeholder="请输入内容"
+                                    style="width: 16vh;" />
                             </div>
                         </div>
                     </div>
@@ -223,46 +255,58 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedOysterReefAreaChange" label="①活体牡蛎礁斑块面积变化" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedOysterReefAreaChange" label="①活体牡蛎礁斑块面积变化" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterReefAreaChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterReefAreaChange" />
+                                <el-input v-model="inputOysterReefAreaChangeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedOysterReefAreaChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterReefAreaChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterReefAreaChange" />
+                                <el-input v-model="inputOysterReefAreaChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedOysterReefAreaChange" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedOysterReefHeightChange" label="②牡蛎礁礁体高度变化" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedOysterReefHeightChange" label="②牡蛎礁礁体高度变化" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterReefHeightChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterReefHeightChange" />
+                                <el-input v-model="inputOysterReefHeightChangeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedOysterReefHeightChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterReefHeightChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterReefHeightChange" />
+                                <el-input v-model="inputOysterReefHeightChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedOysterReefHeightChange" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedOysterDensityChange" label="③牡蛎密度变化" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedOysterDensityChange" label="③牡蛎密度变化" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterDensityChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterDensityChange" />
+                                <el-input v-model="inputOysterDensityChangeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedOysterDensityChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterDensityChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterDensityChange" />
+                                <el-input v-model="inputOysterDensityChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedOysterDensityChange" />
                             </div>
                         </div>
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedOysterSupplementChange" label="④牡蛎补充量变化" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedOysterSupplementChange" label="④牡蛎补充量变化" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterSupplementChangeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterSupplementChange" />
+                                <el-input v-model="inputOysterSupplementChangeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedOysterSupplementChange" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputOysterSupplementChangeBaseline" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedOysterSupplementChange" />
+                                <el-input v-model="inputOysterSupplementChangeBaseline" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedOysterSupplementChange" />
                             </div>
                         </div>
                     </div>
@@ -290,13 +334,16 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedFishEggs" label="鱼卵数量" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedFishEggs" label="鱼卵数量" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputFishEggsYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedFishEggs" />
+                                <el-input v-model="inputFishEggsYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedFishEggs" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputFishEggsReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedFishEggs" />
+                                <el-input v-model="inputFishEggsReference" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedFishEggs" />
                             </div>
                         </div>
                     </div>
@@ -306,23 +353,28 @@
                                 <el-checkbox v-model="checkedLarvae" label="仔鱼数量" size="large" style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputLarvaeYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedLarvae" />
+                                <el-input v-model="inputLarvaeYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedLarvae" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputLarvaeReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedLarvae" />
+                                <el-input v-model="inputLarvaeReference" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedLarvae" />
                             </div>
                         </div>
                     </div>
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedSwimmingAnimals" label="游泳动物" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedSwimmingAnimals" label="游泳动物" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSwimmingAnimalsYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSwimmingAnimals" />
+                                <el-input v-model="inputSwimmingAnimalsYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSwimmingAnimals" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSwimmingAnimalsReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedSwimmingAnimals" />
+                                <el-input v-model="inputSwimmingAnimalsReference" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedSwimmingAnimals" />
                             </div>
                         </div>
                     </div>
@@ -336,33 +388,39 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedPhytoplankton" label="浮游植物" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedPhytoplankton" label="浮游植物" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;"></div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputPhytoplanktonHIndex" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedPhytoplankton" />
+                                <el-input v-model="inputPhytoplanktonHIndex" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedPhytoplankton" />
                             </div>
                         </div>
                     </div>
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedZooplankton" label="浮游动物" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedZooplankton" label="浮游动物" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;"></div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputZooplanktonHIndex" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedZooplankton" />
+                                <el-input v-model="inputZooplanktonHIndex" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedZooplankton" />
                             </div>
                         </div>
                     </div>
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedBenthicAnimals" label="大型底栖生物" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedBenthicAnimals" label="大型底栖生物" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;"></div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputBenthicAnimalsHIndex" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedBenthicAnimals" />
+                                <el-input v-model="inputBenthicAnimalsHIndex" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedBenthicAnimals" />
                             </div>
                         </div>
                     </div>
@@ -418,7 +476,8 @@
                                 <el-input v-model="inputReclaimedLandAreaYear" placeholder="请输入内容" style="width: 16vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputReclaimedLandAreaReference" placeholder="请输入内容" style="width: 16vh;" />
+                                <el-input v-model="inputReclaimedLandAreaReference" placeholder="请输入内容"
+                                    style="width: 16vh;" />
                             </div>
                         </div>
                     </div>
@@ -432,26 +491,32 @@
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedInterferenceCorridorLength" label="干扰廊道总长度" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedInterferenceCorridorLength" label="干扰廊道总长度" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputInterferenceCorridorLengthYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedInterferenceCorridorLength" />
+                                <el-input v-model="inputInterferenceCorridorLengthYear" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedInterferenceCorridorLength" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputInterferenceCorridorLengthReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedInterferenceCorridorLength" />
+                                <el-input v-model="inputInterferenceCorridorLengthReference" placeholder="请输入内容"
+                                    style="width: 16vh;" :disabled="!checkedInterferenceCorridorLength" />
                             </div>
                         </div>
                     </div>
                     <div class="content-body">
                         <div class="content-body-item">
                             <div style="width: 45%;">
-                                <el-checkbox v-model="checkedWetlandArea" label="海湾滩涂湿地面积" size="large" style="margin-left: 6vh;" />
+                                <el-checkbox v-model="checkedWetlandArea" label="海湾滩涂湿地面积" size="large"
+                                    style="margin-left: 6vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputWetlandAreaYear" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedWetlandArea" />
+                                <el-input v-model="inputWetlandAreaYear" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedWetlandArea" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputWetlandAreaReference" placeholder="请输入内容" style="width: 16vh;" :disabled="!checkedWetlandArea" />
+                                <el-input v-model="inputWetlandAreaReference" placeholder="请输入内容" style="width: 16vh;"
+                                    :disabled="!checkedWetlandArea" />
                             </div>
                         </div>
                     </div>
@@ -469,7 +534,8 @@
                                 <el-input v-model="inputAquacultureAreaYear" placeholder="请输入内容" style="width: 16vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputAquacultureAreaReference" placeholder="请输入内容" style="width: 16vh;" />
+                                <el-input v-model="inputAquacultureAreaReference" placeholder="请输入内容"
+                                    style="width: 16vh;" />
                             </div>
                         </div>
                     </div>
@@ -487,7 +553,8 @@
                                 <el-input v-model="inputSewageDischargeYear" placeholder="请输入内容" style="width: 16vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputSewageDischargeReference" placeholder="请输入内容" style="width: 16vh;" />
+                                <el-input v-model="inputSewageDischargeReference" placeholder="请输入内容"
+                                    style="width: 16vh;" />
                             </div>
                         </div>
                     </div>
@@ -505,7 +572,8 @@
                                 <el-input v-model="inputHarmfulRedTideAreaYear" placeholder="请输入内容" style="width: 16vh;" />
                             </div>
                             <div style="width: 27.5%;">
-                                <el-input v-model="inputHarmfulRedTideAreaReference" placeholder="请输入内容" style="width: 16vh;" />
+                                <el-input v-model="inputHarmfulRedTideAreaReference" placeholder="请输入内容"
+                                    style="width: 16vh;" />
                             </div>
                         </div>
                     </div>
@@ -520,7 +588,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
+const emit = defineEmits(['closeDatabox']);
 const currentStep = ref(0);
 const prevStep = () => {
     if (currentStep.value > 0) {
@@ -548,7 +617,7 @@ const nextStep = () => {
     if (currentStep.value < 3) {
         currentStep.value++;
     } else {
-        
+        emit('closeDatabox');
     }
 };
 
@@ -800,7 +869,8 @@ const inputHarmfulRedTideAreaReference = ref('');
     font-weight: bold;
     align-items: center;
 }
-.content-title2{
+
+.content-title2 {
     color: white;
     display: flex;
     font-size: 1.6vh;
@@ -822,20 +892,20 @@ const inputHarmfulRedTideAreaReference = ref('');
 :deep(.el-checkbox__input.is-checked+.el-checkbox__label) {
     color: white;
 }
+
 ::-webkit-scrollbar {
-  height: 0.5vh;
-  width: 0.5vh;
+    height: 0.5vh;
+    width: 0.5vh;
 }
 
 ::-webkit-scrollbar-track {
-  background: #084077;
+    background: #084077;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(0, #6bebff 0%, #0071bc 100%);
+    background: linear-gradient(0, #6bebff 0%, #0071bc 100%);
 }
 
-:deep(.el-input.is-disabled .el-input__wrapper){
+:deep(.el-input.is-disabled .el-input__wrapper) {
     background-color: #092856;
-}
-</style>
+}</style>

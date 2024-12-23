@@ -49,7 +49,7 @@
       <Home />
     </div>
     <div class="databox" v-if="showDatabox">
-      <Updata />
+      <Updata @closeDatabox="showDatabox = false" />
     </div>
   </div>
   <UEpage />
