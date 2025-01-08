@@ -82,10 +82,10 @@
     </div>
     <div class="species">
       <div class="species-item" v-for="(item, index) in speciesList" :key="index" :class="{
-    'odd-item': index % 2 === 0,
-    'even-item': index % 2 !== 0,
-    'active-item': activeIndex === index
-  }" @click="handleClick(index, item)">
+        'odd-item': index % 2 === 0,
+        'even-item': index % 2 !== 0,
+        'active-item': activeIndex === index
+      }" @click="handleClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div>{{ item.count }}</div>
@@ -120,7 +120,7 @@
     <div class="brieflydata">
       <div v-for="(item, index) in animalDatalist" :key="index">
         <div style="font-size: 1.6vh;font-weight: bold;color:#00E7FF;text-align: center;margin-bottom: 1vh;">{{
-    item.title }}</div>
+          item.title }}</div>
         <div style="font-size: 1.2vh;text-indent: 2em;margin-bottom: 1vh;">{{ item.txt }}</div>
       </div>
     </div>
@@ -176,7 +176,7 @@
     <img src="../../assets/img/close.png" alt="" class="close" @click="oystersShow = false">
     <div class="Carousel1">
       <el-carousel height="16vh">
-        <el-carousel-item v-for="(image, index) in imageoysters" :key="index" v-if="imageoysters.length > 0">
+        <el-carousel-item v-for="(image, index) in imageoysters" :key="index" v-if="imageoysters.length > 0" >
           <img :src="image" alt="" style="width: 100%; height: 100%;">
         </el-carousel-item>
       </el-carousel>
@@ -320,7 +320,7 @@
             <td>{{ sediment.粒级含量['粉砂(%)'] }}</td>
           </tr>
           <tr>
-            <td>粘土(%) <0.004mm </td>
+            <td>{{ '粘土(%) <0.004mm' }}</td>
             <td>{{ sediment.粒级含量['粘土(%)'] }}</td>
           </tr>
         </tbody>
@@ -417,8 +417,8 @@
     <img src="../../assets/img/close.png" alt="" class="close" @click="showIntertidalzone = false">
     <div class="species">
       <div class="species-item" v-for="(item, index) in tidalzoneList" :key="index" :class="{
-    'odd-item': index % 2 === 0, 'even-item': index % 2 !== 0, 'active-item': activeIndex2 === index
-  }" @click="handletidalzoneClick(index, item)">
+        'odd-item': index % 2 === 0, 'even-item': index % 2 !== 0, 'active-item': activeIndex2 === index
+      }" @click="handletidalzoneClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div></div>
@@ -452,8 +452,8 @@
     </div>
     <div class="species">
       <div class="species-item" v-for="(item, index) in fishList" :key="index" :class="{
-    'odd-item': index % 2 === 0, 'even-item': index % 2 !== 0, 'active-item': activeIndex3 === index
-  }" @click="handlefishClick(index, item)">
+        'odd-item': index % 2 === 0, 'even-item': index % 2 !== 0, 'active-item': activeIndex3 === index
+      }" @click="handlefishClick(index, item)">
         <div>{{ index + 1 }}</div>
         <div>{{ item.name }}</div>
         <div></div>
@@ -1214,59 +1214,59 @@ onUnmounted(() => {
 }
 
 .bottomCalendar {
-    position: absolute;
-    bottom: 3vh;
-    right: 6vh;
-    width: 13.5vh;
-    height: 3rem;
-    color: rgb(255, 255, 255);
-    line-height: 2.5rem;
-    border: 0;
-    cursor: pointer;
-    padding: 0;
-    font-size: 1.8vh;
-    z-index: 3;
-    font-weight: bold;
+  position: absolute;
+  bottom: 3vh;
+  right: 6vh;
+  width: 13.5vh;
+  height: 5vh;
+  color: rgb(255, 255, 255);
+  line-height: 4vh;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.8vh;
+  z-index: 3;
+  font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__wrapper) {
-    position: absolute;
-    z-index: 1000;
-    width: 15vh;
-    height: 4rem;
-    color: rgb(255, 255, 255);
-    line-height: 2.5rem;
-    border: 0;
-    cursor: pointer;
-    padding: 0;
-    font-size: 1.8vh;
-    background-image: url('../../assets/img/timebox.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    background-color: transparent;
-    border-radius: none;
-    box-shadow: none;
-    font-weight: bold;
+  position: absolute;
+  z-index: 1000;
+  width: 15vh;
+  height: 6.5vh;
+  color: rgb(255, 255, 255);
+  line-height: 4vh;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.8vh;
+  background-image: url('../../assets/img/timebox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-color: transparent;
+  border-radius: none;
+  box-shadow: none;
+  font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__prefix-inner) {
-    margin-left: 1vh;
+  margin-left: 1vh;
 }
 
 .bottomCalendar :deep(.el-input__inner) {
-    margin-right: 1.5vh;
-    color: rgb(255, 255, 255);
-    cursor: pointer;
-    margin: 0;
-    font-weight: bold;
+  margin-right: 1.5vh;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  margin: 0;
+  font-weight: bold;
 }
 
 .bottomCalendar :deep(.el-input__suffix-inner) {
-    display: none !important;
+  display: none !important;
 }
 
 .bottombox-left {
-  width: 89%;
+  width: 88%;
   height: 6vh;
   background-image: url('../../assets/img/timebackground.png');
   background-repeat: no-repeat;
@@ -1278,9 +1278,9 @@ onUnmounted(() => {
 }
 
 .bottombox {
-  padding: 0 3vh 0 11vh;
+  padding: 0 3vh 0 10vh;
   position: absolute;
-  bottom: 2vh;
+  bottom: 1vh;
   box-sizing: border-box;
   display: flex;
   z-index: 5;

@@ -1216,7 +1216,7 @@ const validateInput = () => {
 };
 
 const pointPosition = ref({ x: 0.5, y: 0.5 }); // 初始位置为中心
-let lastPrintedPosition = { x: null, y: null }; 
+let lastPrintedPosition = { x: null, y: null };
 const isDragging = ref(false); // 标记是否正在拖拽
 
 const movePoint = (event) => {
@@ -1355,9 +1355,9 @@ onUnmounted(() => {
     bottom: 3vh;
     right: 6vh;
     width: 13.5vh;
-    height: 3rem;
+    height: 5vh;
     color: rgb(255, 255, 255);
-    line-height: 2.5rem;
+    line-height: 4vh;
     border: 0;
     cursor: pointer;
     padding: 0;
@@ -1370,9 +1370,9 @@ onUnmounted(() => {
     position: absolute;
     z-index: 1000;
     width: 15vh;
-    height: 4rem;
+    height: 6.5vh;
     color: rgb(255, 255, 255);
-    line-height: 2.5rem;
+    line-height: 4vh;
     border: 0;
     cursor: pointer;
     padding: 0;
@@ -1403,7 +1403,7 @@ onUnmounted(() => {
 }
 
 .bottombox-left {
-    width: 89%;
+    width: 88%;
     height: 6vh;
     background-image: url('../../assets/img/timebackground.png');
     background-repeat: no-repeat;
@@ -1415,7 +1415,7 @@ onUnmounted(() => {
 }
 
 .bottombox {
-    padding: 0 3vh 0 11vh;
+    padding: 0 3vh 0 10vh;
     position: absolute;
     bottom: 1vh;
     box-sizing: border-box;
@@ -1855,7 +1855,7 @@ onUnmounted(() => {
 
 .radiobox {
     width: 14.5vh;
-    height: 3vh;
+    height: 4vh;
     background-image: url('../../assets/img/btn2.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;

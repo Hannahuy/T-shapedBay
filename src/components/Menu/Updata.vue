@@ -1,6 +1,7 @@
 <template>
     <div class="databox">
         <div class="title">数据添加</div>
+        <div class="close" @click="emitClose"></div>
         <div class="steps">
             <div class="steps-item" :class="currentStep === 0 ? 'active' : ''">
                 海湾生境盐沼
@@ -588,30 +589,277 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits, watch } from 'vue';
+import axios from 'axios';
 const emit = defineEmits(['closeDatabox']);
 const currentStep = ref(0);
 const prevStep = () => {
     if (currentStep.value > 0) {
         currentStep.value--;
     }
-    if (currentStep.value === 0) {
-        console.log("第一步");
-    } else if (currentStep.value === 1) {
-        console.log("第二步");
-    } else if (currentStep.value === 2) {
-        console.log("第三步");
-    }
 };
-const nextStep = () => {
+const nextStep = async () => {
     if (currentStep.value === 0) {
         console.log("第一步");
+
+        // 构建第一步请求体
+        const requestData = {
+            formName: "海湾生境-盐沼",
+            options: {
+                "盐沼植被": {
+                    subOptions: {
+                        "a.盐沼面积变化率": {
+                            评估年份值: inputSaltMarshAreaChangeYear.value || 0,
+                            基准值: inputSaltMarshAreaChangeBaseline.value || 0,
+                            isSelected: checkedSaltMarshAreaChange.value
+                        },
+                        "b.盐沼植被盖度变化率": {
+                            评估年份值: inputSaltMarshVegetationCoverChangeYear.value || 0,
+                            基准值: inputSaltMarshVegetationCoverChangeBaseline.value || 0,
+                            isSelected: checkedSaltMarshVegetationCoverChange.value
+                        },
+                        "c.盐沼植被宽度变化率": {
+                            评估年份值: inputSaltMarshWidthChangeYear.value || 0,
+                            基准值: inputSaltMarshWidthChangeBaseline.value || 0,
+                            isSelected: checkedSaltMarshWidthChange.value
+                        }
+                    }
+                },
+                "生物群落": {
+                    subOptions: {
+                        "a.大型底栖动物密度变化率": {
+                            评估年份值: inputBenthicAnimalDensityChangeYear.value || 0,
+                            基准值: inputBenthicAnimalDensityChangeBaseline.value || 0,
+                            isSelected: checkedBenthicAnimalDensityChange.value
+                        },
+                        "b.大型底栖动物生物量变化": {
+                            评估年份值: inputBenthicAnimalBiomassChangeYear.value || 0,
+                            基准值: inputBenthicAnimalBiomassChangeBaseline.value || 0,
+                            isSelected: checkedBenthicAnimalBiomassChange.value
+                        }
+                    }
+                },
+                "环境要素": {
+                    subOptions: {
+                        "a.沉积物pH": {
+                            评估年份值: inputSedimentPHYear.value || 0,
+                            赋值: inputSedimentPHValue.value || 0,
+                            isSelected: checkedSedimentPH.value
+                        },
+                        "b.沉积物水溶性盐总量": {
+                            评估年份值: inputSedimentSalinityYear.value || 0,
+                            赋值: inputSedimentSalinityValue.value || 0,
+                            isSelected: checkedSedimentSalinity.value
+                        }
+                    }
+                }
+            },
+            formTime: "2024-04-01"
+        };
+
+        try {
+            const response = await axios.post(window.VITE_APP_BASE_API + `/overall/evaForm`, requestData);
+            console.log("请求成功:", response.data);
+        } catch (error) {
+            console.error("请求失败:", error);
+        }
     } else if (currentStep.value === 1) {
         console.log("第二步");
+
+        // 构建第二步请求体
+        const secondStepData = {
+            formName: "海湾生境",
+            options: {
+                "a.纳潮量和水交换变化率": {
+                    subOptions: {
+                        "纳潮量": {
+                            评估年份值: inputTidalVolumeYear.value || 0,
+                            参照系: inputTidalVolumeReference.value || 0,
+                            isSelected: checkedTidalVolume.value
+                        },
+                        "水交换率": {
+                            评估年份值: inputWaterExchangeRateYear.value || 0,
+                            参照系: inputWaterExchangeRateReference.value || 0,
+                            isSelected: checkedWaterExchangeRate.value
+                        }
+                    }
+                },
+                "b.沉积物": {
+                    subOptions: {
+                        "有机物": {
+                            各站位平均值: inputOrganicMatterAverage.value || 0,
+                            isSelected: checkedOrganicMatter.value
+                        },
+                        "硫化物": {
+                            各站位平均值: inputSulfideAverage.value || 0,
+                            isSelected: checkedSulfide.value
+                        }
+                    }
+                },
+                "c.富营养化程度": {
+                    isSelected: true,
+                    各站位平均值: inputEutrophicationLevel.value || 0
+                },
+                "d.水中初级生产力": {
+                    isSelected: true,
+                    评估年份各初级生产力平均值: inputWaterPrimaryProductivity.value || 0,
+                    参照中处理生产力: inputReferencePrimaryProductivity.value || 0
+                },
+                "e.典型生态系统": {
+                    subOptions: {
+                        "(1)牡蛎礁": {
+                            subOptions: {
+                                "①活体牡蛎礁斑块面积变化": {
+                                    isSelected: checkedOysterReefAreaChange.value,
+                                    评估年份值: inputOysterReefAreaChangeYear.value || 0,
+                                    基准值: inputOysterReefAreaChangeBaseline.value || 0
+                                },
+                                "②牡蛎礁礁体高度变化": {
+                                    isSelected: checkedOysterReefHeightChange.value,
+                                    评估年份值: inputOysterReefHeightChangeYear.value || 0,
+                                    基准值: inputOysterReefHeightChangeBaseline.value || 0
+                                },
+                                "③牡蛎密度变化": {
+                                    isSelected: checkedOysterDensityChange.value,
+                                    评估年份值: inputOysterDensityChangeYear.value || 0,
+                                    基准值: inputOysterDensityChangeBaseline.value || 0
+                                },
+                                "④牡蛎补充量变化": {
+                                    isSelected: checkedOysterSupplementChange.value,
+                                    评估年份值: inputOysterSupplementChangeYear.value || 0,
+                                    基准值: inputOysterSupplementChangeBaseline.value || 0
+                                }
+                            }
+                        },
+                        "(2)盐沼": {
+                            盐沼赋值: inputSaltMarshValue.value || 0,
+                            isSelected: true
+                        }
+                    }
+                }
+            },
+            formTime: "2024-04-01"
+        };
+
+        try {
+            const response = await axios.post(window.VITE_APP_BASE_API + `/overall/evaForm`, secondStepData);
+            console.log("第二步请求成功:", response.data);
+        } catch (error) {
+            console.error("第二步请求失败:", error);
+        }
     } else if (currentStep.value === 2) {
         console.log("第三步");
+
+        // 构建第三步请求体
+        const thirdStepData = {
+            formName: "海湾生物",
+            options: {
+                "a.鱼卵、仔鱼及游泳动物": {
+                    subOptions: {
+                        "鱼卵数量": {
+                            "评估年份": inputFishEggsYear.value || 0,
+                            "参照系": inputFishEggsReference.value || 0,
+                            "isSelected": checkedFishEggs.value
+                        },
+                        "仔鱼数量": {
+                            "评估年份": inputLarvaeYear.value || 0,
+                            "参照系": inputLarvaeReference.value || 0,
+                            "isSelected": checkedLarvae.value
+                        },
+                        "游泳动物": {
+                            "评估年份": inputSwimmingAnimalsYear.value || 0,
+                            "参照系": inputSwimmingAnimalsReference.value || 0,
+                            "isSelected": checkedSwimmingAnimals.value
+                        }
+                    }
+                },
+                "b.香农-维纳指数": {
+                    subOptions: {
+                        "浮游植物": {
+                            "香农-维纳指数H'": inputPhytoplanktonHIndex.value || 0,
+                            "isSelected": checkedPhytoplankton.value
+                        },
+                        "浮游动物": {
+                            "香农-维纳指数H'": inputZooplanktonHIndex.value || 0,
+                            "isSelected": checkedZooplankton.value
+                        },
+                        "大型底栖动物": {
+                            "香农-维纳指数H'": inputBenthicAnimalsHIndex.value || 0,
+                            "isSelected": checkedBenthicAnimals.value
+                        }
+                    }
+                },
+                "c.物种数量": {
+                    isSelected: true,
+                    "评估年份数据合计": inputSpeciesCountYear.value || 0,
+                    "参照中生物物种数量": inputSpeciesCountReference.value || 0
+                },
+                "d.植被面积(外来物种面积不计)": {
+                    isSelected: true,
+                    "评估年份": inputVegetationAreaYear.value || 0,
+                    "参照系": inputVegetationAreaReference.value || 0
+                }
+            },
+            formTime: "2024-04-01"
+        };
+
+        try {
+            const response = await axios.post(window.VITE_APP_BASE_API + `/overall/evaForm`, thirdStepData);
+            console.log("第三步请求成功:", response.data);
+        } catch (error) {
+            console.error("第三步请求失败:", error);
+        }
     } else if (currentStep.value === 3) {
         console.log("第四步");
+
+        // 构建第四步请求体
+        const fourthStepData = {
+            formName: "威胁因素",
+            options: {
+                "a.围填海面积": {
+                    isSelected: true,
+                    "评估年份": inputReclaimedLandAreaYear.value || 0,
+                    "参照系": inputReclaimedLandAreaReference.value || 0
+                },
+                "b.干扰廊道": {
+                    subOptions: {
+                        "干扰廊道总长度": {
+                            "评估年份": inputInterferenceCorridorLengthYear.value || 0,
+                            "参照系": inputInterferenceCorridorLengthReference.value || 0,
+                            "isSelected": checkedInterferenceCorridorLength.value
+                        },
+                        "海湾滩涂湿地面积": {
+                            "评估年份": inputWetlandAreaYear.value || 0,
+                            "参照系": inputWetlandAreaReference.value || 0,
+                            "isSelected": checkedWetlandArea.value
+                        }
+                    }
+                },
+                "c.养殖面积": {
+                    isSelected: true,
+                    "评估年份": inputAquacultureAreaYear.value || 0,
+                    "基准值": inputAquacultureAreaReference.value || 0
+                },
+                "d.污水排放量": {
+                    isSelected: false,
+                    "评估年份": inputSewageDischargeYear.value || 0,
+                    "基准值": inputSewageDischargeReference.value || 0
+                },
+                "e.有害赤潮累积发生面积": {
+                    isSelected: false,
+                    "评估年份": inputHarmfulRedTideAreaYear.value || 0,
+                    "基准值": inputHarmfulRedTideAreaReference.value || 0
+                }
+            },
+            formTime: "2024-04-01"
+        };
+
+        try {
+            const response = await axios.post(window.VITE_APP_BASE_API + `/overall/evaForm`, fourthStepData);
+            console.log("第四步请求成功:", response.data);
+        } catch (error) {
+            console.error("第四步请求失败:", error);
+        }
     }
 
     if (currentStep.value < 3) {
@@ -621,52 +869,131 @@ const nextStep = () => {
     }
 };
 
+const emitClose = () => {
+    emit('closeDatabox');
+};
+
 // 沼泽植被
 const checkedSaltMarshAreaChange = ref(false);
 const inputSaltMarshAreaChangeYear = ref('');
 const inputSaltMarshAreaChangeBaseline = ref('');
 
+watch(checkedSaltMarshAreaChange, (newValue) => {
+    if (!newValue) {
+        inputSaltMarshAreaChangeYear.value = '';
+        inputSaltMarshAreaChangeBaseline.value = '';
+    }
+});
+
 const checkedSaltMarshVegetationCoverChange = ref(false);
 const inputSaltMarshVegetationCoverChangeYear = ref('');
 const inputSaltMarshVegetationCoverChangeBaseline = ref('');
 
+watch(checkedSaltMarshVegetationCoverChange, (newValue) => {
+    if (!newValue) {
+        inputSaltMarshVegetationCoverChangeYear.value = '';
+        inputSaltMarshVegetationCoverChangeBaseline.value = '';
+    }
+});
+
 const checkedSaltMarshWidthChange = ref(false);
 const inputSaltMarshWidthChangeYear = ref('');
 const inputSaltMarshWidthChangeBaseline = ref('');
+
+watch(checkedSaltMarshWidthChange, (newValue) => {
+    if (!newValue) {
+        inputSaltMarshWidthChangeYear.value = '';
+        inputSaltMarshWidthChangeBaseline.value = '';
+    }
+});
 
 // 生物群落
 const checkedBenthicAnimalDensityChange = ref(false);
 const inputBenthicAnimalDensityChangeYear = ref('');
 const inputBenthicAnimalDensityChangeBaseline = ref('');
 
+watch(checkedBenthicAnimalDensityChange, (newValue) => {
+    if (!newValue) {
+        inputBenthicAnimalDensityChangeYear.value = '';
+        inputBenthicAnimalDensityChangeBaseline.value = '';
+    }
+});
+
 const checkedBenthicAnimalBiomassChange = ref(false);
 const inputBenthicAnimalBiomassChangeYear = ref('');
 const inputBenthicAnimalBiomassChangeBaseline = ref('');
+
+watch(checkedBenthicAnimalBiomassChange, (newValue) => {
+    if (!newValue) {
+        inputBenthicAnimalBiomassChangeYear.value = '';
+        inputBenthicAnimalBiomassChangeBaseline.value = '';
+    }
+});
 
 // 环境要素
 const checkedSedimentPH = ref(false);
 const inputSedimentPHYear = ref('');
 const inputSedimentPHValue = ref('');
 
+watch(checkedSedimentPH, (newValue) => {
+    if (!newValue) {
+        inputSedimentPHYear.value = '';
+        inputSedimentPHValue.value = '';
+    }
+});
+
 const checkedSedimentSalinity = ref(false);
 const inputSedimentSalinityYear = ref('');
 const inputSedimentSalinityValue = ref('');
+
+watch(checkedSedimentSalinity, (newValue) => {
+    if (!newValue) {
+        inputSedimentSalinityYear.value = '';
+        inputSedimentSalinityValue.value = '';
+    }
+});
 
 // 纳潮量和水交换变化率
 const checkedTidalVolume = ref(false);
 const inputTidalVolumeYear = ref('');
 const inputTidalVolumeReference = ref('');
 
+watch(checkedTidalVolume, (newValue) => {
+    if (!newValue) {
+        inputTidalVolumeYear.value = '';
+        inputTidalVolumeReference.value = '';
+    }
+});
+
 const checkedWaterExchangeRate = ref(false);
 const inputWaterExchangeRateYear = ref('');
 const inputWaterExchangeRateReference = ref('');
+
+watch(checkedWaterExchangeRate, (newValue) => {
+    if (!newValue) {
+        inputWaterExchangeRateYear.value = '';
+        inputWaterExchangeRateReference.value = '';
+    }
+});
 
 // 沉积物
 const checkedOrganicMatter = ref(false);
 const inputOrganicMatterAverage = ref('');
 
+watch(checkedOrganicMatter, (newValue) => {
+    if (!newValue) {
+        inputOrganicMatterAverage.value = '';
+    }
+});
+
 const checkedSulfide = ref(false);
 const inputSulfideAverage = ref('');
+
+watch(checkedSulfide, (newValue) => {
+    if (!newValue) {
+        inputSulfideAverage.value = '';
+    }
+});
 
 // 富营养化程度
 const inputEutrophicationLevel = ref('');
@@ -680,17 +1007,45 @@ const checkedOysterReefAreaChange = ref(false);
 const inputOysterReefAreaChangeYear = ref('');
 const inputOysterReefAreaChangeBaseline = ref('');
 
+watch(checkedOysterReefAreaChange, (newValue) => {
+    if (!newValue) {
+        inputOysterReefAreaChangeYear.value = '';
+        inputOysterReefAreaChangeBaseline.value = '';
+    }
+});
+
 const checkedOysterReefHeightChange = ref(false);
 const inputOysterReefHeightChangeYear = ref('');
 const inputOysterReefHeightChangeBaseline = ref('');
+
+watch(checkedOysterReefHeightChange, (newValue) => {
+    if (!newValue) {
+        inputOysterReefHeightChangeYear.value = '';
+        inputOysterReefHeightChangeBaseline.value = '';
+    }
+});
 
 const checkedOysterDensityChange = ref(false);
 const inputOysterDensityChangeYear = ref('');
 const inputOysterDensityChangeBaseline = ref('');
 
+watch(checkedOysterDensityChange, (newValue) => {
+    if (!newValue) {
+        inputOysterDensityChangeYear.value = '';
+        inputOysterDensityChangeBaseline.value = '';
+    }
+});
+
 const checkedOysterSupplementChange = ref(false);
 const inputOysterSupplementChangeYear = ref('');
 const inputOysterSupplementChangeBaseline = ref('');
+
+watch(checkedOysterSupplementChange, (newValue) => {
+    if (!newValue) {
+        inputOysterSupplementChangeYear.value = '';
+        inputOysterSupplementChangeBaseline.value = '';
+    }
+});
 
 // 盐沼赋值
 const inputSaltMarshValue = ref('');
@@ -700,23 +1055,62 @@ const checkedFishEggs = ref(false);
 const inputFishEggsYear = ref('');
 const inputFishEggsReference = ref('');
 
+watch(checkedFishEggs, (newValue) => {
+    if (!newValue) {
+        inputFishEggsYear.value = '';
+        inputFishEggsReference.value = '';
+    }
+});
+
 const checkedLarvae = ref(false);
 const inputLarvaeYear = ref('');
 const inputLarvaeReference = ref('');
+
+watch(checkedLarvae, (newValue) => {
+    if (!newValue) {
+        inputLarvaeYear.value = '';
+        inputLarvaeReference.value = '';
+    }
+});
 
 const checkedSwimmingAnimals = ref(false);
 const inputSwimmingAnimalsYear = ref('');
 const inputSwimmingAnimalsReference = ref('');
 
+watch(checkedSwimmingAnimals, (newValue) => {
+    if (!newValue) {
+        inputSwimmingAnimalsYear.value = '';
+        inputSwimmingAnimalsReference.value = '';
+    }
+});
+
 // 沉积物（香农-维纳指数）
 const checkedPhytoplankton = ref(false);
 const inputPhytoplanktonHIndex = ref('');
 
+watch(checkedPhytoplankton, (newValue) => {
+    if (!newValue) {
+        inputPhytoplanktonHIndex.value = '';
+    }
+});
+
 const checkedZooplankton = ref(false);
 const inputZooplanktonHIndex = ref('');
 
+watch(checkedZooplankton, (newValue) => {
+    if (!newValue) {
+        inputZooplanktonHIndex.value = '';
+    }
+});
+
 const checkedBenthicAnimals = ref(false);
 const inputBenthicAnimalsHIndex = ref('');
+
+watch(checkedBenthicAnimals, (newValue) => {
+    if (!newValue) {
+        inputBenthicAnimalsHIndex.value = '';
+    }
+});
 
 // 物种数量
 const inputSpeciesCountYear = ref('');
@@ -735,9 +1129,23 @@ const checkedInterferenceCorridorLength = ref(false);
 const inputInterferenceCorridorLengthYear = ref('');
 const inputInterferenceCorridorLengthReference = ref('');
 
+watch(checkedInterferenceCorridorLength, (newValue) => {
+    if (!newValue) {
+        inputInterferenceCorridorLengthYear.value = '';
+        inputInterferenceCorridorLengthReference.value = '';
+    }
+});
+
 const checkedWetlandArea = ref(false);
 const inputWetlandAreaYear = ref('');
 const inputWetlandAreaReference = ref('');
+
+watch(checkedWetlandArea, (newValue) => {
+    if (!newValue) {
+        inputWetlandAreaYear.value = '';
+        inputWetlandAreaReference.value = '';
+    }
+});
 
 // 养殖面积
 const inputAquacultureAreaYear = ref('');
@@ -760,20 +1168,23 @@ const inputHarmfulRedTideAreaReference = ref('');
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #074f929a;
+    background-image: url('../../assets/img/step/adddata.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .title {
     width: 100%;
     height: 5vh;
-    text-align: center;
     line-height: 5vh;
     font-size: 1.8vh;
     font-weight: bold;
     color: white;
+    padding-left: 3vh;
 }
 
 .steps {
+    margin-top: 1vh;
     width: 100%;
     height: 4vh;
     display: flex;
@@ -908,4 +1319,18 @@ const inputHarmfulRedTideAreaReference = ref('');
 
 :deep(.el-input.is-disabled .el-input__wrapper) {
     background-color: #092856;
-}</style>
+}
+
+:deep(.el-input__inner) {
+    font-size: 1.6vh;
+}
+
+.close{
+    position: absolute;
+    right: 1.5vh;
+    top: 1.5vh;
+    cursor: pointer;
+    width: 2vh;
+    height: 2vh;
+}
+</style>

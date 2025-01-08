@@ -9,14 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "3d-force-graph": "^1.74.5",
     "ant-design-vue": "^4.2.5",
     "axios": "^1.7.7",
     "echarts": "^5.5.1",
     "element-plus": "^2.8.3",
+    "three": "0.134.0",
     "vue": "^3.4.37",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@types/three": "^0.172.0",
     "@vitejs/plugin-vue": "^5.1.2",
     "vite": "^5.4.1"
   }

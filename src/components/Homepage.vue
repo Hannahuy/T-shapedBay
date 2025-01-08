@@ -41,7 +41,8 @@
     <div v-if="selected === '生态动力'">
       <Ecodynamics />
     </div>
-    <EcologicalGrid v-if="selected === '生态网络'" />
+    <!-- <EcologicalGrid v-if="selected === '生态网络'" /> -->
+    <test v-if="selected === '生态网络'" />
     <div v-if="selected === '趋势预测'">
       <TrendForecasting />
     </div>
@@ -65,6 +66,7 @@ import TrendForecasting from './Menu/TrendForecasting.vue';
 import EcologicalGrid from './Menu/EcologicalGrid.vue';
 import Home from './Menu/Home.vue';
 import Updata from './Menu/Updata.vue';
+import test from './Menu/test.vue';
 
 const dayTime = ref('');
 const updateTime = () => {
