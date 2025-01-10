@@ -32,7 +32,50 @@ let Graph;
 const highlightNodes = new Set();
 const highlightLinks = new Set();
 let hoverNode = null;
+const highlightTitles = ref([
+  "综合评估",
+  "海湾生物",
+  "威胁因素",
+  "海湾生境",
+  "海湾生境-盐沼",
+]);
+const onNodeHoverHandler = (node) => {
+  if ((!node && !highlightNodes.size) || (node && hoverNode === node)) return;
 
+  // 清空高光状态
+  highlightNodes.clear();
+  highlightLinks.clear();
+
+  if (node) {
+    // 高光当前节点及其邻居
+    highlightNodes.add(node);
+    if (node.neighbors) {
+      node.neighbors.forEach((neighbor) => highlightNodes.add(neighbor));
+      node.links.forEach((link) => highlightLinks.add(link));
+    }
+
+    // 鼠标悬停时清空 `highlightTitles` 的高光效果
+    highlightTitles.value = [];
+  } else {
+    // 鼠标移开时恢复 `highlightTitles` 的高光效果
+    highlightTitles.value = [
+      "综合评估",
+      "海湾生物",
+      "威胁因素",
+      "海湾生境",
+      "海湾生境-盐沼",
+    ];
+  }
+
+  hoverNode = node || null;
+
+  updateHighlight();
+};
+function updateHighlight() {
+  Graph.nodeColor(Graph.nodeColor())
+    .nodeThreeObject(Graph.nodeThreeObject())
+    .linkThreeObject(Graph.linkThreeObject());
+}
 const processGraphData = () => {
   gDataFull.links.forEach((link) => {
     const a = gDataFull.nodes[link.source];
@@ -112,32 +155,19 @@ const initializeGraph = () => {
     .nodeThreeObject((node) => {
       const nodeEl = document.createElement("div");
 
-      // 构建节点标题
       let content = `<span>${node.title}</span><br>`;
-
-      // 检查 value 是否为对象
       if (typeof node.value === "object" && node.value !== null) {
-        // 遍历 value 对象的每个属性
         for (const [key, val] of Object.entries(node.value)) {
-          // 跳过 isSelected 属性
           if (key === "isSelected") continue;
           content += `${key}: ${val}<br>`;
         }
       } else {
-        // 如果 value 不是对象，直接显示
         content += `Value: ${node.value}<br>`;
       }
 
       nodeEl.innerHTML = content;
 
-      const highlightTitles = [
-        "综合评估",
-        "海湾生物",
-        "威胁因素",
-        "海湾生境",
-        "海湾生境-盐沼",
-      ];
-      const isHighlightedTitle = highlightTitles.includes(node.title);
+      const isHighlightedTitle = highlightTitles.value.includes(node.title);
 
       nodeEl.style.color =
         isHighlightedTitle || highlightNodes.has(node) ? "#ffffff" : "transparent";
@@ -161,23 +191,7 @@ const initializeGraph = () => {
     })
 
     .nodeThreeObjectExtend(true)
-    .onNodeHover((node) => {
-      if ((!node && !highlightNodes.size) || (node && hoverNode === node)) return;
-
-      highlightNodes.clear();
-      highlightLinks.clear();
-      if (node) {
-        highlightNodes.add(node);
-        if (node.neighbors) {
-          node.neighbors.forEach((neighbor) => highlightNodes.add(neighbor));
-          node.links.forEach((link) => highlightLinks.add(link));
-        }
-      }
-
-      hoverNode = node || null;
-
-      updateHighlight();
-    })
+    .onNodeHover(onNodeHoverHandler)
     .linkThreeObject((link) => {
       const linkSourceGroup = gDataFull.nodes[link.source]
         ? gDataFull.nodes[link.source].group
@@ -239,13 +253,6 @@ const initializeGraph = () => {
   bloomPass.radius = 1;
   bloomPass.threshold = 0.1;
   Graph.postProcessingComposer().addPass(bloomPass);
-
-  function updateHighlight() {
-    // trigger update of highlighted objects in scene
-    Graph.nodeColor(Graph.nodeColor())
-      .nodeThreeObject(Graph.nodeThreeObject())
-      .linkThreeObject(Graph.linkThreeObject());
-  }
 
   function getNodeColor(group, hover) {
     switch (group) {
