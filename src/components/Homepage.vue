@@ -6,7 +6,8 @@
           <div style="width: 10.5vh">晴天</div>
           <div>18℃ ~ 27℃</div>
         </div>
-        <div class="top-title-middle" @click="addData">丁字湾典型生态数字孪生系统</div>
+        <!-- <div class="top-title-middle" @click="addData">丁字湾典型生态数字孪生系统</div> -->
+        <div class="top-title-middle">丁字湾典型生态数字孪生系统</div>
         <div class="top-title-right">{{ dayTime }}</div>
       </div>
     </div>
@@ -264,7 +265,7 @@ onUnmounted(() => {
 .top-title-middle {
   margin-bottom: 3vh;
   pointer-events: auto !important;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .top-title-right {

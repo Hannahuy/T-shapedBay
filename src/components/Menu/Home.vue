@@ -2,8 +2,69 @@
   <div class="leftBox">
     <div class="rightBox-top">
       <div class="rightBox-top-title">总体评价</div>
-      <div class="leftBox-top-table">
+      <!-- <div class="rightBox-top-title" @click="goToOverallEvaluation">总体评价</div> -->
+      <!-- <div class="leftBox-top-table">
         <test :gDataFulldata="gDataFulldata" />
+      </div> -->
+      <div class="leftBox-top-table">
+        <div class="lefttopbox">
+          <div class="lefttopbox-item">
+            <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
+              {{ bayEnv }}
+            </div>
+            <div style="margin-top: 4vh; font-size: 1.5vh">海湾生境</div>
+          </div>
+          <div class="lefttopbox-item">
+            <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
+              {{ bayBio }}
+            </div>
+            <div style="margin-top: 4vh; font-size: 1.5vh">海湾生物</div>
+          </div>
+          <div class="lefttopbox-item">
+            <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
+              {{ bayThreat }}
+            </div>
+            <div style="margin-top: 4vh; font-size: 1.5vh">威胁因素</div>
+          </div>
+        </div>
+        <div class="lefttopbox2">
+          <div class="lefttopbox-item2">
+            <div
+              style="
+                color: #ffffff;
+                font-size: 1.5vh;
+                margin-left: 5.5vh;
+                margin-top: 0.8vh;
+                margin-bottom: 0.5vh;
+              "
+            >
+              综合指数
+            </div>
+            <div
+              style="color: aqua; font-size: 1.6vh; font-weight: bold; margin-left: 5.5vh"
+            >
+              {{ overall }}
+            </div>
+          </div>
+          <div class="lefttopbox-item2">
+            <div
+              style="
+                color: #ffffff;
+                font-size: 1.5vh;
+                margin-left: 5.5vh;
+                margin-top: 0.8vh;
+                margin-bottom: 0.5vh;
+              "
+            >
+              健康状况
+            </div>
+            <div
+              style="color: aqua; font-size: 1.6vh; font-weight: bold; margin-left: 5.5vh"
+            >
+              {{ bayHealth }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="rightBox-middle2">
@@ -12,7 +73,7 @@
         <div class="moretable" @click="Seemore"></div>
       </div>
       <div class="leftBox-middle2-content">
-        <el-table
+        <!-- <el-table
           :data="tableData"
           style="width: 100%"
           :header-cell-style="{
@@ -21,6 +82,16 @@
             'text-align': 'center',
           }"
           height="16.5vh"
+        > -->
+        <el-table
+          :data="tableData"
+          style="width: 100%"
+          :header-cell-style="{
+            background: 'transparent',
+            fontSize: '1.2vh',
+            'text-align': 'center',
+          }"
+          height="27.5vh"
         >
           <el-table-column prop="Stations" label="站号" width="70" align="center" />
           <el-table-column prop="PH" label="PH" width="50" align="center" />
@@ -78,7 +149,7 @@
             底栖生物
           </div>
         </div>
-        <el-table
+        <!-- <el-table
           :data="tableData2"
           style="width: 100%"
           :header-cell-style="{
@@ -87,6 +158,16 @@
             'text-align': 'center',
           }"
           height="16.5vh"
+        > -->
+        <el-table
+          :data="tableData2"
+          style="width: 100%"
+          :header-cell-style="{
+            background: 'transparent',
+            fontSize: '1.3vh',
+            'text-align': 'center',
+          }"
+          height="24.5vh"
         >
           <el-table-column prop="Stations" label="站号" width="70" align="center" />
           <el-table-column
@@ -260,6 +341,12 @@ import {
 import { ElMessage } from "element-plus";
 import axios from "axios";
 import test from "../Menu/test.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const goToOverallEvaluation = () => {
+  router.push("/test2");
+};
 
 const selectedEcological = ref("2024-04-29");
 const EcologicalOptions = [
@@ -272,20 +359,36 @@ const tableData = ref([]);
 const tableData2 = ref([]);
 const tableData3 = ref([]);
 const tableRateData = ref([]);
-const gDataFulldata = ref();
+// const gDataFulldata = ref();
+const bayBio = ref(null);
+const bayEnv = ref(null);
+const bayHealth = ref(null);
+const bayThreat = ref(null);
+const overall = ref(null);
 const selectedButton = ref("浮游植物");
 
 const selectButton = (button) => {
   selectedButton.value = button;
   CreatureEvaluation();
 };
+// const OverallRating = () => {
+//   axios
+//     .get(
+//       window.VITE_APP_BASE_API + "/overall/getOverallDetail/" + selectedEcological.value
+//     )
+//     .then((res) => {
+//       gDataFulldata.value = res.data.data;
+//     });
+// };
 const OverallRating = () => {
   axios
-    .get(
-      window.VITE_APP_BASE_API + "/overall/getOverallDetail/" + selectedEcological.value
-    )
+    .get(window.VITE_APP_BASE_API + "/overall/getOverall/" + selectedEcological.value)
     .then((res) => {
-      gDataFulldata.value = res.data.data;
+      bayBio.value = res.data.data.bayBio;
+      bayEnv.value = res.data.data.bayEnv;
+      bayHealth.value = res.data.data.bayHealth;
+      bayThreat.value = res.data.data.bayThreat;
+      overall.value = res.data.data.overall;
     });
 };
 const WaterEvaluation = () => {
@@ -632,7 +735,8 @@ onUnmounted(() => {
 
 .rightBox-top {
   width: 100%;
-  height: 41.25vh;
+  /* height: 41.25vh; */
+  height: 23.25vh;
 }
 
 .rightBox-top-right {
@@ -700,7 +804,8 @@ onUnmounted(() => {
 
 .leftBox-top-table {
   margin: 1vh 0;
-  height: 36vh;
+  /* height: 36vh; */
+  height: 16.25vh;
 }
 
 .leftBox-bottom-table {
@@ -710,12 +815,14 @@ onUnmounted(() => {
 
 .leftBox-middle2-content {
   margin: 1vh 0;
-  height: 16.5vh;
+  /* height: 16.5vh; */
+  height: 27.5vh;
 }
 
 .leftBox-bottom-content {
   margin: 1vh 0;
-  height: 19vh;
+  /* height: 19vh; */
+  height: 27.5vh;
 }
 
 .lefttopbox {
@@ -975,5 +1082,16 @@ onUnmounted(() => {
 .chart {
   width: 85vh;
   height: 25vh;
+}
+
+.viewbox {
+  width: 85vh;
+  height: 85vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0071bc;
+  z-index: 6;
 }
 </style>
