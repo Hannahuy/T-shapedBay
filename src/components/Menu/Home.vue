@@ -8,19 +8,19 @@
       </div> -->
       <div class="leftBox-top-table">
         <div class="lefttopbox">
-          <div class="lefttopbox-item">
+          <div class="lefttopbox-item" @click="showDetail('海湾生境')">
             <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
               {{ bayEnv }}
             </div>
             <div style="margin-top: 4vh; font-size: 1.5vh">海湾生境</div>
           </div>
-          <div class="lefttopbox-item">
+          <div class="lefttopbox-item" @click="showDetail('海湾生物')">
             <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
               {{ bayBio }}
             </div>
             <div style="margin-top: 4vh; font-size: 1.5vh">海湾生物</div>
           </div>
-          <div class="lefttopbox-item">
+          <div class="lefttopbox-item" @click="showDetail('威胁因素')">
             <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
               {{ bayThreat }}
             </div>
@@ -29,38 +29,30 @@
         </div>
         <div class="lefttopbox2">
           <div class="lefttopbox-item2">
-            <div
-              style="
+            <div style="
                 color: #ffffff;
                 font-size: 1.5vh;
                 margin-left: 5.5vh;
                 margin-top: 0.8vh;
                 margin-bottom: 0.5vh;
-              "
-            >
+              ">
               综合指数
             </div>
-            <div
-              style="color: aqua; font-size: 1.6vh; font-weight: bold; margin-left: 5.5vh"
-            >
+            <div style="color: aqua; font-size: 1.6vh; font-weight: bold; margin-left: 5.5vh">
               {{ overall }}
             </div>
           </div>
           <div class="lefttopbox-item2">
-            <div
-              style="
+            <div style="
                 color: #ffffff;
                 font-size: 1.5vh;
                 margin-left: 5.5vh;
                 margin-top: 0.8vh;
                 margin-bottom: 0.5vh;
-              "
-            >
+              ">
               健康状况
             </div>
-            <div
-              style="color: aqua; font-size: 1.6vh; font-weight: bold; margin-left: 5.5vh"
-            >
+            <div style="color: aqua; font-size: 1.6vh; font-weight: bold; margin-left: 5.5vh">
               {{ bayHealth }}
             </div>
           </div>
@@ -83,33 +75,18 @@
           }"
           height="16.5vh"
         > -->
-        <el-table
-          :data="tableData"
-          style="width: 100%"
-          :header-cell-style="{
-            background: 'transparent',
-            fontSize: '1.2vh',
-            'text-align': 'center',
-          }"
-          height="27.5vh"
-        >
+        <el-table :data="tableData" style="width: 100%" :header-cell-style="{
+          background: 'transparent',
+          fontSize: '1.2vh',
+          'text-align': 'center',
+        }" height="27.5vh">
           <el-table-column prop="Stations" label="站号" width="70" align="center" />
           <el-table-column prop="PH" label="PH" width="50" align="center" />
           <el-table-column prop="DO" label="DO" width="50" align="center" />
           <el-table-column prop="COD" label="COD" width="50" align="center" />
-          <el-table-column
-            prop="Inorganicnitrogen"
-            label="无机氮"
-            width="60"
-            align="center"
-          />
+          <el-table-column prop="Inorganicnitrogen" label="无机氮" width="60" align="center" />
           <el-table-column prop="phosphate" label="磷酸盐" width="60" align="center" />
-          <el-table-column
-            prop="Nutritionalization"
-            label="是否富营养化"
-            width="90"
-            align="center"
-          />
+          <el-table-column prop="Nutritionalization" label="是否富营养化" width="90" align="center" />
           <el-table-column prop="有机碳" label="有机碳" width="60" align="center">
             <template #header>
               <span style="color: rgb(251, 255, 0)">有机碳</span>
@@ -127,25 +104,13 @@
       <div class="rightBox-bottom-title">生物多样性评价结果</div>
       <div class="leftBox-bottom-content">
         <div class="tablebtn-box">
-          <div
-            class="tablebtn"
-            :class="{ active: selectedButton === '浮游植物' }"
-            @click="selectButton('浮游植物')"
-          >
+          <div class="tablebtn" :class="{ active: selectedButton === '浮游植物' }" @click="selectButton('浮游植物')">
             浮游植物
           </div>
-          <div
-            class="tablebtn"
-            :class="{ active: selectedButton === '浮游动物' }"
-            @click="selectButton('浮游动物')"
-          >
+          <div class="tablebtn" :class="{ active: selectedButton === '浮游动物' }" @click="selectButton('浮游动物')">
             浮游动物
           </div>
-          <div
-            class="tablebtn"
-            :class="{ active: selectedButton === '底栖生物' }"
-            @click="selectButton('底栖生物')"
-          >
+          <div class="tablebtn" :class="{ active: selectedButton === '底栖生物' }" @click="selectButton('底栖生物')">
             底栖生物
           </div>
         </div>
@@ -159,33 +124,18 @@
           }"
           height="16.5vh"
         > -->
-        <el-table
-          :data="tableData2"
-          style="width: 100%"
-          :header-cell-style="{
-            background: 'transparent',
-            fontSize: '1.3vh',
-            'text-align': 'center',
-          }"
-          height="24.5vh"
-        >
+        <el-table :data="tableData2" style="width: 100%" :header-cell-style="{
+          background: 'transparent',
+          fontSize: '1.3vh',
+          'text-align': 'center',
+        }" height="23.5vh">
           <el-table-column prop="Stations" label="站号" width="70" align="center" />
-          <el-table-column
-            prop="Diversity"
-            label="多样性指数"
-            width="90"
-            align="center"
-          />
+          <el-table-column prop="Diversity" label="多样性指数" width="90" align="center" />
           <el-table-column prop="Uniformity" label="均匀度" width="60" align="center" />
           <el-table-column prop="Dominance" label="优势度" width="60" align="center" />
           <el-table-column prop="Richness" label="丰富度" width="60" align="center" />
           <el-table-column prop="level" label="多样性等级" width="90" align="center" />
-          <el-table-column
-            prop="threshold"
-            label="生物多样性指数阈值"
-            width="140"
-            align="center"
-          />
+          <el-table-column prop="threshold" label="生物多样性指数阈值" width="140" align="center" />
         </el-table>
       </div>
     </div>
@@ -227,16 +177,8 @@
     </div>
   </div>
   <div class="selectbox">
-    <a-select
-      v-model:value="selectedEcological"
-      style="width: 20vh"
-      @change="onEcologicalChange"
-    >
-      <a-select-option
-        v-for="Ecological in EcologicalOptions"
-        :key="Ecological.value"
-        :value="Ecological.value"
-      >
+    <a-select v-model:value="selectedEcological" style="width: 20vh" @change="onEcologicalChange">
+      <a-select-option v-for="Ecological in EcologicalOptions" :key="Ecological.value" :value="Ecological.value">
         {{ Ecological.label }}
       </a-select-option>
     </a-select>
@@ -246,55 +188,29 @@
     <div class="moreboxtitle">水质评价因子质量指数</div>
     <div style="width: 100%; height: 33.5vh; padding: 1vh; boxsizing: border-box">
       <div class="tablebtn-box">
-        <div
-          class="tablebtn"
-          :class="{ active: selectedButton2 === '一类' }"
-          @click="selectButton2('一类')"
-        >
+        <div class="tablebtn" :class="{ active: selectedButton2 === '一类' }" @click="selectButton2('一类')">
           一类
         </div>
-        <div
-          class="tablebtn"
-          :class="{ active: selectedButton2 === '二类' }"
-          @click="selectButton2('二类')"
-        >
+        <div class="tablebtn" :class="{ active: selectedButton2 === '二类' }" @click="selectButton2('二类')">
           二类
         </div>
-        <div
-          class="tablebtn"
-          :class="{ active: selectedButton2 === '三类' }"
-          @click="selectButton2('三类')"
-        >
+        <div class="tablebtn" :class="{ active: selectedButton2 === '三类' }" @click="selectButton2('三类')">
           三类
         </div>
-        <div
-          class="tablebtn"
-          :class="{ active: selectedButton2 === '四类' }"
-          @click="selectButton2('四类')"
-        >
+        <div class="tablebtn" :class="{ active: selectedButton2 === '四类' }" @click="selectButton2('四类')">
           四类
         </div>
       </div>
-      <el-table
-        :data="tableData3"
-        style="width: 100%"
-        :header-cell-style="{
-          background: 'transparent',
-          fontSize: '1.3vh',
-          'text-align': 'center',
-        }"
-        height="16vh"
-      >
+      <el-table :data="tableData3" style="width: 100%" :header-cell-style="{
+        background: 'transparent',
+        fontSize: '1.3vh',
+        'text-align': 'center',
+      }" height="16vh">
         <el-table-column prop="station" label="站号" width="100" align="center" />
         <el-table-column prop="pH" label="pH" width="100" align="center" />
         <el-table-column prop="DO" label="DO" width="100" align="center" />
         <el-table-column prop="COD" label="COD" width="100" align="center" />
-        <el-table-column
-          prop="inorganicNitrogen"
-          label="无机氮"
-          width="100"
-          align="center"
-        />
+        <el-table-column prop="inorganicNitrogen" label="无机氮" width="100" align="center" />
         <el-table-column prop="phosphate" label="磷酸盐" width="100" align="center" />
         <el-table-column prop="sulfur" label="硫化物" width="100" align="center">
           <template #header>
@@ -308,53 +224,43 @@
         </el-table-column>
       </el-table>
       <div class="nexttitle">超标率</div>
-      <el-table
-        :data="tableRateData"
-        style="width: 100%"
-        :header-cell-style="{
-          background: 'transparent',
-          fontSize: '1.3vh',
-          'text-align': 'center',
-        }"
-        height="8.5vh"
-      >
-        <el-table-column
-          v-for="(rate, indicator) in tableRateData[0]"
-          :key="indicator"
-          :label="indicator"
-          :prop="indicator"
-          align="center"
-        />
+      <el-table :data="tableRateData" style="width: 100%" :header-cell-style="{
+        background: 'transparent',
+        fontSize: '1.3vh',
+        'text-align': 'center',
+      }" height="8.5vh">
+        <el-table-column v-for="(rate, indicator) in tableRateData[0]" :key="indicator" :label="indicator"
+          :prop="indicator" align="center" />
       </el-table>
     </div>
     <div class="chart" ref="chartRef"></div>
+  </div>
+  <div class="echartsBox" v-show="showEchartsBox">
+    <div class="echartsBox-title">{{ detailTitle }}</div>
+    <div class="echartsBox-close" @click="showEchartsBox = false"></div>
+    <div class="echartsBox-content">
+      <div class="echartsBox-left"></div>
+      <div class="echartsBox-right" ref="chartRef2"></div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
 import * as echarts from "echarts";
-import {
-  callUIInteraction,
-  addResponseEventListener,
-} from "../../module/webrtcVideo/webrtcVideo.js";
+import { callUIInteraction, addResponseEventListener, } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from "element-plus";
 import axios from "axios";
 import test from "../Menu/test.vue";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 
-const router = useRouter();
-const goToOverallEvaluation = () => {
-  router.push("/test2");
-};
+// const router = useRouter();
+// const goToOverallEvaluation = () => {
+//   router.push("/test2");
+// };
 
-const selectedEcological = ref("2024-04-29");
-const EcologicalOptions = [
-  { value: "2023-06-15", label: "2023-06-15" },
-  { value: "2023-08-09", label: "2023-08-09" },
-  { value: "2023-11-07", label: "2023-11-07" },
-  { value: "2024-04-29", label: "2024-04-29" },
-];
+const selectedEcological = ref("");
+const EcologicalOptions = ref([]); 
 const tableData = ref([]);
 const tableData2 = ref([]);
 const tableData3 = ref([]);
@@ -366,21 +272,47 @@ const bayHealth = ref(null);
 const bayThreat = ref(null);
 const overall = ref(null);
 const selectedButton = ref("浮游植物");
+const showEchartsBox = ref(false);
+const detailTitle = ref("");
+const Clicktitle = ref(null);
 
 const selectButton = (button) => {
   selectedButton.value = button;
   CreatureEvaluation();
 };
-// const OverallRating = () => {
-//   axios
-//     .get(
-//       window.VITE_APP_BASE_API + "/overall/getOverallDetail/" + selectedEcological.value
-//     )
-//     .then((res) => {
-//       gDataFulldata.value = res.data.data;
-//     });
-// };
+
+const getTime = () => {
+  axios.get(window.VITE_APP_BASE_API + "/overall/getTime").then((res) => {
+    EcologicalOptions.value = res.data.data.map(date => ({
+      value: date,
+      label: date
+    }));
+    if (res.data.data.length > 0) {
+      selectedEcological.value = res.data.data[0];
+      OverallRating();
+      WaterEvaluation();
+      CreatureEvaluation();
+    }
+  });
+};
+const getOverallRating = () => {
+  const params = {
+    name: Clicktitle.value,
+    time: selectedEcological.value,
+  }
+  axios.post(window.VITE_APP_BASE_API + "/overall/getRadarData/", params).then((res) => {
+    if (res.data.data === null) {
+      showEchartsBox.value = false;
+      ElMessage.warning("暂无数据");
+    } else {
+      showEchartsBox.value = true;
+      initRadarChart(res.data.data);
+    }
+  });
+};
+
 const OverallRating = () => {
+  if (!selectedEcological.value) return;
   axios
     .get(window.VITE_APP_BASE_API + "/overall/getOverall/" + selectedEcological.value)
     .then((res) => {
@@ -392,6 +324,7 @@ const OverallRating = () => {
     });
 };
 const WaterEvaluation = () => {
+  if (!selectedEcological.value) return;
   tableData.value = [];
   const params = {
     category: "",
@@ -425,6 +358,7 @@ const WaterEvaluation = () => {
 };
 
 const CreatureEvaluation = () => {
+  if (!selectedEcological.value) return;
   tableData2.value = [];
   const params = {
     category: selectedButton.value,
@@ -449,7 +383,8 @@ const CreatureEvaluation = () => {
       ElMessage.warning("未获取生物多样性数据！");
     });
 };
-const onEcologicalChange = (e) => {
+const onEcologicalChange = () => {
+  showEchartsBox.value = false;
   morebox.value = false;
   OverallRating();
   WaterEvaluation();
@@ -550,6 +485,12 @@ const getmoretabledata = () => {
     .catch((error) => {
       console.error("数据获取失败:", error);
     });
+};
+
+const showDetail = (title) => {
+  Clicktitle.value = title;
+  detailTitle.value = title + "评价详情";
+  getOverallRating();
 };
 
 let chartRef = ref(null);
@@ -676,6 +617,86 @@ let initChart1 = (source) => {
   });
 };
 
+let chartRef2 = ref(null);
+
+const initRadarChart = (data) => {
+  let chart = echarts.init(chartRef2.value);
+  charts.push(() => {
+    chart.dispose();
+    initRadarChart(data); // 重新初始化图表
+  });
+
+  const indicators = Object.keys(data).map(key => {
+    let max = 40; // 默认最大值为40
+    if (key == "污水排放量" || key == "养殖面积" || key == "干扰廊道" || key == "有害赤潮累积发生面积" || key == "围填海面积") {
+      max = 20; // 如果是威胁因素，最大值为20
+    }
+    console.log(key);
+  console.log(max);
+
+    return {
+      name: key,
+      max: max
+    };
+  });
+
+  const values = Object.values(data);
+
+  chart.setOption({
+    tooltip: {},
+    radar: {
+      name: {
+        textStyle: {
+          color: "#0ae7f8",
+          borderRadius: 3,
+          padding: [3, 5],
+        },
+      },
+      indicator: indicators,
+      splitLine: {
+        lineStyle: {
+          color: "#05396c",
+        },
+      },
+      splitArea: {
+        areaStyle: {
+          color: ["#010e46", "#010e46"],
+        },
+      },
+      axisLine: {
+        lineStyle: {
+          color: "#075994",
+        },
+      },
+    },
+    series: [
+      {
+        name: "统计",
+        type: "radar",
+        symbol: "circle",
+        symbolSize: "6",
+        data: [
+          {
+            value: values,
+            name: "统计",
+            lineStyle: {
+              color: "#0a78b5",
+            },
+            itemStyle: {
+              color: "#e0c92a",
+              borderColor: "#065d95",
+            },
+            areaStyle: {
+              color: "#065d95",
+              offset: 0.5,
+            },
+          },
+        ],
+      },
+    ],
+  });
+};
+
 let reloadChart = () => {
   charts.splice(-2).forEach((chart) => {
     chart();
@@ -693,9 +714,7 @@ const myHandleResponseFunction = (data) => {
 };
 
 onMounted(() => {
-  OverallRating();
-  WaterEvaluation();
-  CreatureEvaluation();
+  getTime();
   addResponseEventListener("handle_responses", myHandleResponseFunction);
   window.addEventListener("resize", reloadChart);
 });
@@ -841,6 +860,7 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 .lefttopbox-item:nth-child(1) {
@@ -1093,5 +1113,59 @@ onUnmounted(() => {
   transform: translate(-50%, -50%);
   background-color: #0071bc;
   z-index: 6;
+}
+
+.echartsBox {
+  width: 85vh;
+  height: 70vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("../../assets/img/step/adddata.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.echartsBox-title {
+  width: 100%;
+  height: 5vh;
+  line-height: 5vh;
+  font-size: 1.8vh;
+  font-weight: bold;
+  color: white;
+  padding-left: 3vh;
+}
+
+.echartsBox-close {
+  position: absolute;
+  right: 1.5vh;
+  top: 1.5vh;
+  cursor: pointer;
+  width: 2vh;
+  height: 2vh;
+}
+
+.echartsBox-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65vh;
+  padding: 1.5vh;
+  box-sizing: border-box;
+}
+
+.echartsBox-left {
+  width: 24vh;
+  height: 100%;
+  background-image: url("../../assets/img/saomiao.gif");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.echartsBox-right {
+  width: 56vh;
+  height: 65vh;
 }
 </style>
