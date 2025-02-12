@@ -156,7 +156,7 @@
     </div>
     <!-- 图表弹窗 -->
     <div class="buttonstyles2" v-if="showselect2" @click="handlechart">查看数据</div>
-    <div class="fishecharts" v-if="showChart" v-loading="loading" element-loading-background="rgba(39 ,88 ,139, 0.8)">
+    <div class="fishecharts" v-if="showChart" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.7)">
         <img src="../../assets/img/close.png" alt="" class="close2" @click="showChart = false">
         <div class="chartcontent" ref="chartcontent"></div>
     </div>
