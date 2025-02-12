@@ -31,7 +31,7 @@
           :min="min"
           :max="max"
           :marks="marks"
-          style="position: relative; z-index: 1; width: 1560px"
+          style="position: relative; z-index: 1;"
           @change="gettimePlay"
         >
         </el-slider>
@@ -897,6 +897,10 @@ onMounted(() => {
   border: 0;
   width: 4vh;
   height: 4vh;
+}
+
+.bottombox-slider {
+  width: 81.25vw;
 }
 
 .bottombox-slider-span {

@@ -50,7 +50,7 @@
           <span class="bottombox-slider-span">{{ formattedTime }}</span>
         </div>
         <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-          style="position: relative; z-index: 1; width: 1560px" @change="gettimePlay">
+          style="position: relative; z-index: 1;" @change="gettimePlay">
         </el-slider>
       </div>
     </div>
@@ -1316,6 +1316,10 @@ onUnmounted(() => {
   border: 0;
   width: 4vh;
   height: 4vh;
+}
+
+.bottombox-slider {
+  width: 81.25vw;
 }
 
 .bottombox-slider-span {

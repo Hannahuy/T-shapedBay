@@ -59,7 +59,7 @@
                     <span class="bottombox-slider-span">{{ formattedTime }}</span>
                 </div>
                 <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
-                    style="position: relative; z-index: 1; width: 1560px" @change="gettimePlay">
+                    style="position: relative; z-index: 1;" @change="gettimePlay">
                 </el-slider>
             </div>
         </div>
@@ -1455,6 +1455,10 @@ onUnmounted(() => {
     height: 4vh;
 }
 
+.bottombox-slider {
+  width: 81.25vw;
+}
+
 .bottombox-slider-span {
     width: 12.5vh;
     background-color: #42aeff;
@@ -1767,7 +1771,7 @@ onUnmounted(() => {
 }
 
 .fishecharts {
-    width: 110vh;
+    width: 50vw;
     height: 45vh;
     z-index: 3;
     position: absolute;
@@ -1782,7 +1786,7 @@ onUnmounted(() => {
 }
 
 .chartcontent {
-    width: 107vh;
+    width: 48vw;
     height: 42vh;
 }
 
