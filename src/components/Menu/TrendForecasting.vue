@@ -156,7 +156,7 @@
     </div>
     <!-- 图表弹窗 -->
     <div class="buttonstyles2" v-if="showselect2" @click="handlechart">查看数据</div>
-    <div class="fishecharts" v-if="showChart">
+    <div class="fishecharts" v-if="showChart" v-loading="loading" element-loading-background="rgba(39 ,88 ,139, 0.8)">
         <img src="../../assets/img/close.png" alt="" class="close2" @click="showChart = false">
         <div class="chartcontent" ref="chartcontent"></div>
     </div>
@@ -174,6 +174,7 @@ import axios from "axios";
 
 const menuItems = ref(['生态要素预测', '生物量空间预测']);
 const showselect2 = ref(false);
+const loading = ref(false)
 const activeIndex = ref(null);
 const showselectbar = ref(false);
 const showmenu = ref(false)
@@ -210,6 +211,7 @@ const getRandomColor = () => {
 
 const handlechart = () => {
     showChart.value = true;
+    loading.value = true;
     if (radioselection.value == '浒苔情景') {
         radioEng.value = 'Hutai';
     } else if (radioselection.value == '陆源污染情景') {
@@ -218,6 +220,7 @@ const handlechart = () => {
     axios.get(window.VITE_APP_BASE_API + `/biomass/getAllBTP/${radioEng.value}`).then((res) => {
         const btpLineList = res.data.data.btpLineList;
         initChart(btpLineList);
+        loading.value = false;
     });
 };
 
@@ -1456,7 +1459,7 @@ onUnmounted(() => {
 }
 
 .bottombox-slider {
-  width: 81.25vw;
+    width: 81.25vw;
 }
 
 .bottombox-slider-span {
