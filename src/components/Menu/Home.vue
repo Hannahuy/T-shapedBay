@@ -206,18 +206,18 @@
         fontSize: '1.3vh',
         'text-align': 'center',
       }" height="16vh">
-        <el-table-column prop="station" label="站号" width="110" align="center" />
-        <el-table-column prop="pH" label="pH" width="110" align="center" />
-        <el-table-column prop="DO" label="DO" width="110" align="center" />
-        <el-table-column prop="COD" label="COD" width="110" align="center" />
-        <el-table-column prop="inorganicNitrogen" label="无机氮" width="110" align="center" />
-        <el-table-column prop="phosphate" label="磷酸盐" width="110" align="center" />
-        <el-table-column prop="sulfur" label="硫化物" width="120" align="center">
+        <el-table-column prop="station" label="站号" align="center" />
+        <el-table-column prop="pH" label="pH" align="center" />
+        <el-table-column prop="DO" label="DO" align="center" />
+        <el-table-column prop="COD" label="COD" align="center" />
+        <el-table-column prop="inorganicNitrogen" label="无机氮" align="center" />
+        <el-table-column prop="phosphate" label="磷酸盐" align="center" />
+        <el-table-column prop="sulfur" label="硫化物" align="center">
           <template #header>
             <span style="color: rgb(251, 255, 0)">硫化物</span>
           </template>
         </el-table-column>
-        <el-table-column prop="organicCarbon" label="有机碳" width="120" align="center">
+        <el-table-column prop="organicCarbon" label="有机碳" align="center">
           <template #header>
             <span style="color: rgb(251, 255, 0)">有机碳</span>
           </template>
