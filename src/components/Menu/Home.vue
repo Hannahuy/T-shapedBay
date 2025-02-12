@@ -239,7 +239,6 @@
     <div class="echartsBox-title">{{ detailTitle }}</div>
     <div class="echartsBox-close" @click="showEchartsBox = false"></div>
     <div class="echartsBox-content">
-      <div class="echartsBox-left"></div>
       <div class="echartsBox-right" ref="chartRef2"></div>
     </div>
   </div>
@@ -260,7 +259,7 @@ import test from "../Menu/test.vue";
 // };
 
 const selectedEcological = ref("");
-const EcologicalOptions = ref([]); 
+const EcologicalOptions = ref([]);
 const tableData = ref([]);
 const tableData2 = ref([]);
 const tableData3 = ref([]);
@@ -272,7 +271,7 @@ const bayHealth = ref(null);
 const bayThreat = ref(null);
 const overall = ref(null);
 const selectedButton = ref("浮游植物");
-const showEchartsBox = ref(false);
+const showEchartsBox = ref(true);
 const detailTitle = ref("");
 const Clicktitle = ref(null);
 
@@ -632,7 +631,7 @@ const initRadarChart = (data) => {
       max = 20; // 如果是威胁因素，最大值为20
     }
     console.log(key);
-  console.log(max);
+    console.log(max);
 
     return {
       name: key,
@@ -648,6 +647,7 @@ const initRadarChart = (data) => {
       name: {
         textStyle: {
           color: "#0ae7f8",
+          fontSize: 18,
           borderRadius: 3,
           padding: [3, 5],
         },
@@ -674,7 +674,7 @@ const initRadarChart = (data) => {
         name: "统计",
         type: "radar",
         symbol: "circle",
-        symbolSize: "6",
+        symbolSize: 10, // 增大点的大小
         data: [
           {
             value: values,
@@ -687,7 +687,22 @@ const initRadarChart = (data) => {
               borderColor: "#065d95",
             },
             areaStyle: {
-              color: "#065d95",
+              // 使用渐变色
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0, color: 'rgba(0, 255, 255, 0.8)'
+                  },
+                  {
+                    offset: 1, color: 'rgba(63, 169, 245, 0.8)'
+                  }
+                ],
+              },
               offset: 0.5,
             },
           },
@@ -696,7 +711,7 @@ const initRadarChart = (data) => {
     ],
   });
 };
-
+// #00ffff   #3fa9f5   80%
 let reloadChart = () => {
   charts.splice(-2).forEach((chart) => {
     chart();
@@ -1122,7 +1137,7 @@ onUnmounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url("../../assets/img/step/adddata.png");
+  background-image: url("../../assets/img/step/adddata2.png");
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -1135,6 +1150,7 @@ onUnmounted(() => {
   font-weight: bold;
   color: white;
   padding-left: 3vh;
+  margin-top: 0.7vh;
 }
 
 .echartsBox-close {
@@ -1156,16 +1172,8 @@ onUnmounted(() => {
   box-sizing: border-box;
 }
 
-.echartsBox-left {
-  width: 24vh;
-  height: 100%;
-  background-image: url("../../assets/img/saomiao.gif");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-
 .echartsBox-right {
-  width: 56vh;
+  width: 80vh;
   height: 65vh;
 }
 </style>
