@@ -206,11 +206,11 @@
         fontSize: '1.3vh',
         'text-align': 'center',
       }" height="16vh">
-        <el-table-column prop="station" label="站号" width="120" align="center" />
-        <el-table-column prop="pH" label="pH" width="120" align="center" />
-        <el-table-column prop="DO" label="DO" width="120" align="center" />
-        <el-table-column prop="COD" label="COD" width="120" align="center" />
-        <el-table-column prop="inorganicNitrogen" label="无机氮" width="120" align="center" />
+        <el-table-column prop="station" label="站号" width="100" align="center" />
+        <el-table-column prop="pH" label="pH" width="100" align="center" />
+        <el-table-column prop="DO" label="DO" width="100" align="center" />
+        <el-table-column prop="COD" label="COD" width="100" align="center" />
+        <el-table-column prop="inorganicNitrogen" label="无机氮" width="100" align="center" />
         <el-table-column prop="phosphate" label="磷酸盐" width="100" align="center" />
         <el-table-column prop="sulfur" label="硫化物" width="100" align="center">
           <template #header>
@@ -271,7 +271,7 @@ const bayHealth = ref(null);
 const bayThreat = ref(null);
 const overall = ref(null);
 const selectedButton = ref("浮游植物");
-const showEchartsBox = ref(true);
+const showEchartsBox = ref(false);
 const detailTitle = ref("");
 const Clicktitle = ref(null);
 
