@@ -1119,7 +1119,7 @@ const logSliderValues = () => {
     callUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `空间分析`,
-        SelectFunction: selectedButton.value,
+        SelectFunction: selectedButton2.value,
         Values: {
             TOP: TOP.value,
             BOTTOM: BOTTOM.value,
