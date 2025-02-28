@@ -1182,7 +1182,7 @@ onUnmounted(() => {
 
 .echartsBox {
   width: 85vh;
-  height: 70vh;
+  height: 60vh;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1194,8 +1194,8 @@ onUnmounted(() => {
 
 .echartsBox-title {
   width: 100%;
-  height: 5vh;
-  line-height: 5vh;
+  height: 4vh;
+  line-height: 4vh;
   font-size: 1.8vh;
   font-weight: bold;
   color: white;
@@ -1217,22 +1217,22 @@ onUnmounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 65vh;
+  height: 55vh;
   padding: 1.5vh;
   box-sizing: border-box;
 }
 
 .echartsBox-left {
-  width: 20vh;
-  height: 65vh;
+  width: 22vh;
+  height: 52vh;
   background-image: url('../../assets/img/saomiao.gif');
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
 
 .echartsBox-right {
-  width: 60vh;
-  height: 65vh;
+  width: 30vw;
+  height: 40vh;
 }
 
 .Uemenu {

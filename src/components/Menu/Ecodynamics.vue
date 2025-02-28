@@ -381,20 +381,6 @@ const selectButton = (button) => {
         THRESHOLD: THRESHOLD.value,
       },
     });
-    // console.log({
-    //     ModuleName: `生态动力`,
-    //     FunctionName: `空间分析`,
-    //     SelectFunction: selectedButton.value,
-    //     Values: {
-    //         TOP: TOP.value,
-    //         BOTTOM: BOTTOM.value,
-    //         RIGHT: RIGHT.value,
-    //         LEFT: LEFT.value,
-    //         FRONT: FRONT.value,
-    //         BACK: BACK.value,
-    //         THRESHOLD: THRESHOLD.value
-    //     }
-    // });
   } else {
     callUIInteraction({
       ModuleName: `生态动力`,
@@ -407,17 +393,6 @@ const selectButton = (button) => {
         THRESHOLD: THRESHOLD.value,
       },
     });
-    // console.log({
-    //     ModuleName: `生态动力`,
-    //     FunctionName: `空间分析`,
-    //     SelectFunction: selectedButton.value,
-    //     Values: {
-    //         'CROSS-X': pointPosition.value.x,
-    //         'CROSS-Y': pointPosition.value.y,
-    //         "THICK": THICK.value,
-    //         "THRESHOLD": THRESHOLD.value
-    //     }
-    // });
   }
 };
 
@@ -497,20 +472,6 @@ const getColorbar = (e) => {
           THRESHOLD: THRESHOLD.value,
         },
       });
-      // console.log({
-      //     ModuleName: `生态动力`,
-      //     FunctionName: `空间分析`,
-      //     SelectFunction: selectedButton.value,
-      //     Values: {
-      //         TOP: TOP.value,
-      //         BOTTOM: BOTTOM.value,
-      //         RIGHT: RIGHT.value,
-      //         LEFT: LEFT.value,
-      //         FRONT: FRONT.value,
-      //         BACK: BACK.value,
-      //         THRESHOLD: THRESHOLD.value
-      //     }
-      // });
     } else {
       callUIInteraction({
         ModuleName: `生态动力`,
@@ -523,17 +484,6 @@ const getColorbar = (e) => {
           THRESHOLD: THRESHOLD.value,
         },
       });
-      // console.log({
-      //     ModuleName: `生态动力`,
-      //     FunctionName: `空间分析`,
-      //     SelectFunction: selectedButton.value,
-      //     Values: {
-      //         'CROSS-X': pointPosition.value.x,
-      //         'CROSS-Y': pointPosition.value.y,
-      //         "THICK": THICK.value,
-      //         "THRESHOLD": THRESHOLD.value
-      //     }
-      // });
     }
     lastPrintedValue = normalizedValue;
   }

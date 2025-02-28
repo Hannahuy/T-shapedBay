@@ -165,12 +165,14 @@
     </div>
     <!-- 右下角颜色条 -->
     <div class="right-button" v-if="showselectbar">
-        <div class="leftbar">{{ barType }}</div>
-        <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
-            <span>{{ barMax }}</span>
-            <span>{{ barMin }}</span>
-        </div>
+    <div class="leftbar">{{ barType }}</div>
+    <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
+      <span>{{ barMax }}</span>
+      <a-slider v-model:value="colorbar" vertical :step="0.01" :min="barMin"
+        :max="barMax" @change="getColorbar" />
+      <span>{{ barMin }}</span>
     </div>
+  </div>
     <!-- 图表弹窗 -->
     <div class="buttonstyles2" v-if="showData" @click="handlechart">查看数据</div>
     <div class="fishecharts" v-if="showChart" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.7)">
@@ -247,7 +249,7 @@ const handlechart = () => {
         loading.value = false;
     });
 };
-
+const colorbar = ref(0);
 const tablehead = ref('浒苔面积（㎡）');
 const tablehead2 = ref('浒苔生物量（kg/㎡）');
 const tabledata = ref(218300);
@@ -869,6 +871,51 @@ const drive = () => {
 }
 const selectedItemname = ref(null);
 
+let lastPrintedValue = null;
+const getColorbar = (e) => {
+  const range = barMax.value - barMin.value;
+  let normalizedValue;
+
+  if (range === 0) {
+    normalizedValue = 0;
+  } else {
+    normalizedValue = (barMax.value - e) / range;
+  }
+  normalizedValue = Math.round(normalizedValue * 100) / 100;
+  if (normalizedValue !== lastPrintedValue) {
+    THRESHOLD.value = normalizedValue;
+    if (selectedButton.value == "体剖切") {
+      callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: `空间分析`,
+        SelectFunction: selectedButton.value,
+        Values: {
+          TOP: TOP.value,
+          BOTTOM: BOTTOM.value,
+          RIGHT: RIGHT.value,
+          LEFT: LEFT.value,
+          FRONT: FRONT.value,
+          BACK: BACK.value,
+          THRESHOLD: THRESHOLD.value,
+        },
+      });
+    } else {
+      callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: `空间分析`,
+        SelectFunction: selectedButton.value,
+        Values: {
+          "CROSS-X": pointPosition.value.x,
+          "CROSS-Y": pointPosition.value.y,
+          THICK: THICK.value,
+          THRESHOLD: THRESHOLD.value,
+        },
+      });
+    }
+    lastPrintedValue = normalizedValue;
+  }
+};
+
 const timePick = ref(dayjs("2024-08-01").toDate());
 const timePlay = ref(null);
 const activePlay = ref("");
@@ -1231,7 +1278,7 @@ const FRONT = ref(0);
 const BACK = ref(1);
 const CROSSX = ref(0);
 const CROSSY = ref(0);
-const THICK = ref(0);
+const THICK = ref(0.001);
 const THRESHOLD = ref(1);
 const selectedButton2 = ref('体剖切');
 const slidervalue = ref([0, 1])
@@ -1239,6 +1286,34 @@ const slidervalue2 = ref([0, 1])
 const slidervalue3 = ref([0, 1])
 const selectButton2 = (button) => {
     selectedButton2.value = button;
+    if (button == "体剖切") {
+    callUIInteraction({
+      ModuleName: `趋势预测`,
+      FunctionName: `空间分析`,
+      SelectFunction: selectedButton.value,
+      Values: {
+        TOP: TOP.value,
+        BOTTOM: BOTTOM.value,
+        RIGHT: RIGHT.value,
+        LEFT: LEFT.value,
+        FRONT: FRONT.value,
+        BACK: BACK.value,
+        THRESHOLD: THRESHOLD.value,
+      },
+    });
+  } else {
+    callUIInteraction({
+      ModuleName: `趋势预测`,
+      FunctionName: `空间分析`,
+      SelectFunction: selectedButton.value,
+      Values: {
+        "CROSS-X": pointPosition.value.x,
+        "CROSS-Y": pointPosition.value.y,
+        THICK: THICK.value,
+        THRESHOLD: THRESHOLD.value,
+      },
+    });
+  }
 };
 watch(slidervalue, (newVal) => {
     TOP.value = newVal[0];
@@ -1661,7 +1736,7 @@ onUnmounted(() => {
     height: 32vh;
     border-bottom-left-radius: 0.5vh;
     border-bottom-right-radius: 0.5vh;
-    background-image: url('../../assets/img/colorbar.png');
+    /* background-image: url('../../assets/img/colorbar.png'); */
     background-size: 100% 100%;
     background-repeat: no-repeat;
     color: white;
