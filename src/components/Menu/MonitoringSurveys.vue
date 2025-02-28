@@ -1208,7 +1208,7 @@ onUnmounted(() => {
   margin: 1vh 0;
   width: 27vh;
   height: 18.25vh;
-  background-image: url('../../../public/img/DNA.png');
+  background-image: url('/img/DNA.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
@@ -1278,7 +1278,7 @@ onUnmounted(() => {
 }
 
 .bottombox {
-  padding: 0 3vh 0 10vh;
+  padding: 0 3vh 0 9.3vh;
   position: absolute;
   bottom: 1vh;
   box-sizing: border-box;
@@ -1289,7 +1289,7 @@ onUnmounted(() => {
 .bottombox-button {
   position: absolute;
   bottom: 1vh;
-  left: 0.8%;
+  left: 0.76%;
   display: flex;
   align-items: center;
   z-index: 10;

@@ -60,7 +60,7 @@
     <div v-if="selected === '趋势预测'">
       <TrendForecasting />
     </div>
-    <div v-show="!selected">
+    <div v-if="!selected">
       <Home />
     </div>
     <div class="databox" v-if="showDatabox">
@@ -233,7 +233,7 @@ onUnmounted(() => {
   height: 8.5vh;
   font-family: HYLingXinJ;
   font-weight: bold;
-  font-size: 3vh;
+  font-size: 1.5vw;
   color: #feffff;
   background: linear-gradient(0deg, #c7e4ff 24.072265625%, #ffffff 24.560546875%);
   -webkit-background-clip: text;
@@ -291,7 +291,7 @@ onUnmounted(() => {
   display: flex;
   position: absolute;
   z-index: 3;
-  left: 28.5vh;
+  left: 14.3%;
   top: 2.8vh;
   font-family: HYLingXinJ;
   font-weight: bold;
@@ -307,7 +307,7 @@ onUnmounted(() => {
   display: flex;
   position: absolute;
   z-index: 3;
-  right: 26.6vh;
+  left: 71.5%;
   top: 2.8vh;
   font-family: HYLingXinJ;
   font-weight: bold;
@@ -319,7 +319,7 @@ onUnmounted(() => {
 }
 
 .topMenu-left-title {
-  width: 13vh;
+  width: 6.5vw;
   height: 3.5vh;
   background-image: url("../assets/img/leftmenu.png");
   background-size: 100% 100%;
@@ -328,7 +328,7 @@ onUnmounted(() => {
 }
 
 .topMenu-right-title {
-  width: 13vh;
+  width: 6.5vw;
   height: 3.5vh;
   background-image: url("../assets/img/rightmenu.png");
   background-size: 100% 100%;

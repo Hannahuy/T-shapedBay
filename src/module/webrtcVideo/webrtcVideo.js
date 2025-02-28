@@ -1542,11 +1542,11 @@ function updateVideoStreamSize() {
     //   y: window.innerHeight,
     // };
     if (!window.setScreen) {
-      let descriptor = {
-        function: "setScreen",
-        x: window.innerWidth,
-        y: window.innerHeight,
-      };
+      // let descriptor = {
+      //   function: "setScreen",
+      //   x: window.innerWidth,
+      //   y: window.innerHeight,
+      // };
       let callUIInteractionf51 = {
         ModuleName: `监测调查`,
         State: true,
@@ -1560,12 +1560,12 @@ function updateVideoStreamSize() {
         Function: `开启分辨率`,
       };
       // console.log(descriptor)
-      emitUIInteraction(descriptor);
+      // emitUIInteraction(descriptor);
       emitUIInteraction(callUIInteractionf51);
       emitUIInteraction(callUIInteractionf52);
       emitUIInteraction(callUIInteractionf53);
     }
-    window.setScreen = true;
+    // window.setScreen = true;
     lastTimeResized = new Date().getTime();
   } else {
     console.log("Resizing too often - skipping");

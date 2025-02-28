@@ -1,10 +1,6 @@
 <template>
   <div class="left-button">
-    <FunctionMenu
-      :functionData="layerFunction"
-      :Multiple="false"
-      @functionSelected="handleFunctionSelection"
-    />
+    <FunctionMenu :functionData="layerFunction" :Multiple="false" @functionSelected="handleFunctionSelection" />
   </div>
   <!-- 时间轴 -->
   <div class="bottomCalendar">
@@ -12,28 +8,16 @@
   </div>
   <div class="bottombox-left">
     <div class="bottombox-button">
-      <el-button
-        type="primary"
-        class="bottombox-play"
-        :class="{ active: activePlay === 'play' }"
-        @click="togglePlay"
-      ></el-button>
+      <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
+        @click="togglePlay"></el-button>
     </div>
     <div class="bottombox">
       <div class="bottombox-slider">
         <div :style="adjustedStyle">
           <span class="bottombox-slider-span">{{ formattedTime }}</span>
         </div>
-        <el-slider
-          :step="3600000"
-          v-model="timePlay"
-          :show-tooltip="false"
-          :min="min"
-          :max="max"
-          :marks="marks"
-          style="position: relative; z-index: 1;"
-          @change="gettimePlay"
-        >
+        <el-slider :step="3600000" v-model="timePlay" :show-tooltip="false" :min="min" :max="max" :marks="marks"
+          style="position: relative; z-index: 1;" @change="gettimePlay">
         </el-slider>
       </div>
     </div>
@@ -41,18 +25,10 @@
   <!-- 右下角选择 -->
   <div class="rightbottombox" v-if="showslice">
     <div class="rightbottombox-top">
-      <div
-        class="rightbottombox-btn"
-        :class="{ active: selectedButton === '体剖切' }"
-        @click="selectButton('体剖切')"
-      >
+      <div class="rightbottombox-btn" :class="{ active: selectedButton === '体剖切' }" @click="selectButton('体剖切')">
         体剖切
       </div>
-      <div
-        class="rightbottombox-btn"
-        :class="{ active: selectedButton === '十字切片' }"
-        @click="selectButton('十字切片')"
-      >
+      <div class="rightbottombox-btn" :class="{ active: selectedButton === '十字切片' }" @click="selectButton('十字切片')">
         十字切片
       </div>
     </div>
@@ -62,45 +38,21 @@
           <div>TOP</div>
           <div>BOTTOM</div>
         </div>
-        <el-slider
-          v-model="slidervalue"
-          range
-          show-stops
-          :step="0.01"
-          :min="0"
-          :max="1"
-          style="width: 25vh"
-        />
+        <el-slider v-model="slidervalue" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh" />
       </div>
       <div>
         <div class="rightbottombox-content-title">
           <div>LEFT</div>
           <div>RIGHT</div>
         </div>
-        <el-slider
-          v-model="slidervalue2"
-          range
-          show-stops
-          :step="0.01"
-          :min="0"
-          :max="1"
-          style="width: 25vh"
-        />
+        <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh" />
       </div>
       <div>
         <div class="rightbottombox-content-title">
           <div>FRONT</div>
           <div>BACK</div>
         </div>
-        <el-slider
-          v-model="slidervalue3"
-          range
-          show-stops
-          :step="0.01"
-          :min="0"
-          :max="1"
-          style="width: 25vh"
-        />
+        <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh" />
       </div>
     </div>
     <div class="rightbottombox-content" v-if="selectedButton === '十字切片'">
@@ -114,11 +66,7 @@
         <div class="rightbottombox-content-title2">THICK</div>
         <div class="numbtn">
           <div class="numbtn-change" @click="decrease">-</div>
-          <el-input
-            v-model="THICK"
-            style="width: 8vh; height: 3vh"
-            @input="validateInput"
-          />
+          <el-input v-model="THICK" style="width: 8vh; height: 3vh" @input="validateInput" />
           <div class="numbtn-change" @click="increase">+</div>
         </div>
       </div>
@@ -127,20 +75,10 @@
   <!-- 右下角颜色条 -->
   <div class="right-button">
     <div class="leftbar">{{ barType }}</div>
-    <div
-      class="rightbar"
-      :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'"
-    >
+    <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
       <span>{{ barMax }}</span>
-      <a-slider
-        v-if="selectedItemname !== '流速'"
-        v-model:value="colorbar"
-        vertical
-        :step="0.01"
-        :min="barMin"
-        :max="barMax"
-        @change="getColorbar"
-      />
+      <a-slider v-if="selectedItemname !== '流速'" v-model:value="colorbar" vertical :step="0.01" :min="barMin"
+        :max="barMax" @change="getColorbar" />
       <span>{{ barMin }}</span>
     </div>
   </div>
@@ -174,6 +112,7 @@
       </thead>
     </table>
   </div>
+  <div :class="buttonClass" v-if="showselect2" @click="handleparticle">流速粒子</div>
 </template>
 
 <script setup>
@@ -185,6 +124,12 @@ import {
   addResponseEventListener,
 } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from "element-plus";
+
+const isActive = ref(false);
+const showselect2 = ref(false);
+const buttonClass = computed(() => {
+  return isActive.value ? 'buttonstyles2 active' : 'buttonstyles2';
+});
 
 const selectedItemname = ref(null);
 
@@ -353,9 +298,13 @@ const gettimePlay = (e) => {
 const handleFunctionSelection = (selectedItem) => {
   selectedItemname.value = selectedItem.name;
   showslice.value = selectedItem.name !== "流速";
+
+  showselect2.value = selectedItem.name === "流速";
+
   if (timePlay.value == null) {
     timePlay.value = sessionStorage.getItem("timePlay");
   }
+
   const formattedTime = dayjs(timePlay.value).format("YYYY-MM-DD HH:mm:ss");
   callUIInteraction({
     ModuleName: `生态动力`,
@@ -365,6 +314,7 @@ const handleFunctionSelection = (selectedItem) => {
     State: true,
   });
 };
+
 const showslice = ref(true);
 const showSmallWindow = ref(false);
 const barType = ref(null);
@@ -764,6 +714,15 @@ const pointStyle = computed(() => {
   };
 });
 
+const handleparticle = () => {
+  isActive.value = !isActive.value;
+  callUIInteraction({
+    ModuleName: `生态动力`,
+    FunctionName: `流速粒子`,
+    State: isActive.value,
+  });
+};
+
 onMounted(() => {
   const storedTime = sessionStorage.getItem("timePlay");
   if (storedTime) {
@@ -859,7 +818,7 @@ onMounted(() => {
 }
 
 .bottombox {
-  padding: 0 3vh 0 10vh;
+  padding: 0 3vh 0 9.3vh;
   position: absolute;
   bottom: 1vh;
   box-sizing: border-box;
@@ -870,7 +829,7 @@ onMounted(() => {
 .bottombox-button {
   position: absolute;
   bottom: 1vh;
-  left: 0.8%;
+  left: 0.76%;
   display: flex;
   align-items: center;
   z-index: 10;
@@ -1264,5 +1223,31 @@ onMounted(() => {
 
 :deep(.ant-slider-handle) {
   left: 0;
+}
+
+.buttonstyles2 {
+  width: 12vh;
+  height: 4vh;
+  border-radius: 0;
+  background-image: url('../../assets/img/drive.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border: 0;
+  position: absolute;
+  right: 6vh;
+  bottom: 10vh;
+  color: white;
+  font-size: 1.7vh;
+  font-weight: bold;
+  letter-spacing: 0.3vh;
+  margin-left: 0.3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.buttonstyles2.active {
+  background-image: url('../../assets/img/drive-01.png');
 }
 </style>

@@ -42,13 +42,13 @@
     </div>
     <div class="left-button-2" v-if="showselect2">
         <FunctionMenuother :functionData="layerFunction2" :defaultSelect="false" :Multiple="false"
-            @functionSelected="handleFunctionSelection" @close="showselect2 = false" />
+            @functionSelected="handleFunctionSelection2" @close="showselect2 = false" />
     </div>
     <!-- 时间轴 -->
-    <div class="bottomCalendar">
+    <div class="bottomCalendar" v-if="showTimesilder">
         <el-date-picker v-model="timePick" type="date" :editable="false" />
     </div>
-    <div class="bottombox-left">
+    <div class="bottombox-left" v-if="showTimesilder">
         <div class="bottombox-button">
             <el-button type="primary" class="bottombox-play" :class="{ active: activePlay === 'play' }"
                 @click="togglePlay"></el-button>
@@ -64,8 +64,25 @@
             </div>
         </div>
     </div>
-    <!-- 右下角选择 -->
-    <div class="rightbottombox" v-if="showselect">
+    <!-- 时间轴2 -->
+    <div class="bottombox-left2" v-if="showYearsilder">
+        <div class="bottombox-button2">
+            <el-button type="primary" class="bottombox-play2" :class="{ active: activePlay2 === 'play' }"
+                @click="togglePlay2"></el-button>
+        </div>
+        <div class="bottombox2">
+            <div class="bottombox-slider2">
+                <div :style="adjustedStyle2">
+                    <span class="bottombox-slider2-span">{{ formattedTime2 }}</span>
+                </div>
+                <el-slider :step="1" v-model="timePlay2" :show-tooltip="false" :min="min2" :max="max2" :marks="marks2"
+                    style="position: relative; z-index: 1;" @change="gettimePlay2">
+                </el-slider>
+            </div>
+        </div>
+    </div>
+    <!-- 右下角切片 -->
+    <div class="rightbottombox" v-if="showslice">
         <div class="rightbottombox-top">
             <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '体剖切' }" @click="selectButton2('体剖切')">体剖切
             </div>
@@ -155,7 +172,7 @@
         </div>
     </div>
     <!-- 图表弹窗 -->
-    <div class="buttonstyles2" v-if="showselect2" @click="handlechart">查看数据</div>
+    <div class="buttonstyles2" v-if="showData" @click="handlechart">查看数据</div>
     <div class="fishecharts" v-if="showChart" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.7)">
         <img src="../../assets/img/close.png" alt="" class="close2" @click="showChart = false">
         <div class="chartcontent" ref="chartcontent"></div>
@@ -178,22 +195,29 @@ const loading = ref(false)
 const activeIndex = ref(null);
 const showselectbar = ref(false);
 const showmenu = ref(false)
+const showYearsilder = ref(false)
+const showTimesilder = ref(false);
+const showData = ref(false);
+const showslice = ref(false);
 const changeBackground = (index) => {
+    showChart.value = false;
+    showYearsilder.value = false;
+    showData.value = false;
+    showTimesilder.value = false;
+    showslice.value = false;
+    showselectbar.value = false;
     if (activeIndex.value === index) {
         activeIndex.value = null;
         showselect.value = false;
-        showselectbar.value = false;
         showselect2.value = false;
     } else {
         activeIndex.value = index;
         if (index === 0) {
             showselect.value = true;
-            showselectbar.value = true;
             showselect2.value = false;
         } else if (index === 1) {
             showselect2.value = true;
             showselect.value = false;
-            showselectbar.value = true;
         }
     }
 }
@@ -952,22 +976,141 @@ const gettimePlay = (e) => {
     }
 }
 
+// 时间轴2
+const timePlay2 = ref(null);
+const activePlay2 = ref("");
+const min2 = ref(2024);
+const max2 = ref(2053);
+// 暂停/播放
+let previousPlayState2 = null;
+let intervalTime2 = null;
+let playInterval2 = null;
+const togglePlay2 = () => {
+    intervalTime2 = 400;
+    previousPlayState2 = activePlay2.value;
+    activePlay2.value = activePlay2.value === "play" ? "" : "play";
+    if (activePlay2.value === "play") {
+        if (timePlay2.value === null) {
+            timePlay2.value = min2.value;
+        }
+        playInterval2 = setInterval(() => {
+            timePlay2.value++;
+            if (timePlay2.value >= max2.value) {
+                clearInterval(playInterval2);
+                activePlay2.value = "";
+            }
+        }, intervalTime2);
+    } else {
+        clearInterval(playInterval2);
+    }
+};
+
+const formattedTime2 = computed(() => {
+    const time = timePlay2.value;
+    return time;
+});
+
+const style2 = computed(() => {
+    const length = max2.value - min2.value,
+        progress = timePlay2.value - min2.value,
+        left = (progress / length) * 95;
+    return {
+        paddingLeft: `${left}%`,
+    };
+});
+
+const adjustedStyle2 = computed(() => {
+    const baseStyle = style2.value;
+    const divWidth = 62;
+    const totalWidth = 1560;
+    const leftPadding = parseFloat(baseStyle.paddingLeft);
+
+    if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
+        return {
+            paddingLeft: `${((totalWidth - divWidth) / totalWidth) * 100}%`,
+        };
+    }
+    return baseStyle;
+});
+
+// 定义 slider 的刻度
+const marks2 = computed(() => {
+    const marks = {};
+    const startYear = 2024;
+    const endYear = 2053;
+
+    for (let year = startYear; year <= endYear; year++) {
+        marks[year] = {
+            style: {
+                color: '#ffffff'
+            },
+            label: year.toString()
+        };
+    }
+
+    return marks;
+});
+
+watch(timePlay2, (newVal) => {
+    if (selectedItemname.value !== null) {
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            Time: newVal,
+            Type: selectedItemname.value,
+            FunctionName: radioselection.value,
+            State: true,
+        });
+    }
+});
+// 监听时间轴
+const gettimePlay2 = (e) => {
+    timePlay2.value = e;
+    if (activePlay2.value === "play") {
+        activePlay2.value = "";
+        clearInterval(playInterval2);
+    }
+};
+
 const showselect = ref(false);
 const handleFunctionSelection = (selectedItem) => {
+    showselectbar.value = true;
+    showslice.value = true;
+    showTimesilder.value = true;
     selectedItemname.value = selectedItem.name;
-    if (timePlay.value == null) {
-        timePlay.value = sessionStorage.getItem('timePlay');
+    if (activePlay.value === "play") {
+        activePlay.value = "";
+        clearInterval(playInterval);
     }
+    timePlay.value = dayjs("2024-08-01 00:00:00").valueOf();
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     callUIInteraction({
         ModuleName: `趋势预测`,
-        // FunctionMenu: '要素切换',
         Time: formattedTime,
         Type: selectedItem.name,
         FunctionName: radioselection.value,
         State: true,
     });
 };
+
+const handleFunctionSelection2 = (selectedItem) => {
+    showselectbar.value = true;
+    showData.value = true;
+    showYearsilder.value = true;
+    selectedItemname.value = selectedItem.name;
+    if (activePlay2.value === "play") {
+        activePlay2.value = ""; 
+        clearInterval(playInterval2);
+    }
+    timePlay2.value = 2024;
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        Time: timePlay2.value,
+        Type: selectedItem.name,
+        FunctionName: radioselection.value,
+        State: true,
+    });
+};
+
 const barType = ref(null);
 const barMin = ref(0);
 const barMax = ref(0);
@@ -1321,6 +1464,7 @@ const pointStyle = computed(() => {
 
 onMounted(() => {
     const storedTime = sessionStorage.getItem('timePlay');
+    timePlay2.value = 2024;
     if (storedTime) {
         timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
         timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
@@ -1418,7 +1562,7 @@ onUnmounted(() => {
 }
 
 .bottombox {
-    padding: 0 3vh 0 10vh;
+    padding: 0 3vh 0 9.3vh;
     position: absolute;
     bottom: 1vh;
     box-sizing: border-box;
@@ -1429,7 +1573,7 @@ onUnmounted(() => {
 .bottombox-button {
     position: absolute;
     bottom: 1vh;
-    left: 0.8%;
+    left: 0.76%;
     display: flex;
     align-items: center;
     z-index: 10;
@@ -1498,16 +1642,17 @@ onUnmounted(() => {
 }
 
 .leftbar {
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
+    position: absolute;
     border-top-left-radius: 0.5vh;
     border-top-right-radius: 0.5vh;
-    width: 3vh;
+    width: 11vh;
+    text-align: -webkit-right;
     height: 2.5vh;
-    font-size: 1.6vh;
+    font-size: 1.2vh;
     color: white;
-    direction: rtl;
+    top: 0vh;
+    right: 0vh;
+    /* direction: rtl; */
     /* 右到左的文本方向 */
 }
 
@@ -1528,6 +1673,7 @@ onUnmounted(() => {
     padding: 0 1vh;
     box-sizing: border-box;
     justify-content: space-between;
+    margin-top: 2vh;
 }
 
 .smallWindow {
@@ -2093,5 +2239,86 @@ onUnmounted(() => {
 
 :deep(.ant-slider-handle) {
     left: 0;
+}
+
+.bottombox-left2 {
+    width: 96%;
+    height: 6vh;
+    background-image: url('../../assets/img/timebackground.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    bottom: 1.5vh;
+    margin-left: 1.5vh;
+    z-index: 10;
+}
+
+.bottombox2 {
+    padding: 0 3vh 0 9.3vh;
+    position: absolute;
+    bottom: 1vh;
+    box-sizing: border-box;
+    display: flex;
+    z-index: 5;
+}
+
+.bottombox-button2 {
+    position: absolute;
+    bottom: 1vh;
+    left: 0.76%;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.bottombox-play2 {
+    background-image: url("../../assets/img/Timeout.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: 55% 50%;
+    border-radius: 100%;
+    border: 0;
+    width: 4vh;
+    height: 4vh;
+}
+
+.bottombox-play2.active {
+    background-image: url("../../assets/img/Play.png");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: center;
+    background-size: 70% 70%;
+    border-radius: 100%;
+    border: 0;
+    width: 4vh;
+    height: 4vh;
+}
+
+.bottombox-slider2 {
+    width: 89.5vw;
+}
+
+.bottombox-slider2-span {
+    width: 6.5vh;
+    background-color: #42aeff;
+    border-radius: 1.25rem;
+    color: white;
+    display: block;
+    text-align: center;
+    font-size: 1.4vh;
+}
+
+.bottombox-slider2 :deep(.el-slider__button) {
+    background-color: transparent;
+    border: 0;
+}
+
+.bottombox-slider2 :deep(.el-slider__bar) {
+    background: linear-gradient(to right, #0088ff, #00f2fe);
+    /* 渐变蓝色 */
+}
+
+.bottombox-slider2 :deep(.el-slider__marks-text) {
+    color: white !important;
 }
 </style>

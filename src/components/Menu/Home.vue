@@ -12,19 +12,19 @@
             <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
               {{ bayEnv }}
             </div>
-            <div style="margin-top: 4vh; font-size: 1.5vh">海湾生境</div>
+            <div style="position: absolute;bottom: 0.2vh; font-size: 1.5vh">海湾生境</div>
           </div>
           <div class="lefttopbox-item" @click="showDetail('海湾生物')">
             <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
               {{ bayBio }}
             </div>
-            <div style="margin-top: 4vh; font-size: 1.5vh">海湾生物</div>
+            <div style="position: absolute;bottom: 0.2vh; font-size: 1.5vh">海湾生物</div>
           </div>
           <div class="lefttopbox-item" @click="showDetail('威胁因素')">
             <div style="margin-top: 0.2vh; font-weight: bold; font-size: 1.6vh">
               {{ bayThreat }}
             </div>
-            <div style="margin-top: 4vh; font-size: 1.5vh">威胁因素</div>
+            <div style="position: absolute;bottom: 0.2vh; font-size: 1.5vh">威胁因素</div>
           </div>
         </div>
         <div class="lefttopbox2">
@@ -239,7 +239,15 @@
     <div class="echartsBox-title">{{ detailTitle }}</div>
     <div class="echartsBox-close" @click="showEchartsBox = false"></div>
     <div class="echartsBox-content">
+      <div class="echartsBox-left"></div>
       <div class="echartsBox-right" ref="chartRef2"></div>
+    </div>
+  </div>
+  <div class="Uemenu">
+    <div v-for="(item, index) in menuItems" :key="index" @click="selectMenu(index)" class="menu-item"
+      :class="{ active: selectedIndex === index }">
+      <img :src="selectedIndex === index ? item.data.activeimgPath : item.data.imgPath" alt="" class="menu-icon">
+      <div class="menu-title">{{ item.title }}</div>
     </div>
   </div>
 </template>
@@ -250,7 +258,7 @@ import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener, } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from "element-plus";
 import axios from "axios";
-import test from "../Menu/test.vue";
+// import test from "../Menu/test.vue";
 // import { useRouter } from "vue-router";
 
 // const router = useRouter();
@@ -274,6 +282,46 @@ const selectedButton = ref("浮游植物");
 const showEchartsBox = ref(false);
 const detailTitle = ref("");
 const Clicktitle = ref(null);
+const menuItems = ref([]) // 用于存储菜单项
+const selectedIndex = ref(-1) // 用于存储选中的菜单项索引
+const getmenu = () => {
+  axios.get('data/Menu.json').then((res) => {
+    menuItems.value = res.data.data
+  })
+}
+// 选择菜单
+const selectMenu = (index) => {
+  const previousIndex = selectedIndex.value;
+
+  if (selectedIndex.value === index) {
+    selectedIndex.value = -1; // 取消选择
+    callUIInteraction({
+      FunctionName: '生态区域',
+      ModuleName: "其他",
+      SelectFunction: menuItems.value[index].title,
+      Time: 2023,
+      State: false
+    });
+  } else {
+    if (previousIndex !== -1) {
+      callUIInteraction({
+        FunctionName: '生态区域',
+        ModuleName: "其他",
+        SelectFunction: menuItems.value[previousIndex].title,
+        Time: 2023,
+        State: false
+      });
+    }
+    selectedIndex.value = index;
+    callUIInteraction({
+      FunctionName: '生态区域',
+      ModuleName: "其他",
+      SelectFunction: menuItems.value[index].title,
+      Time: 2023,
+      State: true
+    });
+  }
+}
 
 const selectButton = (button) => {
   selectedButton.value = button;
@@ -729,6 +777,7 @@ const myHandleResponseFunction = (data) => {
 };
 
 onMounted(() => {
+  getmenu();
   getTime();
   addResponseEventListener("handle_responses", myHandleResponseFunction);
   window.addEventListener("resize", reloadChart);
@@ -876,6 +925,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  position: relative;
 }
 
 .lefttopbox-item:nth-child(1) {
@@ -1172,8 +1222,52 @@ onUnmounted(() => {
   box-sizing: border-box;
 }
 
-.echartsBox-right {
-  width: 80vh;
+.echartsBox-left {
+  width: 20vh;
   height: 65vh;
+  background-image: url('../../assets/img/saomiao.gif');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.echartsBox-right {
+  width: 60vh;
+  height: 65vh;
+}
+
+.Uemenu {
+  width: 25vw;
+  height: 8vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: absolute;
+  bottom: 0.7vh;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 2;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-icon {
+  width: 7vh;
+  height: 9vh;
+}
+
+.menu-title {
+  position: absolute;
+  bottom: 0.7vh;
+  font-size: 1.4vh;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 0.2vh;
+  margin-left: 0.2vh;
 }
 </style>
