@@ -145,19 +145,19 @@
       <div class="rightBox-top-title">丁字湾简介</div>
       <div class="rightBox-top-table">
         <p>
-          丁字湾位于青岛市即墨区，
-          莱阳，海阳三地的交界处，北纬36度32'40”，东经120度44'58”，
+          丁字湾位于青岛市即墨区、
+          莱阳、海阳三地的交界处，<span class="font-line">北纬36度32'40”</span>，<span class="font-line">东经120度44'58”</span>，
           海湾主体呈北西-南东走向，湾顶部在麻姑岛附近折而向西，
-          继五龙河口向延伸，湾口则转向东偏南方向，整个形态大致呈”丁”字形，故名丁字湾。海呈狭长的半封闭的状深入陆地，从湾口到湾顶长22公里，最宽处(底坊滩至鲁岛附近)约12.3公里，
-          最窄处(香岛附近)约2.5公里，口门宽(栲栳岛至宅南嘴)
-          约2.8公里，湾内岸线蜿蜒曲折，岬湾相间，又被分成几个海湾(或称滩地)
-          ，计有栲栳滩，芝坊滩，鲁岛滩，力岛滩，湾顶滩及五龙河三角洲等，
+          继五龙河口向延伸，湾口则转向东偏南方向，整个形态大致呈”丁”字形，故名丁字湾。海呈狭长的半封闭的状深入陆地，
+          从湾口到湾顶长<span class="font-line">22公里</span>，最宽处(底坊滩至鲁岛附近)约<span class="font-line">12.3公里</span>，
+          最窄处(香岛附近)约<span class="font-line">2.5公里</span>，口门宽(栲栳岛至宅南嘴)
+          约<span class="font-line">2.8公里</span>，湾内岸线蜿蜒曲折，岬湾相间，又被分成几个海湾(或称滩地)
+          ，计有<span class="font-line">栲栳滩、芝坊滩、鲁岛滩、力岛滩、湾顶滩及五龙河三角洲</span>等，
           岬角处多为基岩裸露，形成海蚀崖，但多数因泥沙淤积已为潮水所不及。
         </p>
         <p>
-          丁字湾周围被山丘环抱，南，北方向为剥蚀山丘，高程为70米上，下为切割山坡地，表面被残积-坡积物覆盖，西北方向为冲积平原。
-          流入丁字湾流有五龙河，白沙可，蓬险河，店集河，贤友河，黄塘河，
-          鳌子河，朱埠河，羊郡河等。
+          丁字湾周围被山丘环抱南、北方向为剥蚀山丘，高程为<span class="font-line">70米</span>上，下为切割山坡地，表面被残积-坡积物覆盖，西北方向为冲积平原。
+          流入丁字湾流有<span class="font-line">五龙河、白沙可、蓬险河、店集河、贤友河、黄塘河、鳌子河、朱埠河、羊郡河</span>等。
         </p>
       </div>
     </div>
@@ -449,6 +449,7 @@ const Seemore = () => {
     return;
   }
   morebox.value = !morebox.value;
+  showEchartsBox.value = false;
   if (morebox.value) {
     getmoretabledata();
   }
@@ -537,6 +538,8 @@ const getmoretabledata = () => {
 const showDetail = (title) => {
   Clicktitle.value = title;
   detailTitle.value = title + "评价详情";
+  showEchartsBox.value = true;
+  morebox.value = false;
   getOverallRating();
 };
 
@@ -673,21 +676,37 @@ const initRadarChart = (data) => {
     initRadarChart(data); // 重新初始化图表
   });
 
-  const indicators = Object.keys(data).map(key => {
+  // 分离有值和没有值的数据
+  const indicatorsWithValue = [];
+  const indicatorsWithoutValue = [];
+  const valuesWithValue = [];
+  const valuesWithoutValue = [];
+
+  Object.keys(data).forEach(key => {
     let max = 40; // 默认最大值为40
     if (key == "污水排放量" || key == "养殖面积" || key == "干扰廊道" || key == "有害赤潮累积发生面积" || key == "围填海面积") {
       max = 20; // 如果是威胁因素，最大值为20
     }
-    console.log(key);
-    console.log(max);
 
-    return {
-      name: key,
-      max: max
-    };
+    const value = data[key];
+    const indicator = { name: key, max: max };
+
+    if (value) {
+      indicatorsWithValue.push(indicator);
+      valuesWithValue.push(value);
+    } else {
+      indicatorsWithoutValue.push(indicator);
+      valuesWithoutValue.push(value);
+    }
   });
 
-  const values = Object.values(data);
+  // 倒序排列没有值的指标和数据
+  indicatorsWithoutValue.reverse();
+  valuesWithoutValue.reverse();
+
+  // 合并有值和没有值的指标和数据
+  const indicators = [...indicatorsWithValue, ...indicatorsWithoutValue];
+  const values = [...valuesWithValue, ...valuesWithoutValue];
 
   chart.setOption({
     tooltip: {},
@@ -759,6 +778,7 @@ const initRadarChart = (data) => {
     ],
   });
 };
+
 // #00ffff   #3fa9f5   80%
 let reloadChart = () => {
   charts.splice(-2).forEach((chart) => {
@@ -1270,4 +1290,7 @@ onUnmounted(() => {
   letter-spacing: 0.2vh;
   margin-left: 0.2vh;
 }
-</style>
+
+.font-line {
+  text-decoration: underline;
+}</style>
