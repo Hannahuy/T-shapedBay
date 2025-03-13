@@ -239,7 +239,10 @@
     <div class="echartsBox-title">{{ detailTitle }}</div>
     <div class="echartsBox-close" @click="showEchartsBox = false"></div>
     <div class="echartsBox-content">
-      <div class="echartsBox-left"></div>
+      <div class="echartsBox-left">
+        <div class="echartsBox-left-top"></div>
+        <div class="echartsBox-left-bottom"></div>
+      </div>
       <div class="echartsBox-right" ref="chartRef2"></div>
     </div>
   </div>
@@ -1245,9 +1248,28 @@ onUnmounted(() => {
 .echartsBox-left {
   width: 22vh;
   height: 52vh;
+  position: relative;
+}
+
+.echartsBox-left-top {
+  position: absolute;
+  width: 22vh;
+  height: 22vh;
   background-image: url('../../assets/img/saomiao.gif');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  z-index: 5;
+}
+
+.echartsBox-left-bottom {
+  position: absolute;
+  width: 16vh;
+  height: 16vh;
+  background-image: url('../../assets/img/saomiao2.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  top: 3vh;
+  left: 3vh;
 }
 
 .echartsBox-right {
