@@ -135,26 +135,8 @@ const selectedItemname = ref(null);
 
 let layerFunction = [
   {
-    name: "浮游动物碳",
-    check: true,
-    image: new URL("../../assets/img/浮游动物碳.png", import.meta.url).href,
-    imageActive: new URL("../../assets/img/浮游动物碳-active.png", import.meta.url).href,
-  },
-  {
-    name: "浮游植物碳",
-    check: false,
-    image: new URL("../../assets/img/浮游植物碳.png", import.meta.url).href,
-    imageActive: new URL("../../assets/img/浮游植物碳-active.png", import.meta.url).href,
-  },
-  {
-    name: "叶绿素a",
-    check: false,
-    image: new URL("../../assets/img/浮游植物磷.png", import.meta.url).href,
-    imageActive: new URL("../../assets/img/浮游植物磷-active.png", import.meta.url).href,
-  },
-  {
     name: "硝酸盐",
-    check: false,
+    check: true,
     image: new URL("../../assets/img/浮游植物氮.png", import.meta.url).href,
     imageActive: new URL("../../assets/img/浮游植物氮-active.png", import.meta.url).href,
   },
@@ -177,10 +159,28 @@ let layerFunction = [
     imageActive: new URL("../../assets/img/无机磷-active.png", import.meta.url).href,
   },
   {
+    name: "叶绿素a",
+    check: false,
+    image: new URL("../../assets/img/浮游植物磷.png", import.meta.url).href,
+    imageActive: new URL("../../assets/img/浮游植物磷-active.png", import.meta.url).href,
+  },
+  {
     name: "溶解氧",
     check: false,
     image: new URL("../../assets/img/溶解氧.png", import.meta.url).href,
     imageActive: new URL("../../assets/img/溶解氧-active.png", import.meta.url).href,
+  },
+  {
+    name: "浮游植物碳",
+    check: false,
+    image: new URL("../../assets/img/浮游植物碳.png", import.meta.url).href,
+    imageActive: new URL("../../assets/img/浮游植物碳-active.png", import.meta.url).href,
+  },
+  {
+    name: "浮游动物碳",
+    check: false,
+    image: new URL("../../assets/img/浮游动物碳.png", import.meta.url).href,
+    imageActive: new URL("../../assets/img/浮游动物碳-active.png", import.meta.url).href,
   },
   {
     name: "流速",

@@ -1290,7 +1290,7 @@ const selectButton2 = (button) => {
     callUIInteraction({
       ModuleName: `趋势预测`,
       FunctionName: `空间分析`,
-      SelectFunction: selectedButton.value,
+      SelectFunction: selectedButton2.value,
       Values: {
         TOP: TOP.value,
         BOTTOM: BOTTOM.value,
@@ -1305,7 +1305,7 @@ const selectButton2 = (button) => {
     callUIInteraction({
       ModuleName: `趋势预测`,
       FunctionName: `空间分析`,
-      SelectFunction: selectedButton.value,
+      SelectFunction: selectedButton2.value,
       Values: {
         "CROSS-X": pointPosition.value.x,
         "CROSS-Y": pointPosition.value.y,

@@ -4,7 +4,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { app_load } from '../../module/webrtcVideo/webrtcVideo.js';
+import { app_load, callUIInteraction } from '../../module/webrtcVideo/webrtcVideo.js';
 import '../../module/webrtcVideo/player.css';
 onMounted(() => {
     app_load(
@@ -23,6 +23,15 @@ onMounted(() => {
         },
         () => {
             console.log("成功");
+            callUIInteraction({
+                ModuleName: `监测调查`,
+                State: true,
+            });
+            callUIInteraction({
+                ModuleName: `生态动力`,
+                FunctionName: `生态动力`,
+                State: false,
+            });
         },
         () => {
             console.log("失败");

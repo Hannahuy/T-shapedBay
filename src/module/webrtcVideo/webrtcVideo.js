@@ -1547,22 +1547,11 @@ function updateVideoStreamSize() {
       //   x: window.innerWidth,
       //   y: window.innerHeight,
       // };
-      let callUIInteractionf51 = {
-        ModuleName: `监测调查`,
-        State: true,
-      };
-      let callUIInteractionf52 = {
-        ModuleName: `生态动力`,
-        FunctionName: `生态动力`,
-        State: false,
-      };
       let callUIInteractionf53 = {
         Function: `开启分辨率`,
       };
       // console.log(descriptor)
       // emitUIInteraction(descriptor);
-      emitUIInteraction(callUIInteractionf51);
-      emitUIInteraction(callUIInteractionf52);
       emitUIInteraction(callUIInteractionf53);
     }
     // window.setScreen = true;
