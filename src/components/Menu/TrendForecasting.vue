@@ -659,42 +659,6 @@ const drive = () => {
         if (radioselection.value === '浒苔情景') {
             layerFunction.value = [
                 {
-                    name: "浮游动物碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游动物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游动物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "浮游植物碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "叶绿素a",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游动物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游动物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
                     name: "硝酸盐",
                     check: false,
                     image: new URL(
@@ -743,6 +707,18 @@ const drive = () => {
                     ).href,
                 },
                 {
+                    name: "叶绿素a",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游动物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游动物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
                     name: "溶解氧",
                     check: false,
                     image: new URL(
@@ -751,6 +727,30 @@ const drive = () => {
                     ).href,
                     imageActive: new URL(
                         "../../assets/img/溶解氧-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "浮游植物碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游植物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游植物碳-active.png",
+                        import.meta.url
+                    ).href,
+                },
+                {
+                    name: "浮游动物碳",
+                    check: false,
+                    image: new URL(
+                        "../../assets/img/浮游动物碳.png",
+                        import.meta.url
+                    ).href,
+                    imageActive: new URL(
+                        "../../assets/img/浮游动物碳-active.png",
                         import.meta.url
                     ).href,
                 },
