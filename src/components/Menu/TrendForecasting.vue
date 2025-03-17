@@ -884,11 +884,11 @@ const getColorbar = (e) => {
   normalizedValue = Math.round(normalizedValue * 100) / 100;
   if (normalizedValue !== lastPrintedValue) {
     THRESHOLD.value = normalizedValue;
-    if (selectedButton.value == "体剖切") {
+    if (selectedButton2.value == "体剖切") {
       callUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: `空间分析`,
-        SelectFunction: selectedButton.value,
+        SelectFunction: selectedButton2.value,
         Values: {
           TOP: TOP.value,
           BOTTOM: BOTTOM.value,
@@ -903,7 +903,7 @@ const getColorbar = (e) => {
       callUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: `空间分析`,
-        SelectFunction: selectedButton.value,
+        SelectFunction: selectedButton2.value,
         Values: {
           "CROSS-X": pointPosition.value.x,
           "CROSS-Y": pointPosition.value.y,
