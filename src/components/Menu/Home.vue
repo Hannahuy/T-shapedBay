@@ -1245,7 +1245,7 @@ onUnmounted(() => {
   box-sizing: border-box;
 }
 
-.echartsBox-left {
+/* .echartsBox-left {
   width: 22vh;
   height: 52vh;
   position: relative;
@@ -1270,10 +1270,11 @@ onUnmounted(() => {
   background-size: 100% 100%;
   top: 3vh;
   left: 3vh;
-}
+} */
 
 .echartsBox-right {
-  width: 30vw;
+  /* width: 30vw; */
+  width: 41.5vw;
   height: 40vh;
 }
 
