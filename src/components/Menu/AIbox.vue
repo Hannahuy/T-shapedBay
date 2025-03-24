@@ -160,11 +160,6 @@ const scrollToBottom = () => {
 </script>
   
 <style scoped>
-.Page {
-    width: 100vw;
-    height: 100vh;
-}
-
 .AIrobot {
     width: 8vw;
     height: 16vh;

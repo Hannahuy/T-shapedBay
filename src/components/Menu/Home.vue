@@ -864,7 +864,7 @@ onUnmounted(() => {
   text-indent: 3.2ch;
   /* 每段行缩进2个字符 */
   margin-bottom: 0.1em;
-  font-size: 1.5vh;
+  font-size: 0.9em;
   line-height: 2.3vh;
   color: #e9faff;
 }
@@ -873,7 +873,7 @@ onUnmounted(() => {
   text-indent: 3.2ch;
   /* 每段行缩进2个字符 */
   margin-bottom: 0.1em;
-  font-size: 1.5vh;
+  font-size: 0.9em;
   line-height: 2.1vh;
   color: #e9faff;
 }
