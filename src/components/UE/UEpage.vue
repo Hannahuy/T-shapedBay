@@ -10,8 +10,8 @@ onMounted(() => {
     app_load(
         {
             // serverUrl: 'http://192.168.0.124:89', // 像素流链接
-            serverUrl: 'http://192.168.0.137:89', // 像素流链接
-            // serverUrl: 'http://127.0.0.1:89', // 像素流链接
+            // serverUrl: 'http://192.168.0.137:89', // 像素流链接
+            serverUrl: 'http://localhost:89', // 像素流链接
             matchViewportResolution: true,
             autoConnection: true,
             showPlayOverlay: true,

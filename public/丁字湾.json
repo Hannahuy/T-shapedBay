@@ -1,0 +1,5892 @@
+[
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "丁",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "字",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "位于",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "中国",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "山东省",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "青岛市",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "烟台",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "市",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "交界",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "处",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "是",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "黄",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "海",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "沿岸",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的半",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "封闭",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "海湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "其",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态系统",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "具有",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "典型的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滨海",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "特征",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "以下是",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "其",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "特点",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "总结",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "---\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "###",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "1",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": ".",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " ",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "独特",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的地理",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "水文",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "环境",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "半",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "封闭",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "海湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "丁",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "字",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "三",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "面",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "环",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "陆",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "仅",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "东南",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "部",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "黄",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "海",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "相连",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "形成",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "相对",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "独立",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "体",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "环境",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "潮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "汐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "作用",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "明显",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "潮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "间",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "带",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "广阔",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "淡水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "海水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "交汇",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "周边",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "有",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "白沙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "河",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "五",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "龙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "河",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "注入",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "形成",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "咸",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "淡水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "混合",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "区",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "度",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "梯度",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "变化",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "显著",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "适合",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "多种",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "水生",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖息",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "泥沙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "沉积",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "丰富",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "河流",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "携带",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "泥沙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "在",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "内",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "淤",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "积",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "形成",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "大面积",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滩",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "涂",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "和",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "为",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "底",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "提供",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖息",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "---\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "###",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "2",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": ".",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " ",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "典型的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滨海",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态系统",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滩",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "涂",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "沼",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "植被",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "潮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "间",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "带",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "分布",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "着",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "碱",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蓬",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "芦苇",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "柽",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "柳",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "耐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "植物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "构成",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "独特的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "沼",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "景观",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "具有",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "固",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "碳",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "净化",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "水质",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的功能",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "底",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "多样性",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滩",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "涂",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "中",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "富含",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蛤",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蜊",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "螺",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "沙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蚕",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "底",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "动物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "是",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "候",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸟",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "和",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鱼类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的重要",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "食物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "来源",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "潮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "间",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "带",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "功能",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "潮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "汐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "作用",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "促进",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "营养",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盐",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "循环",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "支撑",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "浮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "游",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "和",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鱼类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "繁殖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "形成",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "完整的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "食物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "链",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "---\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "###",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "3",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": ".",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " ",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "重要的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "候",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸟",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖息",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "地与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "迁徙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "通道",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "东亚",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "澳大利",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "西亚",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "迁",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "飞",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "区",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "节点",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "丁",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "字",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "是",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "候",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸟",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "（",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "如",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸻",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鹬",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "黑",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "嘴",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸥",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "大",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "天鹅",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "）",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "迁徙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "途",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "中的重要",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "停",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "歇",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "地和",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "越冬",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸟类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "多样性",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "广阔的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滩",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "涂",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "和",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "丰富的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "食物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "资源",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "吸引",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "大量",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸟",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "聚集",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "具有",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "较高的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "监测",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "和保护",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "价值",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "---\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "###",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "4",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": ".",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " ",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "渔业",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "资源",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "养殖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "活动",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "天然",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "渔业",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "资源",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "内",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "盛",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "产",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "梭",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鱼",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鲈",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鱼",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "对",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "虾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "经济",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "物种",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "历史上",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "是",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "传统",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "渔",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "场",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "水产",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "养殖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "集中",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "区",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "近年",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "发展",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "贝",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "（",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "如",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蛤",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蜊",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "牡",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "蛎",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "）、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "海",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "参",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "养殖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "业",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "但",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "过度",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "养殖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "可能",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "引发",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "水体",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "富",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "营养",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "化",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "问题",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "---\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "###",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "5",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": ".",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " ",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "脆弱",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "性与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "人类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "活动",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "影响",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "环境",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "压力",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "围",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "垦",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "养殖",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "污染",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "岸",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "线",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "开发",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "导致",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "面积",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "缩减",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "栖息",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "退化",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "富",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "营养",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "化",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "风险",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "陆",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "源",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "污染物",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "（",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "农业",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生活",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "污水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "）",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "输入",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "可能",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "引发",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "赤",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "潮",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "威胁",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态系统",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "稳定性",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "-",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "保护",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "修复",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "措施",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "：",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "部分",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "区域",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "被",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "划",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "入",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "保护",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "红线",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "实施",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "修复",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "退",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "养",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "还",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "滩",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "等",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "工程",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "---\n\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "###",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": " **",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "总结",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "**\n",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "丁",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "字",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湾",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "特点",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "体现",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "为",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "咸",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "淡水",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "交汇",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "湿地",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "多样性",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "候",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "鸟",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "迁徙",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "的关键",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "节点",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "，",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "以及",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "人类",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "活动",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "自然",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "保护的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "博弈",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "其",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态系统",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "兼具",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生产",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "功能",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "（",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "渔业",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "）",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "和",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "生态",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "服务",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "功能",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "（",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "固",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "碳",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "、",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "净化",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "），",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "但也",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "面临",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "开发",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "与",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "保护的",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "平衡",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "挑战",
+                    "type": "text"
+                }
+            }
+        ]
+    },
+    {
+        "choices": [
+            {
+                "delta": {
+                    "content": "。",
+                    "type": "text"
+                }
+            }
+        ]
+    }
+]

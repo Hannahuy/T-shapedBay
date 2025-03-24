@@ -7,7 +7,7 @@
           <div>18℃ ~ 27℃</div>
         </div>
         <!-- <div class="top-title-middle" @click="addData">丁字湾典型生态数字孪生系统</div> -->
-        <div class="top-title-middle">丁字湾典型生态数字孪生系统</div>
+        <div class="top-title-middle" @click="showLeaflet">丁字湾典型生态数字孪生系统</div>
         <div class="top-title-right">{{ dayTime }}</div>
       </div>
     </div>
@@ -63,8 +63,11 @@
     <div v-if="!selected">
       <Home />
     </div>
-    <div class="databox" v-if="showDatabox">
+    <!-- <div class="databox" v-if="showDatabox">
       <Updata @closeDatabox="showDatabox = false" />
+    </div> -->
+    <div v-if="showLeafletbox">
+      <Leaflet @closeLeaflet="showLeafletbox = false" />
     </div>
   </div>
   <UEpage />
@@ -82,7 +85,8 @@ import MonitoringSurveys from "./Menu/MonitoringSurveys.vue";
 import TrendForecasting from "./Menu/TrendForecasting.vue";
 import EcologicalGrid from "./Menu/EcologicalGrid.vue";
 import Home from "./Menu/Home.vue";
-import Updata from "./Menu/Updata.vue";
+// import Updata from "./Menu/Updata.vue";
+import Leaflet from "./Menu/Leaflet.vue";
 
 const dayTime = ref("");
 const updateTime = () => {
@@ -139,10 +143,15 @@ const selectMenu = (menu) => {
 };
 const interval = ref(null);
 
-const showDatabox = ref(false);
-const addData = () => {
-  showDatabox.value = !showDatabox.value;
-};
+// const showDatabox = ref(false);
+// const addData = () => {
+//   showDatabox.value = !showDatabox.value;
+// };
+
+const showLeafletbox = ref(false);
+const showLeaflet = () => {
+  showLeafletbox.value = !showLeafletbox.value;
+}
 
 onMounted(() => {
   if (window.performance.navigation.type == 1) {

@@ -253,6 +253,9 @@
       <div class="menu-title">{{ item.title }}</div>
     </div>
   </div>
+  <div class="AIbox">
+    <AIbox></AIbox>
+  </div>
 </template>
 
 <script setup>
@@ -261,6 +264,7 @@ import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener, } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from "element-plus";
 import axios from "axios";
+import AIbox from './AIbox.vue'
 // import test from "../Menu/test.vue";
 // import { useRouter } from "vue-router";
 
@@ -815,7 +819,7 @@ onUnmounted(() => {
   position: absolute;
   left: 2.4vh;
   top: 10vh;
-  width: 33vh;
+  width: 17vw;
   height: 88vh;
   background-image: url("../../assets/img/rightbox.png");
   background-repeat: no-repeat;
@@ -829,7 +833,7 @@ onUnmounted(() => {
   position: absolute;
   right: 2.4vh;
   top: 10vh;
-  width: 33vh;
+  width: 17vw;
   height: 88vh;
   background-image: url("../../assets/img/rightbox.png");
   background-repeat: no-repeat;
@@ -1316,4 +1320,5 @@ onUnmounted(() => {
 
 .font-line {
   text-decoration: underline;
-}</style>
+}
+</style>
