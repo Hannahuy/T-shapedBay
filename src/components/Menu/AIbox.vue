@@ -9,8 +9,16 @@
             <div class="content" ref="messageContainer">
                 <div v-for="(msg, index) in messages" :key="index" :class="['message', msg.sender]">
                     <img :src="msg.avatar" class="avatar" :class="{ 'right': msg.sender === 'me' }" />
-                    <!-- <div class="bubble" v-html="renderMarkdown(msg.text)"></div> -->
-                    <div class="bubble" v-html="msg.text"></div>
+                    <div class="bubble">
+                        <div v-if="msg.sender === 'bot' && !msg.text" class="loading-container">
+                            <div class="loading-dots">
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                                <div class="dot"></div>
+                            </div>
+                        </div>
+                        <div v-html="marked(msg.text)"></div>
+                    </div>
                 </div>
             </div>
             <div class="bottom">
@@ -23,142 +31,115 @@
         </div>
     </div>
 </template>
-  
+
 <script setup>
-// import { ref, onMounted, reactive } from "vue";
-// import { marked } from "marked";
-
-// const showAIdialog = ref(false);
-// const Question = ref('');
-// const messages = reactive([]);
-
-// // 头像
-// const myAvatar = '/src/assets/img/user.png';
-// const aiAvatar = '/src/assets/img/AI.png';
-
-// // 获取消息容器的引用
-// const messageContainer = ref(null);
-
-// const scoket = new WebSocket('http://127.0.0.1:8024/question');
-
-// const sendMessage = () => {
-//     let userMsg = Question.value;
-//     if (userMsg.trim() === '') return;
-
-//     messages.push({
-//         text: userMsg,
-//         sender: 'me',
-//         avatar: myAvatar
-//     });
-
-//     scoket.send(userMsg);
-//     Question.value = '';
-//     scrollToBottom(); // 发送消息后滚动到底部
-// };
-
-// const messageHandler = (e) => {
-//     const resData = JSON.parse(e.data);
-//     const idx = messages.findIndex(item => item.isActive === true);
-
-//     if (!resData.isEnd) {
-//         if (idx === -1) {
-//             messages.push({
-//                 text: '',
-//                 sender: 'bot',
-//                 isActive: true,
-//                 avatar: aiAvatar
-//             });
-//         } else {
-//             const cleanedText = resData.data.replace(/<think>/g, '').replace(/<\/think>/g, '');
-//             messages[idx].text += cleanedText;
-//         }
-//     } else {
-//         messages[idx].isActive = false;
-//         Question.value = '';
-//     }
-//     scrollToBottom(); // 接收到消息后滚动到底部
-// };
-
-// const scrollToBottom = () => {
-//     if (messageContainer.value) {
-//         messageContainer.value.scrollTop = messageContainer.value.scrollHeight;
-//     }
-// };
-
-// const openHanlder = () => {
-//     console.log('open');
-// };
-// const errorHandler = () => {
-//     console.log('error');
-// };
-// const closeHandler = () => {
-//     console.log('close');
-// };
-// const initScoket = () => {
-//     scoket.onmessage = messageHandler;
-//     scoket.onopen = openHanlder;
-//     scoket.onerror = errorHandler;
-//     scoket.onclose = closeHandler;
-// };
-
-// onMounted(() => {
-//     initScoket();
-// });
-
-// // 解析 Markdown
-// const renderMarkdown = (text) => {
-//     return marked(text);
-// };
-import axios from "axios";
 import { ref } from "vue";
 import { marked } from "marked";
+
+// 配置marked以安全模式渲染（防止XSS攻击）
+marked.setOptions({
+    sanitize: true,
+});
 
 const showAIdialog = ref(false);
 const Question = ref('');
 const messages = ref([]);
-const lastQuestion = ref(''); // 记录上一次用户输入
 
-// 头像
+// 头像路径
 const myAvatar = '/src/assets/img/用户.png';
 const aiAvatar = '/src/assets/img/AI3.png';
 
-const sendMessage = () => {
-  if (Question.value.trim() !== '') {
+const scrollToBottom = () => {
+    const container = document.querySelector('.content');
+    if (container) {
+        setTimeout(() => {
+            container.scrollTop = container.scrollHeight;
+        }, 0);
+    }
+};
+
+const sendMessage = async () => {
+    if (Question.value.trim() === '') return;
+
+    // 添加用户消息
     messages.value.push({ sender: 'me', text: Question.value, avatar: myAvatar });
-    lastQuestion.value = Question.value;
+    const userQuestion = Question.value;
     Question.value = '';
 
+    // 添加AI消息占位符
     const aiMessage = { sender: 'bot', text: '', avatar: aiAvatar };
     messages.value.push(aiMessage);
 
-    axios.get('丁字湾.json').then((res) => {
-      const contents = res.data.map(item => item.choices[0].delta.content);
-      const result = contents.join('');
-      const htmlContent = marked(result);
-      // 将解析后的内容逐字显示
-      let index = 0;
-      const interval = setInterval(() => {
-        if (index < htmlContent.length) {
-          aiMessage.text += htmlContent[index];
-          messages.value = [...messages.value];
-          index++;
-        } else {
-          clearInterval(interval);
+    // 构造请求数据
+    const requestData = {
+        messages: [
+            { content: userQuestion, role: "system" },
+            { content: "你好", role: "user" }
+        ],
+        model: "deepseek-chat",
+        stream: true, // 启用流式传输
+        max_tokens: 4096,
+        temperature: 1,
+    };
+
+    try {
+        const response = await fetch('https://api.deepseek.com/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer sk-b09e2be88f544ba88b532e2e1a82745e'
+            },
+            body: JSON.stringify(requestData)
+        });
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = '';
+        let isStreaming = true;
+
+        // 流式数据接收处理
+        while (true) {
+            const { done, value } = await reader.read();
+            if (done) {
+                isStreaming = false;
+                break;
+            }
+            const chunk = decoder.decode(value, { stream: true });
+            buffer += chunk;
+
+            // 处理SSE格式
+            const parts = buffer.split('\n');
+            buffer = parts.pop(); // 剩余部分放回缓冲区
+
+            for (const part of parts) {
+                if (part.startsWith('data: ')) {
+                    const dataStr = part.slice(6).trim();
+                    if (dataStr === '[DONE]') {
+                        isStreaming = false;
+                        break;
+                    }
+                    try {
+                        const data = JSON.parse(dataStr);
+                        if (data.choices[0].delta.content) {
+                            // 逐字添加到AI消息
+                            aiMessage.text += data.choices[0].delta.content;
+                            messages.value = [...messages.value];
+                            scrollToBottom();
+                        }
+                    } catch (e) {
+                        console.error('解析错误:', e);
+                    }
+                }
+            }
         }
+    } catch (error) {
+        console.error('请求失败:', error);
+        aiMessage.text += ' [对话出错，请重试]';
+        messages.value = [...messages.value];
         scrollToBottom();
-      }, 50);
-    });
-  }
-};
-// // 获取消息容器的引用
-const messageContainer = ref(null);
-const scrollToBottom = () => {
-    if (messageContainer.value) {
-        messageContainer.value.scrollTop = messageContainer.value.scrollHeight;
     }
 };
 </script>
-  
 <style scoped>
 .AIrobot {
     width: 8vw;
@@ -314,5 +295,52 @@ const scrollToBottom = () => {
 
 .bubble {
     margin: 0;
+}
+
+.bubble * {
+    margin: 0 !important;
+}
+
+.loading-container {
+    min-height: 20px;
+    padding: 8px 0;
+}
+
+.loading-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #ddd;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: translateY(0);
+        background: #ddd;
+    }
+
+    40% {
+        transform: translateY(-6px);
+        background: #666;
+    }
 }
 </style>
