@@ -253,9 +253,9 @@
       <div class="menu-title">{{ item.title }}</div>
     </div>
   </div>
-  <div class="AIbox">
+  <!-- <div class="AIbox">
     <AIbox></AIbox>
-  </div>
+  </div> -->
 </template>
 
 <script setup>
@@ -264,7 +264,7 @@ import * as echarts from "echarts";
 import { callUIInteraction, addResponseEventListener, } from "../../module/webrtcVideo/webrtcVideo.js";
 import { ElMessage } from "element-plus";
 import axios from "axios";
-import AIbox from './AIbox.vue'
+// import AIbox from './AIbox.vue'
 // import test from "../Menu/test.vue";
 // import { useRouter } from "vue-router";
 
