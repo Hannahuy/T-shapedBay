@@ -136,7 +136,7 @@ defineExpose({
 <style scoped>
 .container {
     position: absolute;
-    top: 67vh;
+    top: 71vh;
     transform: translateY(-50%);
     left: 22vh;
     z-index: 9;

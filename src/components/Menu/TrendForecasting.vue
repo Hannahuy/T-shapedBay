@@ -1,30 +1,48 @@
 <template>
     <div class="rightbox">
         <div class="rightbox-middle">
-            <div class="rightbox-middle-content">
-                <div class="rightBox-top-title-dialog">
-                    情景选择
+            <div class="rightBox-top-title-dialog">
+                情景选择
+            </div>
+            <div class="radiobox-container">
+                <div class="radiobox1" :class="{ active: selectedButton === '浒苔情景' }" @click="selectButton('浒苔情景')">
+                    <span style="margin-top: 2vh;">浒苔情景</span>
                 </div>
-                <div class="radiobox-container">
-                    <div class="radiobox" :class="{ active: selectedButton === '浒苔情景' }" @click="selectButton('浒苔情景')">浒苔情景
-                    </div>
-                    <div class="radiobox" :class="{ active: selectedButton === '陆源污染情景' }" @click="selectButton('陆源污染情景')">
-                        陆源污染情景</div>
+                <div class="radiobox2" :class="{ active: selectedButton === '陆源污染情景' }" @click="selectButton('陆源污染情景')">
+                    <span style="margin-top: 2vh;">陆源污染情景</span>
                 </div>
-                <div class="rightBox-top-title-dialog">
-                    参数名称
+                <div class="radiobox3" :class="{ active: selectedButton === '互花米草情景' }" @click="selectButton('互花米草情景')">
+                    <span style="margin-top: 2vh;">互花米草情景</span>
+                </div>
+            </div>
+            <div class="rightBox-top-title-dialog2">
+                <div class="toptitle">
+                    <span style="margin-top: 1.5vh;">
+                        {{ selectedButton === '互花米草情景' ? '年份选择' : '参数名称' }}
+                    </span>
+                    <div class="spanbtm"></div>
                 </div>
                 <div class="rightbox-table">
-                    <div class="rightbox-table1">
-                        <div class="rightbox-tabletitle">{{ tablehead }}：</div>
+                    <div class="rightbox-table1" v-show="selectedButton !== '互花米草情景'">
+                        <div class="rightbox-tabletitle">{{ tablehead }}</div>
                         <el-input v-model="tabledata" style="width: 12vh;" placeholder="请输入数值" />
                     </div>
-                    <div class="rightbox-table2">
-                        <div class="rightbox-tabletitle">{{ tablehead2 }}：</div>
+                    <div class="rightbox-table1" v-show="selectedButton !== '互花米草情景'">
+                        <div class="rightbox-tabletitle">{{ tablehead2 }}</div>
                         <el-input v-model="tabledata2" style="width: 12vh;" placeholder="请输入数值" />
                     </div>
-                    <div class="buttonstyles" @click="drive">驱动模型</div>
+                    <div class="yearSelect" v-show="selectedButton === '互花米草情景'">
+                        <div v-for="year in ['2020', '2021', '2022', '2023', '2024', '2025']" :key="year"
+                            class="year-item" :class="{ 'year-item-act': selectedYear === year }"
+                            @click="selectYear(year)">
+                            {{ year }}
+                        </div>
+                    </div>
+
                 </div>
+            </div>
+            <div class="buttonstyles" :class="{ 'buttonstyles-act': isDriving }" @click="drive">
+                驱动模型
             </div>
         </div>
     </div>
@@ -84,9 +102,11 @@
     <!-- 右下角切片 -->
     <div class="rightbottombox" v-if="showslice">
         <div class="rightbottombox-top">
-            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '体剖切' }" @click="selectButton2('体剖切')">体剖切
+            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '体剖切' }"
+                @click="selectButton2('体剖切')">体剖切
             </div>
-            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '十字切片' }" @click="selectButton2('十字切片')">
+            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '十字切片' }"
+                @click="selectButton2('十字切片')">
                 十字切片</div>
         </div>
         <div class="rightbottombox-content" v-if="selectedButton2 === '体剖切'">
@@ -102,14 +122,16 @@
                     <div>LEFT</div>
                     <div>RIGHT</div>
                 </div>
-                <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
+                <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1"
+                    style="width: 25vh;" />
             </div>
             <div>
                 <div class="rightbottombox-content-title">
                     <div>FRONT</div>
                     <div>BACK</div>
                 </div>
-                <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
+                <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1"
+                    style="width: 25vh;" />
             </div>
         </div>
         <div class="rightbottombox-content" v-if="selectedButton2 === '十字切片'">
@@ -165,14 +187,14 @@
     </div>
     <!-- 右下角颜色条 -->
     <div class="right-button" v-if="showselectbar">
-    <div class="leftbar">{{ barType }}</div>
-    <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
-      <span>{{ barMax }}</span>
-      <a-slider v-model:value="colorbar" vertical :step="0.01" :min="barMin"
-        :max="barMax" @change="getColorbar" />
-      <span>{{ barMin }}</span>
+        <div class="leftbar">{{ barType }}</div>
+        <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
+            <span>{{ barMax }}</span>
+            <a-slider v-model:value="colorbar" vertical :step="0.01" :min="barMin" :max="barMax"
+                @change="getColorbar" />
+            <span>{{ barMin }}</span>
+        </div>
     </div>
-  </div>
     <!-- 图表弹窗 -->
     <div class="buttonstyles2" v-if="showData" @click="handlechart">查看数据</div>
     <div class="fishecharts" v-if="showChart" v-loading="loading" element-loading-background="rgba(0, 0, 0, 0.7)">
@@ -634,11 +656,25 @@ const selectButton = (button) => {
         tablehead2.value = '浒苔生物量（kg/㎡）';
         tabledata.value = 218300;
         tabledata2.value = 2;
-    } else {
+        selectedYear.value = null;
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: '互花米草情景',
+            State: false,
+        });
+    } else if (button == '陆源污染情景') {
         tablehead.value = '无机氮（mg/m³）';
         tablehead2.value = '无机磷（mg/m³）';
         tabledata.value = 200;
         tabledata2.value = 100;
+        selectedYear.value = null;
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: '互花米草情景',
+            State: false,
+        });
+    } else {
+        selectedYear.value = null;
     }
 
     callUIInteraction({
@@ -649,223 +685,247 @@ const selectButton = (button) => {
         Type: selectedItemname.value,
     });
 };
+const selectedYear = ref(null);
+
+const selectYear = (year) => {
+    selectedYear.value = year;
+};
+
+const isDriving = ref(false);
 const drive = () => {
-    if (tabledata.value == '' || tabledata2.value == '') {
-        ElMessage.warning('请输入数据');
-        return;
+    isDriving.value = true;
+    setTimeout(() => {
+        isDriving.value = false;
+    }, 100);
+    if (selectedButton.value === '互花米草情景') {
+        if (!selectedYear.value) {
+            ElMessage.warning('请选择年份范围');
+            return;
+        }
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: '互花米草情景',
+            State: true,
+            Time: selectedYear.value,
+        });
     } else {
-        showmenu.value = true;
-        // 根据选中的情景设置 layerFunction
-        if (radioselection.value === '浒苔情景') {
-            layerFunction.value = [
-                {
-                    name: "硝酸盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "铵盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物磷.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物磷-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "磷酸盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物氮.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物氮-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "硅酸盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/叶绿素.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/叶绿素-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "叶绿素a",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游动物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游动物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "溶解氧",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/溶解氧.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/溶解氧-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "浮游植物碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "浮游动物碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游动物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游动物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "碎屑碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/溶解氧.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/溶解氧-active.png",
-                        import.meta.url
-                    ).href,
-                }
-            ];
-        } else if (radioselection.value === '陆源污染情景') {
-            layerFunction.value = [
-                {
-                    name: "浮游动物碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游动物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游动物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "浮游植物碳",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "叶绿素a",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游动物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游动物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "硝酸盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物碳.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物碳-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "铵盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物磷.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物磷-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "磷酸盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/浮游植物氮.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/浮游植物氮-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "硅酸盐",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/叶绿素.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/叶绿素-active.png",
-                        import.meta.url
-                    ).href,
-                },
-                {
-                    name: "溶解氧",
-                    check: false,
-                    image: new URL(
-                        "../../assets/img/溶解氧.png",
-                        import.meta.url
-                    ).href,
-                    imageActive: new URL(
-                        "../../assets/img/溶解氧-active.png",
-                        import.meta.url
-                    ).href,
-                }
-            ];
+        if (tabledata.value == '' || tabledata2.value == '') {
+            ElMessage.warning('请输入数据');
+            return;
+        } else {
+            showmenu.value = true;
+            // 根据选中的情景设置 layerFunction
+            if (radioselection.value === '浒苔情景') {
+                layerFunction.value = [
+                    {
+                        name: "硝酸盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "铵盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物磷.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物磷-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "磷酸盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物氮.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物氮-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "硅酸盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/叶绿素.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/叶绿素-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "叶绿素a",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游动物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游动物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "溶解氧",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/溶解氧.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/溶解氧-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "浮游植物碳",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "浮游动物碳",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游动物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游动物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "碎屑碳",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/溶解氧.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/溶解氧-active.png",
+                            import.meta.url
+                        ).href,
+                    }
+                ];
+            } else if (radioselection.value === '陆源污染情景') {
+                layerFunction.value = [
+                    {
+                        name: "浮游动物碳",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游动物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游动物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "浮游植物碳",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "叶绿素a",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游动物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游动物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "硝酸盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物碳.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物碳-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "铵盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物磷.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物磷-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "磷酸盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/浮游植物氮.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/浮游植物氮-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "硅酸盐",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/叶绿素.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/叶绿素-active.png",
+                            import.meta.url
+                        ).href,
+                    },
+                    {
+                        name: "溶解氧",
+                        check: false,
+                        image: new URL(
+                            "../../assets/img/溶解氧.png",
+                            import.meta.url
+                        ).href,
+                        imageActive: new URL(
+                            "../../assets/img/溶解氧-active.png",
+                            import.meta.url
+                        ).href,
+                    }
+                ];
+            }
         }
     }
 }
@@ -873,47 +933,47 @@ const selectedItemname = ref(null);
 
 let lastPrintedValue = null;
 const getColorbar = (e) => {
-  const range = barMax.value - barMin.value;
-  let normalizedValue;
+    const range = barMax.value - barMin.value;
+    let normalizedValue;
 
-  if (range === 0) {
-    normalizedValue = 0;
-  } else {
-    normalizedValue = (barMax.value - e) / range;
-  }
-  normalizedValue = Math.round(normalizedValue * 100) / 100;
-  if (normalizedValue !== lastPrintedValue) {
-    THRESHOLD.value = normalizedValue;
-    if (selectedButton2.value == "体剖切") {
-      callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-          TOP: TOP.value,
-          BOTTOM: BOTTOM.value,
-          RIGHT: RIGHT.value,
-          LEFT: LEFT.value,
-          FRONT: FRONT.value,
-          BACK: BACK.value,
-          THRESHOLD: THRESHOLD.value,
-        },
-      });
+    if (range === 0) {
+        normalizedValue = 0;
     } else {
-      callUIInteraction({
-        ModuleName: `趋势预测`,
-        FunctionName: `空间分析`,
-        SelectFunction: selectedButton2.value,
-        Values: {
-          "CROSS-X": pointPosition.value.x,
-          "CROSS-Y": pointPosition.value.y,
-          THICK: THICK.value,
-          THRESHOLD: THRESHOLD.value,
-        },
-      });
+        normalizedValue = (barMax.value - e) / range;
     }
-    lastPrintedValue = normalizedValue;
-  }
+    normalizedValue = Math.round(normalizedValue * 100) / 100;
+    if (normalizedValue !== lastPrintedValue) {
+        THRESHOLD.value = normalizedValue;
+        if (selectedButton2.value == "体剖切") {
+            callUIInteraction({
+                ModuleName: `趋势预测`,
+                FunctionName: `空间分析`,
+                SelectFunction: selectedButton2.value,
+                Values: {
+                    TOP: TOP.value,
+                    BOTTOM: BOTTOM.value,
+                    RIGHT: RIGHT.value,
+                    LEFT: LEFT.value,
+                    FRONT: FRONT.value,
+                    BACK: BACK.value,
+                    THRESHOLD: THRESHOLD.value,
+                },
+            });
+        } else {
+            callUIInteraction({
+                ModuleName: `趋势预测`,
+                FunctionName: `空间分析`,
+                SelectFunction: selectedButton2.value,
+                Values: {
+                    "CROSS-X": pointPosition.value.x,
+                    "CROSS-Y": pointPosition.value.y,
+                    THICK: THICK.value,
+                    THRESHOLD: THRESHOLD.value,
+                },
+            });
+        }
+        lastPrintedValue = normalizedValue;
+    }
 };
 
 const timePick = ref(dayjs("2024-08-01").toDate());
@@ -1145,7 +1205,7 @@ const handleFunctionSelection2 = (selectedItem) => {
     showYearsilder.value = true;
     selectedItemname.value = selectedItem.name;
     if (activePlay2.value === "play") {
-        activePlay2.value = ""; 
+        activePlay2.value = "";
         clearInterval(playInterval2);
     }
     timePlay2.value = 2024;
@@ -1287,33 +1347,33 @@ const slidervalue3 = ref([0, 1])
 const selectButton2 = (button) => {
     selectedButton2.value = button;
     if (button == "体剖切") {
-    callUIInteraction({
-      ModuleName: `趋势预测`,
-      FunctionName: `空间分析`,
-      SelectFunction: selectedButton2.value,
-      Values: {
-        TOP: TOP.value,
-        BOTTOM: BOTTOM.value,
-        RIGHT: RIGHT.value,
-        LEFT: LEFT.value,
-        FRONT: FRONT.value,
-        BACK: BACK.value,
-        THRESHOLD: THRESHOLD.value,
-      },
-    });
-  } else {
-    callUIInteraction({
-      ModuleName: `趋势预测`,
-      FunctionName: `空间分析`,
-      SelectFunction: selectedButton2.value,
-      Values: {
-        "CROSS-X": pointPosition.value.x,
-        "CROSS-Y": pointPosition.value.y,
-        THICK: THICK.value,
-        THRESHOLD: THRESHOLD.value,
-      },
-    });
-  }
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton2.value,
+            Values: {
+                TOP: TOP.value,
+                BOTTOM: BOTTOM.value,
+                RIGHT: RIGHT.value,
+                LEFT: LEFT.value,
+                FRONT: FRONT.value,
+                BACK: BACK.value,
+                THRESHOLD: THRESHOLD.value,
+            },
+        });
+    } else {
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: `空间分析`,
+            SelectFunction: selectedButton2.value,
+            Values: {
+                "CROSS-X": pointPosition.value.x,
+                "CROSS-Y": pointPosition.value.y,
+                THICK: THICK.value,
+                THRESHOLD: THRESHOLD.value,
+            },
+        });
+    }
 };
 watch(slidervalue, (newVal) => {
     TOP.value = newVal[0];
@@ -1552,6 +1612,11 @@ onMounted(() => {
 });
 onUnmounted(() => {
     window.removeEventListener("resize", reloadChart);
+    callUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: '互花米草情景',
+        State: false,
+    });
 });
 </script>
 
@@ -1893,12 +1958,12 @@ onUnmounted(() => {
 
 .rightbox-middle {
     width: 40vh;
-    height: 32.5vh;
-    background-image: url("../../assets/img/bacg-bg.png");
+    height: 37.5vh;
+    background-image: url("../../assets/img/TrendForecasting/bacg-bg.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin-top: 2vh;
-    padding: 2vh;
+    padding: 1.5vh;
     box-sizing: border-box;
     color: #b7cffc;
 }
@@ -1926,29 +1991,58 @@ onUnmounted(() => {
     box-sizing: border-box;
 }
 
-.rightbox-table {
+.rightBox-top-title-dialog2 {
     width: 100%;
-    height: 11vh;
-    margin-top: 1vh;
+    height: 15vh;
+    background-image: url('../../assets/img/TrendForecasting/rightboxtitle2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #FFFFFF;
+    font-size: 1.65vh;
+    font-weight: bold;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.toptitle {
+    width: 100%;
+    height: 4vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
+.spanbtm {
+    width: 3.5vh;
+    height: 0.1vh;
+    background-image: url('../../assets/img/TrendForecasting/spanbtm.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-top: 0.5vh;
+}
+
+.rightbox-table {
+    width: 100%;
+    height: 11vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .buttonstyles {
-    width: 12vh;
-    height: 4vh;
+    width: 15vh;
+    height: 3vh;
     margin-top: 2vh;
     margin-left: 37vh;
     border-radius: 0;
-    background-image: url('../../assets/img/drive.png');
+    background-image: url('../../assets/img/TrendForecasting/drive.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     border: 0;
     position: absolute;
-    right: 2vh;
-    bottom: 2.4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1vh;
     color: white;
     font-size: 1.7vh;
     font-weight: bold;
@@ -1958,6 +2052,12 @@ onUnmounted(() => {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+
+.buttonstyles-act {
+    background-image: url('../../assets/img/TrendForecasting/drive-act.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .buttonstyles2 {
@@ -2026,7 +2126,7 @@ onUnmounted(() => {
     height: 18vh;
     width: 20vh;
     left: 3vh;
-    top: 50%;
+    top: 55%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
@@ -2074,46 +2174,93 @@ onUnmounted(() => {
 }
 
 .radiobox-container {
-    margin-top: 1.5vh;
-    margin-bottom: 1.5vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
-.radiobox {
-    width: 14.5vh;
-    height: 4vh;
-    background-image: url('../../assets/img/btn2.png');
+.radiobox1 {
+    width: 11.5vh;
+    height: 11.5vh;
+    background-image: url('../../assets/img/TrendForecasting/btn1.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     display: flex;
     align-items: center;
-    padding-left: 3.2vh;
+    justify-content: center;
     box-sizing: border-box;
     color: #E6F8FF;
     font-weight: bold;
-    font-size: 1.6vh;
+    font-size: 1.5vh;
     cursor: pointer;
 }
 
-.radiobox.active {
-    background-image: url('../../assets/img/btn2-act.png');
+.radiobox1.active {
+    background-image: url('../../assets/img/TrendForecasting/btn1-act.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #ffffff;
+}
+
+.radiobox2 {
+    width: 11.5vh;
+    height: 11.5vh;
+    background-image: url('../../assets/img/TrendForecasting/btn2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: #E6F8FF;
+    font-weight: bold;
+    font-size: 1.5vh;
+    cursor: pointer;
+}
+
+.radiobox2.active {
+    background-image: url('../../assets/img/TrendForecasting/btn2-act.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #ffffff;
+}
+
+.radiobox3 {
+    width: 11.5vh;
+    height: 11.5vh;
+    background-image: url('../../assets/img/TrendForecasting/btn3.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: #E6F8FF;
+    font-weight: bold;
+    font-size: 1.5vh;
+    cursor: pointer;
+}
+
+.radiobox3.active {
+    background-image: url('../../assets/img/TrendForecasting/btn3-act.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     color: #ffffff;
 }
 
 .rightbox-table1 {
-    width: 35vh;
-    height: 4vh;
-    background-image: url('../../assets/img/areatable.png');
+    margin-top: 2vh;
+    width: 17vh;
+    height: 8vh;
+    background-image: url('../../assets/img/TrendForecasting/areatable.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-evenly;
     align-items: center;
-    padding-right: 1vh;
 }
 
 .rightbox-table2 {
@@ -2150,6 +2297,7 @@ onUnmounted(() => {
     color: #00FFFF;
     font-size: 1.6vh;
     font-weight: bold;
+    text-align: center;
 }
 
 .rightbottombox {
@@ -2395,5 +2543,31 @@ onUnmounted(() => {
 
 .bottombox-slider2 :deep(.el-slider__marks-text) {
     color: white !important;
+}
+
+.yearSelect {
+    margin-top: 1.5vh;
+    width: 100%;
+    height: 9vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.year-item {
+    width: 10vh;
+    height: 3vh;
+    background-image: url('../../assets/img/TrendForecasting/year.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.year-item-act {
+    background-image: url('../../assets/img/TrendForecasting/year-act.png');
 }
 </style>
