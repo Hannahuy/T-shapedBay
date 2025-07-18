@@ -518,14 +518,14 @@ const showFish = ref(false);
 const showWaterquality = ref(false);
 const WTtime = ref('2025-01')
 const WTtimeoptions = ref([])
-const YStime = ref('siOH4')
+const YStime = ref('硅酸盐')
 const YStimeoptions = ref([
-  { label: 'siOH4', value: 'siOH4' },
-  { label: 'oxygen', value: 'oxygen' },
-  { label: 'chlorophyll', value: 'chlorophyll' },
-  { label: 'nh4', value: 'nh4' },
-  { label: 'po4', value: 'po4' },
-  { label: 'no3', value: 'no3' },
+  { label: '硅酸盐', value: 'siOH4' },
+  { label: '溶解氧', value: 'oxygen' },
+  { label: '叶绿素', value: 'chlorophyll' },
+  { label: '氨氮', value: 'nh4' },
+  { label: '磷酸盐', value: 'po4' },
+  { label: '硝酸盐', value: 'no3' },
 ])
 const fishName = ref(null);
 const charts = [];
@@ -751,7 +751,6 @@ const initWaterQualityChart = (data, selectedElement) => {
 
   const dates = data.map(item => item.date);
 
-  // 根据选中要素，映射对应数据数组
   const elementMap = {
     siOH4: data.map(item => item.siOH4),
     oxygen: data.map(item => item.oxygen),
@@ -761,7 +760,15 @@ const initWaterQualityChart = (data, selectedElement) => {
     no3: data.map(item => item.no3),
   };
 
-  // 如果没有选中要素，默认展示全部
+  // y轴单位映射
+  const yAxisUnitMap = {
+    chlorophyll: 'mg/m³',
+    default: 'mmol/m³',
+  };
+
+  // 选择单位
+  const yAxisUnit = selectedElement === 'chlorophyll' ? yAxisUnitMap.chlorophyll : yAxisUnitMap.default;
+
   let series = [];
   if (selectedElement && elementMap[selectedElement]) {
     series = [{
@@ -769,10 +776,9 @@ const initWaterQualityChart = (data, selectedElement) => {
       type: 'line',
       smooth: true,
       data: elementMap[selectedElement],
-      lineStyle: { color: '#FF6384' } // 你可以根据需要调整颜色
+      lineStyle: { color: '#FF6384' }
     }];
   } else {
-    // 默认展示全部6个指标
     series = Object.keys(elementMap).map((key, index) => {
       const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
       return {
@@ -811,12 +817,17 @@ const initWaterQualityChart = (data, selectedElement) => {
       data: dates,
       axisLabel: {
         color: '#CFEFFF',
-        rotate: 45,
+        rotate: 0, // 取消倾斜
         formatter: (value) => dayjs(value).format('MM-DD')
       }
     },
     yAxis: {
       type: 'value',
+      name: yAxisUnit, // 显示单位
+      nameTextStyle: {
+        color: '#CFEFFF',
+        padding: [0, 0, 0, 10] // 适当调整单位名称位置
+      },
       axisLabel: { color: '#CFEFFF' },
       splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
     },
@@ -845,6 +856,7 @@ const initWaterQualityChart = (data, selectedElement) => {
     chart.resize();
   });
 };
+
 
 const currentSite = ref(null);
 
