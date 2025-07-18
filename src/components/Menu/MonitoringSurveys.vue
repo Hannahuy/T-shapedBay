@@ -176,7 +176,7 @@
     <img src="../../assets/img/close.png" alt="" class="close" @click="oystersShow = false">
     <div class="Carousel1">
       <el-carousel height="16vh">
-        <el-carousel-item v-for="(image, index) in imageoysters" :key="index" v-if="imageoysters.length > 0" >
+        <el-carousel-item v-for="(image, index) in imageoysters" :key="index" v-if="imageoysters.length > 0">
           <img :src="image" alt="" style="width: 100%; height: 100%;">
         </el-carousel-item>
       </el-carousel>
@@ -473,6 +473,26 @@
       {{ fishContent }}
     </div>
   </div>
+  <!-- 水质监测 -->
+  <div class="waterquality" v-show="showWaterquality">
+    <div class="rightBox-top-title-dialog">
+      水质检测
+    </div>
+    <img src="../../assets/img/close.png" alt="" class="close" @click="showWaterquality = false" />
+    <div class="waterquality-time">
+      时间选择：
+      <el-select v-model="WTtime" placeholder="" style="width: 15vh">
+        <el-option v-for="item in WTtimeoptions" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
+    </div>
+    <div class="waterquality-time">
+      要素选择：
+      <el-select v-model="YStime" placeholder="" style="width: 15vh">
+        <el-option v-for="item in YStimeoptions" :key="item.value" :label="item.label" :value="item.value" />
+      </el-select>
+    </div>
+    <div class="waterqualitycharts" ref="chartRef10"></div>
+  </div>
 </template>
 
 <script setup>
@@ -495,6 +515,18 @@ const showSediment = ref(false);
 const showIntertidalzone = ref(false);
 const showNorth = ref(false);
 const showFish = ref(false);
+const showWaterquality = ref(false);
+const WTtime = ref('2025-01')
+const WTtimeoptions = ref([])
+const YStime = ref('si0H4')
+const YStimeoptions = ref([
+  { label: 'si0H4', value: 'si0H4' },
+  { label: 'oxygen', value: 'oxygen' },
+  { label: 'chlorophyll', value: 'chlorophyll' },
+  { label: 'nh4', value: 'nh4' },
+  { label: 'po4', value: 'po4' },
+  { label: 'no3', value: 'no3' },
+])
 const fishName = ref(null);
 const charts = [];
 const chartRef1 = ref(null);
@@ -506,6 +538,15 @@ const chartRef6 = ref(null);
 const chartRef7 = ref(null);
 const chartRef8 = ref(null);
 const chartRef9 = ref(null);
+const generateWTtimeoptions = () => {
+  const options = []
+  for (let month = 1; month <= 12; month++) {
+    const monthStr = month < 10 ? `0${month}` : `${month}`
+    const value = `2025-${monthStr}`
+    options.push({ label: value, value: value })
+  }
+  WTtimeoptions.value = options
+}
 const initChart = (chartRef, source) => {
   const chart = echarts.init(chartRef.value);
   charts.push(() => {
@@ -702,6 +743,123 @@ let initChart4 = (source) => {
     ]
   });
 };
+
+const initWaterQualityChart = (data, selectedElement) => {
+  const chart = echarts.init(chartRef10.value);
+
+  const dates = data.map(item => item.date);
+
+  // 根据选中要素，映射对应数据数组
+  const elementMap = {
+    si0H4: data.map(item => item.si0H4),
+    oxygen: data.map(item => item.oxygen),
+    chlorophyll: data.map(item => item.chlorophyll),
+    nh4: data.map(item => item.nh4),
+    po4: data.map(item => item.po4),
+    no3: data.map(item => item.no3),
+  };
+
+  // 如果没有选中要素，默认展示全部
+  let series = [];
+  if (selectedElement && elementMap[selectedElement]) {
+    series = [{
+      name: selectedElement,
+      type: 'line',
+      smooth: true,
+      data: elementMap[selectedElement],
+      lineStyle: { color: '#FF6384' } // 你可以根据需要调整颜色
+    }];
+  } else {
+    // 默认展示全部6个指标
+    series = Object.keys(elementMap).map((key, index) => {
+      const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+      return {
+        name: key,
+        type: 'line',
+        smooth: true,
+        data: elementMap[key],
+        lineStyle: { color: colors[index] }
+      };
+    });
+  }
+
+  const totalDays = dates.length;
+  const showDays = 5;
+  const startPercent = 0;
+  const endPercent = totalDays > showDays ? (showDays / totalDays) * 100 : 100;
+
+  const option = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: { type: 'cross' }
+    },
+    legend: {
+      data: series.map(s => s.name),
+      textStyle: { color: '#CFEFFF' }
+    },
+    grid: {
+      left: '3%',
+      right: '4%',
+      bottom: '15%',
+      containLabel: true
+    },
+    xAxis: {
+      type: 'category',
+      boundaryGap: false,
+      data: dates,
+      axisLabel: {
+        color: '#CFEFFF',
+        rotate: 45,
+        formatter: (value) => dayjs(value).format('MM-DD')
+      }
+    },
+    yAxis: {
+      type: 'value',
+      axisLabel: { color: '#CFEFFF' },
+      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
+    },
+    dataZoom: [
+      {
+        type: 'slider',
+        start: startPercent,
+        end: endPercent,
+        bottom: 0,
+        height: 20,
+        handleSize: '100%',
+        textStyle: { color: '#CFEFFF' }
+      },
+      {
+        type: 'inside',
+        start: startPercent,
+        end: endPercent
+      }
+    ],
+    series: series
+  };
+
+  chart.setOption(option);
+
+  window.addEventListener('resize', () => {
+    chart.resize();
+  });
+};
+
+const currentSite = ref(null);
+
+watch(WTtime, (newVal) => {
+  if (showWaterquality.value) {
+    axios.post('http://192.168.0.137:8088/waterSurvey/getWaterQualityByMouth', {
+      date: newVal,
+      site: currentSite.value // 需要定义当前站点变量
+    }).then(res => {
+      const data = res.data;
+      if (Array.isArray(data) && data.length > 0) {
+        initWaterQualityChart(data);
+      }
+    });
+  }
+});
+
 const reloadChart = () => {
   charts.forEach((chart) => chart());
 };
@@ -967,7 +1125,7 @@ const toggleVisibility = (visibleEntities) => {
 const initChartsByData = (charts, data) => {
   charts.forEach(([chartRef, chartData]) => initChart(chartRef, chartData));
 };
-
+const waterQualityData = ref([])
 const myHandleResponseFunction = (data) => {
   const datajson = JSON.parse(data);
 
@@ -1094,14 +1252,37 @@ const myHandleResponseFunction = (data) => {
       const angle = datajson.angle;
       const compassImage = document.getElementById('compassImage');
       compassImage.style.transform = `rotate(${angle}deg)`;
+      break;
+
+    case '水质监测查询':
+      showWaterquality.value = true;
+      currentSite.value = datajson.site;
+      axios.post('http://192.168.0.137:8088/waterSurvey/getWaterQualityByMouth', {
+        date: WTtime.value,
+        site: datajson.site
+      }).then(res => {
+        const data = res.data;
+        if (Array.isArray(data) && data.length > 0) {
+          waterQualityData.value = data; // 保存数据
+          initWaterQualityChart(data, YStime.value); // 根据当前选中要素初始化图表
+        }
+      }).catch(err => {
+        console.error('水质监测接口请求失败', err);
+      });
+      break;
     default:
       console.warn('Unknown function type:', datajson.Function);
   }
 };
-
+watch(YStime, (newVal) => {
+  if (showWaterquality.value && waterQualityData.value.length > 0) {
+    initWaterQualityChart(waterQualityData.value, newVal);
+  }
+});
 
 onMounted(() => {
   const storedTime = sessionStorage.getItem('timePlay');
+  generateWTtimeoptions()
   if (storedTime) {
     timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
     timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
@@ -1575,6 +1756,12 @@ onUnmounted(() => {
   margin-top: 1vh;
 }
 
+.waterqualitycharts {
+  width: 26.75vh;
+  height: 20vh;
+  margin-top: 1vh;
+}
+
 :deep(.el-tabs__item) {
   width: 13.5vh;
   padding: 0 !important;
@@ -1791,5 +1978,33 @@ onUnmounted(() => {
   font-size: 1.5vh;
   text-indent: 3.5ch;
   line-height: 1.5;
+}
+
+.waterquality {
+  position: absolute;
+  left: 2.4vh;
+  top: 10vh;
+  width: 30vh;
+  max-height: 80vh;
+  z-index: 10;
+  background-image: url('../../assets/img/rightbox.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 1.5vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.waterquality-time {
+  margin-top: 1vh;
+  display: flex;
+  color: white;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+:deep(.el-select__wrapper) {
+  border-radius: 0;
 }
 </style>
