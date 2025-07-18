@@ -476,7 +476,7 @@
   <!-- 水质监测 -->
   <div class="waterquality" v-show="showWaterquality">
     <div class="rightBox-top-title-dialog">
-      水质检测
+      水质监测站点：{{ waterqualityName }}
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="showWaterquality = false" />
     <div class="waterquality-time">
@@ -518,7 +518,7 @@ const showFish = ref(false);
 const showWaterquality = ref(false);
 const WTtime = ref('2025-01')
 const WTtimeoptions = ref([])
-const YStime = ref('硅酸盐')
+const YStime = ref('siOH4')
 const YStimeoptions = ref([
   { label: '硅酸盐', value: 'siOH4' },
   { label: '溶解氧', value: 'oxygen' },
@@ -527,6 +527,7 @@ const YStimeoptions = ref([
   { label: '磷酸盐', value: 'po4' },
   { label: '硝酸盐', value: 'no3' },
 ])
+const waterqualityName = ref(null);
 const fishName = ref(null);
 const charts = [];
 const chartRef1 = ref(null);
@@ -760,14 +761,7 @@ const initWaterQualityChart = (data, selectedElement) => {
     no3: data.map(item => item.no3),
   };
 
-  // y轴单位映射
-  const yAxisUnitMap = {
-    chlorophyll: 'mg/m³',
-    default: 'mmol/m³',
-  };
-
-  // 选择单位
-  const yAxisUnit = selectedElement === 'chlorophyll' ? yAxisUnitMap.chlorophyll : yAxisUnitMap.default;
+  const yAxisUnit = selectedElement === 'chlorophyll' ? 'mg/m³' : 'mmol/m³';
 
   let series = [];
   if (selectedElement && elementMap[selectedElement]) {
@@ -779,16 +773,14 @@ const initWaterQualityChart = (data, selectedElement) => {
       lineStyle: { color: '#FF6384' }
     }];
   } else {
-    series = Object.keys(elementMap).map((key, index) => {
-      const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
-      return {
-        name: key,
-        type: 'line',
-        smooth: true,
-        data: elementMap[key],
-        lineStyle: { color: colors[index] }
-      };
-    });
+    const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
+    series = Object.keys(elementMap).map((key, index) => ({
+      name: key,
+      type: 'line',
+      smooth: true,
+      data: elementMap[key],
+      lineStyle: { color: colors[index] }
+    }));
   }
 
   const totalDays = dates.length;
@@ -826,7 +818,7 @@ const initWaterQualityChart = (data, selectedElement) => {
       name: yAxisUnit, // 显示单位
       nameTextStyle: {
         color: '#CFEFFF',
-        padding: [0, 0, 0, 10] // 适当调整单位名称位置
+        padding: [0, 0, 0, 10]
       },
       axisLabel: { color: '#CFEFFF' },
       splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
@@ -858,15 +850,16 @@ const initWaterQualityChart = (data, selectedElement) => {
 };
 
 
+
 const currentSite = ref(null);
 
 watch(WTtime, (newVal) => {
   if (showWaterquality.value) {
     axios.post('http://192.168.0.137:8088/waterSurvey/getWaterQualityByMouth', {
       date: newVal,
-      site: currentSite.value // 需要定义当前站点变量
+      site: currentSite.value
     }).then(res => {
-      const data = res.data;
+      const data = res.data.data;
       if (Array.isArray(data) && data.length > 0) {
         initWaterQualityChart(data);
       }
@@ -1271,6 +1264,7 @@ const myHandleResponseFunction = (data) => {
     case '水质监测查询':
       showWaterquality.value = true;
       currentSite.value = datajson.site;
+      waterqualityName.value = datajson.site;
       axios.post('http://192.168.0.137:8088/waterSurvey/getWaterQualityByMouth', {
         date: WTtime.value,
         site: datajson.site
