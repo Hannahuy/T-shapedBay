@@ -518,9 +518,9 @@ const showFish = ref(false);
 const showWaterquality = ref(false);
 const WTtime = ref('2025-01')
 const WTtimeoptions = ref([])
-const YStime = ref('si0H4')
+const YStime = ref('siOH4')
 const YStimeoptions = ref([
-  { label: 'si0H4', value: 'si0H4' },
+  { label: 'siOH4', value: 'siOH4' },
   { label: 'oxygen', value: 'oxygen' },
   { label: 'chlorophyll', value: 'chlorophyll' },
   { label: 'nh4', value: 'nh4' },
@@ -538,6 +538,8 @@ const chartRef6 = ref(null);
 const chartRef7 = ref(null);
 const chartRef8 = ref(null);
 const chartRef9 = ref(null);
+const chartRef10 = ref(null);
+
 const generateWTtimeoptions = () => {
   const options = []
   for (let month = 1; month <= 12; month++) {
@@ -751,7 +753,7 @@ const initWaterQualityChart = (data, selectedElement) => {
 
   // 根据选中要素，映射对应数据数组
   const elementMap = {
-    si0H4: data.map(item => item.si0H4),
+    siOH4: data.map(item => item.siOH4),
     oxygen: data.map(item => item.oxygen),
     chlorophyll: data.map(item => item.chlorophyll),
     nh4: data.map(item => item.nh4),
@@ -1261,7 +1263,7 @@ const myHandleResponseFunction = (data) => {
         date: WTtime.value,
         site: datajson.site
       }).then(res => {
-        const data = res.data;
+        const data = res.data.data;
         if (Array.isArray(data) && data.length > 0) {
           waterQualityData.value = data; // 保存数据
           initWaterQualityChart(data, YStime.value); // 根据当前选中要素初始化图表
