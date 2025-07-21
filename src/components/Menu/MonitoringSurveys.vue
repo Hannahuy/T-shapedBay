@@ -1136,6 +1136,7 @@ const toggleVisibility = (visibleEntities) => {
   showSediment.value = visibleEntities.includes('sediment');
   showIntertidalzone.value = visibleEntities.includes('intertidalzone');
   showFish.value = visibleEntities.includes('fishbox');
+  showWaterquality.value = visibleEntities.includes('waterquality');
 };
 
 const initChartsByData = (charts, data) => {
@@ -1250,7 +1251,6 @@ const myHandleResponseFunction = (data) => {
 
     case '渔业点击查询':
       toggleVisibility(['fishbox']);
-      showFish.value = true;
       fishDatacontent.value = datajson;
       imagefish.value = [];
       fishName.value = datajson.Data.name;
@@ -1271,7 +1271,7 @@ const myHandleResponseFunction = (data) => {
       break;
 
     case '水质监测查询':
-      showWaterquality.value = true;
+      toggleVisibility(['waterquality']);
       currentSite.value = datajson.site;
       waterqualityName.value = datajson.site;
       axios.post('http://192.168.0.137:8088/waterSurvey/getWaterQualityByMouth', {
