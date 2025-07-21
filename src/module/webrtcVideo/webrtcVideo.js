@@ -1524,42 +1524,26 @@ function setupMouseAndFreezeFrame(playerElement) {
 
 function updateVideoStreamSize() {
   if (!matchViewportResolution) {
-    return;
+      return;
   }
 
   let now = new Date().getTime();
   if (now - lastTimeResized > 1000) {
-    let playerElement = document.getElementById("UEplayer");
-    if (!playerElement) return;
-    // let descriptor = {
-    //   ConsoleCommand:
-    //     "setres " + window.clientWidth + "x" + window.clientHeight,
-    // };
-    // let descriptor = {
-    //   PageId: "0",
-    //   ExcuteName: "SetResolutionSize",
-    //   x: window.innerWidth,
-    //   y: window.innerHeight,
-    // };
-    if (!window.setScreen) {
-      // let descriptor = {
-      //   function: "setScreen",
-      //   x: window.innerWidth,
-      //   y: window.innerHeight,
-      // };
-      let callUIInteractionf53 = {
-        Function: `开启分辨率`,
+      let playerElement = document.getElementById('UEplayer');
+      if (!playerElement)
+          return;
+
+      let descriptor = {
+          "Resolution.Width": playerElement.clientWidth, 
+          "Resolution.Height": playerElement.clientHeight
       };
-      // console.log(descriptor)
-      // emitUIInteraction(descriptor);
-      emitUIInteraction(callUIInteractionf53);
-    }
-    // window.setScreen = true;
-    lastTimeResized = new Date().getTime();
+      emitCommand(descriptor);
+      console.log(descriptor);
+      lastTimeResized = new Date().getTime();
   } else {
-    console.log("Resizing too often - skipping");
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(updateVideoStreamSize, 1000);
+      console.log('Resizing too often - skipping');
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(updateVideoStreamSize, 1000);
   }
 }
 
