@@ -766,7 +766,7 @@ const initWaterQualityChart = (data, selectedElement) => {
   let series = [];
   if (selectedElement && elementMap[selectedElement]) {
     series = [{
-      name: selectedElement,
+      name: elementLabelMap[selectedElement] || selectedElement,
       type: 'line',
       smooth: true,
       data: elementMap[selectedElement],
@@ -775,7 +775,7 @@ const initWaterQualityChart = (data, selectedElement) => {
   } else {
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
     series = Object.keys(elementMap).map((key, index) => ({
-      name: key,
+      name: elementLabelMap[key] || key,
       type: 'line',
       smooth: true,
       data: elementMap[key],
@@ -849,7 +849,14 @@ const initWaterQualityChart = (data, selectedElement) => {
   });
 };
 
-
+const elementLabelMap = {
+  siOH4: '硅酸盐',
+  oxygen: '溶解氧',
+  chlorophyll: '叶绿素',
+  nh4: '氨氮',
+  po4: '磷酸盐',
+  no3: '硝酸盐',
+};
 
 const currentSite = ref(null);
 
@@ -861,11 +868,13 @@ watch(WTtime, (newVal) => {
     }).then(res => {
       const data = res.data.data;
       if (Array.isArray(data) && data.length > 0) {
-        initWaterQualityChart(data);
+        waterQualityData.value = data;
+        initWaterQualityChart(data, YStime.value);
       }
     });
   }
 });
+
 
 const reloadChart = () => {
   charts.forEach((chart) => chart());
