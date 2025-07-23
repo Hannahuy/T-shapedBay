@@ -764,7 +764,13 @@ const initWaterQualityChart = (data, selectedElement) => {
   const yAxisUnit = selectedElement === 'chlorophyll' ? 'mg/m³' : 'mmol/m³';
 
   let series = [];
+  let yMin = null;
+  let yMax = null;
+
   if (selectedElement && elementMap[selectedElement]) {
+    const values = elementMap[selectedElement].filter(v => v !== null && v !== undefined);
+    yMin = Math.min(...values);
+    yMax = Math.max(...values);
     series = [{
       name: elementLabelMap[selectedElement] || selectedElement,
       type: 'line',
@@ -773,6 +779,13 @@ const initWaterQualityChart = (data, selectedElement) => {
       lineStyle: { color: '#FF6384' }
     }];
   } else {
+    let allValues = [];
+    Object.values(elementMap).forEach(arr => {
+      allValues = allValues.concat(arr.filter(v => v !== null && v !== undefined));
+    });
+    yMin = Math.min(...allValues);
+    yMax = Math.max(...allValues);
+
     const colors = ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'];
     series = Object.keys(elementMap).map((key, index) => ({
       name: elementLabelMap[key] || key,
@@ -782,6 +795,9 @@ const initWaterQualityChart = (data, selectedElement) => {
       lineStyle: { color: colors[index] }
     }));
   }
+
+  const yAxisMin = yMin !== null ? yMin : 0;
+  const yAxisMax = yMax !== null ? yMax * 1.1 : 100;
 
   const totalDays = dates.length;
   const showDays = 5;
@@ -809,19 +825,21 @@ const initWaterQualityChart = (data, selectedElement) => {
       data: dates,
       axisLabel: {
         color: '#CFEFFF',
-        rotate: 0, // 取消倾斜
+        rotate: 0,
         formatter: (value) => dayjs(value).format('MM-DD')
       }
     },
     yAxis: {
       type: 'value',
-      name: yAxisUnit, // 显示单位
+      name: yAxisUnit,
       nameTextStyle: {
         color: '#CFEFFF',
         padding: [0, 0, 0, 10]
       },
       axisLabel: { color: '#CFEFFF' },
-      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } }
+      splitLine: { lineStyle: { color: 'rgba(255,255,255,0.1)' } },
+      min: yAxisMin,
+      max: yAxisMax,
     },
     dataZoom: [
       {
@@ -848,6 +866,7 @@ const initWaterQualityChart = (data, selectedElement) => {
     chart.resize();
   });
 };
+
 
 const elementLabelMap = {
   siOH4: '硅酸盐',
