@@ -1,346 +1,316 @@
 <template>
-    <div class="Page">
-        <div class="AIrobot" @click="showAIdialog = !showAIdialog"></div>
-        <div class="AIbox" v-if="showAIdialog">
-            <div class="top">
-                <div class="close" @click="showAIdialog = false"></div>
-                <div class="title">生态小丁</div>
+    <div>
+        <div class="AI"></div>
+        <div class="question" 
+             v-show="showQuestions" 
+             @click="showAnswer('丁字湾近年来水质状况如何？')" 
+             @mouseenter="pauseAnimation" 
+             @mouseleave="resumeAnimation">
+            <div class="point"></div>
+            <div class="text">丁字湾近年来水质状况如何？</div>
+        </div>
+        <div class="question2" 
+             v-show="showQuestions" 
+             @click="showAnswer('丁字湾生态现状如何？')" 
+             @mouseenter="pauseAnimation2" 
+             @mouseleave="resumeAnimation2">
+            <div class="point"></div>
+            <div class="text">丁字湾生态现状如何？</div>
+        </div>
+        <div class="answer" v-show="showAnswerBox">
+            <div class="close" @click="hideAnswer"></div>
+            <div class="answer-title"></div>
+            <div class="answer-questionbox">
+                <div class="point2"></div>
+                <div class="answer-question">{{ displayQuestion }}</div>
             </div>
-            <div class="content" ref="messageContainer">
-                <div v-for="(msg, index) in messages" :key="index" :class="['message', msg.sender]">
-                    <img :src="msg.avatar" class="avatar" :class="{ 'right': msg.sender === 'me' }" />
-                    <div class="bubble">
-                        <div v-if="msg.sender === 'bot' && !msg.text" class="loading-container">
-                            <div class="loading-dots">
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                                <div class="dot"></div>
-                            </div>
-                        </div>
-                        <div v-html="marked(msg.text)"></div>
-                    </div>
+            <div class="answerbox">
+                <div class="point" v-if="showpoint"></div>
+                <div class="answer-content">
+                    {{ displayAnswer }}
                 </div>
-            </div>
-            <div class="bottom">
-                <div class="inputQuestion">
-                    <a-textarea v-model:value="Question" placeholder="请输入问题..." :auto-size="{ minRows: 1, maxRows: 1 }"
-                        @keydown.enter.prevent="sendMessage" />
-                </div>
-                <a-button type="primary" style="margin-right: 1vw;" @click="sendMessage">发送</a-button>
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { marked } from "marked";
+import { ref, onMounted, onUnmounted } from 'vue'
 
-// 配置marked以安全模式渲染（防止XSS攻击）
-marked.setOptions({
-    sanitize: true,
-});
+const question1 = ref(null)
+const question2 = ref(null)
+const showAnswerBox = ref(false)
+const showQuestions = ref(true)
+const currentQuestion = ref('')
+const displayQuestion = ref('')
+const displayAnswer = ref('')
+const showpoint = ref(false)
 
-const showAIdialog = ref(false);
-const Question = ref('');
-const messages = ref([]);
+let animationId1 = null
+let animationId2 = null
+let typingTimer = null
 
-// 头像路径
-const myAvatar = '/src/assets/img/用户.png';
-const aiAvatar = '/src/assets/img/AI3.png';
+const showAnswer = (question) => {
+    currentQuestion.value = question
+    showAnswerBox.value = true
+    showQuestions.value = false 
+    setTimeout(() => {
+        startTypingQuestion(question)
+    }, 200)
+}
 
-const scrollToBottom = () => {
-    const container = document.querySelector('.content');
-    if (container) {
-        setTimeout(() => {
-            container.scrollTop = container.scrollHeight;
-        }, 0);
+const hideAnswer = () => {
+    showAnswerBox.value = false
+    showQuestions.value = true
+    displayQuestion.value = ''
+    displayAnswer.value = ''
+    if (typingTimer) {
+        clearTimeout(typingTimer)
+        typingTimer = null
     }
-};
+}
 
-const sendMessage = async () => {
-    if (Question.value.trim() === '') return;
-
-    // 添加用户消息
-    messages.value.push({ sender: 'me', text: Question.value, avatar: myAvatar });
-    const userQuestion = Question.value;
-    Question.value = '';
-
-    // 添加AI消息占位符
-    const aiMessage = { sender: 'bot', text: '', avatar: aiAvatar };
-    messages.value.push(aiMessage);
-
-    // 构造请求数据
-    const requestData = {
-        messages: [
-            { content: userQuestion, role: "system" },
-            { content: "你好", role: "user" }
-        ],
-        model: "deepseek-chat",
-        stream: true, // 启用流式传输
-        max_tokens: 4096,
-        temperature: 1,
-    };
-
-    try {
-        const response = await fetch('https://api.deepseek.com/chat/completions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer sk-b09e2be88f544ba88b532e2e1a82745e'
-            },
-            body: JSON.stringify(requestData)
-        });
-
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let buffer = '';
-        let isStreaming = true;
-
-        // 流式数据接收处理
-        while (true) {
-            const { done, value } = await reader.read();
-            if (done) {
-                isStreaming = false;
-                break;
-            }
-            const chunk = decoder.decode(value, { stream: true });
-            buffer += chunk;
-
-            // 处理SSE格式
-            const parts = buffer.split('\n');
-            buffer = parts.pop(); // 剩余部分放回缓冲区
-
-            for (const part of parts) {
-                if (part.startsWith('data: ')) {
-                    const dataStr = part.slice(6).trim();
-                    if (dataStr === '[DONE]') {
-                        isStreaming = false;
-                        break;
-                    }
-                    try {
-                        const data = JSON.parse(dataStr);
-                        if (data.choices[0].delta.content) {
-                            // 逐字添加到AI消息
-                            aiMessage.text += data.choices[0].delta.content;
-                            messages.value = [...messages.value];
-                            scrollToBottom();
-                        }
-                    } catch (e) {
-                        console.error('解析错误:', e);
-                    }
-                }
-            }
+const startTypingQuestion = (question) => {
+    displayQuestion.value = ''
+    displayAnswer.value = ''
+    
+    let index = 0
+    const typeQuestion = () => {
+        if (index < question.length) {
+            displayQuestion.value += question[index]
+            index++
+            typingTimer = setTimeout(typeQuestion, 50)
+        } else {
+            showpoint.value = true
+            startTypingAnswer(getAnswerContent(question))
         }
-    } catch (error) {
-        console.error('请求失败:', error);
-        aiMessage.text += ' [对话出错，请重试]';
-        messages.value = [...messages.value];
-        scrollToBottom();
     }
-};
+    typeQuestion()
+}
+
+const startTypingAnswer = (answer) => {
+    displayAnswer.value = ''
+    let index = 0
+    const typeAnswer = () => {
+        if (index < answer.length) {
+            displayAnswer.value += answer[index]
+            index++
+            typingTimer = setTimeout(typeAnswer, 50)
+        }
+    }
+    typeAnswer()
+}
+
+const getAnswerContent = (question) => {
+    const answers = {
+        '丁字湾近年来水质状况如何？': '自然资源部青岛海洋中心分别在2023年6月、8月和11月份对丁字湾水质环境状况开展监测调查，调查结果发现6月和8月水质因高的无机氮含量仅符合四类海水水质标准，12月符合三类海水水质标准。《2023年中国海洋生态环境状况公报》评价结果显示，丁字湾海区夏季无机氮含量处于劣四类海水水质标准，与我中心调查结果相近。',
+        '丁字湾生态现状如何？': '2024年4月和11月丁字湾盐沼生态系统状态为受损，牡蛎礁生态系统状态为稳定。综合评估结果显示丁字湾生态系统稳定、健康状况未受损。海湾整体稳定，可自我维持，管理措施为跟踪监测、持续管理。'
+    }
+    return answers[question] || '暂无相关信息'
+}
+
+const pauseAnimation = () => {
+    if (question1.value) {
+        question1.value.style.animationPlayState = 'paused'
+    }
+}
+
+const resumeAnimation = () => {
+    if (question1.value) {
+        question1.value.style.animationPlayState = 'running'
+    }
+}
+
+const pauseAnimation2 = () => {
+    if (question2.value) {
+        question2.value.style.animationPlayState = 'paused'
+    }
+}
+
+const resumeAnimation2 = () => {
+    if (question2.value) {
+        question2.value.style.animationPlayState = 'running'
+    }
+}
+
+onMounted(() => {
+    question1.value = document.querySelector('.question')
+    question2.value = document.querySelector('.question2')
+})
+
+onUnmounted(() => {
+    if (animationId1) cancelAnimationFrame(animationId1)
+    if (animationId2) cancelAnimationFrame(animationId2)
+})
 </script>
+
 <style scoped>
-.AIrobot {
-    width: 8vw;
-    height: 16vh;
+.AI {
+    width: 16vh;
+    height: 18vh;
     position: absolute;
-    left: 18vw;
-    bottom: 3vh;
-    cursor: pointer;
-    z-index: 2;
-    background-image: url('assets/img/AIrobot.gif');
+    z-index: 3;
+    bottom: 2vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-image: url('../../assets/img/AIapng.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
 
-.AIbox {
-    width: 25vw;
-    height: 60vh;
+.question {
+    width: 21.5vh;
     position: absolute;
-    top: 50%;
-    left: 32%;
-    transform: translate(-50%, -50%);
-    border: 1px solid;
-    background-color: #153351bf;
-    border: 1px solid #05519c;
-    border-radius: 2vh;
+    background-image: url('../../assets/img/AI/question.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    bottom: 1vh;
+    left: 35%;
+    z-index: 3;
+    padding: 2vh;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    animation: bubbleUp 4s ease-in-out infinite;
+    opacity: 0;
 }
 
-.top {
-    position: relative;
+.question2 {
+    width: 21.5vh;
+    position: absolute;
+    background-image: url('../../assets/img/AI/question.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    bottom: 1vh;
+    left: 55%;
+    z-index: 3;
+    padding: 2vh;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    animation: bubbleUp 4s ease-in-out infinite 2s;
+    opacity: 0;
+}
+
+@keyframes bubbleUp {
+    0% {
+        bottom: 1vh;
+        opacity: 0;
+    }
+
+    25% {
+        bottom: 7vh;
+        opacity: 1;
+    }
+
+    75% {
+        bottom: 18vh;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 25vh;
+        opacity: 0;
+    }
+}
+
+.point {
+    width: 2vh;
+    height: 2vh;
+    background-image: url('../../assets/img/AI/point.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.text {
+    width: calc(100% - 2vh - 1vh);
+    font-size: 1.6vh;
+    color: white;
+    margin-left: 1vh;
+    letter-spacing: 0.1vh;
+}
+
+.answer {
+    position: absolute;
+    bottom: 10vh;
+    left: 55%;
+    width: 50vh;
+    height: 60vh;
+    background-image: url('../../assets/img/AI/questionbox.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: 3;
+    padding: 2vh;
+}
+
+.answer-title {
+    position: absolute;
+    top: 0;
+    left: 2vh;
+    width: 8vh;
+    height: 11vh;
+    background-image: url('../../assets/img/AI/AI.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.answer-questionbox {
+    min-height: 4vh;
+    background-color: #004EA0D4;
+    font-size: 1.6vh;
+    letter-spacing: 0.1vh;
+    border-radius: 0.5vh;
+    display: flex;
+    align-items: center;
+    padding: 0.5vh 1vh;
+    margin-top: 2.5vh;
+    width: fit-content;
+    max-width: calc(100% - 12vh);
+    margin-left: auto;
+    margin-right: 2vh;
+}
+
+.answer-question {
+    margin-left: 1vh;
+    color: white;
+    font-weight: bold;
+}
+
+.point2 {
+    width: 1vh;
+    height: 2.5vh;
+    background-image: url('../../assets/img/AI/point2.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.answerbox {
     width: 100%;
-    height: 5vh;
-    background-color: #14416e;
-    border-top-right-radius: 2vh;
-    border-top-left-radius: 2vh;
+    margin-top: 4vh;
+    display: flex;
 }
 
-.close {
-    width: 1.5vw;
-    height: 3vh;
+.answer-content {
+    width: calc(100% - 2vh);
+    color: white;
+    font-size: 1.4vh;
+    line-height: 1.6;
+    text-align: justify;
+    max-height: 40vh;
+    overflow-y: auto;
+    padding-right: 1vh;
+    letter-spacing: 0.1vh;
+}
+
+.close{
+    width: 1.5vh;
+    height: 1.5vh;
+    background-image: url('../../assets/img/AI/close.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
     position: absolute;
     top: 1vh;
-    right: 0.5vw;
+    right: 1vh;
     cursor: pointer;
-    background-image: url('assets/img/close.png');
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-}
-
-.title {
-    height: 100%;
-    font-size: 2vh;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.content {
-    width: 100%;
-    height: calc(100% - 5vh - 6vh);
-    padding: 1vh 0.5vw;
-    overflow-y: auto;
-}
-
-.message {
-    display: flex;
-    margin: 0.5vh 0 1vh 0;
-}
-
-.message.me {
-    justify-content: flex-end;
-}
-
-.message.bot {
-    justify-content: flex-start;
-}
-
-.avatar {
-    width: 1.75vw;
-    height: 1.75vw;
-    border-radius: 50%;
-    margin: 0 0.5vw;
-}
-
-.bubble {
-    max-width: 60%;
-    padding: 1vh;
-    border-radius: 1vh;
-    color: white;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal;
-}
-
-.message.me .bubble {
-    background-color: #007bff;
-}
-
-.message.bot .bubble {
-    padding: 1vh 2vh 1vh 3vh;
-    background-color: #1d3e5a;
-}
-
-.message.me .avatar {
-    order: 1;
-}
-
-.message.bot .avatar {
-    order: 0;
-}
-
-.bottom {
-    width: 100%;
-    height: 6vh;
-    position: absolute;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    padding: 0 0.5vw;
-    box-sizing: border-box;
-}
-
-.inputQuestion {
-    width: 60vw;
-    margin-right: 1vw;
-}
-
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #f5f5f5;
-}
-
-::-webkit-scrollbar {
-    height: 5px;
-    width: 5px;
-    background-color: rgba(245, 245, 245, 0.25);
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 170, 238);
-    background-image: -webkit-gradient(linear,
-            0 0,
-            0 100%,
-            color-stop(0.5, rgba(255, 255, 255, 0.2)),
-            color-stop(0.5, transparent),
-            to(transparent));
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: rgb(0, 170, 238);
-}
-
-.bubble {
-    margin: 0;
-}
-
-.bubble * {
-    margin: 0 !important;
-}
-
-.loading-container {
-    min-height: 20px;
-    padding: 8px 0;
-}
-
-.loading-dots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    background: #ddd;
-    border-radius: 50%;
-    animation: bounce 1.4s infinite ease-in-out;
-}
-
-.dot:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.dot:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes bounce {
-
-    0%,
-    80%,
-    100% {
-        transform: translateY(0);
-        background: #ddd;
-    }
-
-    40% {
-        transform: translateY(-6px);
-        background: #666;
-    }
 }
 </style>

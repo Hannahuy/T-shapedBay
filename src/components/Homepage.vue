@@ -61,7 +61,8 @@
       <TrendForecasting />
     </div>
     <div v-if="!selected">
-      <Home />
+      <!-- <Home /> -->
+      <AIbox />
     </div>
     <!-- <div class="databox" v-if="showDatabox">
       <Updata @closeDatabox="showDatabox = false" />
@@ -84,9 +85,10 @@ import Ecodynamics from "./Menu/Ecodynamics.vue";
 import MonitoringSurveys from "./Menu/MonitoringSurveys.vue";
 import TrendForecasting from "./Menu/TrendForecasting.vue";
 import EcologicalGrid from "./Menu/EcologicalGrid.vue";
-import Home from "./Menu/Home.vue";
+// import Home from "./Menu/Home.vue";
 // import Updata from "./Menu/Updata.vue";
 import Leaflet from "./Menu/Leaflet.vue";
+import AIbox from "./Menu/AIbox.vue";
 
 const dayTime = ref("");
 const updateTime = () => {

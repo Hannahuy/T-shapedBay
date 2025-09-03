@@ -32,9 +32,8 @@
                         <el-input v-model="tabledata2" style="width: 12vh;" placeholder="请输入数值" />
                     </div>
                     <div class="yearSelect" v-show="selectedButton === '互花米草情景'">
-                        <div v-for="year in ['2020', '2021', '2022', '2023', '2024', '2025']" :key="year"
-                            class="year-item" :class="{ 'year-item-act': selectedYear === year }"
-                            @click="selectYear(year)">
+                        <div v-for="year in ['2020', '2021', '2022', '2023', '2024', '2025']" :key="year" class="year-item"
+                            :class="{ 'year-item-act': selectedYear === year }" @click="selectYear(year)">
                             {{ year }}
                         </div>
                     </div>
@@ -47,7 +46,7 @@
         </div>
     </div>
     <!-- 左侧菜单 -->
-    <div class="left-menu" v-if="showmenu">
+    <div class="left-menu" v-if="showmenu" :style="leftMenuStyle">
         <div class="itemMenu" :class="{ active: activeIndex === index }" v-for="(item, index) in menuItems" :key="index"
             @click="changeBackground(index)">
             <div class="itemMenuicon" :class="index === 0 ? 'icon-stys' : 'icon-kjyc'"></div>
@@ -99,14 +98,32 @@
             </div>
         </div>
     </div>
+    <!-- 时间轴3 -->
+    <div class="bottomCalendar" v-if="showTimesilder3">
+        <el-date-picker v-model="timePick3" type="date" :editable="false" />
+    </div>
+    <div class="bottombox-left" v-if="showTimesilder3">
+        <div class="bottombox-button">
+            <el-button type="primary" class="bottombox-play" :class="{ active: activePlay3 === 'play' }"
+                @click="togglePlay3"></el-button>
+        </div>
+        <div class="bottombox">
+            <div class="bottombox-slider">
+                <div :style="adjustedStyle3">
+                    <span class="bottombox-slider-span">{{ formattedTime3 }}</span>
+                </div>
+                <el-slider :step="3600000" v-model="timePlay3" :show-tooltip="false" :min="min3" :max="max3" :marks="marks3"
+                    style="position: relative; z-index: 1;" @change="gettimePlay3">
+                </el-slider>
+            </div>
+        </div>
+    </div>
     <!-- 右下角切片 -->
     <div class="rightbottombox" v-if="showslice">
         <div class="rightbottombox-top">
-            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '体剖切' }"
-                @click="selectButton2('体剖切')">体剖切
+            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '体剖切' }" @click="selectButton2('体剖切')">体剖切
             </div>
-            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '十字切片' }"
-                @click="selectButton2('十字切片')">
+            <div class="rightbottombox-btn" :class="{ active: selectedButton2 === '十字切片' }" @click="selectButton2('十字切片')">
                 十字切片</div>
         </div>
         <div class="rightbottombox-content" v-if="selectedButton2 === '体剖切'">
@@ -122,16 +139,14 @@
                     <div>LEFT</div>
                     <div>RIGHT</div>
                 </div>
-                <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1"
-                    style="width: 25vh;" />
+                <el-slider v-model="slidervalue2" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
             </div>
             <div>
                 <div class="rightbottombox-content-title">
                     <div>FRONT</div>
                     <div>BACK</div>
                 </div>
-                <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1"
-                    style="width: 25vh;" />
+                <el-slider v-model="slidervalue3" range show-stops :step="0.01" :min="0" :max="1" style="width: 25vh;" />
             </div>
         </div>
         <div class="rightbottombox-content" v-if="selectedButton2 === '十字切片'">
@@ -190,8 +205,7 @@
         <div class="leftbar">{{ barType }}</div>
         <div class="rightbar" :class="selectedItemname === '流速' ? 'rightbar-flow' : 'rightbar-normal'">
             <span>{{ barMax }}</span>
-            <a-slider v-model:value="colorbar" vertical :step="0.01" :min="barMin" :max="barMax"
-                @change="getColorbar" />
+            <a-slider v-model:value="colorbar" vertical :step="0.01" :min="barMin" :max="barMax" @change="getColorbar" />
             <span>{{ barMin }}</span>
         </div>
     </div>
@@ -213,7 +227,10 @@ import { callUIInteraction, addResponseEventListener } from "../../module/webrtc
 import { ElMessage } from 'element-plus';
 import axios from "axios";
 
-const menuItems = ref(['生态要素预测', '生物量空间预测']);
+const baseMenuItems = ['生态要素预测', '生物量空间预测'];
+const menuItems = computed(() =>
+    radioselection.value === '浒苔情景' ? [...baseMenuItems, '浒苔空间分布'] : baseMenuItems
+);
 const showselect2 = ref(false);
 const loading = ref(false)
 const activeIndex = ref(null);
@@ -221,6 +238,7 @@ const showselectbar = ref(false);
 const showmenu = ref(false)
 const showYearsilder = ref(false)
 const showTimesilder = ref(false);
+const showTimesilder3 = ref(false);
 const showData = ref(false);
 const showslice = ref(false);
 const changeBackground = (index) => {
@@ -230,6 +248,7 @@ const changeBackground = (index) => {
     showTimesilder.value = false;
     showslice.value = false;
     showselectbar.value = false;
+    showTimesilder3.value = false;
     if (activeIndex.value === index) {
         activeIndex.value = null;
         showselect.value = false;
@@ -242,6 +261,10 @@ const changeBackground = (index) => {
         } else if (index === 1) {
             showselect2.value = true;
             showselect.value = false;
+        } else if (index === 2 && radioselection.value === '浒苔情景') {
+            showselect.value = false;
+            showselect2.value = false;
+            showTimesilder3.value = true;
         }
     }
 }
@@ -692,6 +715,12 @@ const selectYear = (year) => {
 };
 
 const isDriving = ref(false);
+const leftMenuStyle = computed(() => {
+    if (selectedButton.value === '陆源污染情景') {
+        return { height: '15vh', top: '53%' };
+    }
+    return {};
+});
 const drive = () => {
     isDriving.value = true;
     setTimeout(() => {
@@ -1178,6 +1207,103 @@ const gettimePlay2 = (e) => {
     }
 };
 
+// 时间轴3（仅用于“浒苔空间分布”）
+const timePick3 = ref(dayjs("2025-08-01").toDate());
+const timePlay3 = ref(null);
+const activePlay3 = ref("");
+let previousPlayState3 = null;
+let intervalTime3 = null;
+let playInterval3 = null;
+const togglePlay3 = () => {
+    intervalTime3 = 400;
+    previousPlayState3 = activePlay3.value;
+    activePlay3.value = activePlay3.value === "play" ? "" : "play";
+    if (activePlay3.value === "play") {
+        playInterval3 = setInterval(() => {
+            timePlay3.value = dayjs(timePlay3.value).add(1, "hour").valueOf();
+            if (activePlay3.value !== "play") {
+                clearInterval(playInterval3);
+            }
+        }, intervalTime3);
+    } else {
+        clearInterval(playInterval3);
+    }
+};
+const min3 = ref(dayjs(timePick3.value).startOf("day").valueOf());
+const max3 = ref(dayjs(timePick3.value).hour(23).minute(0).second(0).valueOf());
+watch(timePick3, (newVal) => {
+    const selectedDate = dayjs(newVal);
+    min3.value = selectedDate.startOf("day").valueOf();
+    max3.value = selectedDate.hour(23).minute(0).second(0).valueOf();
+    if (!timePlay3.value) {
+        timePlay3.value = selectedDate.startOf("day").valueOf();
+    }
+});
+
+const formattedTime3 = computed(() => {
+    const time = dayjs(timePlay3.value);
+    return time.format("YYYY/MM/DD HH:mm");
+});
+
+const style3 = computed(() => {
+    const length = max3.value - min3.value,
+        progress = timePlay3.value - min3.value,
+        left = (progress / length) * 95;
+    return {
+        paddingLeft: `${left}%`,
+    };
+});
+
+const adjustedStyle3 = computed(() => {
+    const baseStyle = style3.value;
+    const divWidth = 125;
+    const totalWidth = 1560;
+    const leftPadding = parseFloat(baseStyle.paddingLeft);
+    if ((leftPadding / 100) * totalWidth + divWidth > totalWidth) {
+        return {
+            paddingLeft: `${((totalWidth - divWidth) / totalWidth) * 100}%`,
+        };
+    }
+    return baseStyle;
+});
+
+const marks3 = computed(() => {
+    const marks = {};
+    const start = dayjs(min3.value);
+    for (let i = 0; i <= 23; i++) {
+        const markTime = start.add(i, 'hour');
+        marks[markTime.valueOf()] = {
+            style: { color: '#ffffff' },
+            label: markTime.format('HH:mm')
+        };
+    }
+    return marks;
+});
+
+watch(timePlay3, (newVal) => {
+    const currentTime = dayjs(newVal);
+    if (currentTime.minute() === 0 && currentTime.second() === 0) {
+        const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
+            callUIInteraction({
+                ModuleName: `趋势预测`,
+                FunctionMenu: '浒苔空间分布',
+                Time: formattedTime,
+                FunctionName: radioselection.value,
+                State: true,
+            });
+        sessionStorage.setItem('timePlay', formattedTime);
+    }
+    if (currentTime.isSame(dayjs(max3.value))) {
+        activePlay3.value = '';
+    }
+});
+const gettimePlay3 = (e) => {
+    timePlay3.value = dayjs(e).second(0).valueOf();
+    if (activePlay3.value === "play") {
+        activePlay3.value = "";
+    }
+}
+
 const showselect = ref(false);
 const handleFunctionSelection = (selectedItem) => {
     showselectbar.value = true;
@@ -1607,6 +1733,9 @@ onMounted(() => {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
         timePick.value = dayjs('2024-08-01').toDate(); // 默认值
     }
+    // 初始化时间轴3默认值（2025-08-01）
+    timePlay3.value = dayjs('2025-08-01 00:00:00').valueOf();
+    timePick3.value = dayjs('2025-08-01').toDate();
     addResponseEventListener("handle_responses", myHandleResponseFunction);
     window.addEventListener("resize", reloadChart);
 });
@@ -2123,10 +2252,9 @@ onUnmounted(() => {
 
 .left-menu {
     position: absolute;
-    height: 18vh;
-    width: 20vh;
+    height: 22vh;
     left: 3vh;
-    top: 55%;
+    top: 56%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;

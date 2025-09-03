@@ -4,7 +4,7 @@
             生态要素预测
             <div class="close" @click="emitClose"></div>
         </div>
-        <div style="overflow-y: auto;max-height: 43vh;overflow-x: hidden;">
+        <div style="overflow-y: auto;max-height: 40vh;overflow-x: hidden;">
             <div v-for="(item, index) in props.functionData" :key="item.name">
                 <template v-if="item.isParent">
                     <div class="parent" :class="checkedFunction.indexOf(index) > -1 ? 'active' : ''">
@@ -136,16 +136,16 @@ defineExpose({
 <style scoped>
 .container {
     position: absolute;
-    top: 71vh;
+    top: 69vh;
     transform: translateY(-50%);
     left: 22vh;
     z-index: 9;
-    max-height: 50vh;
+    max-height: 43vh;
     width: 21vh;
     background-image: url('../../assets/img/组 3.png');
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    padding: 1vh;
+    padding: 0.6vh 1vh 1vh 1vh;
 }
 
 ::-webkit-scrollbar {
@@ -173,7 +173,7 @@ defineExpose({
 }
 
 .container>div>div {
-    margin: 1.5vh 0;
+    margin: 1.2vh 0;
     white-space: nowrap;
 }
 
@@ -235,17 +235,17 @@ defineExpose({
     height: 3vh;
     line-height: 3vh;
     margin-left: 2vh;
-    padding-left: 3.5vh;
+    padding-left: 3vh;
     transform: translateX(-1.5vh);
-    font-family: Microsoft YaHei;
-    font-size: 1.8vh;
-    font-weight: bold;
+    /* font-family: Microsoft YaHei; */
+    font-size: 1.6vh;
+    /* font-weight: bold; */
     color: #ffffff;
-    text-shadow: 0px 2px 0px rgba(0, 25, 60, 0.68);
+    /* text-shadow: 0px 2px 0px rgba(0, 25, 60, 0.68); */
     background-image: url("../../assets/img/图层 52.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    letter-spacing: 0.2vh !important;
+    letter-spacing: 0.1vh !important;
 }
 
 .active .name {
@@ -267,7 +267,7 @@ defineExpose({
     height: 2vh;
     position: absolute;
     right: 0vh;
-    top: 0vh;
+    top: 0.3vh;
     background-image: url("../../assets/img/close3.png");
     background-repeat: no-repeat;
     background-size: 100% 100%;
