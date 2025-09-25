@@ -239,6 +239,7 @@ const showmenu = ref(false)
 const showYearsilder = ref(false)
 const showTimesilder = ref(false);
 const showTimesilder3 = ref(false);
+const isHutaiSpaceActive = ref(false);
 const showData = ref(false);
 const showslice = ref(false);
 const changeBackground = (index) => {
@@ -249,6 +250,15 @@ const changeBackground = (index) => {
     showslice.value = false;
     showselectbar.value = false;
     showTimesilder3.value = false;
+    if (isHutaiSpaceActive.value) {
+        callUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionMenu: '浒苔空间分布',
+            FunctionName: radioselection.value,
+            State: false,
+        });
+        isHutaiSpaceActive.value = false;
+    }
     if (activeIndex.value === index) {
         activeIndex.value = null;
         showselect.value = false;
@@ -265,6 +275,15 @@ const changeBackground = (index) => {
             showselect.value = false;
             showselect2.value = false;
             showTimesilder3.value = true;
+            isHutaiSpaceActive.value = true;
+            const formattedTime = dayjs(timePlay3.value).format('YYYY-MM-DD HH:mm:ss');
+            callUIInteraction({
+                ModuleName: `趋势预测`,
+                FunctionMenu: '浒苔空间分布',
+                Time: formattedTime,
+                FunctionName: radioselection.value,
+                State: true,
+            });
         }
     }
 }
@@ -1207,7 +1226,6 @@ const gettimePlay2 = (e) => {
     }
 };
 
-// 时间轴3（仅用于“浒苔空间分布”）
 const timePick3 = ref(dayjs("2025-08-01").toDate());
 const timePlay3 = ref(null);
 const activePlay3 = ref("");
@@ -1281,6 +1299,7 @@ const marks3 = computed(() => {
 });
 
 watch(timePlay3, (newVal) => {
+    if (!isHutaiSpaceActive.value) return;
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
