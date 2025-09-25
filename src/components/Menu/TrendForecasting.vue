@@ -227,6 +227,12 @@ import { callUIInteraction, addResponseEventListener } from "../../module/webrtc
 import { ElMessage } from 'element-plus';
 import axios from "axios";
 
+// 统一包装：打印参数后再调用原始交互
+const sendUIInteraction = (payload) => {
+    console.log(payload);
+    callUIInteraction(payload);
+};
+
 const baseMenuItems = ['生态要素预测', '生物量空间预测'];
 const menuItems = computed(() =>
     radioselection.value === '浒苔情景' ? [...baseMenuItems, '浒苔空间分布'] : baseMenuItems
@@ -251,7 +257,7 @@ const changeBackground = (index) => {
     showselectbar.value = false;
     showTimesilder3.value = false;
     if (isHutaiSpaceActive.value) {
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             FunctionMenu: '浒苔空间分布',
             FunctionName: radioselection.value,
@@ -277,7 +283,7 @@ const changeBackground = (index) => {
             showTimesilder3.value = true;
             isHutaiSpaceActive.value = true;
             const formattedTime = dayjs(timePlay3.value).format('YYYY-MM-DD HH:mm:ss');
-            callUIInteraction({
+            sendUIInteraction({
                 ModuleName: `趋势预测`,
                 FunctionMenu: '浒苔空间分布',
                 Time: formattedTime,
@@ -684,14 +690,48 @@ const layerFunction2 = ref([
 ]);
 const selectedButton = ref('浒苔情景');
 const selectButton = (button) => {
+    const prevRadio = radioselection.value;
+    // 关闭上一个情景
+    if (prevRadio) {
+        sendUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: prevRadio,
+            State: false,
+        });
+    }
+
     selectedButton.value = button;
     radioselection.value = button;
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     activeIndex.value = null;
+    // 统一关闭所有弹窗/控件
     showmenu.value = false;
     showselect.value = false;
     showselectbar.value = false;
     showselect2.value = false;
+    showChart.value = false;
+    showYearsilder.value = false;
+    showData.value = false;
+    showTimesilder.value = false;
+    showslice.value = false;
+    showTimesilder3.value = false;
+    showSmallWindow.value = false;
+    // 若浒苔空间分布激活，发送关闭并复位
+    if (isHutaiSpaceActive.value) {
+        sendUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionMenu: '浒苔空间分布',
+            FunctionName: prevRadio,
+            State: false,
+        });
+        isHutaiSpaceActive.value = false;
+    }
+    // 关闭空间分析
+    sendUIInteraction({
+        ModuleName: `趋势预测`,
+        FunctionName: `空间分析`,
+        State: false,
+    });
 
     if (button == '浒苔情景') {
         tablehead.value = '浒苔面积（㎡）';
@@ -699,7 +739,7 @@ const selectButton = (button) => {
         tabledata.value = 218300;
         tabledata2.value = 2;
         selectedYear.value = null;
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             FunctionName: '互花米草情景',
             State: false,
@@ -710,7 +750,7 @@ const selectButton = (button) => {
         tabledata.value = 200;
         tabledata2.value = 100;
         selectedYear.value = null;
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             FunctionName: '互花米草情景',
             State: false,
@@ -719,7 +759,7 @@ const selectButton = (button) => {
         selectedYear.value = null;
     }
 
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: radioselection.value,
         State: true,
@@ -750,7 +790,7 @@ const drive = () => {
             ElMessage.warning('请选择年份范围');
             return;
         }
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             FunctionName: '互花米草情景',
             State: true,
@@ -993,7 +1033,7 @@ const getColorbar = (e) => {
     if (normalizedValue !== lastPrintedValue) {
         THRESHOLD.value = normalizedValue;
         if (selectedButton2.value == "体剖切") {
-            callUIInteraction({
+            sendUIInteraction({
                 ModuleName: `趋势预测`,
                 FunctionName: `空间分析`,
                 SelectFunction: selectedButton2.value,
@@ -1008,7 +1048,7 @@ const getColorbar = (e) => {
                 },
             });
         } else {
-            callUIInteraction({
+            sendUIInteraction({
                 ModuleName: `趋势预测`,
                 FunctionName: `空间分析`,
                 SelectFunction: selectedButton2.value,
@@ -1108,7 +1148,7 @@ watch(timePlay, (newVal) => {
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
         if (selectedItemname.value !== null) {
-            callUIInteraction({
+            sendUIInteraction({
                 ModuleName: `趋势预测`,
                 // FunctionMenu: '要素切换',
                 Time: formattedTime,
@@ -1208,7 +1248,7 @@ const marks2 = computed(() => {
 
 watch(timePlay2, (newVal) => {
     if (selectedItemname.value !== null) {
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             Time: newVal,
             Type: selectedItemname.value,
@@ -1303,7 +1343,7 @@ watch(timePlay3, (newVal) => {
     const currentTime = dayjs(newVal);
     if (currentTime.minute() === 0 && currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
-            callUIInteraction({
+            sendUIInteraction({
                 ModuleName: `趋势预测`,
                 FunctionMenu: '浒苔空间分布',
                 Time: formattedTime,
@@ -1335,7 +1375,7 @@ const handleFunctionSelection = (selectedItem) => {
     }
     timePlay.value = dayjs("2024-08-01 00:00:00").valueOf();
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `趋势预测`,
         Time: formattedTime,
         Type: selectedItem.name,
@@ -1354,7 +1394,7 @@ const handleFunctionSelection2 = (selectedItem) => {
         clearInterval(playInterval2);
     }
     timePlay2.value = 2024;
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `趋势预测`,
         Time: timePlay2.value,
         Type: selectedItem.name,
@@ -1492,7 +1532,7 @@ const slidervalue3 = ref([0, 1])
 const selectButton2 = (button) => {
     selectedButton2.value = button;
     if (button == "体剖切") {
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             FunctionName: `空间分析`,
             SelectFunction: selectedButton2.value,
@@ -1507,7 +1547,7 @@ const selectButton2 = (button) => {
             },
         });
     } else {
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `趋势预测`,
             FunctionName: `空间分析`,
             SelectFunction: selectedButton2.value,
@@ -1539,7 +1579,7 @@ watch(slidervalue3, (newVal) => {
 });
 
 const logSliderValues = () => {
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `生态动力`,
         FunctionName: `空间分析`,
         SelectFunction: selectedButton2.value,
@@ -1574,7 +1614,7 @@ const increase = () => {
     if (nextValue <= 0.05) {
         THICK.value = nextValue;
     }
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: `空间分析`,
         SelectFunction: selectedButton2.value,
@@ -1604,7 +1644,7 @@ const decrease = () => {
     if (nextValue >= 0) {
         THICK.value = nextValue;
     }
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: `空间分析`,
         SelectFunction: selectedButton2.value,
@@ -1705,7 +1745,7 @@ const stopDragging = () => {
 
 const updatePointPosition = () => {
     if (pointPosition.value.x !== lastPrintedPosition.x || pointPosition.value.y !== lastPrintedPosition.y) {
-        callUIInteraction({
+        sendUIInteraction({
             ModuleName: `生态动力`,
             FunctionName: `空间分析`,
             SelectFunction: selectedButton.value,
@@ -1760,7 +1800,7 @@ onMounted(() => {
 });
 onUnmounted(() => {
     window.removeEventListener("resize", reloadChart);
-    callUIInteraction({
+    sendUIInteraction({
         ModuleName: `趋势预测`,
         FunctionName: '互花米草情景',
         State: false,
