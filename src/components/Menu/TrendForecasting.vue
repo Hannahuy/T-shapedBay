@@ -227,7 +227,6 @@ import { callUIInteraction, addResponseEventListener } from "../../module/webrtc
 import { ElMessage } from 'element-plus';
 import axios from "axios";
 
-// 统一包装：打印参数后再调用原始交互
 const sendUIInteraction = (payload) => {
     console.log(payload);
     callUIInteraction(payload);
@@ -1767,7 +1766,6 @@ const updatePointPosition = () => {
         //         "THRESHOLD": THRESHOLD.value
         //     }
         // });
-        // 更新上一次打印的坐标
         lastPrintedPosition.x = pointPosition.value.x;
         lastPrintedPosition.y = pointPosition.value.y;
     }
