@@ -112,7 +112,7 @@
                 <div :style="adjustedStyle3">
                     <span class="bottombox-slider-span">{{ formattedTime3 }}</span>
                 </div>
-                <el-slider :step="3600000" v-model="timePlay3" :show-tooltip="false" :min="min3" :max="max3" :marks="marks3"
+                <el-slider :step="60000" v-model="timePlay3" :show-tooltip="false" :min="min3" :max="max3" :marks="marks3"
                     style="position: relative; z-index: 1;" @change="gettimePlay3">
                 </el-slider>
             </div>
@@ -1277,7 +1277,7 @@ const togglePlay3 = () => {
     activePlay3.value = activePlay3.value === "play" ? "" : "play";
     if (activePlay3.value === "play") {
         playInterval3 = setInterval(() => {
-            timePlay3.value = dayjs(timePlay3.value).add(1, "hour").valueOf();
+            timePlay3.value = dayjs(timePlay3.value).add(1, "minute").valueOf();
             if (activePlay3.value !== "play") {
                 clearInterval(playInterval3);
             }
@@ -1287,11 +1287,11 @@ const togglePlay3 = () => {
     }
 };
 const min3 = ref(dayjs(timePick3.value).startOf("day").valueOf());
-const max3 = ref(dayjs(timePick3.value).hour(23).minute(0).second(0).valueOf());
+const max3 = ref(dayjs(timePick3.value).hour(23).minute(59).second(0).valueOf());
 watch(timePick3, (newVal) => {
     const selectedDate = dayjs(newVal);
     min3.value = selectedDate.startOf("day").valueOf();
-    max3.value = selectedDate.hour(23).minute(0).second(0).valueOf();
+    max3.value = selectedDate.hour(23).minute(59).second(0).valueOf();
     if (!timePlay3.value) {
         timePlay3.value = selectedDate.startOf("day").valueOf();
     }
@@ -1340,15 +1340,15 @@ const marks3 = computed(() => {
 watch(timePlay3, (newVal) => {
     if (!isHutaiSpaceActive.value) return;
     const currentTime = dayjs(newVal);
-    if (currentTime.minute() === 0 && currentTime.second() === 0) {
+    if (currentTime.second() === 0) {
         const formattedTime = currentTime.format('YYYY-MM-DD HH:mm:ss');
-            sendUIInteraction({
-                ModuleName: `趋势预测`,
-                FunctionMenu: '浒苔空间分布',
-                Time: formattedTime,
-                FunctionName: radioselection.value,
-                State: true,
-            });
+        sendUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionMenu: '浒苔空间分布',
+            Time: formattedTime,
+            FunctionName: radioselection.value,
+            State: true,
+        });
         sessionStorage.setItem('timePlay', formattedTime);
     }
     if (currentTime.isSame(dayjs(max3.value))) {
