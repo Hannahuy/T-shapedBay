@@ -1265,7 +1265,7 @@ const gettimePlay2 = (e) => {
     }
 };
 
-const timePick3 = ref(dayjs("2025-08-01").toDate());
+const timePick3 = ref(dayjs("2024-08-01").toDate());
 const timePlay3 = ref(null);
 const activePlay3 = ref("");
 let previousPlayState3 = null;
@@ -1790,9 +1790,9 @@ onMounted(() => {
         timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
         timePick.value = dayjs('2024-08-01').toDate(); // 默认值
     }
-    // 初始化时间轴3默认值（2025-08-01）
-    timePlay3.value = dayjs('2025-08-01 00:00:00').valueOf();
-    timePick3.value = dayjs('2025-08-01').toDate();
+    // 初始化时间轴3默认值（2024-08-01）
+    timePlay3.value = dayjs('2024-08-01 00:00:00').valueOf();
+    timePick3.value = dayjs('2024-08-01').toDate();
     addResponseEventListener("handle_responses", myHandleResponseFunction);
     window.addEventListener("resize", reloadChart);
 });
