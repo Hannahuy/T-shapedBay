@@ -203,12 +203,14 @@
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="SpartinaalternifloraShow = false">
     <div>
-      <el-radio-group v-model="radio" style="display: flex;flex-direction: column;" @change="radioChange">
-        <el-radio :value="2019">2019</el-radio>
-        <el-radio :value="2020">2020</el-radio>
-        <el-radio :value="2021">2021</el-radio>
-        <el-radio :value="2022">2022</el-radio>
-        <el-radio :value="2023">2023</el-radio>
+      <el-radio-group v-model="radio" style="display: flex;flex-wrap: wrap;justify-content: flex-start;margin:1vh 0 1vh 0;" @change="radioChange">
+        <el-radio :value="2019" style="width: 50%;display: flex;justify-content: center;">2019</el-radio>
+        <el-radio :value="2020" style="width: 50%;display: flex;justify-content: center;">2020</el-radio>
+        <el-radio :value="2021" style="width: 50%;display: flex;justify-content: center;">2021</el-radio>
+        <el-radio :value="2022" style="width: 50%;display: flex;justify-content: center;">2022</el-radio>
+        <el-radio :value="2023" style="width: 50%;display: flex;justify-content: center;">2023</el-radio>
+        <el-radio :value="2024" style="width: 50%;display: flex;justify-content: center;">2024</el-radio>
+        <el-radio :value="2025" style="width: 50%;display: flex;justify-content: center;">2025</el-radio>
       </el-radio-group>
     </div>
     <div class="rightBox-top-title-dialog">
@@ -1108,7 +1110,7 @@ const handlefishClick = (index) => {
 
 const countspeciesList = ref(0);
 const oystersShow = ref(false);
-const SpartinaalternifloraShow = ref(false);
+const SpartinaalternifloraShow = ref(true);
 
 const radioChange = (e) => {
   callUIInteraction({
@@ -1880,7 +1882,7 @@ onUnmounted(() => {
   left: 2.4vh;
   top: 10vh;
   width: 30vh;
-  height: 71vh;
+  height: 69vh;
   z-index: 10;
   background-image: url('../../assets/img/rightbox.png');
   background-repeat: no-repeat;
