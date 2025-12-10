@@ -52,6 +52,7 @@
     </div>
     <div v-if="selected === '监测调查'">
       <MonitoringSurveys />
+      <Home />
     </div>
     <div v-if="selected === '生态动力'">
       <Ecodynamics />
@@ -85,7 +86,7 @@ import Ecodynamics from "./Menu/Ecodynamics.vue";
 import MonitoringSurveys from "./Menu/MonitoringSurveys.vue";
 import TrendForecasting from "./Menu/TrendForecasting.vue";
 import EcologicalGrid from "./Menu/EcologicalGrid.vue";
-// import Home from "./Menu/Home.vue";
+import Home from "./Menu/Home.vue";
 // import Updata from "./Menu/Updata.vue";
 import Leaflet from "./Menu/Leaflet.vue";
 import AIbox from "./Menu/AIbox.vue";

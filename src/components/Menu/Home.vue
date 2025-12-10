@@ -140,7 +140,7 @@
       </div>
     </div>
   </div>
-  <div class="rightBox">
+  <!-- <div class="rightBox">
     <div class="rightBox-top-right">
       <div class="rightBox-top-title">丁字湾简介</div>
       <div class="rightBox-top-table">
@@ -175,7 +175,7 @@
         <p>水体连通性差，容易遭受海洋热浪侵袭，对围堰养殖业威胁最大。</p>
       </div>
     </div>
-  </div>
+  </div> -->
   <div class="selectbox">
     <a-select v-model:value="selectedEcological" style="width: 20vh" @change="onEcologicalChange">
       <a-select-option v-for="Ecological in EcologicalOptions" :key="Ecological.value" :value="Ecological.value">
@@ -1289,7 +1289,7 @@ onUnmounted(() => {
   justify-content: space-evenly;
   align-items: center;
   position: absolute;
-  bottom: 0.7vh;
+  bottom: 1vh;
   right: 50%;
   transform: translateX(50%);
   z-index: 2;

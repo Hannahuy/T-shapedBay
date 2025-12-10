@@ -36,7 +36,7 @@
     <img src="/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
   </div>
   <!-- 时间轴 -->
-  <div class="bottomCalendar">
+  <!-- <div class="bottomCalendar">
     <el-date-picker v-model="timePick" type="date" :editable="false" />
   </div>
   <div class="bottombox-left">
@@ -54,7 +54,7 @@
         </el-slider>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- 鸟类点击弹窗 -->
   <div class="bird" v-show="birdShow">
     <div class="rightBox-top-title-dialog">
