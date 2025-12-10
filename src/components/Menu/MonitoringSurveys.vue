@@ -1110,7 +1110,7 @@ const handlefishClick = (index) => {
 
 const countspeciesList = ref(0);
 const oystersShow = ref(false);
-const SpartinaalternifloraShow = ref(true);
+const SpartinaalternifloraShow = ref(false);
 
 const radioChange = (e) => {
   callUIInteraction({
