@@ -1063,7 +1063,7 @@ const getColorbar = (e) => {
     }
 };
 
-const timePick = ref(dayjs("2024-08-01").toDate());
+const timePick = ref(dayjs("2025-08-01").toDate());
 const timePlay = ref(null);
 const activePlay = ref("");
 // 暂停/播放
@@ -1265,7 +1265,7 @@ const gettimePlay2 = (e) => {
     }
 };
 
-const timePick3 = ref(dayjs("2024-08-01").toDate());
+const timePick3 = ref(dayjs("2025-08-01").toDate());
 const timePlay3 = ref(null);
 const activePlay3 = ref("");
 let previousPlayState3 = null;
@@ -1372,7 +1372,7 @@ const handleFunctionSelection = (selectedItem) => {
         activePlay.value = "";
         clearInterval(playInterval);
     }
-    timePlay.value = dayjs("2024-08-01 00:00:00").valueOf();
+    timePlay.value = dayjs("2025-08-01 00:00:00").valueOf();
     const formattedTime = dayjs(timePlay.value).format('YYYY-MM-DD HH:mm:ss');
     sendUIInteraction({
         ModuleName: `趋势预测`,
@@ -1787,12 +1787,12 @@ onMounted(() => {
         timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
         timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
     } else {
-        timePlay.value = dayjs('2024-08-01 00:00:00').valueOf(); // 默认值
-        timePick.value = dayjs('2024-08-01').toDate(); // 默认值
+        timePlay.value = dayjs('2025-08-01 00:00:00').valueOf(); // 默认值
+        timePick.value = dayjs('2025-08-01').toDate(); // 默认值
     }
-    // 初始化时间轴3默认值（2024-08-01）
-    timePlay3.value = dayjs('2024-08-01 00:00:00').valueOf();
-    timePick3.value = dayjs('2024-08-01').toDate();
+    // 初始化时间轴3默认值（2025-08-01）
+    timePlay3.value = dayjs('2025-08-01 00:00:00').valueOf();
+    timePick3.value = dayjs('2025-08-01').toDate();
     addResponseEventListener("handle_responses", myHandleResponseFunction);
     window.addEventListener("resize", reloadChart);
 });

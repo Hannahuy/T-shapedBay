@@ -190,7 +190,7 @@ let layerFunction = [
   },
 ];
 
-const timePick = ref(dayjs("2024-08-01").toDate());
+const timePick = ref(dayjs("2025-08-01").toDate());
 const timePlay = ref(null);
 const activePlay = ref("");
 // 暂停/播放
@@ -679,8 +679,8 @@ onMounted(() => {
     timePlay.value = dayjs(storedTime).valueOf(); // 直接设置 timePlay
     timePick.value = dayjs(storedTime).toDate(); // 设置 timePick
   } else {
-    timePlay.value = dayjs("2024-08-01 00:00:00").valueOf(); // 默认值
-    timePick.value = dayjs("2024-08-01").toDate(); // 默认值
+    timePlay.value = dayjs("2025-08-01 00:00:00").valueOf(); // 默认值
+    timePick.value = dayjs("2025-08-01").toDate(); // 默认值
   }
   const formattedTime = dayjs(timePlay.value).format("YYYY-MM-DD HH:mm:ss");
   callUIInteraction({
