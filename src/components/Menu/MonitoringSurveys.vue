@@ -36,7 +36,7 @@
     <img src="/img/雪天.png" class="imageicon" alt="" @click="selectWeather('雪天')">
   </div>
   <!-- 时间轴 -->
-  <!-- <div class="bottomCalendar">
+  <div class="bottomCalendar">
     <el-date-picker v-model="timePick" type="date" :editable="false" />
   </div>
   <div class="bottombox-left">
@@ -54,7 +54,7 @@
         </el-slider>
       </div>
     </div>
-  </div> -->
+  </div>
   <!-- 鸟类点击弹窗 -->
   <div class="bird" v-show="birdShow">
     <div class="rightBox-top-title-dialog">
@@ -266,11 +266,13 @@
     </div>
     <img src="../../assets/img/close.png" alt="" class="close" @click="showSediment = false">
     <div>
-      <el-radio-group v-model="radio2" style="display: flex;flex-direction: column;" @change="radioChange2">
-        <el-radio value="2023.06">2023.06</el-radio>
-        <el-radio value="2023.08">2023.08</el-radio>
-        <el-radio value="2023.11">2023.11</el-radio>
-        <el-radio value="2024.04">2024.04</el-radio>
+      <el-radio-group v-model="radio2" style="display: flex;flex-wrap: wrap;justify-content: space-evenly;" @change="radioChange2">
+        <el-radio value="2023.06" style="width: 40%;display: flex;justify-content: center;">2023.06</el-radio>
+        <el-radio value="2023.08" style="width: 40%;display: flex;justify-content: center;">2023.08</el-radio>
+        <el-radio value="2023.11" style="width: 40%;display: flex;justify-content: center;">2023.11</el-radio>
+        <el-radio value="2024.04" style="width: 40%;display: flex;justify-content: center;">2024.04</el-radio>
+        <el-radio value="2025.02" style="width: 40%;display: flex;justify-content: center;">2025.02</el-radio>
+        <el-radio value="2025.07" style="width: 40%;display: flex;justify-content: center;">2025.07</el-radio>
       </el-radio-group>
     </div>
     <div class="rightBox-top-title-dialog1">

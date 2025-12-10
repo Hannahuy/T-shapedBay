@@ -26,19 +26,19 @@
         <div
           class="topMenu-left-title"
           style="margin-left: 2.3vh"
-          :class="{ 'topMenu-left-title-active': selected === '生态动力' }"
-          @click="selectMenu('生态动力')"
+          :class="{ 'topMenu-left-title-active': selected === '生态网络' }"
+          @click="selectMenu('生态网络')"
         >
-          生态动力
+          生态网络
         </div>
       </div>
       <div class="topMenu-right">
         <div
           class="topMenu-right-title"
-          :class="{ 'topMenu-right-title-active': selected === '生态网络' }"
-          @click="selectMenu('生态网络')"
+          :class="{ 'topMenu-right-title-active': selected === '生态动力' }"
+          @click="selectMenu('生态动力')"
         >
-          生态网络
+          生态动力
         </div>
         <div
           class="topMenu-right-title"
@@ -52,7 +52,7 @@
     </div>
     <div v-if="selected === '监测调查'">
       <MonitoringSurveys />
-      <Home />
+      <!-- <Home /> -->
     </div>
     <div v-if="selected === '生态动力'">
       <Ecodynamics />
@@ -86,7 +86,7 @@ import Ecodynamics from "./Menu/Ecodynamics.vue";
 import MonitoringSurveys from "./Menu/MonitoringSurveys.vue";
 import TrendForecasting from "./Menu/TrendForecasting.vue";
 import EcologicalGrid from "./Menu/EcologicalGrid.vue";
-import Home from "./Menu/Home.vue";
+// import Home from "./Menu/Home.vue";
 // import Updata from "./Menu/Updata.vue";
 import Leaflet from "./Menu/Leaflet.vue";
 import AIbox from "./Menu/AIbox.vue";
