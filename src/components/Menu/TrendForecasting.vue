@@ -6,13 +6,16 @@
             </div>
             <div class="radiobox-container">
                 <div class="radiobox1" :class="{ active: selectedButton === '浒苔情景' }" @click="selectButton('浒苔情景')">
-                    <span style="margin-top: 2vh;">浒苔情景</span>
+                    <span style="margin-top: 2vh;text-align: center;padding: 0 1vh;">浒苔情景</span>
                 </div>
                 <div class="radiobox2" :class="{ active: selectedButton === '陆源污染情景' }" @click="selectButton('陆源污染情景')">
-                    <span style="margin-top: 2vh;">陆源污染情景</span>
+                    <span style="margin-top: 2vh;text-align: center;padding: 0 1vh;">陆源污染情景</span>
                 </div>
                 <div class="radiobox3" :class="{ active: selectedButton === '互花米草情景' }" @click="selectButton('互花米草情景')">
-                    <span style="margin-top: 2vh;">互花米草情景</span>
+                    <span style="margin-top: 2vh;text-align: center;padding: 0 1vh;">互花米草情景</span>
+                </div>
+                <div class="radiobox4" :class="{ active: selectedButton === '养殖尾排水情景' }" @click="selectButton('养殖尾排水情景')">
+                    <span style="margin-top: 2vh;text-align: center;padding: 0 1vh;">养殖尾排水情景</span>
                 </div>
             </div>
             <div class="rightBox-top-title-dialog2">
@@ -23,14 +26,34 @@
                     <div class="spanbtm"></div>
                 </div>
                 <div class="rightbox-table">
-                    <div class="rightbox-table1" v-show="selectedButton !== '互花米草情景'">
-                        <div class="rightbox-tabletitle">{{ tablehead }}</div>
-                        <el-input v-model="tabledata" style="width: 12vh;" placeholder="请输入数值" />
-                    </div>
-                    <div class="rightbox-table1" v-show="selectedButton !== '互花米草情景'">
-                        <div class="rightbox-tabletitle">{{ tablehead2 }}</div>
-                        <el-input v-model="tabledata2" style="width: 12vh;" placeholder="请输入数值" />
-                    </div>
+                    <template v-if="selectedButton !== '互花米草情景'">
+                        <div class="rightbox-table1" :class="{ tailwater: selectedButton === '养殖尾排水情景' }">
+                            <div class="rightbox-tabletitle">{{ tablehead }}</div>
+                            <el-input v-model="tabledata" style="width: 12vh;" placeholder="请输入数值"
+                                :class="{ 'tailwater-input': selectedButton === '养殖尾排水情景' }" />
+                        </div>
+                        <template v-if="selectedButton === '养殖尾排水情景'">
+                            <div class="rightbox-table1" :class="{ tailwater: selectedButton === '养殖尾排水情景' }">
+                                <div class="rightbox-tabletitle">{{ tablehead2 }}</div>
+                                <el-input v-model="tabledata2" style="width: 12vh;" placeholder="请输入数值"
+                                    :class="{ 'tailwater-input': selectedButton === '养殖尾排水情景' }" />
+                            </div>
+                            <div class="rightbox-table1" :class="{ tailwater: selectedButton === '养殖尾排水情景' }">
+                                <div class="rightbox-tabletitle">{{ tablehead3 }}</div>
+                                <el-input v-model="tabledata3" style="width: 12vh;" placeholder="请输入数值"
+                                    :class="{ 'tailwater-input': selectedButton === '养殖尾排水情景' }" />
+                            </div>
+                            <div class="rightbox-table1" :class="{ tailwater: selectedButton === '养殖尾排水情景' }">
+                                <div class="rightbox-tabletitle">{{ tablehead4 }}</div>
+                                <el-input v-model="tabledata4" style="width: 12vh;" placeholder="请输入数值"
+                                    :class="{ 'tailwater-input': selectedButton === '养殖尾排水情景' }" />
+                            </div>
+                        </template>
+                        <div class="rightbox-table1" v-else>
+                            <div class="rightbox-tabletitle">{{ tablehead2 }}</div>
+                            <el-input v-model="tabledata2" style="width: 12vh;" placeholder="请输入数值" />
+                        </div>
+                    </template>
                     <div class="yearSelect" v-show="selectedButton === '互花米草情景'">
                         <div v-for="year in ['2020', '2021', '2022', '2023', '2024', '2025']" :key="year" class="year-item"
                             :class="{ 'year-item-act': selectedYear === year }" @click="selectYear(year)">
@@ -311,6 +334,8 @@ const handlechart = () => {
         radioEng.value = 'Hutai';
     } else if (radioselection.value == '陆源污染情景') {
         radioEng.value = 'HighRiver';
+    } else if (radioselection.value == '养殖尾排水情景') {
+        radioEng.value = 'TailWater';
     }
     axios.get(window.VITE_APP_BASE_API + `/biomass/getAllBTP/${radioEng.value}`).then((res) => {
         const btpLineList = res.data.data.btpLineList;
@@ -321,8 +346,12 @@ const handlechart = () => {
 const colorbar = ref(0);
 const tablehead = ref('浒苔面积（㎡）');
 const tablehead2 = ref('浒苔生物量（kg/㎡）');
+const tablehead3 = ref('');
+const tablehead4 = ref('');
 const tabledata = ref(218300);
 const tabledata2 = ref(2);
+const tabledata3 = ref(null);
+const tabledata4 = ref(null);
 const radioselection = ref('浒苔情景');
 const layerFunction = ref([]);
 const layerFunction2 = ref([
@@ -746,8 +775,27 @@ const selectButton = (button) => {
     } else if (button == '陆源污染情景') {
         tablehead.value = '无机氮（mg/m³）';
         tablehead2.value = '无机磷（mg/m³）';
+        tablehead3.value = '';
+        tablehead4.value = '';
         tabledata.value = 200;
         tabledata2.value = 100;
+        tabledata3.value = null;
+        tabledata4.value = null;
+        selectedYear.value = null;
+        sendUIInteraction({
+            ModuleName: `趋势预测`,
+            FunctionName: '互花米草情景',
+            State: false,
+        });
+    } else if (button == '养殖尾排水情景') {
+        tablehead.value = '排污量（m³/天）';
+        tablehead2.value = '总氨（mg/L）';
+        tablehead3.value = '总磷（mg/L）';
+        tablehead4.value = '悬浮物（mg/L）';
+        tabledata.value = 200;
+        tabledata2.value = 50.8;
+        tabledata3.value = 3.6;
+        tabledata4.value = 164.6;
         selectedYear.value = null;
         sendUIInteraction({
             ModuleName: `趋势预测`,
@@ -796,10 +844,32 @@ const drive = () => {
             Time: selectedYear.value,
         });
     } else {
-        if (tabledata.value == '' || tabledata2.value == '') {
+        const needExtraFields = selectedButton.value === '养殖尾排水情景';
+        const emptyCommon = tabledata.value === '' || tabledata.value === null || tabledata.value === undefined;
+        const emptySecond = tabledata2.value === '' || tabledata2.value === null || tabledata2.value === undefined;
+        const emptyThird = tabledata3.value === '' || tabledata3.value === null || tabledata3.value === undefined;
+        const emptyFourth = tabledata4.value === '' || tabledata4.value === null || tabledata4.value === undefined;
+
+        const hasEmpty = needExtraFields
+            ? emptyCommon || emptySecond || emptyThird || emptyFourth
+            : emptyCommon || emptySecond;
+
+        if (hasEmpty) {
             ElMessage.warning('请输入数据');
             return;
         } else {
+            if (selectedButton.value === '养殖尾排水情景') {
+                sendUIInteraction({
+                    ModuleName: `趋势预测`,
+                    FunctionName: '养殖尾排水情景',
+                    State: true,
+                    SewageVolume: tabledata.value,
+                    TotalAmmonia: tabledata2.value,
+                    TotalPhosphorus: tabledata3.value,
+                    SuspendedSolids: tabledata4.value,
+                });
+                return;
+            }
             showmenu.value = true;
             // 根据选中的情景设置 layerFunction
             if (radioselection.value === '浒苔情景') {
@@ -2213,6 +2283,7 @@ onUnmounted(() => {
     height: 11vh;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 .buttonstyles {
@@ -2367,7 +2438,7 @@ onUnmounted(() => {
 }
 
 .radiobox1 {
-    width: 11.5vh;
+    width: 8.5vh;
     height: 11.5vh;
     background-image: url('../../assets/img/TrendForecasting/btn1.png');
     background-repeat: no-repeat;
@@ -2390,7 +2461,7 @@ onUnmounted(() => {
 }
 
 .radiobox2 {
-    width: 11.5vh;
+    width: 8.5vh;
     height: 11.5vh;
     background-image: url('../../assets/img/TrendForecasting/btn2.png');
     background-repeat: no-repeat;
@@ -2413,7 +2484,7 @@ onUnmounted(() => {
 }
 
 .radiobox3 {
-    width: 11.5vh;
+    width: 8.5vh;
     height: 11.5vh;
     background-image: url('../../assets/img/TrendForecasting/btn3.png');
     background-repeat: no-repeat;
@@ -2435,6 +2506,29 @@ onUnmounted(() => {
     color: #ffffff;
 }
 
+.radiobox4 {
+    width: 8.5vh;
+    height: 11.5vh;
+    background-image: url('../../assets/img/TrendForecasting/btn4.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: #E6F8FF;
+    font-weight: bold;
+    font-size: 1.5vh;
+    cursor: pointer;
+}
+
+.radiobox4.active {
+    background-image: url('../../assets/img/TrendForecasting/btn4-act.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: #ffffff;
+}
+
 .rightbox-table1 {
     margin-top: 2vh;
     width: 17vh;
@@ -2446,6 +2540,22 @@ onUnmounted(() => {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.rightbox-table1.tailwater {
+    margin-top: 1vh;
+    height: 4.5vh;
+}
+
+.tailwater-input :deep(.el-input__wrapper) {
+    height: 2.5vh;
+    min-height: 2.5vh;
+    padding: 0 0.8vh;
+}
+
+.tailwater-input :deep(.el-input__inner) {
+    height: 2.5vh;
+    line-height: 2.5vh;
 }
 
 .rightbox-table2 {
